@@ -14,8 +14,33 @@ app.get("/", (req, res) => {
 
 app.get("/imovel/:codigo", async (req, res) => {
   const { codigo } = req.params;
-  const idioma = String(req.query.lang || "pt").toLowerCase();
 
+  try {
+    const imovelResult = await pool.query(
+      "SELECT * FROM imoveis WHERE codigo_publico = $1",
+      [codigo]
+    );
+
+    if (imovelResult.rows.length === 0) {
+      return res.send("Imóvel não encontrado");
+    }
+
+    const imovel = imovelResult.rows[0];
+
+    const conteudoResult = await pool.query(
+      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
+      [imovel.id]
+    );
+
+    return res.json({
+      ...imovel,
+      conteudo: conteudoResult.rows[0] || null
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Erro no servidor");
+  }
+});
   try {
     const imovelResult = await pool.query(
       "SELECT * FROM imoveis WHERE codigo_publico = $1",
