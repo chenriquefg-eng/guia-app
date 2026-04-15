@@ -14,28 +14,36 @@ app.get("/", (req, res) => {
 
 app.get("/imovel/:codigo", async (req, res) => {
   const { codigo } = req.params;
+  const idioma = String(req.query.lang || "pt").toLowerCase();
 
   try {
-    const result = await pool.query(
+    const imovelResult = await pool.query(
       "SELECT * FROM imoveis WHERE codigo_publico = $1",
       [codigo]
     );
 
-    if (result.rows.length === 0) {
+    if (imovelResult.rows.length === 0) {
       return res.send("Imóvel não encontrado");
     }
 
-    const imovel = result.rows[0];
+    const imovel = imovelResult.rows[0];
 
-const conteudo = await pool.query(
-  "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt'",
-  [imovel.id]
-);
+    let conteudoResult = await pool.query(
+      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2",
+      [imovel.id, idioma]
+    );
 
-res.json({
-  ...imovel,
-  conteudo: conteudo.rows[0] || null
-});
+    if (conteudoResult.rows.length === 0 && idioma !== "pt") {
+      conteudoResult = await pool.query(
+        "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt'",
+        [imovel.id]
+      );
+    }
+
+    res.json({
+      ...imovel,
+      conteudo: conteudoResult.rows[0] || null
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Erro no servidor");
