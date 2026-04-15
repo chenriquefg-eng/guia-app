@@ -29,7 +29,7 @@ app.get("/imovel/:codigo", async (req, res) => {
     const imovel = imovelResult.rows[0];
 
     let conteudoResult = await pool.query(
-      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2",
+      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
       [imovel.id, idioma]
     );
 
