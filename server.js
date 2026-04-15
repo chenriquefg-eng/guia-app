@@ -25,7 +25,17 @@ app.get("/imovel/:codigo", async (req, res) => {
       return res.send("Imóvel não encontrado");
     }
 
-    res.json(result.rows[0]);
+    const imovel = result.rows[0];
+
+const conteudo = await pool.query(
+  "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt'",
+  [imovel.id]
+);
+
+res.json({
+  ...imovel,
+  conteudo: conteudo.rows[0] || null
+});
   } catch (err) {
     console.error(err);
     res.status(500).send("Erro no servidor");
