@@ -34,10 +34,18 @@ app.get("/imovel/:codigo", async (req, res) => {
     const imovel = imovelResult.rows[0];
 
     const conteudoResult = await pool.query(
-      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
-      [imovel.id]
-    );
+      let conteudoResult = await pool.query(
+  "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2",
+  [imovel.id, idioma]
+);
 
+// fallback para português
+if (conteudoResult.rows.length === 0 && idioma !== "pt") {
+  conteudoResult = await pool.query(
+    "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt'",
+    [imovel.id]
+  );
+}
     const conteudo = conteudoResult.rows[0] || {};
 
     // LINKS DINÂMICOS
