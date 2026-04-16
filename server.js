@@ -9,13 +9,38 @@ const pool = new Pool({
 });
 
 app.get("/", (req, res) => {
-  res.send("Guia do Hóspede rodando v2 🚀");
-
-app.get("/imovel/:codigo", (req, res) => {
-  res.json({
-    NOVO: "VERSAO_NOVA"
-  });
+  res.send("Guia do Hóspede rodando 🚀");
 });
+
+app.get("/imovel/:codigo", async (req, res) => {
+  const { codigo } = req.params;
+
+  try {
+    // busca imóvel
+    const imovelResult = await pool.query(
+      "SELECT * FROM imoveis WHERE codigo_publico = $1",
+      [codigo]
+    );
+
+    if (imovelResult.rows.length === 0) {
+      return res.send("Imóvel não encontrado");
+    }
+
+    const imovel = imovelResult.rows[0];
+
+    // busca conteúdo
+    const conteudoResult = await pool.query(
+      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
+      [imovel.id]
+    );
+
+    const conteudo = conteudoResult.rows[0] || null;
+
+    return res.json({
+      imovel,
+      conteudo
+    });
+
   } catch (err) {
     console.error("Erro geral:", err.message);
     return res.status(500).send(err.message);
