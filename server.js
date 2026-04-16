@@ -30,10 +30,9 @@ app.get("/imovel/:codigo", async (req, res) => {
     });
 
   } catch (err) {
-    console.error("ERRO AQUI:", err);
-    res.status(500).send("Erro no servidor");
-  }
-});
+  console.error("ERRO DETALHADO:", err);
+  res.status(500).send(err.message);
+}
   try {
     const imovelResult = await pool.query(
       "SELECT * FROM imoveis WHERE codigo_publico = $1",
