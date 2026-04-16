@@ -159,8 +159,15 @@ p {
 <div class="card">
   <h2>📶 Wi-Fi</h2>
   <div class="wifi-box">
-    <p class="wifi">Rede: ${conteudo.wifi_nome}</p>
-    <p class="wifi">Senha: ${conteudo.wifi_senha}</p>
+    <p><strong>Rede:</strong> ${conteudo.wifi_nome}</p>
+<button class="botao maps" onclick="copiarTexto('${conteudo.wifi_nome}')">
+  📋 Copiar Rede
+</button>
+
+<p><strong>Senha:</strong> ${conteudo.wifi_senha}</p>
+<button class="botao uber" onclick="copiarTexto('${conteudo.wifi_senha}')">
+  📋 Copiar Senha
+</button>
   </div>
 </div>
 
