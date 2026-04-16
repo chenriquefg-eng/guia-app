@@ -126,6 +126,21 @@ p {
     padding: 12px;
   }
 }
+.botao {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 12px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.maps { background: #10b981; }
+.uber { background: #000000; }
+.whatsapp { background: #25d366; }
 </style></head>
 
 <body>
