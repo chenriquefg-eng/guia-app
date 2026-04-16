@@ -8,10 +8,6 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
-app.get("/", (req, res) => {
-  res.send("VERSAO NOVA 22:05 🚀");
-});
-
 app.get("/imovel/:codigo", async (req, res) => {
   const { codigo } = req.params;
 
@@ -27,17 +23,14 @@ app.get("/imovel/:codigo", async (req, res) => {
 
     const imovel = imovelResult.rows[0];
 
-    const conteudoResult = await pool.query(
-      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
-      [imovel.id]
-    );
-
+    // TESTE 1
     return res.json({
-      ...imovel,
-      conteudo: conteudoResult.rows[0] || null
+      etapa: "imovel_ok",
+      id: imovel.id
     });
+
   } catch (err) {
-    console.error(err);
+    console.error("ERRO AQUI:", err);
     res.status(500).send("Erro no servidor");
   }
 });
