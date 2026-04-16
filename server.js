@@ -72,6 +72,7 @@ const conteudoResult = await pool.query(
   [imovel.id]
 );
 
+const conteudo = conteudoResult.rows[0] || {};
 return res.json({
   etapa: "conteudo_ok",
   conteudo: conteudoResult.rows
