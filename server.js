@@ -12,11 +12,10 @@ app.get("/imovel/:codigo", async (req, res) => {
   const { codigo } = req.params;
 
   try {
-    const imovelResult = await pool.query(
-      "SELECT * FROM imoveis WHERE codigo_publico = $1",
-      [codigo]
-    );
-
+    const conteudoResult = await pool.query(
+  "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
+  [imovel.id]
+);
     if (imovelResult.rows.length === 0) {
       return res.send("Imóvel não encontrado");
     }
