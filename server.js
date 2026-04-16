@@ -96,6 +96,13 @@ body {
   border-radius: 18px;
   margin-bottom: 20px;
 }
+<div class="card">
+  <h2>🌍 Idioma</h2>
+
+  <a class="botao maps" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
+  <a class="botao uber" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
+  <a class="botao whatsapp" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
+</div>
 
 h1 {
   margin: 0;
