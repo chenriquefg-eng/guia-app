@@ -12,22 +12,38 @@ app.get("/imovel/:codigo", async (req, res) => {
   const { codigo } = req.params;
 
   try {
-    const conteudoResult = await pool.query(
-  "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
-  [imovel.id]
-);
+    const imovelResult = await pool.query(
+      "SELECT * FROM imoveis WHERE codigo_publico = $1",
+      [codigo]
+    );
+
     if (imovelResult.rows.length === 0) {
       return res.send("Imóvel não encontrado");
     }
 
     const imovel = imovelResult.rows[0];
 
+    let conteudo = null;
+
+    try {
+      const conteudoResult = await pool.query(
+        "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
+        [imovel.id]
+      );
+
+      conteudo = conteudoResult.rows[0] || null;
+
+    } catch (erroConteudo) {
+      console.error("ERRO NA TABELA imovel_conteudos:", erroConteudo.message);
+    }
+
     return res.json({
-      etapa: "imovel_ok",
-      imovel
+      imovel,
+      conteudo
     });
+
   } catch (err) {
-    console.error("ERRO DETALHADO:", err);
+    console.error("ERRO GERAL:", err);
     return res.status(500).send(err.message);
   }
 });
