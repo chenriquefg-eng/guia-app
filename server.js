@@ -9,8 +9,7 @@ const pool = new Pool({
 });
 
 app.get("/", (req, res) => {
-  res.send("Guia do Hóspede rodando 🚀");
-});
+  res.send("Guia do Hóspede rodando v2 🚀");
 
 app.get("/imovel/:codigo", async (req, res) => {
   const { codigo } = req.params;
