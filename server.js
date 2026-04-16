@@ -178,19 +178,21 @@ p {
 
 <div class="card">
   <h2>📶 Wi-Fi</h2>
-  <div class="wifi-box">
-    <p><strong>Rede:</strong> ${conteudo.wifi_nome}</p>
-<button class="botao maps" onclick="copiarTexto('${conteudo.wifi_nome}')">
-  📋 Copiar Rede
-</button>
 
-<p><strong>Senha:</strong> ${conteudo.wifi_senha}</p>
-<button class="botao uber" onclick="copiarTexto('${conteudo.wifi_senha}')">
-  📋 Copiar Senha
-</button>
+  <div class="wifi-box">
+
+    <p><strong>Rede:</strong> ${conteudo.wifi_nome}</p>
+    <button class="botao maps" onclick="copiarTexto('${conteudo.wifi_nome}')">
+      📋 Copiar Rede
+    </button>
+
+    <p style="margin-top:10px;"><strong>Senha:</strong> ${conteudo.wifi_senha}</p>
+    <button class="botao uber" onclick="copiarTexto('${conteudo.wifi_senha}')">
+      🔐 Copiar Senha
+    </button>
+
   </div>
 </div>
-
 <div class="card">
   <h2>🚀 Acesso rápido</h2>
 
