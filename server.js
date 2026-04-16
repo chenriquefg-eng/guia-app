@@ -8,8 +8,13 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
+app.get("/", (req, res) => {
+  res.send("Guia do Hóspede rodando 🚀");
+});
+
 app.get("/imovel/:codigo", async (req, res) => {
   const { codigo } = req.params;
+  const idioma = String(req.query.lang || "pt").toLowerCase();
 
   try {
     const imovelResult = await pool.query(
@@ -22,17 +27,22 @@ app.get("/imovel/:codigo", async (req, res) => {
     }
 
     const imovel = imovelResult.rows[0];
-
     let conteudo = null;
 
     try {
-      const conteudoResult = await pool.query(
-        "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
-        [imovel.id]
+      let conteudoResult = await pool.query(
+        "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1",
+        [imovel.id, idioma]
       );
 
-      conteudo = conteudoResult.rows[0] || null;
+      if (conteudoResult.rows.length === 0 && idioma !== "pt") {
+        conteudoResult = await pool.query(
+          "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt' LIMIT 1",
+          [imovel.id]
+        );
+      }
 
+      conteudo = conteudoResult.rows[0] || null;
     } catch (erroConteudo) {
       console.error("ERRO NA TABELA imovel_conteudos:", erroConteudo.message);
     }
@@ -41,59 +51,12 @@ app.get("/imovel/:codigo", async (req, res) => {
       imovel,
       conteudo
     });
-
   } catch (err) {
-    console.error("ERRO GERAL:", err);
+    console.error("ERRO GERAL:", err.message);
     return res.status(500).send(err.message);
   }
 });
-  } catch (err) {
-  console.error("ERRO DETALHADO:", err);
-  res.status(500).send(err.message);
-}
-  try {
-    const imovelResult = await pool.query(
-      "SELECT * FROM imoveis WHERE codigo_publico = $1",
-      [codigo]
-    );
 
-    if (imovelResult.rows.length === 0) {
-      return res.send("Imóvel não encontrado");
-    }
-
-    const imovel = imovelResult.rows[0];
-
-    let conteudoResult = await pool.query(
-      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
-      [imovel.id, idioma]
-    );
-
-    if (conteudoResult.rows.length === 0 && idioma !== "pt") {
-      conteudoResult = await pool.query(
-        "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt'",
-        [imovel.id]
-      );
-    }
-
-    res.json({
-      ...imovel,
-      conteudo: conteudoResult.rows[0] || null
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Erro no servidor");
-  }
-});
-const conteudoResult = await pool.query(
-  "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
-  [imovel.id]
-);
-
-const conteudo = conteudoResult.rows[0] || {};
-return res.json({
-  etapa: "conteudo_ok",
-  conteudo: conteudoResult.rows
-});
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
