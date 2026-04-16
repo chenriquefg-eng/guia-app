@@ -23,12 +23,15 @@ app.get("/imovel/:codigo", async (req, res) => {
 
     const imovel = imovelResult.rows[0];
 
-    // TESTE 1
     return res.json({
       etapa: "imovel_ok",
-      id: imovel.id
+      imovel
     });
-
+  } catch (err) {
+    console.error("ERRO DETALHADO:", err);
+    return res.status(500).send(err.message);
+  }
+});
   } catch (err) {
   console.error("ERRO DETALHADO:", err);
   res.status(500).send(err.message);
