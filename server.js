@@ -144,10 +144,11 @@ p {
 
 <div class="card">
   <h2>📶 Wi-Fi</h2>
-  <p class="wifi">Rede: ${conteudo.wifi_nome}</p>
-  <p class="wifi">Senha: ${conteudo.wifi_senha}</p>
+  <div class="wifi-box">
+    <p class="wifi">Rede: ${conteudo.wifi_nome}</p>
+    <p class="wifi">Senha: ${conteudo.wifi_senha}</p>
+  </div>
 </div>
-
 <div class="card">
   <h2>🔑 Check-in</h2>
   <p>${nl2br(conteudo.checkin_texto)}</p>
