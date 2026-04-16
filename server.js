@@ -1,16 +1,50 @@
 const express = require("express");
+const { Pool } = require("pg");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-  res.send("OK GUIA APP 🚀");
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: false
 });
 
-app.get("/imovel/:codigo", (req, res) => {
-  res.send("ROTA OK 🚀");
+app.get("/", (req, res) => {
+  res.send("Guia do Hóspede rodando 🚀");
+});
+
+app.get("/imovel/:codigo", async (req, res) => {
+  const { codigo } = req.params;
+
+  try {
+    const imovelResult = await pool.query(
+      "SELECT * FROM imoveis WHERE codigo_publico = $1",
+      [codigo]
+    );
+
+    if (imovelResult.rows.length === 0) {
+      return res.status(404).send("Imóvel não encontrado");
+    }
+
+    const imovel = imovelResult.rows[0];
+
+    const conteudoResult = await pool.query(
+      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
+      [imovel.id]
+    );
+
+    const conteudo = conteudoResult.rows[0] || null;
+
+    return res.json({
+      imovel,
+      conteudo
+    });
+  } catch (err) {
+    console.error("ERRO GERAL:", err.message);
+    return res.status(500).send(err.message);
+  }
 });
 
 app.listen(port, () => {
-  console.log(`Rodando na porta ${port}`);
+  console.log(`Servidor rodando na porta ${port}`);
 });
