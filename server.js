@@ -67,7 +67,15 @@ app.get("/imovel/:codigo", async (req, res) => {
     res.status(500).send("Erro no servidor");
   }
 });
+const conteudoResult = await pool.query(
+  "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 LIMIT 1",
+  [imovel.id]
+);
 
+return res.json({
+  etapa: "conteudo_ok",
+  conteudo: conteudoResult.rows
+});
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
