@@ -115,10 +115,6 @@ p {
   border-radius: 12px;
 }
 
-.wifi {
-  font-weight: bold;
-}
-
 .botao {
   display: block;
   width: 100%;
@@ -171,7 +167,6 @@ p {
 </head>
 
 <body>
-
 <div class="container">
 
   <div class="hero">
@@ -257,10 +252,8 @@ p {
 <script>
 function copiarTexto(texto) {
   navigator.clipboard.writeText(texto);
-
   const toast = document.getElementById("toast");
   toast.classList.add("show");
-
   setTimeout(() => {
     toast.classList.remove("show");
   }, 2000);
@@ -271,10 +264,10 @@ function copiarTexto(texto) {
 </html>
     `;
 
-    res.send(html);
+    return res.send(html);
   } catch (err) {
     console.error(err);
-    res.status(500).send("Erro no servidor");
+    return res.status(500).send("Erro no servidor");
   }
 });
 
