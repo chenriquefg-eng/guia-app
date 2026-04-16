@@ -221,7 +221,28 @@ p {
 </div>
 
 </div>
+<script>
+function copiarTexto(texto) {
+  navigator.clipboard.writeText(texto).then(() => {
+    const aviso = document.createElement("div");
+    aviso.innerText = "Copiado!";
+    aviso.style.position = "fixed";
+    aviso.style.bottom = "20px";
+    aviso.style.left = "50%";
+    aviso.style.transform = "translateX(-50%)";
+    aviso.style.background = "#111";
+    aviso.style.color = "#fff";
+    aviso.style.padding = "10px 20px";
+    aviso.style.borderRadius = "8px";
 
+    document.body.appendChild(aviso);
+
+    setTimeout(() => {
+      aviso.remove();
+    }, 2000);
+  });
+}
+</script>
 </body>
 </html>
     `;
