@@ -132,12 +132,11 @@ p {
 
 <div class="container">
 
-<div class="card">
+<div class="hero">
   <h1>${conteudo.titulo}</h1>
   <p>${conteudo.subtitulo}</p>
   <p>${conteudo.endereco_exibicao}</p>
 </div>
-
 <div class="card">
   <h2>${conteudo.boas_vindas_titulo}</h2>
   <p>${conteudo.boas_vindas_subtitulo}</p>
