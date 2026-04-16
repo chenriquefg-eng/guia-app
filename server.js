@@ -137,6 +137,26 @@ p {
     padding: 12px;
   }
 }
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.toast.show {
+  opacity: 1;
+  bottom: 30px;
+}
+
 </style>
 
 </head>
