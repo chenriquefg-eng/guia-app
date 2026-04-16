@@ -1,60 +1,17 @@
 const express = require("express");
-const { Pool } = require("pg");
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
-});
-
 app.get("/", (req, res) => {
-  res.send("Guia do Hóspede rodando 🚀");
+  res.send("OK GUIA APP");
 });
 
-app.get("/imovel/:codigo", async (req, res) => {
-  const { codigo } = req.params;
-  const idioma = String(req.query.lang || "pt").toLowerCase();
-
-  try {
-    const imovelResult = await pool.query(
-      "SELECT * FROM imoveis WHERE codigo_publico = $1",
-      [codigo]
-    );
-
-    if (imovelResult.rows.length === 0) {
-      return res.send("Imóvel não encontrado");
-    }
-
-    const imovel = imovelResult.rows[0];
-    let conteudo = null;
-
-    try {
-      let conteudoResult = await pool.query(
-        "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1",
-        [imovel.id, idioma]
-      );
-
-      if (conteudoResult.rows.length === 0 && idioma !== "pt") {
-        conteudoResult = await pool.query(
-          "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt' LIMIT 1",
-          [imovel.id]
-        );
-      }
-
-      conteudo = conteudoResult.rows[0] || null;
-    } catch (erroConteudo) {
-      console.error("ERRO NA TABELA imovel_conteudos:", erroConteudo.message);
-    }
-
-    return res.json({
-      imovel,
-      conteudo
-    });
-  } catch (err) {
-    console.error("ERRO GERAL:", err.message);
-    return res.status(500).send(err.message);
-  }
+app.get("/imovel/:codigo", (req, res) => {
+  res.json({
+    codigo: req.params.codigo,
+    ok: true
+  });
 });
 
 app.listen(port, () => {
