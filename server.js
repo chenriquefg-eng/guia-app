@@ -1,3 +1,23 @@
+const express = require("express");
+const { Pool } = require("pg");
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: false
+});
+
+function nl2br(texto) {
+  if (!texto) return "";
+  return String(texto).replace(/\n/g, "<br>");
+}
+
+app.get("/", (req, res) => {
+  res.send("Guia do Hóspede rodando 🚀");
+});
+
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   const { codigo } = req.params;
   const idioma = req.params.idioma || "pt";
@@ -227,4 +247,8 @@ function copiarTexto(texto) {
     console.error("ERRO DETALHADO:", err);
     return res.status(500).send(err.message);
   }
+});
+
+app.listen(port, () => {
+  console.log("Servidor rodando 🚀");
 });
