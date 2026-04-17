@@ -194,8 +194,9 @@ p {
   <a class="botao maps ${idioma === "pt" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
 
   <a class="botao uber ${idioma === "en" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
-
+  
   <a class="botao whatsapp ${idioma === "es" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
+
 </div>
 
   <div class="card">
