@@ -184,9 +184,9 @@ p {
 
   <div class="card">
     <h2>🌍 Idioma</h2>
-    <a class="botao maps" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
-    <a class="botao uber" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
-    <a class="botao whatsapp" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
+    <a class="botao maps ${ativoPT}" href="/imovel/${imovel.codigo_publico}/pt">
+    <a class="botao uber ${ativoEN}" href="/imovel/${imovel.codigo_publico}/en">
+<a class="botao whatsapp ${ativoES}" href="/imovel/${imovel.codigo_publico}/es">
   </div>
 
   <div class="card">
