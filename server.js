@@ -165,6 +165,10 @@ p {
   .container {
     padding: 12px;
   }
+  .ativo {
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px #6366f1;
+}
 }
 </style>
 </head>
