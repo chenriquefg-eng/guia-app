@@ -1,23 +1,3 @@
-const express = require("express");
-const { Pool } = require("pg");
-
-const app = express();
-const port = process.env.PORT || 3000;
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: false
-});
-
-function nl2br(texto) {
-  if (!texto) return "";
-  return String(texto).replace(/\n/g, "<br>");
-}
-
-app.get("/", (req, res) => {
-  res.send("Guia do Hóspede rodando 🚀");
-});
-
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   const { codigo } = req.params;
   const idioma = req.params.idioma || "pt";
@@ -56,9 +36,8 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     const linkUber = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${endereco}`;
     const telefone = "5522998337912";
     const linkWhatsApp = `https://wa.me/${telefone}?text=Olá, estou no apartamento e preciso de ajuda`;
-    const idioma = req.params.idioma || "pt";
 
-const html = `
+    const html = `
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -73,13 +52,11 @@ body {
   background: #f2f4f7;
   color: #1f2937;
 }
-
 .container {
   max-width: 850px;
   margin: auto;
   padding: 20px;
 }
-
 .card {
   background: #ffffff;
   padding: 22px;
@@ -87,7 +64,6 @@ body {
   margin-bottom: 18px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
-
 .hero {
   background: linear-gradient(135deg, #6366f1, #4f46e5);
   color: white;
@@ -95,27 +71,14 @@ body {
   border-radius: 18px;
   margin-bottom: 20px;
 }
-
-h1 {
-  margin: 0;
-  font-size: 32px;
-}
-
-h2 {
-  margin-bottom: 10px;
-}
-
-p {
-  margin: 6px 0;
-  line-height: 1.5;
-}
-
+h1 { margin: 0; font-size: 32px; }
+h2 { margin-bottom: 10px; }
+p { margin: 6px 0; line-height: 1.5; }
 .wifi-box {
   background: #eef2ff;
   padding: 16px;
   border-radius: 12px;
 }
-
 .botao {
   display: block;
   width: 100%;
@@ -130,11 +93,13 @@ p {
   cursor: pointer;
   box-sizing: border-box;
 }
-
 .maps { background: #10b981; }
 .uber { background: #000000; }
 .whatsapp { background: #25d366; }
-
+.selecionado {
+  box-shadow: 0 0 0 4px #6366f1;
+  transform: scale(1.01);
+}
 .toast {
   position: fixed;
   bottom: 20px;
@@ -149,31 +114,13 @@ p {
   transition: all 0.3s ease;
   z-index: 999;
 }
-
 .toast.show {
   opacity: 1;
   bottom: 30px;
 }
-
 @media (max-width: 600px) {
-  h1 {
-    font-size: 24px;
-  }
-
-  .container {
-    padding: 12px;
-  }
-  .ativo {
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px #6366f1;
-}
-  .ativo {
-  outline: 3px solid #6366f1;
-  outline-offset: 2px;
-}
-  .selecionado {
-  box-shadow: 0 0 0 4px #6366f1;
-  transform: scale(1.01);
+  h1 { font-size: 24px; }
+  .container { padding: 12px; }
 }
 </style>
 </head>
@@ -188,26 +135,22 @@ p {
   </div>
 
   <div class="card">
+    <h2>🌍 Idioma</h2>
+    <a class="botao maps ${idioma === "pt" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
+    <a class="botao uber ${idioma === "en" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
+    <a class="botao whatsapp ${idioma === "es" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
+  </div>
+
+  <div class="card">
     <h2>${conteudo.boas_vindas_titulo || "Boas-vindas"}</h2>
     <p>${conteudo.boas_vindas_subtitulo || ""}</p>
   </div>
-<div class="card">
-  <h2>🌍 Idioma</h2>
-
-  <a class="botao maps ${idioma === "pt" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
-
-  <a class="botao uber ${idioma === "en" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
-  
-  <a class="botao whatsapp ${idioma === "es" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
-
-</div>
 
   <div class="card">
     <h2>📶 Wi-Fi</h2>
     <div class="wifi-box">
       <p><strong>Rede:</strong> ${conteudo.wifi_nome || ""}</p>
       <button class="botao maps" onclick="copiarTexto('${conteudo.wifi_nome || ""}')">📋 Copiar Rede</button>
-
       <p style="margin-top:10px;"><strong>Senha:</strong> ${conteudo.wifi_senha || ""}</p>
       <button class="botao uber" onclick="copiarTexto('${conteudo.wifi_senha || ""}')">🔐 Copiar Senha</button>
     </div>
@@ -281,11 +224,7 @@ function copiarTexto(texto) {
 
     return res.send(html);
   } catch (err) {
-    console.error(err);
-    return res.status(500).send("Erro no servidor");
+    console.error("ERRO DETALHADO:", err);
+    return res.status(500).send(err.message);
   }
-});
-
-app.listen(port, () => {
-  console.log("Servidor rodando 🚀");
 });
