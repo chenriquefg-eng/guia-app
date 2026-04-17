@@ -56,11 +56,13 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     const linkUber = `https://m.uber.com/ul/?action=setPickup&dropoff[formatted_address]=${endereco}`;
     const telefone = "5522998337912";
     const linkWhatsApp = `https://wa.me/${telefone}?text=Olá, estou no apartamento e preciso de ajuda`;
-    const ativoPT = idioma === "pt" ? "ativo" : "";
+    const idioma = req.params.idioma || "pt";
+
+const ativoPT = idioma === "pt" ? "ativo" : "";
 const ativoEN = idioma === "en" ? "ativo" : "";
 const ativoES = idioma === "es" ? "ativo" : "";
 
-    const html = `
+const html = `
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
