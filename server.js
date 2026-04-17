@@ -171,10 +171,9 @@ p {
   outline: 3px solid #6366f1;
   outline-offset: 2px;
 }
-.selecionado {
+  .selecionado {
   box-shadow: 0 0 0 4px #6366f1;
   transform: scale(1.01);
-}
 }
 </style>
 </head>
