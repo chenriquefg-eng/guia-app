@@ -58,10 +58,6 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     const linkWhatsApp = `https://wa.me/${telefone}?text=Olá, estou no apartamento e preciso de ajuda`;
     const idioma = req.params.idioma || "pt";
 
-const ativoPT = idioma === "pt" ? "ativo" : "";
-const ativoEN = idioma === "en" ? "ativo" : "";
-const ativoES = idioma === "es" ? "ativo" : "";
-
 const html = `
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -175,6 +171,10 @@ p {
   outline: 3px solid #6366f1;
   outline-offset: 2px;
 }
+.selecionado {
+  box-shadow: 0 0 0 4px #6366f1;
+  transform: scale(1.01);
+}
 }
 </style>
 </head>
@@ -191,10 +191,11 @@ p {
   <div class="card">
   <h2>🌍 Idioma</h2>
 
-  <a class="botao maps ${ativoPT}" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
-  <a class="botao uber ${ativoEN}" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
-  <a class="botao whatsapp ${ativoES}" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
+  <a class="botao maps ${idioma === "pt" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
 
+  <a class="botao uber ${idioma === "en" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
+
+  <a class="botao whatsapp ${idioma === "es" ? "selecionado" : ""}" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
 </div>
 
   <div class="card">
