@@ -169,6 +169,10 @@ p {
   border: 2px solid #fff;
   box-shadow: 0 0 0 3px #6366f1;
 }
+  .ativo {
+  outline: 3px solid #6366f1;
+  outline-offset: 2px;
+}
 }
 </style>
 </head>
@@ -185,17 +189,9 @@ p {
   <div class="card">
   <h2>🌍 Idioma</h2>
 
-  <a class="botao maps ${ativoPT}" href="/imovel/${imovel.codigo_publico}/pt">
-    🇧🇷 Português
-  </a>
-
-  <a class="botao uber ${ativoEN}" href="/imovel/${imovel.codigo_publico}/en">
-    🇺🇸 English
-  </a>
-
-  <a class="botao whatsapp ${ativoES}" href="/imovel/${imovel.codigo_publico}/es">
-    🇪🇸 Español
-  </a>
+  <a class="botao maps ${ativoPT}" href="/imovel/${imovel.codigo_publico}/pt">🇧🇷 Português</a>
+<a class="botao uber ${ativoEN}" href="/imovel/${imovel.codigo_publico}/en">🇺🇸 English</a>
+<a class="botao whatsapp ${ativoES}" href="/imovel/${imovel.codigo_publico}/es">🇪🇸 Español</a>
 
 </div>
 
