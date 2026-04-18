@@ -563,14 +563,16 @@ secoesResult.rows.forEach(item => {
       </div>`
   },
 
-  bares: {
+ bares: {
   title: "Bares",
   html: renderLista("bares")
 },
-  cafe: {
-  title: "Cafés & Doces",
+
+cafe: {
+  title: "Café da Manhã",
   html: renderLista("cafe")
 },
+
 doces: {
   title: "Cafés & Doces",
   html: `
@@ -787,15 +789,15 @@ avaliacao: {
     </div>`
 },
       
-proximos: {
-  title: "Mais próximos",
-  html: renderLista("proximos")
-},
-
 fazer: {
   title: "O que fazer",
   html: renderLista("fazer")
 },
+      proximos: {
+  title: "Mais próximos",
+  html: renderLista("proximos")
+},
+
       partir: {
   title: "Antes de Partir",
   html: `
