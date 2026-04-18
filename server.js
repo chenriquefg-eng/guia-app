@@ -280,192 +280,382 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     ];
 
     const sections = {
-      importante: {
-        title: t.importantTitle,
-        html: `
-          <div class="space-y-3">
-            <div class="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-100">
-              <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:#d94f4f15;">
-                <i data-lucide="info" style="width:18px;height:18px;color:#d94f4f;"></i>
-              </div>
-              <div>
-                <p class="text-sm text-gray-700 leading-relaxed">${nl2brEsc(conteudo.boas_vindas_subtitulo || t.placeholder)}</p>
-              </div>
+  importante: {
+    title: "Importante",
+    html: `
+      <div class="space-y-3">
+        ${[
+          ["trash-2","Lixo","Descartar no local indicado pelo condomínio."],
+          ["tv","TV Smart","Disponível com acesso a aplicativos de streaming (login do hóspede)."],
+          ["coffee","Máquina de café","Utilize cápsulas compatíveis com Nespresso."],
+          ["spray-can","Produtos de limpeza","Disponíveis na área de serviço."],
+          ["sparkles","Serviço de limpeza","Para estadias longas, pode ser solicitado à parte."]
+        ].map(([ic,t,d])=>`
+          <div class="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-100">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:#d94f4f15;">
+              <i data-lucide="${ic}" style="width:18px;height:18px;color:#d94f4f;"></i>
             </div>
-          </div>`
-      },
-      amenidades: {
-        title: t.amenitiesTitle,
-        html: `
-          <div class="space-y-3">
-            <div class="p-4 rounded-xl" style="background:#c47a2e08;">
-              <p class="text-sm text-gray-700 leading-relaxed">${t.placeholder}</p>
+            <div>
+              <p class="text-sm font-semibold text-gray-800">${t}</p>
+              <p class="text-xs text-gray-500 mt-0.5">${d}</p>
             </div>
-          </div>`
-      },
-      wifi: {
-        title: t.wifi.title,
-        html: `
-          <div class="rounded-2xl p-6 wifi-box" style="background:#1a5c3a;">
-            <div class="text-center">
-              <i data-lucide="wifi" style="width:48px;height:48px;color:#7cc9a0;margin:0 auto 16px;display:block;"></i>
-              <div class="mb-4">
-                <p class="text-white/60 text-xs uppercase tracking-widest mb-1">${escHtml(t.wifi.network)}</p>
-                <p class="text-white text-2xl font-semibold">${escHtml(conteudo.wifi_nome || "")}</p>
-              </div>
-              <div class="mb-5">
-                <p class="text-white/60 text-xs uppercase tracking-widest mb-1">${escHtml(t.wifi.password)}</p>
-                <p class="text-white text-2xl font-semibold">${escHtml(conteudo.wifi_senha || "")}</p>
-              </div>
-              <button onclick="event.stopPropagation();copyText(${JSON.stringify(conteudo.wifi_senha || "")})" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.15);color:white;">
-                <i data-lucide="copy" style="width:14px;height:14px;"></i> ${escHtml(t.wifi.copyPassword)}
-              </button>
+          </div>`).join("")}
+      </div>`
+  },
+
+  amenidades: {
+    title: "Amenidades",
+    html: `
+      <div class="grid grid-cols-2 gap-2">
+        ${[
+          "Ar condicionado nos quartos e sala",
+          "Roupas de cama",
+          "Toalhas",
+          "Papel higiênico",
+          "Pó de café",
+          "Açúcar",
+          "Sal e temperos",
+          "Cafeteira elétrica",
+          "Cafeteira Nespresso",
+          "Microondas",
+          "Sanduicheira",
+          "Liquidificador",
+          "Panos de prato",
+          "Esponja e detergente",
+          "Shampoo",
+          "Condicionador",
+          "Sabonete líquido"
+        ].map(a=>`
+          <div class="flex items-center gap-2 p-2.5 rounded-lg" style="background:#c47a2e08;">
+            <span style="color:#c47a2e;">✓</span>
+            <span class="text-xs text-gray-700">${a}</span>
+          </div>`).join("")}
+      </div>`
+  },
+
+  wifi: {
+    title: "Wi-Fi",
+    html: `
+      <div class="rounded-2xl p-6 wifi-box" style="background:#1a5c3a;">
+        <div class="text-center">
+          <i data-lucide="wifi" style="width:48px;height:48px;color:#7cc9a0;margin:0 auto 16px;display:block;"></i>
+          <div class="mb-4">
+            <p class="text-white/60 text-xs uppercase tracking-widest mb-1">Rede</p>
+            <p class="text-white text-2xl font-semibold">${escHtml(conteudo.wifi_nome || "")}</p>
+          </div>
+          <div class="mb-5">
+            <p class="text-white/60 text-xs uppercase tracking-widest mb-1">Senha</p>
+            <p class="text-white text-2xl font-semibold">${escHtml(conteudo.wifi_senha || "")}</p>
+          </div>
+          <button onclick="event.stopPropagation();copyText(${JSON.stringify(conteudo.wifi_senha || "")})" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.15);color:white;">
+            <i data-lucide="copy" style="width:14px;height:14px;"></i> Copiar senha
+          </button>
+        </div>
+      </div>`
+  },
+
+  checkin: {
+    title: "Check-in / Check-out",
+    html: `
+      <div class="space-y-4">
+        <div class="rounded-xl p-4" style="background:#2a7d5010;">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#2a7d50;">
+              <i data-lucide="log-in" style="width:18px;height:18px;color:white;"></i>
             </div>
-          </div>`
-      },
-      checkin: {
-        title: t.checkin.title,
-        html: `
-          <div class="space-y-4">
-            <div class="rounded-xl p-4" style="background:#2a7d5010;">
-              <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#2a7d50;">
-                  <i data-lucide="log-in" style="width:18px;height:18px;color:white;"></i>
-                </div>
-                <span class="font-semibold text-lg" style="color:#1a5c3a;">${escHtml(t.checkin.checkin)}</span>
-              </div>
-              <p class="text-sm text-gray-600 whitespace-pre-line">${escHtml(conteudo.checkin_texto || "")}</p>
+            <span class="font-semibold text-lg" style="color:#1a5c3a;">Check-in: 15:00</span>
+          </div>
+          <ul class="text-sm text-gray-600 space-y-1 list-disc pl-5">
+            <li>Acesso por fechadura eletrônica</li>
+            <li>O código será enviado no dia da chegada</li>
+            <li>Portaria 24h – informe Ap 1101</li>
+            <li>Check-in rápido e independente</li>
+          </ul>
+        </div>
+        <div class="rounded-xl p-4" style="background:#3b73b810;">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#3b73b8;">
+              <i data-lucide="log-out" style="width:18px;height:18px;color:white;"></i>
             </div>
-            <div class="rounded-xl p-4" style="background:#3b73b810;">
-              <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#3b73b8;">
-                  <i data-lucide="log-out" style="width:18px;height:18px;color:white;"></i>
-                </div>
-                <span class="font-semibold text-lg" style="color:#3b73b8;">${escHtml(t.checkin.checkout)}</span>
-              </div>
-              <p class="text-sm text-gray-600 whitespace-pre-line">${escHtml(conteudo.checkout_texto || "")}</p>
+            <span class="font-semibold text-lg" style="color:#3b73b8;">Check-out: 11:00</span>
+          </div>
+          <ul class="text-sm text-gray-600 space-y-1 list-disc pl-5">
+            <li>Desligue ar-condicionado</li>
+            <li>Apague as luzes</li>
+            <li>Feche portas e janelas</li>
+          </ul>
+        </div>
+      </div>`
+  },
+
+  regras: {
+    title: "Regras do Apartamento",
+    html: `
+      <div class="space-y-3">
+        ${[
+          ["🤫","Silêncio após 22h"],
+          ["🚭","Não é permitido fumar"],
+          ["🚫","Não são permitidas festas"],
+          ["🪑","Não alterar disposição dos móveis"],
+          ["⏰","Respeitar horários de check-in e check-out"],
+          ["🗑️","Retirar o lixo ao sair"]
+        ].map(([em,tx])=>`
+          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#f5f0eb;">
+            <span class="text-xl">${em}</span>
+            <span class="text-sm text-gray-700 pt-0.5">${tx}</span>
+          </div>`).join("")}
+        <div class="mt-5 p-4 rounded-xl" style="background:#2a7d5010;">
+          <p class="text-sm" style="color:#1a5c3a;">💚 Agradeço antecipadamente por você ser um super hóspede! Espero que você aproveite o máximo da casa!</p>
+        </div>
+      </div>`
+  },
+
+  apartamento: {
+    title: "O Apartamento",
+    html: `
+      <p class="text-gray-600 text-sm leading-relaxed mb-5">
+        Estamos muito felizes em receber você. O apartamento foi recém-reformado, com marcenaria planejada, decoração contemporânea e enxoval padrão hotelaria.
+      </p>
+      <div class="grid grid-cols-2 gap-3">
+        ${[
+          ["users","4 pessoas"],
+          ["door-open","2 quartos"],
+          ["bath","1 banheiro"],
+          ["bed-double","4 camas"]
+        ].map(([ic,lb])=>`
+          <div class="rounded-xl p-4 flex items-center gap-3" style="background:#f5f0eb;">
+            <i data-lucide="${ic}" style="width:20px;height:20px;color:#2a7d50;"></i>
+            <span class="text-sm font-medium text-gray-700">${lb}</span>
+          </div>`).join("")}
+      </div>
+      <div class="mt-4 rounded-xl p-4 text-sm text-gray-600 space-y-1" style="background:#f5f0eb;">
+        <p>🛏️ 1 cama de casal (Queen)</p>
+        <p>🛏️ 1 cama de solteiro com cama auxiliar</p>
+        <p>🛋️ 1 sofá-cama</p>
+      </div>`
+  },
+
+  locomover: {
+    title: "Como se Locomover",
+    html: `
+      <div class="space-y-3">
+        ${[
+          ["🚗","Uber / 99","Serviços amplamente disponíveis na região, com rápida chegada e excelente cobertura."],
+          ["🚕","Táxi","Há ponto fixo de táxi na torre do Shopping RioSul, a poucos passos do edifício."],
+          ["🚇","Transporte Público","Diversas linhas de ônibus passam em frente ao Shopping RioSul. A estação de metrô Botafogo é a mais próxima."],
+          ["🚲","Bicicleta","Aluguel pelos aplicativos Tembici ou Uber."],
+          ["🚶","A Pé","A região é residencial, tranquila e arborizada, ideal para caminhadas até a Praia Vermelha, Pão de Açúcar e Shopping RioSul."],
+          ["🅿️","Estacionamento","O edifício não dispõe de vaga privativa. Há vagas públicas na rua e estacionamentos próximos."]
+        ].map(([em,t,d])=>`
+          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#f5f0eb;">
+            <span class="text-xl flex-shrink-0">${em}</span>
+            <div>
+              <p class="text-sm font-semibold text-gray-800">${t}</p>
+              <p class="text-xs text-gray-500">${d}</p>
             </div>
-          </div>`
-      },
-      regras: {
-        title: t.rulesTitle,
-        html: `
-          <div class="p-4 rounded-xl" style="background:#f5f0eb;">
-            <p class="text-sm text-gray-700 whitespace-pre-line">${escHtml(conteudo.regras_texto || "")}</p>
-          </div>`
-      },
-      apartamento: {
-        title: t.apartmentTitle,
-        html: `
-          <div class="space-y-4">
-            <p class="text-gray-600 text-sm leading-relaxed">${nl2brEsc(conteudo.apartamento_texto || "")}</p>
-            <div class="grid grid-cols-2 gap-3">
-              <div class="rounded-xl p-4 flex items-center gap-3" style="background:#f5f0eb;">
-                <i data-lucide="users" style="width:20px;height:20px;color:#2a7d50;"></i>
-                <span class="text-sm font-medium text-gray-700">4 pessoas</span>
-              </div>
-              <div class="rounded-xl p-4 flex items-center gap-3" style="background:#f5f0eb;">
-                <i data-lucide="door-open" style="width:20px;height:20px;color:#2a7d50;"></i>
-                <span class="text-sm font-medium text-gray-700">2 quartos</span>
-              </div>
-              <div class="rounded-xl p-4 flex items-center gap-3" style="background:#f5f0eb;">
-                <i data-lucide="bath" style="width:20px;height:20px;color:#2a7d50;"></i>
-                <span class="text-sm font-medium text-gray-700">1 banheiro</span>
-              </div>
-              <div class="rounded-xl p-4 flex items-center gap-3" style="background:#f5f0eb;">
-                <i data-lucide="bed-double" style="width:20px;height:20px;color:#2a7d50;"></i>
-                <span class="text-sm font-medium text-gray-700">4 camas</span>
-              </div>
-            </div>
-          </div>`
-      },
-      locomover: {
-        title: t.gettingAroundTitle,
-        html: `
-          <div class="p-4 rounded-xl" style="background:#f5f0eb;">
-            <p class="text-sm text-gray-700 whitespace-pre-line">${escHtml(conteudo.transporte_texto || "")}</p>
-          </div>`
-      },
-      chegar: {
-        title: t.gettingThereTitle,
-        html: `
-          <div class="space-y-4">
-            <div class="rounded-xl p-5" style="background:#c47a2e10;">
-              <p class="font-semibold text-gray-800 mb-2">${escHtml(conteudo.endereco_exibicao || "")}</p>
-              <p class="text-sm text-gray-600 whitespace-pre-line">${escHtml(conteudo.como_chegar_texto || "")}</p>
-            </div>
-            <a href="${linkMaps}" target="_blank" class="inline-flex items-center gap-2 px-4 py-3 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
-              <i data-lucide="map-pinned" style="width:16px;height:16px;"></i> ${escHtml(t.openMaps)}
-            </a>
-          </div>`
-      },
-      restaurantes: {
-        title: t.restaurantsTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#d94f4f08;"><p class="text-sm text-gray-700">${escHtml(t.placeholder)}</p></div>`
-      },
-      bares: {
-        title: t.barsTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#8b5fbf08;"><p class="text-sm text-gray-700">${escHtml(t.placeholder)}</p></div>`
-      },
-      fazer: {
-        title: t.whatToDoTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#2a7d5008;"><p class="text-sm text-gray-700">${escHtml(t.placeholder)}</p></div>`
-      },
-      partir: {
-        title: t.beforeLeavingTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#3b73b808;"><p class="text-sm text-gray-700 whitespace-pre-line">${escHtml(conteudo.antes_partir_texto || "")}</p></div>`
-      },
-      emergencia: {
-        title: t.emergencyTitle,
-        html: `
-          <div class="space-y-3">
-            <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
-              <div class="flex items-center gap-3"><span class="text-xl">🚔</span><span class="text-sm font-semibold text-gray-800">Polícia</span></div>
-              <span class="text-sm font-bold" style="color:#d94f4f;">190</span>
-            </div>
-            <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
-              <div class="flex items-center gap-3"><span class="text-xl">🚑</span><span class="text-sm font-semibold text-gray-800">SAMU</span></div>
-              <span class="text-sm font-bold" style="color:#d94f4f;">192</span>
-            </div>
-            <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
-              <div class="flex items-center gap-3"><span class="text-xl">🚒</span><span class="text-sm font-semibold text-gray-800">Bombeiros</span></div>
-              <span class="text-sm font-bold" style="color:#d94f4f;">193</span>
-            </div>
-          </div>`
-      },
-      avaliacao: {
-        title: t.reviewTitle,
-        html: `
-          <div class="text-center py-6">
-            <div class="text-4xl mb-4">⭐</div>
-            <p class="text-sm text-gray-500 mb-5">${escHtml(t.placeholder)}</p>
-          </div>`
-      },
-      faq: {
-        title: t.faqTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#8b5fbf08;"><p class="text-sm text-gray-700">${escHtml(t.placeholder)}</p></div>`
-      },
-      cafe: {
-        title: t.breakfastTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#c47a2e08;"><p class="text-sm text-gray-700">${escHtml(t.placeholder)}</p></div>`
-      },
-      proximos: {
-        title: t.nearbyTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#3b73b808;"><p class="text-sm text-gray-700">${escHtml(t.placeholder)}</p></div>`
-      },
-      doces: {
-        title: t.sweetsTitle,
-        html: `<div class="p-4 rounded-xl" style="background:#d94f4f08;"><p class="text-sm text-gray-700">${escHtml(t.placeholder)}</p></div>`
-      },
-      contato: {
-        title: t.contactTitle,
-        html: `
-          <div class="text-center py-6">
-            <div class="text-4xl mb-4">💬</div>
-            <p class="text-sm text-gray-500 mb-5">${nl2brEsc(conteudo.contato_texto || "")}</p>
-          </div>`
-      }
-    };
+          </div>`).join("")}
+      </div>`
+  },
+
+  chegar: {
+    title: "Como Chegar",
+    html: `
+      <div class="rounded-xl p-5" style="background:#c47a2e10;">
+        <p class="font-semibold text-gray-800 mb-2">📍 Rua Lauro Müller, 46 - Botafogo</p>
+        <p class="text-gray-600 mb-4 text-sm">Rio de Janeiro - RJ</p>
+        <ul class="text-sm text-gray-600 space-y-2">
+          <li>• Utilize o endereço completo no Google Maps ou Uber</li>
+          <li>• O prédio possui portaria 24h</li>
+          <li>• Informe o número do apartamento: 1101</li>
+          <li>• A entrada é feita por fechadura eletrônica</li>
+        </ul>
+        <a href="https://maps.app.goo.gl/FEPcLwTqpL1vyYfdA" target="_blank" class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
+          <i data-lucide="map-pinned" style="width:16px;height:16px;"></i> Abrir no Google Maps
+        </a>
+      </div>`
+  },
+
+  restaurantes: {
+    title: "Restaurantes Locais",
+    html: `
+      <div class="space-y-2">
+        ${[
+          "Terra Brasilis",
+          "Fogo de Chão",
+          "Assador Rio's",
+          "Bar Urca / Mureta da Urca",
+          "Irajá Redux",
+          "Pergula",
+          "Ferro e Farinha",
+          "San Izakaya",
+          "Encarnado Burger",
+          "Delivery - iFood"
+        ].map(r=>`
+          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#d94f4f08;">
+            <span>🍽️</span><span class="text-sm text-gray-700">${r}</span>
+          </div>`).join("")}
+      </div>`
+  },
+
+  bares: {
+    title: "Bares",
+    html: `
+      <div class="space-y-2">
+        ${[
+          "Brewteco Botafogo",
+          "Rio Scenarium",
+          "Belmonte Ipanema",
+          "Blue Note Rio"
+        ].map(b=>`
+          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#8b5fbf08;">
+            <span>🍸</span><span class="text-sm text-gray-700">${b}</span>
+          </div>`).join("")}
+      </div>`
+  },
+
+  cafe: {
+    title: "Café da Manhã",
+    html: `
+      <div class="space-y-2">
+        ${[
+          "Empório Jardim Casa Firjan",
+          "The Slow Bakery",
+          "Café 18 do Forte de Copacabana"
+        ].map(c=>`
+          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#c47a2e08;">
+            <span>☕</span><span class="text-sm text-gray-700">${c}</span>
+          </div>`).join("")}
+      </div>`
+  },
+
+  doces: {
+    title: "Cafés & Doces",
+    html: `
+      <div class="space-y-2">
+        ${[
+          "Classico Beach Club Urca",
+          "Cirandaia",
+          "Que Doce",
+          "Padaria Ipanema"
+        ].map(c=>`
+          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#d94f4f08;">
+            <span>🧁</span><span class="text-sm text-gray-700">${c}</span>
+          </div>`).join("")}
+      </div>`
+  },
+
+  proximos: {
+    title: "Mais Próximos",
+    html: `
+      <div class="space-y-2">
+        ${[
+          ["🥖","Pão e Companhia","Rua Lauro Müller, 116"],
+          ["🛒","Zona Sul Urca","R. Marechal Cantuária, 178"],
+          ["🏥","Hospital Samaritano Botafogo","Rua Bambina, 98"],
+          ["💊","Drogaria Pacheco – RioSul","Rua Lauro Müller, 116"],
+          ["🍺","Zé Delivery","Aplicativo"],
+          ["⛽","Posto Petrobras","Av. Pasteur, 490 – Urca"]
+        ].map(([em,n,d])=>`
+          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#3b73b808;">
+            <span>${em}</span>
+            <div><p class="text-sm font-semibold text-gray-800">${n}</p><p class="text-xs text-gray-500">${d}</p></div>
+          </div>`).join("")}
+      </div>`
+  },
+
+  fazer: {
+    title: "O que Fazer",
+    html: `
+      <div class="space-y-3">
+        ${[
+          ["🏖️","Bondinho do Pão de Açúcar","10 minutos a pé · Av. Pasteur, 520 – Urca"],
+          ["⛰️","Cristo Redentor","20 min de carro até embarque"],
+          ["🎨","Escadaria Selarón","15 min de carro · Rua Joaquim Silva – Lapa"],
+          ["🌊","Praia de Copacabana","5 minutos de carro · Avenida Atlântica"],
+          ["🌿","Jardim Botânico","25 minutos de carro · Rua Jardim Botânico, 1008"],
+          ["🌅","Pôr do sol no Arpoador","20 minutos de carro · Pedra do Arpoador"]
+        ].map(([em,t,d])=>`
+          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#2a7d5008;">
+            <span class="text-xl flex-shrink-0">${em}</span>
+            <div><p class="text-sm font-semibold text-gray-800">${t}</p><p class="text-xs text-gray-500">${d}</p></div>
+          </div>`).join("")}
+      </div>`
+  },
+
+  partir: {
+    title: "Antes de Partir",
+    html: `
+      <div class="space-y-3">
+        ${[
+          ["⏰","Check-out até 11:00"],
+          ["🔑","O código de acesso expira após o check-out"],
+          ["🗑️","Retirar o lixo e colocá-lo no local indicado do prédio"],
+          ["🧳","Verificar se nenhum item pessoal foi esquecido"],
+          ["🚪","Feche todas as janelas e portas"],
+          ["💡","Desligue o ar-condicionado e as luzes antes de sair"],
+          ["🛠️","Informe-nos se algum dano pequeno tiver acontecido"]
+        ].map(([em,t])=>`
+          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#3b73b808;">
+            <span class="text-xl">${em}</span><span class="text-sm text-gray-700">${t}</span>
+          </div>`).join("")}
+      </div>`
+  },
+
+  emergencia: {
+    title: "Emergência",
+    html: `
+      <div class="space-y-3">
+        ${[
+          ["🚔","Polícia Militar","190"],
+          ["🚑","SAMU","192"],
+          ["🚒","Corpo de Bombeiros","193"]
+        ].map(([em,t,n])=>`
+          <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
+            <div class="flex items-center gap-3"><span class="text-xl">${em}</span><span class="text-sm font-semibold text-gray-800">${t}</span></div>
+            <span class="text-sm font-bold" style="color:#d94f4f;">${n}</span>
+          </div>`).join("")}
+      </div>`
+  },
+
+  avaliacao: {
+    title: "Avaliação",
+    html: `
+      <div class="text-center py-6">
+        <div class="text-4xl mb-4">⭐</div>
+        <p class="heading-font text-xl mb-2" style="color:#1a5c3a;">Esperamos que você tenha gostado da sua estadia!</p>
+        <p class="text-sm text-gray-500 mb-5">Se puder, deixe uma avaliação no Airbnb.</p>
+        <a href="https://airbnb.com/" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
+          <i data-lucide="star" style="width:14px;height:14px;"></i> Deixar avaliação
+        </a>
+      </div>`
+  },
+
+  faq: {
+    title: "Perguntas Frequentes",
+    html: `
+      <div class="space-y-3">
+        ${[
+          ["Tem estacionamento disponível no local?","O edifício não dispõe de vaga privativa. Há vagas públicas na rua."],
+          ["Posso levar meu pet?","Não é permitida a hospedagem de animais."],
+          ["Tem roupa de cama e banho disponível?","Sim. Disponibilizamos enxoval completo, incluindo roupas de cama e toalhas de banho e rosto."],
+          ["Como funciona a lavanderia?","O apartamento não dispõe de máquina de lavar. Sugerimos Lavô Lavanderia, Acqua Lavanderia e 5àSec."]
+        ].map(([q,a])=>`
+          <div class="p-4 rounded-xl" style="background:#8b5fbf08;">
+            <p class="text-sm font-semibold text-gray-800 mb-1">${q}</p>
+            <p class="text-xs text-gray-600">${a}</p>
+          </div>`).join("")}
+      </div>`
+  },
+
+  contato: {
+    title: "Entre em Contato",
+    html: `
+      <div class="text-center py-6">
+        <div class="text-4xl mb-4">💬</div>
+        <p class="text-sm text-gray-500 mb-5">${nl2brEsc(conteudo.contato_texto || "Foi um prazer recebê-lo em nosso apartamento! Caso tenha qualquer sugestão ou comentário, ficaremos muito felizes em ouvir.")}</p>
+      </div>`
+  }
+};
 
     const html = `
 <!doctype html>
