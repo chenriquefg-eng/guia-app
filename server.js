@@ -250,6 +250,45 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     }
 
     const conteudo = conteudoResult.rows[0] || {};
+const idiomaFinal = req.params.idioma || "pt";
+
+let secoesResult = await pool.query(
+  `
+  SELECT *
+  FROM imovel_secao_itens
+  WHERE imovel_id = $1
+    AND idioma = $2
+    AND ativo = true
+  ORDER BY secao, ordem
+  `,
+  [imovel.id, idiomaFinal]
+);
+
+// fallback para português
+if (secoesResult.rows.length === 0 && idiomaFinal !== "pt") {
+  secoesResult = await pool.query(
+    `
+    SELECT *
+    FROM imovel_secao_itens
+    WHERE imovel_id = $1
+      AND idioma = 'pt'
+      AND ativo = true
+    ORDER BY secao, ordem
+    `,
+    [imovel.id]
+  );
+}
+
+const secoesAgrupadas = {};
+
+secoesResult.rows.forEach(item => {
+  if (!secoesAgrupadas[item.secao]) {
+    secoesAgrupadas[item.secao] = [];
+  }
+  secoesAgrupadas[item.secao].push(item);
+});
+
+    
 
     const enderecoMaps = encodeURIComponent(
       conteudo.endereco_exibicao ||
