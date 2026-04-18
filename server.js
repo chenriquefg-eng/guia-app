@@ -42,9 +42,9 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     }
 
     return res.json({
-      imovel,
-      conteudo: conteudoResult.rows[0] || null
-    });
+  imovel,
+  conteudo: conteudoResult.rows[0] || null
+});
   } catch (err) {
     console.error("ERRO:", err);
     return res.status(500).send(err.message);
