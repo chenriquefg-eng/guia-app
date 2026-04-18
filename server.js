@@ -514,148 +514,238 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   },
 
   cafe: {
-    title: "Café da Manhã",
-    html: `
-      <div class="space-y-2">
-        ${[
-          "Empório Jardim Casa Firjan",
-          "The Slow Bakery",
-          "Café 18 do Forte de Copacabana"
-        ].map(c=>`
-          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#c47a2e08;">
-            <span>☕</span><span class="text-sm text-gray-700">${c}</span>
-          </div>`).join("")}
-      </div>`
-  },
+  title: "Café da Manhã",
+  html: `
+    <div class="space-y-3">
+      ${[
+        {
+          nome: "Empório Jardim Casa Firjan",
+          desc: "R. Guilhermina Guinle, 211 - Botafogo · 18 min de carro",
+          maps: "https://maps.app.goo.gl/euoubBRqSvoWERnD7",
+          insta: "http://www.instagram.com/emporiojardimrio/?hl=pt-br",
+          review: "https://share.google/QOOw0wgcoPqA4CH5c"
+        },
+        {
+          nome: "The Slow Bakery",
+          desc: "R. General Polidoro, 25 - Botafogo · 10 min a pé",
+          maps: "https://maps.app.goo.gl/ws4dffA6P8NPr9k17",
+          insta: "https://www.instagram.com/theslowbakery/",
+          review: "https://share.google/TpGcvFVtgbzUmBYIW"
+        },
+        {
+          nome: "Café 18 do Forte",
+          desc: "Forte de Copacabana · ótimo passeio + café",
+          maps: "https://maps.app.goo.gl/nYbbGHAwZXnwzCEP8",
+          insta: "https://www.instagram.com/cafe18doforte/",
+          review: "https://share.google/q1u8YrHJEHRCaFizi"
+        }
+      ].map(item => `
+        <div class="p-4 rounded-2xl bg-white border border-gray-100">
+          <p class="text-sm font-semibold text-gray-800">${item.nome}</p>
+          <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <a href="${item.maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
+            <a href="${item.insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
+            <a href="${item.review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
+          </div>
+        </div>
+      `).join("")}
+    </div>`
+},
 
-  doces: {
-    title: "Cafés & Doces",
-    html: `
-      <div class="space-y-2">
-        ${[
-          "Classico Beach Club Urca",
-          "Cirandaia",
-          "Que Doce",
-          "Padaria Ipanema"
-        ].map(c=>`
-          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#d94f4f08;">
-            <span>🧁</span><span class="text-sm text-gray-700">${c}</span>
-          </div>`).join("")}
-      </div>`
-  },
+doces: {
+  title: "Cafés & Doces",
+  html: `
+    <div class="space-y-3">
+      ${[
+        {
+          nome: "Classico Beach Club Urca",
+          desc: "Av. Pasteur, 520 - Urca · 15 min a pé",
+          maps: "https://maps.app.goo.gl/VUVTfQYV1cRjEwe77",
+          insta: "https://www.instagram.com/classicobeachclub/?hl=pt-br",
+          review: "https://share.google/5aXU0nBUW4il3mwTK"
+        },
+        {
+          nome: "Cirandaia",
+          desc: "R. Voluntários da Pátria, 416 - Botafogo · 19 min de carro",
+          maps: "https://maps.app.goo.gl/4dRMtCkRGyMiErW49",
+          insta: "http://www.instagram.com/",
+          review: "https://share.google/FWbcwup74oNPihmpF"
+        },
+        {
+          nome: "Que Doce",
+          desc: "R. Odílio Bacelar, 30 - Urca · 10 min a pé",
+          maps: "https://www.google.com/maps/place/Casa+Que+Doce/@-22.9541372,-43.174362,17z/data=!4m6!3m5!1s0x997b58dcd90f71:0x4ca184d7bd113064!8m2!3d-22.9532045!4d-43.1682974!16s%2Fg%2F11cmykzrps",
+          insta: "https://www.instagram.com/quedoce/",
+          review: "https://share.google/ZPx65fJw5pWCTAlSh"
+        },
+        {
+          nome: "Padaria Ipanema",
+          desc: "R. Visc. de Pirajá, 325 - Ipanema · 23 min de carro",
+          maps: "https://maps.app.goo.gl/sz9eXmq3dGMR5ujF8",
+          insta: "https://www.instagram.com/padariaipanemaoficial/",
+          review: "https://share.google/YM0kd1DIl4Yml89Rm"
+        }
+      ].map(item => `
+        <div class="p-4 rounded-2xl bg-white border border-gray-100">
+          <p class="text-sm font-semibold text-gray-800">${item.nome}</p>
+          <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <a href="${item.maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
+            <a href="${item.insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
+            <a href="${item.review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
+          </div>
+        </div>
+      `).join("")}
+    </div>`
+},
 
-  proximos: {
-    title: "Mais Próximos",
-    html: `
-      <div class="space-y-2">
-        ${[
-          ["🥖","Pão e Companhia","Rua Lauro Müller, 116"],
-          ["🛒","Zona Sul Urca","R. Marechal Cantuária, 178"],
-          ["🏥","Hospital Samaritano Botafogo","Rua Bambina, 98"],
-          ["💊","Drogaria Pacheco – RioSul","Rua Lauro Müller, 116"],
-          ["🍺","Zé Delivery","Aplicativo"],
-          ["⛽","Posto Petrobras","Av. Pasteur, 490 – Urca"]
-        ].map(([em,n,d])=>`
-          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#3b73b808;">
+restaurantes: {
+  title: "Restaurantes Locais",
+  html: `
+    <div class="space-y-3">
+      ${[
+        {
+          nome: "Terra Brasilis",
+          desc: "Praça General Tibúrcio, s/n · comida brasileira · 15 min a pé",
+          maps: "https://maps.app.goo.gl/UKcfaSs7kywVz4XX6",
+          insta: "https://www.instagram.com/restauranteterrabrasilis/",
+          review: "https://share.google/HypQmZYjXdM1BRLMw"
+        },
+        {
+          nome: "Fogo de Chão",
+          desc: "Praia de Botafogo, 400 · carnes e vista linda · 15 min a pé",
+          maps: "https://maps.app.goo.gl/9rzSjzqu7tuuPrce8",
+          insta: "https://www.instagram.com/fogodechaobr/?hl=en",
+          review: "https://share.google/Qv9X5UeAyXTtJK4Aa"
+        },
+        {
+          nome: "Assador Rio's",
+          desc: "Av. Infante Dom Henrique, s/n · churrascaria · 9 min de carro",
+          maps: "http://www.googlemaps.com/",
+          insta: "https://www.instagram.com/assadorbr/?hl=en",
+          review: "https://share.google/4DTQZiT70rZnZQXjP"
+        },
+        {
+          nome: "Bar Urca / Mureta",
+          desc: "Rua Cândido Gaffrée, 205 · boteco clássico · 10 min de carro",
+          maps: "https://maps.app.goo.gl/2xzVEpzyvjRBKVpY7",
+          insta: "https://www.instagram.com/barurca/",
+          review: "https://share.google/dt4P7Wm3jwq8QbDNz"
+        },
+        {
+          nome: "Pergula",
+          desc: "Copacabana Palace · 15 min de carro",
+          maps: "http://www.googlemaps.com/",
+          insta: "https://www.instagram.com/belmondcopacabanapalace/",
+          review: "https://riotur.rio/onde_comer/pergula/"
+        },
+        {
+          nome: "Irajá Redux",
+          desc: "Shopping RioSul · 3 min a pé",
+          maps: "https://maps.app.goo.gl/QPWX4k7fTXzvj4cY9",
+          insta: "https://www.instagram.com/irajaredux/?hl=en",
+          review: "https://share.google/SqLmhVAICt4EWg438"
+        }
+      ].map(item => `
+        <div class="p-4 rounded-2xl bg-white border border-gray-100">
+          <p class="text-sm font-semibold text-gray-800">${item.nome}</p>
+          <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <a href="${item.maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
+            <a href="${item.insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
+            <a href="${item.review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
+          </div>
+        </div>
+      `).join("")}
+    </div>`
+},
+
+bares: {
+  title: "Bares",
+  html: `
+    <div class="space-y-3">
+      ${[
+        ["Brewteco Botafogo","10 min de carro","https://maps.google.com/?q=Brewteco+Botafogo","https://www.instagram.com/brewteco/","https://www.google.com/search?q=Brewteco+Botafogo+reviews"],
+        ["Rio Scenarium","15 min de carro","https://maps.google.com/?q=Rio+Scenarium","https://www.instagram.com/rioscenarium/","https://www.google.com/search?q=Rio+Scenarium+reviews"],
+        ["Belmonte Ipanema","18 min de carro","https://maps.google.com/?q=Belmonte+Ipanema","https://www.instagram.com/belmontebar/","https://www.google.com/search?q=Belmonte+Ipanema+avaliacoes"],
+        ["Blue Note Rio","12 min de carro","https://maps.google.com/?q=Blue+Note+Rio","https://www.instagram.com/bluenoterio/?utm_source=chatgpt.com","https://www.google.com/search?q=Blue+Note+Rio+reviews"]
+      ].map(([nome,desc,maps,insta,review]) => `
+        <div class="p-4 rounded-2xl bg-white border border-gray-100">
+          <p class="text-sm font-semibold text-gray-800">${nome}</p>
+          <p class="text-xs text-gray-500 mt-1">${desc}</p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <a href="${maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
+            <a href="${insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
+            <a href="${review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
+          </div>
+        </div>
+      `).join("")}
+    </div>`
+},
+
+proximos: {
+  title: "Mais Próximos",
+  html: `
+    <div class="space-y-3">
+      ${[
+        ["🥖","Pão e companhia","Rua Lauro Müller, 116","https://maps.app.goo.gl/iVgWfZgKAmKHNabs7"],
+        ["🛒","Zona Sul Urca","R. Marechal Cantuária, 178","https://maps.app.goo.gl/ri5vHFrNv4e4rb246"],
+        ["🏥","Hospital Samaritano Botafogo","Rua Bambina, 98","https://maps.google.com/?q=Hospital+Samaritano+Botafogo"],
+        ["💊","Drogaria Pacheco – RioSul","Rua Lauro Müller, 116","http://www.googlemaps.com/"],
+        ["🍺","Zé Delivery","Aplicativo","https://apps.apple.com/br/app/z%C3%A9-delivery/id1070070438"],
+        ["⛽","Posto Petrobras","Av. Pasteur, 490 – Urca","https://maps.google.com/?q=Posto+Petrobras+Av+Pasteur+490+Urca"]
+      ].map(([em,n,d,maps])=>`
+        <div class="flex items-start justify-between gap-3 p-3 rounded-xl" style="background:#3b73b808;">
+          <div class="flex items-start gap-3">
             <span>${em}</span>
             <div><p class="text-sm font-semibold text-gray-800">${n}</p><p class="text-xs text-gray-500">${d}</p></div>
-          </div>`).join("")}
-      </div>`
-  },
+          </div>
+          <a href="${maps}" target="_blank" class="text-xs font-medium" style="color:#3b73b8;">Abrir</a>
+        </div>`).join("")}
+    </div>`
+},
 
-  fazer: {
-    title: "O que Fazer",
-    html: `
-      <div class="space-y-3">
-        ${[
-          ["🏖️","Bondinho do Pão de Açúcar","10 minutos a pé · Av. Pasteur, 520 – Urca"],
-          ["⛰️","Cristo Redentor","20 min de carro até embarque"],
-          ["🎨","Escadaria Selarón","15 min de carro · Rua Joaquim Silva – Lapa"],
-          ["🌊","Praia de Copacabana","5 minutos de carro · Avenida Atlântica"],
-          ["🌿","Jardim Botânico","25 minutos de carro · Rua Jardim Botânico, 1008"],
-          ["🌅","Pôr do sol no Arpoador","20 minutos de carro · Pedra do Arpoador"]
-        ].map(([em,t,d])=>`
-          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#2a7d5008;">
+fazer: {
+  title: "O que Fazer",
+  html: `
+    <div class="space-y-3">
+      ${[
+        ["🏔️","Bondinho do Pão de Açúcar","10 min a pé · Av. Pasteur, 520 – Urca","https://maps.google.com/?q=Bondinho+Pao+de+Acucar"],
+        ["⛰️","Cristo Redentor","20 min de carro até embarque","https://maps.app.goo.gl/EWKaN2UA23HwhF4H8"],
+        ["🎨","Escadaria Selarón","15 min de carro · Rua Joaquim Silva – Lapa","https://maps.google.com/?q=Escadaria+Selaron"],
+        ["🌊","Praia de Copacabana","5 min de carro · Av. Atlântica","https://maps.google.com/?q=Copacabana+Beach"],
+        ["🌿","Jardim Botânico","25 min de carro · Rua Jardim Botânico, 1008","https://maps.app.goo.gl/mcfnQUqDPCVbRuko8"],
+        ["🌅","Pôr do sol no Arpoador","20 min de carro · Pedra do Arpoador","https://maps.app.goo.gl/RGknCvVpfwp6C2c87"]
+      ].map(([em,t,d,maps])=>`
+        <div class="flex items-start justify-between gap-3 p-3 rounded-xl" style="background:#2a7d5008;">
+          <div class="flex items-start gap-3">
             <span class="text-xl flex-shrink-0">${em}</span>
             <div><p class="text-sm font-semibold text-gray-800">${t}</p><p class="text-xs text-gray-500">${d}</p></div>
-          </div>`).join("")}
-      </div>`
-  },
+          </div>
+          <a href="${maps}" target="_blank" class="text-xs font-medium" style="color:#2a7d50;">Abrir</a>
+        </div>`).join("")}
+    </div>`
+},
 
-  partir: {
-    title: "Antes de Partir",
-    html: `
-      <div class="space-y-3">
-        ${[
-          ["⏰","Check-out até 11:00"],
-          ["🔑","O código de acesso expira após o check-out"],
-          ["🗑️","Retirar o lixo e colocá-lo no local indicado do prédio"],
-          ["🧳","Verificar se nenhum item pessoal foi esquecido"],
-          ["🚪","Feche todas as janelas e portas"],
-          ["💡","Desligue o ar-condicionado e as luzes antes de sair"],
-          ["🛠️","Informe-nos se algum dano pequeno tiver acontecido"]
-        ].map(([em,t])=>`
-          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#3b73b808;">
-            <span class="text-xl">${em}</span><span class="text-sm text-gray-700">${t}</span>
-          </div>`).join("")}
-      </div>`
-  },
-
-  emergencia: {
-    title: "Emergência",
-    html: `
-      <div class="space-y-3">
-        ${[
-          ["🚔","Polícia Militar","190"],
-          ["🚑","SAMU","192"],
-          ["🚒","Corpo de Bombeiros","193"]
-        ].map(([em,t,n])=>`
-          <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
-            <div class="flex items-center gap-3"><span class="text-xl">${em}</span><span class="text-sm font-semibold text-gray-800">${t}</span></div>
-            <span class="text-sm font-bold" style="color:#d94f4f;">${n}</span>
-          </div>`).join("")}
-      </div>`
-  },
-
-  avaliacao: {
-    title: "Avaliação",
-    html: `
-      <div class="text-center py-6">
-        <div class="text-4xl mb-4">⭐</div>
-        <p class="heading-font text-xl mb-2" style="color:#1a5c3a;">Esperamos que você tenha gostado da sua estadia!</p>
-        <p class="text-sm text-gray-500 mb-5">Se puder, deixe uma avaliação no Airbnb.</p>
-        <a href="https://airbnb.com/" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
-          <i data-lucide="star" style="width:14px;height:14px;"></i> Deixar avaliação
+contato: {
+  title: "Entre em Contato",
+  html: `
+    <div class="text-center py-6">
+      <div class="text-4xl mb-4">💬</div>
+      <p class="text-sm text-gray-500 mb-4">Foi um prazer recebê-lo em nosso apartamento! Caso tenha qualquer sugestão ou comentário, ficaremos muito felizes em ouvir.</p>
+      <div class="space-y-2 text-sm">
+        <p><strong>Instagram:</strong> @milepascoal</p>
+        <p><strong>Telefone:</strong> <a href="tel:+5521971810022" style="color:#1a5c3a;">+55 21 97181-0022</a></p>
+        <p><strong>Endereço:</strong> Rua Lauro Müller, 46 Ap 1101</p>
+      </div>
+      <div class="mt-4">
+        <a href="https://maps.app.goo.gl/5r23kN9fv3gH8JBr8" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
+          <i data-lucide="map-pinned" style="width:14px;height:14px;"></i> Abrir localização
         </a>
-      </div>`
-  },
-
-  faq: {
-    title: "Perguntas Frequentes",
-    html: `
-      <div class="space-y-3">
-        ${[
-          ["Tem estacionamento disponível no local?","O edifício não dispõe de vaga privativa. Há vagas públicas na rua."],
-          ["Posso levar meu pet?","Não é permitida a hospedagem de animais."],
-          ["Tem roupa de cama e banho disponível?","Sim. Disponibilizamos enxoval completo, incluindo roupas de cama e toalhas de banho e rosto."],
-          ["Como funciona a lavanderia?","O apartamento não dispõe de máquina de lavar. Sugerimos Lavô Lavanderia, Acqua Lavanderia e 5àSec."]
-        ].map(([q,a])=>`
-          <div class="p-4 rounded-xl" style="background:#8b5fbf08;">
-            <p class="text-sm font-semibold text-gray-800 mb-1">${q}</p>
-            <p class="text-xs text-gray-600">${a}</p>
-          </div>`).join("")}
-      </div>`
-  },
-
-  contato: {
-    title: "Entre em Contato",
-    html: `
-      <div class="text-center py-6">
-        <div class="text-4xl mb-4">💬</div>
-        <p class="text-sm text-gray-500 mb-5">${nl2brEsc(conteudo.contato_texto || "Foi um prazer recebê-lo em nosso apartamento! Caso tenha qualquer sugestão ou comentário, ficaremos muito felizes em ouvir.")}</p>
-      </div>`
-  }
-};
+      </div>
+    </div>`
+}
 
     const html = `
 <!doctype html>
