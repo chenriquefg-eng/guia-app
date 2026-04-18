@@ -723,19 +723,19 @@ avaliacao: {
   title: "Avaliação",
   html: `
     <div class="text-center py-6">
-      <div class="text-4xl mb-4">⭐</div>
-      <p class="heading-font text-xl mb-2" style="color:#1a5c3a;">Gostou da estadia?</p>
-      <p class="text-sm text-gray-500 mb-5">
-        Esperamos que você tenha gostado da sua experiência em nosso apartamento.
-        Sua avaliação é muito importante e nos ajuda a receber cada vez melhor.
+      <div class="text-5xl mb-4">⭐</div>
+      <p class="heading-font text-2xl mb-2" style="color:#1a5c3a;">Sua opinião é muito importante</p>
+      <p class="text-sm text-gray-500 mb-5 leading-relaxed">
+        Esperamos que você tenha gostado da sua estadia em nosso apartamento.
+        Se puder, deixe sua avaliação no Airbnb. Isso nos ajuda muito e faz diferença para os próximos hóspedes.
       </p>
 
-      <a href="https://airbnb.com/" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
+      <a href="https://airbnb.com/" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium text-white shadow-sm" style="background:#1a5c3a;">
         <i data-lucide="star" style="width:14px;height:14px;"></i> Deixar avaliação no Airbnb
       </a>
 
       <p class="text-xs text-gray-400 mt-4">
-        Obrigado por dedicar um tempinho para compartilhar sua experiência.
+        Obrigado por dedicar um tempinho para compartilhar sua experiência. 💚
       </p>
     </div>`
 },
@@ -817,20 +817,29 @@ contato: {
   title: "Entre em Contato",
   html: `
     <div class="text-center py-6">
-      <div class="text-4xl mb-4">💬</div>
-      <p class="text-sm text-gray-500 mb-4">Foi um prazer recebê-lo em nosso apartamento! Caso tenha qualquer sugestão ou comentário, ficaremos muito felizes em ouvir.</p>
-      <div class="space-y-2 text-sm">
+      <div class="text-5xl mb-4">💬</div>
+      <p class="heading-font text-2xl mb-2" style="color:#1a5c3a;">Estamos por perto</p>
+      <p class="text-sm text-gray-500 mb-5 leading-relaxed">
+        Foi um prazer recebê-lo em nosso apartamento. Caso tenha qualquer dúvida, sugestão ou precise de ajuda, ficaremos muito felizes em falar com você.
+      </p>
+
+      <div class="space-y-2 text-sm mb-5">
         <p><strong>Instagram:</strong> @milepascoal</p>
         <p><strong>Telefone:</strong> <a href="tel:+5521971810022" style="color:#1a5c3a;">+55 21 97181-0022</a></p>
         <p><strong>Endereço:</strong> Rua Lauro Müller, 46 Ap 1101</p>
       </div>
-      <div class="mt-4">
-        <a href="https://maps.app.goo.gl/5r23kN9fv3gH8JBr8" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
+
+      <div class="flex flex-col gap-2">
+        <a href="https://wa.me/5521971810022" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-medium text-white" style="background:#25d366;">
+          <i data-lucide="message-circle" style="width:14px;height:14px;"></i> Falar no WhatsApp
+        </a>
+
+        <a href="https://maps.app.goo.gl/5r23kN9fv3gH8JBr8" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
           <i data-lucide="map-pinned" style="width:14px;height:14px;"></i> Abrir localização
         </a>
       </div>
     </div>`
-}
+},
     };
 
     const html = `
