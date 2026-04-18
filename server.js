@@ -812,7 +812,38 @@ fazer: {
         </div>`).join("")}
     </div>`
 },
+partir: {
+  title: "Antes de Partir",
+  html: `
+    <div class="space-y-3">
 
+      <div class="p-4 rounded-xl" style="background:#3b73b808;">
+        <p class="text-sm font-semibold text-gray-800 mb-2">⏰ Check-out</p>
+        <p class="text-xs text-gray-600">
+          O horário de saída é até <strong>11:00</strong>. Caso precise de um horário diferente, nos avise com antecedência.
+        </p>
+      </div>
+
+      ${[
+        "Verifique se não esqueceu nenhum item pessoal",
+        "Retire o lixo e coloque no local indicado do prédio",
+        "Feche todas as janelas e portas",
+        "Desligue o ar-condicionado",
+        "Apague as luzes",
+        "Informe caso tenha ocorrido algum pequeno dano"
+      ].map(item => `
+        <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#f5f0eb;">
+          <span>✔️</span>
+          <span class="text-sm text-gray-700">${item}</span>
+        </div>
+      `).join("")}
+
+      <div class="mt-4 p-4 rounded-xl text-sm text-gray-700" style="background:#2a7d5010;">
+        💚 Esperamos que você tenha tido uma excelente estadia e momentos especiais aqui no Rio!
+      </div>
+
+    </div>`
+},
 contato: {
   title: "Entre em Contato",
   html: `
