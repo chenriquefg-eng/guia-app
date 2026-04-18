@@ -1015,7 +1015,7 @@ contato: {
       </div>
     </div>
 
-    <div id="modal" class="modal-overlay fixed inset-0 z-50" style="background:rgba(0,0,0,0.4);" onclick="closeModal(event)">
+    <div id="modal" onclick="closeModal(event)">
       <div class="modal-content absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl overflow-hidden" style="max-height:88%;">
         <div class="sticky top-0 bg-white z-10 px-5 pt-4 pb-3 border-b border-gray-100 flex items-center justify-between">
           <h2 id="modalTitle" class="heading-font text-xl" style="color:#1a5c3a;"></h2>
