@@ -1051,13 +1051,28 @@ contato: {
       lucide.createIcons();
     }
 
-    function openSection(id) {
-      const section = sections[id] || { title: "Info", html: "<p>Sem conteúdo.</p>" };
-      document.getElementById("modalTitle").textContent = section.title;
-      document.getElementById("modalBody").innerHTML = section.html;
-      document.getElementById("modal").classList.add("active");
-      lucide.createIcons();
-    }
+   function openSection(id) {
+  const modal = document.getElementById("modal");
+  const modalBody = document.getElementById("modalBody");
+  const modalTitle = document.getElementById("modalTitle");
+
+  const section = sections[id] || { title: "Info", html: "<p>Sem conteúdo.</p>" };
+
+  // se já está aberto no mesmo → fecha
+  if (modal.dataset.open === id) {
+    modal.classList.remove("active");
+    modal.dataset.open = "";
+    return;
+  }
+
+  modalTitle.textContent = section.title;
+  modalBody.innerHTML = section.html;
+
+  modal.classList.add("active");
+  modal.dataset.open = id;
+
+  lucide.createIcons();
+}
 
     function closeModal(e) {
       if (e.target === document.getElementById("modal")) {
