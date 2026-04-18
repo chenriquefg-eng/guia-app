@@ -719,6 +719,56 @@ emergencia: {
       </div>
     </div>`
 },
+avaliacao: {
+  title: "Avaliação",
+  html: `
+    <div class="text-center py-6">
+      <div class="text-4xl mb-4">⭐</div>
+      <p class="heading-font text-xl mb-2" style="color:#1a5c3a;">Gostou da estadia?</p>
+      <p class="text-sm text-gray-500 mb-5">
+        Esperamos que você tenha gostado da sua experiência em nosso apartamento.
+        Sua avaliação é muito importante e nos ajuda a receber cada vez melhor.
+      </p>
+
+      <a href="https://airbnb.com/" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
+        <i data-lucide="star" style="width:14px;height:14px;"></i> Deixar avaliação no Airbnb
+      </a>
+
+      <p class="text-xs text-gray-400 mt-4">
+        Obrigado por dedicar um tempinho para compartilhar sua experiência.
+      </p>
+    </div>`
+},
+      faq: {
+  title: "Perguntas Frequentes",
+  html: `
+    <div class="space-y-3">
+      ${[
+        [
+          "Tem estacionamento disponível no local?",
+          "O edifício não dispõe de vaga privativa. Há vagas públicas na rua e estacionamentos próximos."
+        ],
+        [
+          "Posso levar meu pet?",
+          "Não é permitida a hospedagem de animais."
+        ],
+        [
+          "Tem roupa de cama e banho disponível?",
+          "Sim. Disponibilizamos enxoval completo, incluindo roupas de cama e toalhas de banho e rosto, preparados com padrão de qualidade e conforto."
+        ],
+        [
+          "Como funciona a lavanderia?",
+          "O apartamento não dispõe de máquina de lavar. Para maior comodidade, sugerimos: Lavô Lavanderia – Botafogo; Acqua Lavanderia – Leme; e 5àSec – Botafogo ou Copacabana."
+        ]
+      ].map(([q,a]) => `
+        <div class="p-4 rounded-xl" style="background:#8b5fbf08;">
+          <p class="text-sm font-semibold text-gray-800 mb-1">${q}</p>
+          <p class="text-xs text-gray-600">${a}</p>
+        </div>
+      `).join("")}
+    </div>`
+},
+      
 proximos: {
   title: "Mais Próximos",
   html: `
