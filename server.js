@@ -552,61 +552,13 @@ secoesResult.rows.forEach(item => {
   },
 
   bares: {
-    title: "Bares",
-    html: `
-      <div class="space-y-2">
-        ${[
-          "Brewteco Botafogo",
-          "Rio Scenarium",
-          "Belmonte Ipanema",
-          "Blue Note Rio"
-        ].map(b=>`
-          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#8b5fbf08;">
-            <span>🍸</span><span class="text-sm text-gray-700">${b}</span>
-          </div>`).join("")}
-      </div>`
-  },
-
-  cafe: {
-  title: "Café da Manhã",
-  html: `
-    <div class="space-y-3">
-      ${[
-        {
-          nome: "Empório Jardim Casa Firjan",
-          desc: "R. Guilhermina Guinle, 211 - Botafogo · 18 min de carro",
-          maps: "https://maps.app.goo.gl/euoubBRqSvoWERnD7",
-          insta: "http://www.instagram.com/emporiojardimrio/?hl=pt-br",
-          review: "https://share.google/QOOw0wgcoPqA4CH5c"
-        },
-        {
-          nome: "The Slow Bakery",
-          desc: "R. General Polidoro, 25 - Botafogo · 10 min a pé",
-          maps: "https://maps.app.goo.gl/ws4dffA6P8NPr9k17",
-          insta: "https://www.instagram.com/theslowbakery/",
-          review: "https://share.google/TpGcvFVtgbzUmBYIW"
-        },
-        {
-          nome: "Café 18 do Forte",
-          desc: "Forte de Copacabana · ótimo passeio + café",
-          maps: "https://maps.app.goo.gl/nYbbGHAwZXnwzCEP8",
-          insta: "https://www.instagram.com/cafe18doforte/",
-          review: "https://share.google/q1u8YrHJEHRCaFizi"
-        }
-      ].map(item => `
-        <div class="p-4 rounded-2xl bg-white border border-gray-100">
-          <p class="text-sm font-semibold text-gray-800">${item.nome}</p>
-          <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
-          <div class="flex flex-wrap gap-2 mt-3">
-            <a href="${item.maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
-            <a href="${item.insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
-            <a href="${item.review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
-          </div>
-        </div>
-      `).join("")}
-    </div>`
+  title: "Bares",
+  html: renderLista("bares")
 },
-
+  cafe: {
+  title: "Cafés & Doces",
+  html: renderLista("cafe")
+},
 doces: {
   title: "Cafés & Doces",
   html: `
@@ -824,49 +776,15 @@ avaliacao: {
 },
       
 proximos: {
-  title: "Mais Próximos",
-  html: `
-    <div class="space-y-3">
-      ${[
-        ["🥖","Pão e companhia","Rua Lauro Müller, 116","https://maps.app.goo.gl/iVgWfZgKAmKHNabs7"],
-        ["🛒","Zona Sul Urca","R. Marechal Cantuária, 178","https://maps.app.goo.gl/ri5vHFrNv4e4rb246"],
-        ["🏥","Hospital Samaritano Botafogo","Rua Bambina, 98","https://maps.google.com/?q=Hospital+Samaritano+Botafogo"],
-        ["💊","Drogaria Pacheco – RioSul","Rua Lauro Müller, 116","http://www.googlemaps.com/"],
-        ["🍺","Zé Delivery","Aplicativo","https://apps.apple.com/br/app/z%C3%A9-delivery/id1070070438"],
-        ["⛽","Posto Petrobras","Av. Pasteur, 490 – Urca","https://maps.google.com/?q=Posto+Petrobras+Av+Pasteur+490+Urca"]
-      ].map(([em,n,d,maps])=>`
-        <div class="flex items-start justify-between gap-3 p-3 rounded-xl" style="background:#3b73b808;">
-          <div class="flex items-start gap-3">
-            <span>${em}</span>
-            <div><p class="text-sm font-semibold text-gray-800">${n}</p><p class="text-xs text-gray-500">${d}</p></div>
-          </div>
-          <a href="${maps}" target="_blank" class="text-xs font-medium" style="color:#3b73b8;">Abrir</a>
-        </div>`).join("")}
-    </div>`
-},
+  title: "Mais próximos",
+  html: renderLista("proximos")
+}
 
 fazer: {
-  title: "O que Fazer",
-  html: `
-    <div class="space-y-3">
-      ${[
-        ["🏔️","Bondinho do Pão de Açúcar","10 min a pé · Av. Pasteur, 520 – Urca","https://maps.google.com/?q=Bondinho+Pao+de+Acucar"],
-        ["⛰️","Cristo Redentor","20 min de carro até embarque","https://maps.app.goo.gl/EWKaN2UA23HwhF4H8"],
-        ["🎨","Escadaria Selarón","15 min de carro · Rua Joaquim Silva – Lapa","https://maps.google.com/?q=Escadaria+Selaron"],
-        ["🌊","Praia de Copacabana","5 min de carro · Av. Atlântica","https://maps.google.com/?q=Copacabana+Beach"],
-        ["🌿","Jardim Botânico","25 min de carro · Rua Jardim Botânico, 1008","https://maps.app.goo.gl/mcfnQUqDPCVbRuko8"],
-        ["🌅","Pôr do sol no Arpoador","20 min de carro · Pedra do Arpoador","https://maps.app.goo.gl/RGknCvVpfwp6C2c87"]
-      ].map(([em,t,d,maps])=>`
-        <div class="flex items-start justify-between gap-3 p-3 rounded-xl" style="background:#2a7d5008;">
-          <div class="flex items-start gap-3">
-            <span class="text-xl flex-shrink-0">${em}</span>
-            <div><p class="text-sm font-semibold text-gray-800">${t}</p><p class="text-xs text-gray-500">${d}</p></div>
-          </div>
-          <a href="${maps}" target="_blank" class="text-xs font-medium" style="color:#2a7d50;">Abrir</a>
-        </div>`).join("")}
-    </div>`
+  title: "O que fazer",
+  html: renderLista("fazer")
 },
-partir: {
+      partir: {
   title: "Antes de Partir",
   html: `
     <div class="space-y-3">
