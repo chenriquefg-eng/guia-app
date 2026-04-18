@@ -1074,24 +1074,20 @@ contato: {
   lucide.createIcons();
 }
 
-    function closeModal(e) {
-      if (e.target === document.getElementById("modal")) {
-        document.getElementById("modal").classList.remove("active");
-      }
-    }
+   function closeModal(e) {
+  const modal = document.getElementById("modal");
 
-    function closeModalDirect() {
-      document.getElementById("modal").classList.remove("active");
-    }
+  if (e.target === modal) {
+    modal.classList.remove("active");
+    modal.dataset.open = ""; // 🔥 IMPORTANTE
+  }
+}
 
-    function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const t = document.getElementById("copyToast");
-        t.classList.add("show");
-        setTimeout(() => t.classList.remove("show"), 1800);
-      });
-    }
-
+function closeModalDirect() {
+  const modal = document.getElementById("modal");
+  modal.classList.remove("active");
+  modal.dataset.open = ""; // 🔥 IMPORTANTE
+}
     buildMenu();
     lucide.createIcons();
   </script>
