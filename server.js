@@ -745,7 +745,7 @@ contato: {
         </a>
       </div>
     </div>`
-}
+},
 
     const html = `
 <!doctype html>
