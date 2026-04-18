@@ -288,9 +288,21 @@ secoesResult.rows.forEach(item => {
   secoesAgrupadas[item.secao].push(item);
 });
     function renderLista(secao) {
-  if (!secoes[secao]) return "<p>Sem conteúdo.</p>";
+  if (!secoesAgrupadas[secao]) return "<p>Sem conteúdo.</p>";
 
-  return secoes[secao].map(item => `
+  return secoesAgrupadas[secao].map(item => `
+    <div class="p-3 rounded-xl mb-3" style="background:#f5f0eb;">
+      <p style="font-weight:600">${item.titulo}</p>
+      <p style="font-size:13px;color:#555">${item.descricao || ""}</p>
+
+      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+        ${item.link_maps ? `<a class="botao maps" href="${item.link_maps}" target="_blank">Maps</a>` : ""}
+        ${item.link_instagram ? `<a class="botao instagram" href="${item.link_instagram}" target="_blank">Instagram</a>` : ""}
+        ${item.link_reviews ? `<a class="botao whatsapp" href="${item.link_reviews}" target="_blank">Avaliações</a>` : ""}
+      </div>
+    </div>
+  `).join("");
+}
     <div class="p-3 rounded-xl mb-3" style="background:#f5f0eb;">
       <p style="font-weight:600">${item.titulo}</p>
       <p style="font-size:13px;color:#555">${item.descricao || ""}</p>
@@ -778,7 +790,7 @@ avaliacao: {
 proximos: {
   title: "Mais próximos",
   html: renderLista("proximos")
-}
+},
 
 fazer: {
   title: "O que fazer",
