@@ -1060,6 +1060,13 @@ function closeModalDirect() {
   modal.classList.remove("active");
   modal.dataset.open = ""; // 🔥 IMPORTANTE
 }
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const t = document.getElementById("copyToast");
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 1800);
+  });
+}
     buildMenu();
     lucide.createIcons();
   </script>
