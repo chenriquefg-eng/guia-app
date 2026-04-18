@@ -303,7 +303,6 @@ secoesResult.rows.forEach(item => {
     </div>
   `).join("");
 }
-   
     const enderecoMaps = encodeURIComponent(
       conteudo.endereco_exibicao ||
         `${imovel.endereco || ""}, ${imovel.apartamento || ""} - ${imovel.cidade || ""} - ${imovel.estado || ""}`
@@ -560,6 +559,15 @@ cafe: {
   html: renderLista("cafe")
 },
 
+fazer: {
+  title: "O que fazer",
+  html: renderLista("fazer")
+},
+
+proximos: {
+  title: "Mais próximos",
+  html: renderLista("proximos")
+},
 doces: {
   title: "Cafés & Doces",
   html: `
@@ -776,15 +784,6 @@ avaliacao: {
     </div>`
 },
       
-fazer: {
-  title: "O que fazer",
-  html: renderLista("fazer")
-},
-      proximos: {
-  title: "Mais próximos",
-  html: renderLista("proximos")
-},
-
       partir: {
   title: "Antes de Partir",
   html: `
