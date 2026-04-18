@@ -568,6 +568,7 @@ proximos: {
   title: "Mais próximos",
   html: renderLista("proximos")
 },
+},
 doces: {
   title: "Cafés & Doces",
   html: `
