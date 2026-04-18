@@ -549,26 +549,23 @@ secoesResult.rows.forEach(item => {
       </div>`
   },
 
- bares: {
+bares: {
   title: "Bares",
   html: renderLista("bares")
 },
-
 cafe: {
   title: "Café da Manhã",
   html: renderLista("cafe")
-},
-
+}
 fazer: {
   title: "O que fazer",
   html: renderLista("fazer")
 },
-
 proximos: {
   title: "Mais próximos",
   html: renderLista("proximos")
 },
-},
+
 doces: {
   title: "Cafés & Doces",
   html: `
