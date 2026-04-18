@@ -683,7 +683,42 @@ bares: {
       `).join("")}
     </div>`
 },
+emergencia: {
+  title: "Emergência",
+  html: `
+    <div class="space-y-3">
+      <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
+        <div class="flex items-center gap-3">
+          <span class="text-xl">🚔</span>
+          <span class="text-sm font-semibold text-gray-800">Polícia Militar</span>
+        </div>
+        <a href="tel:190" class="text-sm font-bold" style="color:#d94f4f;">190</a>
+      </div>
 
+      <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
+        <div class="flex items-center gap-3">
+          <span class="text-xl">🚑</span>
+          <span class="text-sm font-semibold text-gray-800">SAMU</span>
+        </div>
+        <a href="tel:192" class="text-sm font-bold" style="color:#d94f4f;">192</a>
+      </div>
+
+      <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
+        <div class="flex items-center gap-3">
+          <span class="text-xl">🚒</span>
+          <span class="text-sm font-semibold text-gray-800">Corpo de Bombeiros</span>
+        </div>
+        <a href="tel:193" class="text-sm font-bold" style="color:#d94f4f;">193</a>
+      </div>
+
+      <div class="mt-4 p-4 rounded-xl" style="background:#fff7f7;">
+        <p class="text-sm text-gray-700 leading-relaxed">
+          Em caso de emergência médica, policial ou incêndio, utilize os números acima imediatamente.
+          Para situações menos urgentes, fale com o anfitrião pelo card de contato.
+        </p>
+      </div>
+    </div>`
+},
 proximos: {
   title: "Mais Próximos",
   html: `
