@@ -926,6 +926,9 @@ contato: {
       box-shadow: 0 0 0 3px rgba(124, 201, 160, 0.18);
     }
     ::-webkit-scrollbar { width: 0; }
+    .heading-font {
+  letter-spacing: 0.2px;
+}
   </style>
 </head>
 <body class="h-full">
