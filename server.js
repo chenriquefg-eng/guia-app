@@ -1016,16 +1016,16 @@ contato: {
     </div>
 
     <div id="modal" class="modal-overlay fixed inset-0 z-50" style="background:rgba(0,0,0,0.4);" onclick="closeModal(event)">
-      <div class="modal-content absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl overflow-hidden" style="max-height:88%;">
-        <div class="sticky top-0 bg-white z-10 px-5 pt-4 pb-3 border-b border-gray-100 flex items-center justify-between">
-          <h2 id="modalTitle" class="heading-font text-xl" style="color:#1a5c3a;"></h2>
-          <button onclick="closeModalDirect()" class="w-8 h-8 rounded-full flex items-center justify-center" style="background:#f0f0f0;">
-            <i data-lucide="x" style="width:16px;height:16px;color:#666;"></i>
-          </button>
-        </div>
-        <div id="modalBody" class="px-5 py-5 overflow-auto" style="max-height:calc(88% - 60px);"></div>
-      </div>
+  <div class="modal-content absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl overflow-hidden" style="max-height:88%;">
+    <div class="sticky top-0 bg-white z-10 px-5 pt-4 pb-3 border-b border-gray-100 flex items-center justify-between">
+      <h2 id="modalTitle" class="heading-font text-xl" style="color:#1a5c3a;"></h2>
+      <button onclick="closeModalDirect()" class="w-8 h-8 rounded-full flex items-center justify-center" style="background:#f0f0f0;">
+        <i data-lucide="x" style="width:16px;height:16px;color:#666;"></i>
+      </button>
     </div>
+    <div id="modalBody" class="px-5 py-5 overflow-auto" style="max-height:calc(88% - 60px);"></div>
+  </div>
+</div>
   </div>
 
   <script>
