@@ -311,7 +311,6 @@ function getLabels(idioma) {
     html: `...`
   }
 
-};   
 };
 
 const html = `
