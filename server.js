@@ -265,29 +265,12 @@ function agruparListasPorSecao(rows = []) {
     doces: []
   };
 
-  const alias = {
-    cafe: "cafe",
-    cafes: "cafe",
-    bares: "bares",
-    bar: "bares",
-    proximos: "proximos",
-    fazer: "fazer",
-    restaurantes: "restaurantes",
-    restaurante: "restaurantes",
-    doces: "doces",
-    cafesdoces: "doces"
-  };
-
   for (const row of rows) {
-    const bruto = String(row.secao || "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\s+/g, "")
-      .toLowerCase();
+    const secao = (row.secao || "").toLowerCase().trim();
 
-    const secao = alias[bruto] || bruto;
-    if (!grupos[secao]) continue;
-    grupos[secao].push(row);
+    if (grupos[secao]) {
+      grupos[secao].push(row);
+    }
   }
 
   for (const secao of Object.keys(grupos)) {
@@ -295,8 +278,7 @@ function agruparListasPorSecao(rows = []) {
   }
 
   return grupos;
-}
-function renderLista(itens = [], labels = {}) {
+}function renderLista(itens = [], labels = {}) {
   if (!Array.isArray(itens) || itens.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
   }
