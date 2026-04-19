@@ -267,19 +267,15 @@ function agruparListasPorSecao(rows = []) {
 
   const alias = {
     cafe: "cafe",
-    cafés: "cafe",
     cafes: "cafe",
     bares: "bares",
     bar: "bares",
     proximos: "proximos",
-    próximos: "proximos",
     fazer: "fazer",
-    oquefazer: "fazer",
     restaurantes: "restaurantes",
     restaurante: "restaurantes",
     doces: "doces",
-    cafesdoces: "doces",
-    cafeseDoces: "doces"
+    cafesdoces: "doces"
   };
 
   for (const row of rows) {
@@ -291,7 +287,6 @@ function agruparListasPorSecao(rows = []) {
 
     const secao = alias[bruto] || bruto;
     if (!grupos[secao]) continue;
-
     grupos[secao].push(row);
   }
 
@@ -301,7 +296,6 @@ function agruparListasPorSecao(rows = []) {
 
   return grupos;
 }
-
 function renderLista(itens = [], labels = {}) {
   if (!Array.isArray(itens) || itens.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
@@ -673,7 +667,7 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
 
     const conteudo = conteudoResult.rows[0] || {};
 
-    let listas = {
+ let listas = {
   cafe: [],
   bares: [],
   proximos: [],
@@ -692,11 +686,11 @@ try {
   );
 
   listas = agruparListasPorSecao(listasResult.rows);
-
+  console.log("Itens encontrados:", listasResult.rows.length);
+  console.log("Seções encontradas:", listasResult.rows.map(r => r.secao));
 } catch (e) {
   console.error("Erro ao buscar listas:", e.message);
 }
-
   console.log("Itens encontrados:", listasResult.rows.length);
   console.log("Seções encontradas:", listasResult.rows.map(r => r.secao));
 
