@@ -320,7 +320,7 @@ function renderLista(itens = [], labels = {}) {
     </div>
   `;
 }
-}
+
 function renderLista(itens = [], labels = {}) {
   if (!Array.isArray(itens) || itens.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
