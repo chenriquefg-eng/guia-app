@@ -881,7 +881,7 @@ function closeModal(e) {
     }
   </script>
 
-  </body>
+ </body>
 </html>
     `;
 
