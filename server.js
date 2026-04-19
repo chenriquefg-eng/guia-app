@@ -878,22 +878,7 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     }
   </script>
 
-  <a href="https://wa.me/5521971810022" target="_blank" rel="noopener noreferrer" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25d366;
-    color: white;
-    padding: 14px 16px;
-    border-radius: 50px;
-    font-weight: bold;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    text-decoration: none;
-    z-index: 999;
-  ">
-    💬 Falar com anfitrião
-  </a>
-</body>
+  </body>
 </html>
     `;
 
