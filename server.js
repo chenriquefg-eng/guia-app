@@ -833,26 +833,25 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     }
 
     function openSection(id) {
-      const modal = document.getElementById("modal");
-      const modalBody = document.getElementById("modalBody");
-      const modalTitle = document.getElementById("modalTitle");
-      const section = sections[id] || { title: "Info", html: "<p>Sem conteúdo.</p>" };
+  const modal = document.getElementById("modal");
+  const modalBody = document.getElementById("modalBody");
+  const modalTitle = document.getElementById("modalTitle");
 
-      if (modal.dataset.open === id) {
-        modal.classList.remove("active");
-        modal.dataset.open = "";
-        return;
-      }
+  const section = sections[id] || { title: "Info", html: "<p>Sem conteúdo.</p>" };
 
-      modalTitle.textContent = section.title;
-      modalBody.innerHTML = section.html;
-      lucide.createIcons();
-      modal.classList.add("active");
-      modal.dataset.open = id;
+  if (modal.dataset.open === id) {
+    modal.classList.remove("active");
+    modal.dataset.open = "";
+    return;
+  }
 
-      if (window.lucide && typeof window.lucide.createIcons === "function") {
-        window.lucide.createIcons();
-      }
+  modalTitle.textContent = section.title;
+  modalBody.innerHTML = section.html;
+  modal.classList.add("active");
+  modal.dataset.open = id;
+
+  lucide.createIcons();
+}
     }
 
     function closeModal(e) {
