@@ -298,12 +298,13 @@ function agruparListasPorSecao(rows = []) {
           const instagram = item.link_instagram || "";
           const review = item.link_reviews || "";
           const extra = item.link_extra || "";
+
           return `
             <div class="rounded-2xl border border-gray-200 p-4 bg-white">
               <div class="flex items-center gap-2">
-  <i data-lucide="${item.icone || 'map-pin'}" style="width:16px;height:16px;color:#1a5c3a;"></i>
-  <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
-</div>
+                <i data-lucide="${icone}" style="width:16px;height:16px;color:#1a5c3a;"></i>
+                <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
+              </div>
               ${descricao ? `<p class="text-sm text-gray-600 mt-2">${descricao}</p>` : ""}
               <div class="flex flex-wrap gap-2 mt-3">
                 ${maps ? `<a href="${escHtml(maps)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#1a5c3a;">${escHtml(mapLabel)}</a>` : ""}
@@ -317,7 +318,6 @@ function agruparListasPorSecao(rows = []) {
         .join("")}
     </div>
   `;
-}
 
 }
 function renderLista(itens = [], labels = {}) {
