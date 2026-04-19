@@ -312,125 +312,70 @@ function getLabels(idioma) {
   }
 
 };   
-  
-  return dict[idioma] || dict.pt;
-}
+};
 
-app.get("/", (req, res) => {
-  res.send("Guia do Hóspede rodando 🚀");
-});
-
-app.get("/imovel/:codigo/:idioma?", async (req, res) => {
-  const { codigo } = req.params;
-  const idioma = req.params.idioma || "pt";
-  const t = getLabels(idioma);
-
-  try {
-    const imovelResult = await pool.query(
-      "SELECT * FROM imoveis WHERE codigo_publico = $1",
-      [codigo]
-    );
-
-    if (imovelResult.rows.length === 0) {
-      return res.status(404).send("Imóvel não encontrado");
+const html = `
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escHtml(t.pageTitle)} - ${escHtml(imovel.nome || "")}</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Outfit', sans-serif; }
+    .heading-font { font-family: 'DM Serif Display', serif; }
+    .section-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
     }
-
-    const imovel = imovelResult.rows[0];
-
-    let conteudoResult = await pool.query(
-      "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1",
-      [imovel.id, idioma]
-    );
-
-    if (conteudoResult.rows.length === 0 && idioma !== "pt") {
-      conteudoResult = await pool.query(
-        "SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt' LIMIT 1",
-        [imovel.id]
+    .section-card:hover { transform: translateY(-2px); }
+    .modal-overlay {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-content {
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+    .fade-in {
+      animation: fadeUp 0.5s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-gradient {
+      background: linear-gradient(165deg, #0c2e1e 0%, #1a5c3a 40%, #2a7d50 70%, #1a5c3a 100%);
+    }
+    .menu-icon-box {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .wifi-box {
+      background: repeating-linear-gradient(
+        135deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.03) 10px,
+        rgba(255,255,255,0.03) 20px
       );
     }
-
-    const conteudo = conteudoResult.rows[0] || {};
-const idiomaFinal = req.params.idioma || "pt";
-
-let secoesResult = await pool.query(
-  `
-  SELECT *
-  FROM imovel_secao_itens
-  WHERE imovel_id = $1
-    AND idioma = $2
-    AND ativo = true
-  ORDER BY secao, ordem
-  `,
-  [imovel.id, idiomaFinal]
-);
-
-// fallback para português
-if (secoesResult.rows.length === 0 && idiomaFinal !== "pt") {
-  secoesResult = await pool.query(
-    `
-    SELECT *
-    FROM imovel_secao_itens
-    WHERE imovel_id = $1
-      AND idioma = 'pt'
-      AND ativo = true
-    ORDER BY secao, ordem
-    `,
-    [imovel.id]
-  );
-}
-
-const secoesAgrupadas = {};
-
-secoesResult.rows.forEach(item => {
-  if (!secoesAgrupadas[item.secao]) {
-    secoesAgrupadas[item.secao] = [];
-  }
-  secoesAgrupadas[item.secao].push(item);
-});
-    function renderLista(secao) {
-  if (!secoesAgrupadas[secao]) return "<p>Sem conteúdo.</p>";
-
-  return secoesAgrupadas[secao].map(item => `
-    <div class="p-3 rounded-xl mb-3" style="background:#f5f0eb;">
-      <p style="font-weight:600">${item.titulo}</p>
-      <p style="font-size:13px;color:#555">${item.descricao || ""}</p>
-
-      <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
-        ${item.link_maps ? `<a class="botao maps" href="${item.link_maps}" target="_blank">Maps</a>` : ""}
-        ${item.link_instagram ? `<a class="botao instagram" href="${item.link_instagram}" target="_blank">Instagram</a>` : ""}
-        ${item.link_reviews ? `<a class="botao whatsapp" href="${item.link_reviews}" target="_blank">Avaliações</a>` : ""}
-      </div>
-    </div>
-  `).join("");
-}
-    const enderecoMaps = encodeURIComponent(
-      conteudo.endereco_exibicao ||
-        `${imovel.endereco || ""}, ${imovel.apartamento || ""} - ${imovel.cidade || ""} - ${imovel.estado || ""}`
-    );
-    const linkMaps = `https://www.google.com/maps/search/?api=1&query=${enderecoMaps}`;
-
-    const menuItems = [
-      { id: "importante", icon: "alert-circle", label: t.sections.importante, color: "#d94f4f" },
-      { id: "amenidades", icon: "coffee", label: t.sections.amenidades, color: "#c47a2e" },
-      { id: "wifi", icon: "wifi", label: t.sections.wifi, color: "#2a7d50" },
-      { id: "checkin", icon: "clock", label: t.sections.checkin, color: "#3b73b8" },
-      { id: "regras", icon: "book-open", label: t.sections.regras, color: "#8b5fbf" },
-      { id: "apartamento", icon: "home", label: t.sections.apartamento, color: "#2a7d50" },
-      { id: "locomover", icon: "map-pin", label: t.sections.locomover, color: "#3b73b8" },
-      { id: "chegar", icon: "navigation", label: t.sections.chegar, color: "#c47a2e" },
-      { id: "restaurantes", icon: "utensils", label: t.sections.restaurantes, color: "#d94f4f" },
-      { id: "bares", icon: "glass-water", label: t.sections.bares, color: "#8b5fbf" },
-      { id: "fazer", icon: "camera", label: t.sections.fazer, color: "#2a7d50" },
-      { id: "partir", icon: "log-out", label: t.sections.partir, color: "#3b73b8" },
-      { id: "emergencia", icon: "phone", label: t.sections.emergencia, color: "#d94f4f" },
-      { id: "avaliacao", icon: "star", label: t.sections.avaliacao, color: "#c47a2e" },
-      { id: "faq", icon: "help-circle", label: t.sections.faq, color: "#8b5fbf" },
-      { id: "cafe", icon: "sunrise", label: t.sections.cafe, color: "#c47a2e" },
-      { id: "proximos", icon: "map", label: t.sections.proximos, color: "#3b73b8" },
-      { id: "doces", icon: "cake", label: t.sections.doces, color: "#d94f4f" },
-      { id: "contato", icon: "message-circle", label: t.sections.contato, color: "#2a7d50" }
-    ];
-
     .copy-toast {
       position: fixed;
       bottom: 80px;
@@ -452,12 +397,13 @@ secoesResult.rows.forEach(item => {
       border-color: #7cc9a0;
       box-shadow: 0 0 0 3px rgba(124, 201, 160, 0.18);
     }
-    ::-webkit-scrollbar { width: 0; 
-    }
+    ::-webkit-scrollbar { width: 0; }
     .heading-font {
-  letter-spacing: 0.2px;
-}
+      letter-spacing: 0.2px;
+    }
   </style>
+</head>
+<body class="h-full">  </style>
 </head>
 <body class="h-full">
   <div id="app" class="h-full w-full overflow-auto" style="background:#f5f0eb;">
