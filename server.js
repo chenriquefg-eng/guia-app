@@ -259,16 +259,18 @@ function renderLista(lista = [], labels = {}) {
   const mapLabel = labels.mapLabel || "Google Maps";
   const instaLabel = labels.instaLabel || "Instagram";
   const reviewLabel = labels.reviewLabel || "Reviews";
+  const extraLabel = labels.extraLabel || "Mais";
 
   return `
     <div class="space-y-3">
       ${lista
         .map((item) => {
-          const titulo = escHtml(item.nome || item.titulo || "");
+          const titulo = escHtml(item.titulo || "");
           const descricao = escHtml(item.descricao || "");
-          const maps = item.link_maps || item.maps || item.link || "";
-          const instagram = item.link_instagram || item.instagram || "";
-          const review = item.link_reviews || item.review || "";
+          const maps = item.link_maps || "";
+          const instagram = item.link_instagram || "";
+          const review = item.link_reviews || "";
+          const extra = item.link_extra || "";
 
           return `
             <div class="rounded-2xl border border-gray-200 p-4 bg-white">
@@ -290,6 +292,11 @@ function renderLista(lista = [], labels = {}) {
                     ? `<a href="${escHtml(review)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#3b73b8;">${escHtml(reviewLabel)}</a>`
                     : ""
                 }
+                ${
+                  extra
+                    ? `<a href="${escHtml(extra)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#92400e;">${escHtml(extraLabel)}</a>`
+                    : ""
+                }
               </div>
             </div>
           `;
@@ -298,7 +305,6 @@ function renderLista(lista = [], labels = {}) {
     </div>
   `;
 }
-
 function agruparListasPorCategoria(rows = []) {
   const grupos = {
     cafe: [],
@@ -310,8 +316,13 @@ function agruparListasPorCategoria(rows = []) {
   };
 
   for (const row of rows) {
-    const categoria = row.categoria;
-    if (!grupos[categoria]) grupos[categoria] = [];
+    const categoria = row.secao;
+    if (!categoria) continue;
+
+    if (!grupos[categoria]) {
+      grupos[categoria] = [];
+    }
+
     grupos[categoria].push(row);
   }
 
@@ -328,10 +339,11 @@ function agruparListasPorCategoria(rows = []) {
 
 function buildSections(t, conteudo = {}, listas = {}) {
   const labelsLista = {
-    mapLabel: t.openMaps || "Google Maps",
-    instaLabel: "Instagram",
-    reviewLabel: "Reviews"
-  };
+  mapLabel: t.openMaps || "Google Maps",
+  instaLabel: "Instagram",
+  reviewLabel: "Reviews",
+  extraLabel: "Mais"
+};
 
   return {
     importante: {
