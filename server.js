@@ -527,36 +527,14 @@ secoesResult.rows.forEach(item => {
       </div>`
   },
 
-  restaurantes: {
-    title: "Restaurantes Locais",
-    html: `
-      <div class="space-y-2">
-        ${[
-          "Terra Brasilis",
-          "Fogo de Chão",
-          "Assador Rio's",
-          "Bar Urca / Mureta da Urca",
-          "Irajá Redux",
-          "Pergula",
-          "Ferro e Farinha",
-          "San Izakaya",
-          "Encarnado Burger",
-          "Delivery - iFood"
-        ].map(r=>`
-          <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#d94f4f08;">
-            <span>🍽️</span><span class="text-sm text-gray-700">${r}</span>
-          </div>`).join("")}
-      </div>`
-  },
-
-bares: {
+ bares: {
   title: "Bares",
   html: renderLista("bares")
 },
 cafe: {
   title: "Café da Manhã",
   html: renderLista("cafe")
-}
+},
 fazer: {
   title: "O que fazer",
   html: renderLista("fazer")
@@ -668,29 +646,6 @@ restaurantes: {
             <a href="${item.maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
             <a href="${item.insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
             <a href="${item.review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
-          </div>
-        </div>
-      `).join("")}
-    </div>`
-},
-
-bares: {
-  title: "Bares",
-  html: `
-    <div class="space-y-3">
-      ${[
-        ["Brewteco Botafogo","10 min de carro","https://maps.google.com/?q=Brewteco+Botafogo","https://www.instagram.com/brewteco/","https://www.google.com/search?q=Brewteco+Botafogo+reviews"],
-        ["Rio Scenarium","15 min de carro","https://maps.google.com/?q=Rio+Scenarium","https://www.instagram.com/rioscenarium/","https://www.google.com/search?q=Rio+Scenarium+reviews"],
-        ["Belmonte Ipanema","18 min de carro","https://maps.google.com/?q=Belmonte+Ipanema","https://www.instagram.com/belmontebar/","https://www.google.com/search?q=Belmonte+Ipanema+avaliacoes"],
-        ["Blue Note Rio","12 min de carro","https://maps.google.com/?q=Blue+Note+Rio","https://www.instagram.com/bluenoterio/?utm_source=chatgpt.com","https://www.google.com/search?q=Blue+Note+Rio+reviews"]
-      ].map(([nome,desc,maps,insta,review]) => `
-        <div class="p-4 rounded-2xl bg-white border border-gray-100">
-          <p class="text-sm font-semibold text-gray-800">${nome}</p>
-          <p class="text-xs text-gray-500 mt-1">${desc}</p>
-          <div class="flex flex-wrap gap-2 mt-3">
-            <a href="${maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
-            <a href="${insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
-            <a href="${review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
           </div>
         </div>
       `).join("")}
