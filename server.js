@@ -222,6 +222,35 @@ function getLabels(idioma) {
   return dict[idioma] || dict.pt;
 }
 
+function buildMenuItems(t) {
+  return [
+    { id: "importante", label: t.sections.importante, icon: "badge-alert", color: "#b7791f" },
+    { id: "amenidades", label: t.sections.amenidades, icon: "sparkles", color: "#2a7d50" },
+    { id: "wifi", label: t.sections.wifi, icon: "wifi", color: "#2563eb" },
+    { id: "checkin", label: t.sections.checkin, icon: "log-in", color: "#7c3aed" },
+    { id: "regras", label: t.sections.regras, icon: "shield-check", color: "#dc2626" },
+    { id: "apartamento", label: t.sections.apartamento, icon: "bed-double", color: "#0f766e" },
+    { id: "locomover", label: t.sections.locomover, icon: "car-front", color: "#ea580c" },
+    { id: "chegar", label: t.sections.chegar, icon: "map-pinned", color: "#2563eb" },
+    { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
+    { id: "bares", label: t.sections.bares, icon: "martini", color: "#7c2d12" },
+    { id: "fazer", label: t.sections.fazer, icon: "camera", color: "#0891b2" },
+    { id: "partir", label: t.sections.partir, icon: "briefcase", color: "#475569" },
+    { id: "emergencia", label: t.sections.emergencia, icon: "siren", color: "#dc2626" },
+    { id: "avaliacao", label: t.sections.avaliacao, icon: "star", color: "#eab308" },
+    { id: "faq", label: t.sections.faq, icon: "circle-help", color: "#6366f1" },
+    { id: "cafe", label: t.sections.cafe, icon: "coffee", color: "#92400e" },
+    { id: "proximos", label: t.sections.proximos, icon: "map", color: "#15803d" },
+    { id: "doces", label: t.sections.doces, icon: "cake-slice", color: "#db2777" },
+    { id: "contato", label: t.sections.contato, icon: "message-circle", color: "#16a34a" }
+  ];
+}
+
+function normalizarTextoMultiLinha(texto) {
+  if (!texto) return "";
+  return nl2brEsc(String(texto).replace(/\r\n/g, "\n"));
+}
+
 function renderLista(lista = [], labels = {}) {
   if (!Array.isArray(lista) || lista.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
@@ -236,16 +265,14 @@ function renderLista(lista = [], labels = {}) {
       ${lista
         .map((item) => {
           const titulo = escHtml(item.nome || item.titulo || "");
-          const endereco = escHtml(item.endereco || "");
           const descricao = escHtml(item.descricao || "");
-          const maps = item.maps || item.link || "";
-          const instagram = item.instagram || "";
-          const review = item.review || "";
+          const maps = item.link_maps || item.maps || item.link || "";
+          const instagram = item.link_instagram || item.instagram || "";
+          const review = item.link_reviews || item.review || "";
 
           return `
             <div class="rounded-2xl border border-gray-200 p-4 bg-white">
               <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
-              ${endereco ? `<p class="text-sm text-gray-500 mt-1">${endereco}</p>` : ""}
               ${descricao ? `<p class="text-sm text-gray-600 mt-2">${descricao}</p>` : ""}
               <div class="flex flex-wrap gap-2 mt-3">
                 ${
@@ -272,36 +299,34 @@ function renderLista(lista = [], labels = {}) {
   `;
 }
 
-function buildMenuItems(t) {
-  return [
-    { id: "importante", label: t.sections.importante, icon: "badge-alert", color: "#b7791f" },
-    { id: "amenidades", label: t.sections.amenidades, icon: "sparkles", color: "#2a7d50" },
-    { id: "wifi", label: t.sections.wifi, icon: "wifi", color: "#2563eb" },
-    { id: "checkin", label: t.sections.checkin, icon: "log-in", color: "#7c3aed" },
-    { id: "regras", label: t.sections.regras, icon: "shield-check", color: "#dc2626" },
-    { id: "apartamento", label: t.sections.apartamento, icon: "bed-double", color: "#0f766e" },
-    { id: "locomover", label: t.sections.locomover, icon: "car-front", color: "#ea580c" },
-    { id: "chegar", label: t.sections.chegar, icon: "map-pinned", color: "#2563eb" },
-    { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
-    { id: "bares", label: t.sections.bares, icon: "martini", color: "#7c2d12" },
-    { id: "fazer", label: t.sections.fazer, icon: "camera", color: "#0891b2" },
-    { id: "partir", label: t.sections.partir, icon: "briefcase", color: "#475569" },
-    { id: "emergencia", label: t.sections.emergencia, icon: "siren", color: "#dc2626" },
-    { id: "avaliacao", label: t.sections.avaliacao, icon: "star", color: "#eab308" },
-    { id: "faq", label: t.sections.faq, icon: "circle-help", color: "#6366f1" },
-    { id: "cafe", label: t.sections.cafe, icon: "coffee", color: "#92400e" },
-    { id: "proximos", label: t.sections.proximos, icon: "map", color: "#15803d" },
-    { id: "doces", label: t.sections.doces, icon: "cake-slice", color: "#db2777" },
-    { id: "contato", label: t.sections.contato, icon: "message-circle", color: "#16a34a" }
-  ];
+function agruparListasPorCategoria(rows = []) {
+  const grupos = {
+    cafe: [],
+    bares: [],
+    proximos: [],
+    fazer: [],
+    restaurantes: [],
+    doces: []
+  };
+
+  for (const row of rows) {
+    const categoria = row.categoria;
+    if (!grupos[categoria]) grupos[categoria] = [];
+    grupos[categoria].push(row);
+  }
+
+  for (const categoria of Object.keys(grupos)) {
+    grupos[categoria].sort((a, b) => {
+      const oa = Number(a.ordem || 0);
+      const ob = Number(b.ordem || 0);
+      return oa - ob;
+    });
+  }
+
+  return grupos;
 }
 
-function buildSections(t, dados = {}) {
-  const { conteudo = {}, listas = {} } = dados;
-
-  const wifiRede = conteudo.wifi_rede || "Ap1101";
-  const wifiSenha = conteudo.wifi_senha || "Paodeacucar1101";
-
+function buildSections(t, conteudo = {}, listas = {}) {
   const labelsLista = {
     mapLabel: t.openMaps || "Google Maps",
     instaLabel: "Instagram",
@@ -313,17 +338,7 @@ function buildSections(t, dados = {}) {
       title: t.importantTitle,
       html: `
         <div class="space-y-3 text-sm leading-relaxed text-gray-700">
-          <p>Acesso por fechadura eletrônica.</p>
-          <p>O código será enviado no dia da chegada.</p>
-          <p>Portaria 24h – informe Ap 1101.</p>
-          <p>Check-in rápido e independente.</p>
-          <hr class="my-3">
-          <p><strong>Ao sair, pedimos gentilmente que:</strong></p>
-          <ul class="list-disc pl-5 space-y-1">
-            <li>Desligue ar-condicionado</li>
-            <li>Apague as luzes</li>
-            <li>Feche portas e janelas</li>
-          </ul>
+          ${normalizarTextoMultiLinha(conteudo.checkin_texto || "")}
         </div>
       `
     },
@@ -357,13 +372,13 @@ function buildSections(t, dados = {}) {
         <div class="wifi-box rounded-2xl p-4 border border-gray-200">
           <div class="mb-4">
             <p class="text-xs uppercase tracking-widest text-gray-500">${escHtml(t.wifi.network)}</p>
-            <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(wifiRede)}</p>
+            <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(conteudo.wifi_nome || "")}</p>
           </div>
           <div class="mb-4">
             <p class="text-xs uppercase tracking-widest text-gray-500">${escHtml(t.wifi.password)}</p>
-            <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(wifiSenha)}</p>
+            <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(conteudo.wifi_senha || "")}</p>
           </div>
-          <button onclick="copyText(${JSON.stringify(wifiSenha)})" class="text-sm px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
+          <button onclick="copyText(${JSON.stringify(conteudo.wifi_senha || "")})" class="text-sm px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
             ${escHtml(t.wifi.copyPassword)}
           </button>
         </div>
@@ -373,14 +388,14 @@ function buildSections(t, dados = {}) {
     checkin: {
       title: t.checkin.title,
       html: `
-        <div class="grid grid-cols-2 gap-3">
-          <div class="rounded-2xl p-4 text-center" style="background:#f5f0eb;">
-            <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">${escHtml(t.checkin.checkin)}</p>
-            <p class="text-2xl font-semibold" style="color:#1a5c3a;">15:00</p>
+        <div class="space-y-4 text-sm text-gray-700">
+          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+            <p class="font-semibold mb-2">${escHtml(t.checkin.checkin)}</p>
+            <div>${normalizarTextoMultiLinha(conteudo.checkin_texto || "")}</div>
           </div>
-          <div class="rounded-2xl p-4 text-center" style="background:#f5f0eb;">
-            <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">${escHtml(t.checkin.checkout)}</p>
-            <p class="text-2xl font-semibold" style="color:#1a5c3a;">11:00</p>
+          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+            <p class="font-semibold mb-2">${escHtml(t.checkin.checkout)}</p>
+            <div>${normalizarTextoMultiLinha(conteudo.checkout_texto || "")}</div>
           </div>
         </div>
       `
@@ -389,14 +404,9 @@ function buildSections(t, dados = {}) {
     regras: {
       title: t.rulesTitle,
       html: `
-        <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700">
-          <li>Silêncio após 22h</li>
-          <li>Não é permitido fumar</li>
-          <li>Não são permitidas festas</li>
-          <li>Não alterar disposição dos móveis</li>
-          <li>Respeitar horários de check-in e check-out</li>
-          <li>Retirar o lixo ao sair</li>
-        </ul>
+        <div class="space-y-3 text-sm text-gray-700">
+          ${normalizarTextoMultiLinha(conteudo.regras_texto || "")}
+        </div>
       `
     },
 
@@ -404,7 +414,7 @@ function buildSections(t, dados = {}) {
       title: t.apartmentTitle,
       html: `
         <div class="space-y-4 text-sm text-gray-700">
-          <p>Estamos muito felizes em receber você. O apartamento foi recém-reformado, com marcenaria planejada, decoração contemporânea e enxoval padrão hotelaria.</p>
+          ${normalizarTextoMultiLinha(conteudo.apartamento_texto || "")}
           <div class="grid grid-cols-2 gap-3">
             <div class="rounded-2xl p-4" style="background:#f5f0eb;">
               <p class="text-xs text-gray-500 uppercase">Capacidade</p>
@@ -431,12 +441,7 @@ function buildSections(t, dados = {}) {
       title: t.gettingAroundTitle,
       html: `
         <div class="space-y-4 text-sm text-gray-700">
-          <div><strong>Uber / 99:</strong> serviços amplamente disponíveis na região.</div>
-          <div><strong>Táxi:</strong> há ponto fixo na torre do Shopping RioSul.</div>
-          <div><strong>Transporte público:</strong> ônibus em frente ao Shopping RioSul e metrô Botafogo nas proximidades.</div>
-          <div><strong>A pé:</strong> região residencial, tranquila e arborizada, ideal para caminhadas.</div>
-          <div><strong>Bicicleta:</strong> aluguel por apps como Tembici e Uber.</div>
-          <div><strong>Estacionamento:</strong> o edifício não dispõe de vaga privativa.</div>
+          ${normalizarTextoMultiLinha(conteudo.transporte_texto || "")}
         </div>
       `
     },
@@ -445,14 +450,8 @@ function buildSections(t, dados = {}) {
       title: t.gettingThereTitle,
       html: `
         <div class="space-y-3 text-sm text-gray-700">
-          <p><strong>Endereço:</strong> Rua Lauro Müller, 46 - Botafogo - Rio de Janeiro</p>
-          <p>• Utilize o endereço completo no Google Maps ou Uber</p>
-          <p>• O prédio possui portaria 24h</p>
-          <p>• Informe o número do apartamento: 1101</p>
-          <p>• A entrada é feita por fechadura eletrônica</p>
-          <a href="https://maps.app.goo.gl/FEPcLwTqpL1vyYfdA" target="_blank" rel="noopener noreferrer" class="inline-flex text-sm px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
-            ${escHtml(t.openMaps)}
-          </a>
+          <p><strong>${escHtml(conteudo.endereco_exibicao || "")}</strong></p>
+          <div>${normalizarTextoMultiLinha(conteudo.como_chegar_texto || "")}</div>
         </div>
       `
     },
@@ -538,12 +537,7 @@ function buildSections(t, dados = {}) {
       title: t.beforeLeavingTitle,
       html: `
         <div class="space-y-3 text-sm text-gray-700">
-          <p><strong>Check-out:</strong> 11:00</p>
-          <p>• Retirar o lixo e colocá-lo no local indicado do prédio</p>
-          <p>• Feche todas as janelas e portas</p>
-          <p>• Desligue o ar-condicionado e as luzes antes de sair</p>
-          <p>• Informe-nos se algum dano pequeno tiver acontecido</p>
-          <p>• Antes de sair, verifique se nenhum item pessoal foi esquecido</p>
+          ${normalizarTextoMultiLinha(conteudo.antes_partir_texto || "")}
         </div>
       `
     },
@@ -552,133 +546,12 @@ function buildSections(t, dados = {}) {
       title: t.contactTitle,
       html: `
         <div class="space-y-4 text-sm text-gray-700">
-          <p>Foi um prazer recebê-lo em nosso apartamento.</p>
-          <p><strong>Instagram:</strong> @milepascoal</p>
-          <p><strong>WhatsApp:</strong> +55 21 97181-0022</p>
-          <p><strong>Endereço:</strong> Rua Lauro Müller, 46 Ap 1101</p>
+          ${normalizarTextoMultiLinha(conteudo.contato_texto || "")}
           <a href="https://wa.me/5521971810022" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#25d366;">
             💬 Falar com anfitrião
           </a>
         </div>
       `
-    }
-  };
-}
-
-function getDadosExemplo(idioma) {
-  return {
-    imovel: {
-      nome: "Apartamento Nova Urca - Botafogo",
-      endereco: "Rua Lauro Müller, 46",
-      apartamento: "1101",
-      cidade: "Rio de Janeiro",
-      estado: "RJ"
-    },
-    conteudo: {
-      titulo:
-        idioma === "en"
-          ? "WELCOME GUIDE"
-          : idioma === "es"
-            ? "GUÍA DE BIENVENIDA"
-            : "GUIA DE BOAS-VINDAS",
-      wifi_rede: "Ap1101",
-      wifi_senha: "Paodeacucar1101"
-    },
-    listas: {
-      cafe: [
-        {
-          nome: "Empório Jardim Casa Firjan",
-          endereco: "R. Guilhermina Guinle, 211 - Botafogo, Rio de Janeiro - RJ",
-          descricao: "18 minutos de carro",
-          maps: "https://maps.app.goo.gl/euoubBRqSvoWERnD7",
-          instagram: "http://www.instagram.com/emporiojardimrio/?hl=pt-br",
-          review: "https://share.google/QOOw0wgcoPqA4CH5c"
-        },
-        {
-          nome: "The Slow Bakery",
-          endereco: "R. General Polidoro, 25 - Botafogo, Rio de Janeiro - RJ",
-          descricao: "10 minutos a pé",
-          maps: "https://maps.app.goo.gl/ws4dffA6P8NPr9k17",
-          instagram: "https://www.instagram.com/theslowbakery/",
-          review: "https://share.google/TpGcvFVtgbzUmBYIW"
-        }
-      ],
-      bares: [
-        {
-          nome: "Brewteco Botafogo",
-          endereco: "Praia de Botafogo, 400 Rooftop",
-          descricao: "10 minutos de carro",
-          maps: "https://maps.google.com/?q=Brewteco+Botafogo",
-          instagram: "https://www.instagram.com/brewteco/",
-          review: "https://www.google.com/search?q=Brewteco+Botafogo+reviews"
-        },
-        {
-          nome: "Rio Scenarium",
-          endereco: "Rua do Lavradio, 20 Lapa",
-          descricao: "15 minutos de carro",
-          maps: "https://maps.google.com/?q=Rio+Scenarium",
-          instagram: "https://www.instagram.com/rioscenarium/",
-          review: "https://www.google.com/search?q=Rio+Scenarium+reviews"
-        }
-      ],
-      fazer: [
-        {
-          nome: "Bondinho do Pão de Açúcar",
-          endereco: "Av. Pasteur, 520 – Urca",
-          descricao: "10 minutos a pé · Necessita ingresso",
-          maps: "https://maps.google.com/?q=Bondinho+Pao+de+Acucar",
-          instagram: "https://www.instagram.com/parquebondinho/"
-        },
-        {
-          nome: "Cristo Redentor",
-          endereco: "Rio de Janeiro - RJ",
-          descricao: "20 min de carro até embarque",
-          maps: "https://maps.app.goo.gl/EWKaN2UA23HwhF4H8",
-          instagram: "https://www.instagram.com/cristoredentoroficial/"
-        }
-      ],
-      proximos: [
-        {
-          nome: "Pão e Companhia",
-          endereco: "Rua Lauro Müller, 116",
-          descricao: "Panificadora",
-          maps: "https://maps.app.goo.gl/iVgWfZgKAmKHNabs7"
-        },
-        {
-          nome: "Drogaria Pacheco – RioSul",
-          endereco: "Rua Lauro Müller, 116",
-          descricao: "Farmácia",
-          maps: "http://www.googlemaps.com/"
-        }
-      ],
-      restaurantes: [
-        {
-          nome: "Terra Brasilis",
-          endereco: "Praça General Tibúrcio, s/n - Clube Militar da Praia Vermelha",
-          descricao: "Comida brasileira e vista para o Pão de Açúcar | 15 minutos a pé",
-          maps: "https://maps.app.goo.gl/UKcfaSs7kywVz4XX6",
-          instagram: "https://www.instagram.com/restauranteterrabrasilis/",
-          review: "https://share.google/HypQmZYjXdM1BRLMw"
-        },
-        {
-          nome: "Fogo de Chão",
-          endereco: "Praia de Botafogo, 400",
-          descricao: "Carnes, churrasco e vista linda | 15 minutos a pé",
-          maps: "https://maps.app.goo.gl/9rzSjzqu7tuuPrce8",
-          instagram: "https://www.instagram.com/fogodechaobr/?hl=en",
-          review: "https://share.google/Qv9X5UeAyXTtJK4Aa"
-        }
-      ],
-      doces: [
-        {
-          nome: "Classico Beach Club Urca",
-          endereco: "Av. Pasteur, 520 - Urca",
-          descricao: "15 minutos a pé",
-          maps: "https://maps.app.goo.gl/VUVTfQYV1cRjEwe77",
-          instagram: "https://www.instagram.com/classicobeachclub/?hl=pt-br",
-          review: "https://share.google/5aXU0nBUW4il3mwTK"
-        }
-      ]
     }
   };
 }
@@ -702,10 +575,56 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     const idioma = req.params.idioma || "pt";
     const t = getLabels(idioma);
 
-    const { imovel, conteudo, listas } = getDadosExemplo(idioma);
+    const imovelResult = await pool.query(
+      `SELECT * FROM imoveis WHERE codigo_publico = $1 LIMIT 1`,
+      [codigo]
+    );
 
+    if (imovelResult.rows.length === 0) {
+      return res.status(404).send("Imóvel não encontrado.");
+    }
+
+    const imovel = imovelResult.rows[0];
+
+    let conteudoResult = await pool.query(
+      `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1`,
+      [imovel.id, idioma]
+    );
+
+    if (conteudoResult.rows.length === 0 && idioma !== "pt") {
+      conteudoResult = await pool.query(
+        `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt' LIMIT 1`,
+        [imovel.id]
+      );
+    }
+
+    const conteudo = conteudoResult.rows[0] || {};
+
+    let listasResult;
+    try {
+      listasResult = await pool.query(
+        `SELECT *
+         FROM imovel_listas
+         WHERE imovel_id = $1
+           AND ativo = true
+           AND (idioma = $2 OR idioma IS NULL OR idioma = '')
+         ORDER BY categoria, ordem ASC, id ASC`,
+        [imovel.id, idioma]
+      );
+    } catch (e) {
+      listasResult = await pool.query(
+        `SELECT *
+         FROM imovel_listas
+         WHERE imovel_id = $1
+           AND ativo = true
+         ORDER BY categoria, ordem ASC, id ASC`,
+        [imovel.id]
+      );
+    }
+
+    const listas = agruparListasPorCategoria(listasResult.rows);
     const menuItems = buildMenuItems(t);
-    const sections = buildSections(t, { conteudo, listas, idioma });
+    const sections = buildSections(t, conteudo, listas);
 
     const html = `
 <!doctype html>
@@ -722,31 +641,13 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     * { box-sizing: border-box; }
     body { font-family: 'Outfit', sans-serif; }
     .heading-font { font-family: 'DM Serif Display', serif; }
-    .section-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-    }
+    .section-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
     .section-card:hover { transform: translateY(-2px); }
-    .modal-overlay {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .modal-content {
-      transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .modal-overlay.active .modal-content {
-      transform: translateY(0);
-    }
-    .fade-in {
-      animation: fadeUp 0.5s ease forwards;
-      opacity: 0;
-    }
+    .modal-overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    .modal-content { transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .fade-in { animation: fadeUp 0.5s ease forwards; opacity: 0; }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
@@ -755,12 +656,8 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
       background: linear-gradient(165deg, #0c2e1e 0%, #1a5c3a 40%, #2a7d50 70%, #1a5c3a 100%);
     }
     .menu-icon-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
       transition: all 0.2s ease;
     }
     .wifi-box {
@@ -773,22 +670,13 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
       );
     }
     .copy-toast {
-      position: fixed;
-      bottom: 80px;
-      left: 50%;
+      position: fixed; bottom: 80px; left: 50%;
       transform: translateX(-50%) translateY(20px);
-      opacity: 0;
-      transition: all 0.3s ease;
-      pointer-events: none;
-      z-index: 9999;
+      opacity: 0; transition: all 0.3s ease;
+      pointer-events: none; z-index: 9999;
     }
-    .copy-toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-    .lang-pill {
-      border: 2px solid transparent;
-    }
+    .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .lang-pill { border: 2px solid transparent; }
     .lang-pill.active {
       border-color: #7cc9a0;
       box-shadow: 0 0 0 3px rgba(124, 201, 160, 0.18);
@@ -822,8 +710,8 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
 
       <div class="max-w-md mx-auto px-5 -mt-4 relative z-10">
         <div class="bg-white rounded-2xl p-5 shadow-sm fade-in" style="animation-delay:0.35s">
-          <p class="heading-font text-xl mb-1" style="color:#1a5c3a;">${escHtml(t.welcomeTitle)}</p>
-          <p class="text-sm text-gray-500 leading-relaxed">${escHtml(t.welcomeText)}</p>
+          <p class="heading-font text-xl mb-1" style="color:#1a5c3a;">${escHtml(conteudo.boas_vindas_titulo || t.welcomeTitle)}</p>
+          <p class="text-sm text-gray-500 leading-relaxed">${escHtml(conteudo.boas_vindas_subtitulo || t.welcomeText)}</p>
           <button onclick="openSection('contato')" class="mt-3 flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
             <i data-lucide="message-circle" style="width:15px;height:15px;"></i> ${escHtml(t.contactButton)}
           </button>
@@ -927,10 +815,7 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     }
 
     function copyText(text) {
-      if (!navigator.clipboard || !navigator.clipboard.writeText) {
-        return;
-      }
-
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
       navigator.clipboard.writeText(text).then(() => {
         const toast = document.getElementById("copyToast");
         toast.classList.add("show");
@@ -939,7 +824,6 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     }
 
     buildMenu();
-
     if (window.lucide && typeof window.lucide.createIcons === "function") {
       window.lucide.createIcons();
     }
@@ -985,5 +869,5 @@ process.on("uncaughtException", (error) => {
 });
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Servidor rodando 🚀 na porta ${port}`);
+  console.log(\`Servidor rodando 🚀 na porta \${port}\`);
 });
