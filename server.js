@@ -259,8 +259,7 @@ function getLabels(idioma) {
     html: `...`
   },
 
-  // 🔥 DINÂMICOS (BANCO)
-  bares: {
+   bares: {
     title: "Bares",
     html: renderLista("bares")
   },
@@ -280,8 +279,7 @@ function getLabels(idioma) {
     html: renderLista("proximos")
   },
 
-  // 🔥 FIXOS (POR ENQUANTO)
-  doces: {
+   doces: {
     title: "Cafés & Doces",
     html: `...`
   },
