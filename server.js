@@ -845,6 +845,7 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
 
       modalTitle.textContent = section.title;
       modalBody.innerHTML = section.html;
+      lucide.createIcons();
       modal.classList.add("active");
       modal.dataset.open = id;
 
