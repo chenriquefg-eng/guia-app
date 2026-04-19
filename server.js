@@ -20,7 +20,7 @@ function escHtml(texto) {
 }
 
 function nl2brEsc(texto) {
-  return escHtml(texto).replace(/\n/g, "<br>");
+  return escHtml(texto).replace(/\r?\n/g, "<br>");
 }
 
 function getLabels(idioma) {
@@ -83,6 +83,9 @@ function getLabels(idioma) {
       reviewTitle: "Avaliação",
       faqTitle: "Perguntas Frequentes",
       openMaps: "Abrir no Google Maps",
+      mapLabel: "Maps",
+      reviewLabel: "Avaliações",
+      extraLabel: "Mais",
       activeLang: {
         pt: "🇧🇷 Português",
         en: "🇺🇸 English",
@@ -147,6 +150,9 @@ function getLabels(idioma) {
       reviewTitle: "Review",
       faqTitle: "Frequently Asked Questions",
       openMaps: "Open in Google Maps",
+      mapLabel: "Maps",
+      reviewLabel: "Reviews",
+      extraLabel: "More",
       activeLang: {
         pt: "🇧🇷 Português",
         en: "🇺🇸 English",
@@ -211,6 +217,9 @@ function getLabels(idioma) {
       reviewTitle: "Reseña",
       faqTitle: "Preguntas Frecuentes",
       openMaps: "Abrir en Google Maps",
+      mapLabel: "Maps",
+      reviewLabel: "Reseñas",
+      extraLabel: "Más",
       activeLang: {
         pt: "🇧🇷 Português",
         en: "🇺🇸 English",
@@ -246,24 +255,42 @@ function buildMenuItems(t) {
   ];
 }
 
-function normalizarTextoMultiLinha(texto) {
-  if (!texto) return "";
-  return nl2brEsc(String(texto).replace(/\r\n/g, "\n"));
+function agruparListasPorSecao(rows = []) {
+  const grupos = {
+    cafe: [],
+    bares: [],
+    proximos: [],
+    fazer: [],
+    restaurantes: [],
+    doces: []
+  };
+
+  for (const row of rows) {
+    const secao = row.secao;
+    if (!secao) continue;
+    if (!grupos[secao]) grupos[secao] = [];
+    grupos[secao].push(row);
+  }
+
+  for (const secao of Object.keys(grupos)) {
+    grupos[secao].sort((a, b) => Number(a.ordem || 0) - Number(b.ordem || 0));
+  }
+
+  return grupos;
 }
 
-function renderLista(lista = [], labels = {}) {
-  if (!Array.isArray(lista) || lista.length === 0) {
+function renderLista(itens = [], labels = {}) {
+  if (!Array.isArray(itens) || itens.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
   }
 
-  const mapLabel = labels.mapLabel || "Google Maps";
-  const instaLabel = labels.instaLabel || "Instagram";
+  const mapLabel = labels.mapLabel || "Maps";
   const reviewLabel = labels.reviewLabel || "Reviews";
   const extraLabel = labels.extraLabel || "Mais";
 
   return `
     <div class="space-y-3">
-      ${lista
+      ${itens
         .map((item) => {
           const titulo = escHtml(item.titulo || "");
           const descricao = escHtml(item.descricao || "");
@@ -284,7 +311,7 @@ function renderLista(lista = [], labels = {}) {
                 }
                 ${
                   instagram
-                    ? `<a href="${escHtml(instagram)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full border" style="border-color:#1a5c3a;color:#1a5c3a;">${escHtml(instaLabel)}</a>`
+                    ? `<a href="${escHtml(instagram)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full border" style="border-color:#1a5c3a;color:#1a5c3a;">Instagram</a>`
                     : ""
                 }
                 ${
@@ -305,54 +332,39 @@ function renderLista(lista = [], labels = {}) {
     </div>
   `;
 }
-function agruparListasPorCategoria(rows = []) {
-  const grupos = {
-    cafe: [],
-    bares: [],
-    proximos: [],
-    fazer: [],
-    restaurantes: [],
-    doces: []
-  };
 
-  for (const row of rows) {
-    const categoria = row.secao;
-    if (!categoria) continue;
-
-    if (!grupos[categoria]) {
-      grupos[categoria] = [];
-    }
-
-    grupos[categoria].push(row);
+function renderTextoBlocos(texto) {
+  if (!texto) {
+    return `<p class="text-sm text-gray-500">Sem conteúdo cadastrado.</p>`;
   }
 
-  for (const categoria of Object.keys(grupos)) {
-    grupos[categoria].sort((a, b) => {
-      const oa = Number(a.ordem || 0);
-      const ob = Number(b.ordem || 0);
-      return oa - ob;
-    });
+  const linhas = String(texto)
+    .split(/\r?\n/)
+    .map((linha) => linha.trim())
+    .filter(Boolean);
+
+  if (linhas.length === 0) {
+    return `<p class="text-sm text-gray-500">Sem conteúdo cadastrado.</p>`;
   }
 
-  return grupos;
+  return `
+    <div class="space-y-2 text-sm leading-relaxed text-gray-700">
+      ${linhas.map((linha) => `<p>${escHtml(linha)}</p>`).join("")}
+    </div>
+  `;
 }
 
 function buildSections(t, conteudo = {}, listas = {}) {
   const labelsLista = {
-  mapLabel: t.openMaps || "Google Maps",
-  instaLabel: "Instagram",
-  reviewLabel: "Reviews",
-  extraLabel: "Mais"
-};
+    mapLabel: t.mapLabel,
+    reviewLabel: t.reviewLabel,
+    extraLabel: t.extraLabel
+  };
 
   return {
     importante: {
       title: t.importantTitle,
-      html: `
-        <div class="space-y-3 text-sm leading-relaxed text-gray-700">
-          ${normalizarTextoMultiLinha(conteudo.checkin_texto || "")}
-        </div>
-      `
+      html: renderTextoBlocos(conteudo.checkin_texto)
     },
 
     amenidades: {
@@ -403,11 +415,11 @@ function buildSections(t, conteudo = {}, listas = {}) {
         <div class="space-y-4 text-sm text-gray-700">
           <div class="rounded-2xl p-4" style="background:#f5f0eb;">
             <p class="font-semibold mb-2">${escHtml(t.checkin.checkin)}</p>
-            <div>${normalizarTextoMultiLinha(conteudo.checkin_texto || "")}</div>
+            ${renderTextoBlocos(conteudo.checkin_texto)}
           </div>
           <div class="rounded-2xl p-4" style="background:#f5f0eb;">
             <p class="font-semibold mb-2">${escHtml(t.checkin.checkout)}</p>
-            <div>${normalizarTextoMultiLinha(conteudo.checkout_texto || "")}</div>
+            ${renderTextoBlocos(conteudo.checkout_texto)}
           </div>
         </div>
       `
@@ -415,18 +427,14 @@ function buildSections(t, conteudo = {}, listas = {}) {
 
     regras: {
       title: t.rulesTitle,
-      html: `
-        <div class="space-y-3 text-sm text-gray-700">
-          ${normalizarTextoMultiLinha(conteudo.regras_texto || "")}
-        </div>
-      `
+      html: renderTextoBlocos(conteudo.regras_texto)
     },
 
     apartamento: {
       title: t.apartmentTitle,
       html: `
         <div class="space-y-4 text-sm text-gray-700">
-          ${normalizarTextoMultiLinha(conteudo.apartamento_texto || "")}
+          ${renderTextoBlocos(conteudo.apartamento_texto)}
           <div class="grid grid-cols-2 gap-3">
             <div class="rounded-2xl p-4" style="background:#f5f0eb;">
               <p class="text-xs text-gray-500 uppercase">Capacidade</p>
@@ -451,19 +459,15 @@ function buildSections(t, conteudo = {}, listas = {}) {
 
     locomover: {
       title: t.gettingAroundTitle,
-      html: `
-        <div class="space-y-4 text-sm text-gray-700">
-          ${normalizarTextoMultiLinha(conteudo.transporte_texto || "")}
-        </div>
-      `
+      html: renderTextoBlocos(conteudo.transporte_texto)
     },
 
     chegar: {
       title: t.gettingThereTitle,
       html: `
         <div class="space-y-3 text-sm text-gray-700">
-          <p><strong>${escHtml(conteudo.endereco_exibicao || "")}</strong></p>
-          <div>${normalizarTextoMultiLinha(conteudo.como_chegar_texto || "")}</div>
+          ${conteudo.endereco_exibicao ? `<p><strong>${conteudo.endereco_exibicao}</strong></p>` : ""}
+          ${renderTextoBlocos(conteudo.como_chegar_texto)}
         </div>
       `
     },
@@ -547,18 +551,14 @@ function buildSections(t, conteudo = {}, listas = {}) {
 
     partir: {
       title: t.beforeLeavingTitle,
-      html: `
-        <div class="space-y-3 text-sm text-gray-700">
-          ${normalizarTextoMultiLinha(conteudo.antes_partir_texto || "")}
-        </div>
-      `
+      html: renderTextoBlocos(conteudo.antes_partir_texto)
     },
 
     contato: {
       title: t.contactTitle,
       html: `
         <div class="space-y-4 text-sm text-gray-700">
-          ${normalizarTextoMultiLinha(conteudo.contato_texto || "")}
+          ${renderTextoBlocos(conteudo.contato_texto)}
           <a href="https://wa.me/5521971810022" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#25d366;">
             💬 Falar com anfitrião
           </a>
@@ -612,29 +612,43 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
 
     const conteudo = conteudoResult.rows[0] || {};
 
-    let listasResult;
+    let listas = {
+      cafe: [],
+      bares: [],
+      proximos: [],
+      fazer: [],
+      restaurantes: [],
+      doces: []
+    };
+
     try {
-      listasResult = await pool.query(
+      let listasResult = await pool.query(
         `SELECT *
-         FROM imovel_listas
+         FROM imovel_secao_itens
          WHERE imovel_id = $1
-           AND ativo = true
+           AND ativo_boolean = true
            AND (idioma = $2 OR idioma IS NULL OR idioma = '')
-         ORDER BY categoria, ordem ASC, id ASC`,
+         ORDER BY secao, ordem ASC, id ASC`,
         [imovel.id, idioma]
       );
+
+      if ((!listasResult.rows || listasResult.rows.length === 0) && idioma !== "pt") {
+        listasResult = await pool.query(
+          `SELECT *
+           FROM imovel_secao_itens
+           WHERE imovel_id = $1
+             AND ativo_boolean = true
+             AND (idioma = 'pt' OR idioma IS NULL OR idioma = '')
+           ORDER BY secao, ordem ASC, id ASC`,
+          [imovel.id]
+        );
+      }
+
+      listas = agruparListasPorSecao(listasResult.rows);
     } catch (e) {
-      listasResult = await pool.query(
-        `SELECT *
-         FROM imovel_listas
-         WHERE imovel_id = $1
-           AND ativo = true
-         ORDER BY categoria, ordem ASC, id ASC`,
-        [imovel.id]
-      );
+      console.error("Erro ao buscar listas:", e.message);
     }
 
-    const listas = agruparListasPorCategoria(listasResult.rows);
     const menuItems = buildMenuItems(t);
     const sections = buildSections(t, conteudo, listas);
 
@@ -709,13 +723,12 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
         <div class="relative z-10 max-w-md mx-auto">
           <div class="fade-in" style="animation-delay:0.1s">
             <p class="text-white/60 text-xs tracking-widest uppercase mb-2">Welcome Guide · Guía de Bienvenida</p>
-            <h1 id="heroTitle" class="heading-font text-white text-4xl leading-tight mb-3">${escHtml(conteudo.titulo || "WELCOME GUIDE")}</h1>
+            <h1 id="heroTitle" class="heading-font text-white text-4xl leading-tight mb-3">${escHtml(conteudo.titulo || t.pageTitle)}</h1>
             <div class="w-10 h-0.5 rounded-full mb-4" style="background:#7cc9a0;"></div>
           </div>
           <div class="fade-in" style="animation-delay:0.25s">
-            <p class="text-white/90 font-light text-lg leading-relaxed">${escHtml(imovel.nome || "")}</p>
-            <p class="text-white/50 text-sm mt-1">${escHtml(imovel.endereco || "")}${imovel.apartamento ? " · Ap " + escHtml(imovel.apartamento) : ""}</p>
-            <p class="text-white/50 text-sm">${escHtml(imovel.cidade || "")} · ${escHtml(imovel.estado || "")} · Brasil</p>
+            <p class="text-white/90 font-light text-lg leading-relaxed">${escHtml(conteudo.subtitulo || imovel.nome || "")}</p>
+            <p class="text-white/50 text-sm mt-1">${conteudo.endereco_exibicao || ""}</p>
           </div>
         </div>
       </div>
@@ -793,7 +806,6 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
       const modal = document.getElementById("modal");
       const modalBody = document.getElementById("modalBody");
       const modalTitle = document.getElementById("modalTitle");
-
       const section = sections[id] || { title: "Info", html: "<p>Sem conteúdo.</p>" };
 
       if (modal.dataset.open === id) {
@@ -836,6 +848,7 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     }
 
     buildMenu();
+
     if (window.lucide && typeof window.lucide.createIcons === "function") {
       window.lucide.createIcons();
     }
