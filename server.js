@@ -315,7 +315,17 @@ function agruparListasPorSecao(rows = []) {
     </div>
   `;
 }
-
+function getEmoji(secao) {
+  const map = {
+    restaurantes: "🍽",
+    bares: "🍻",
+    cafe: "☕",
+    doces: "🍰",
+    proximos: "📍",
+    fazer: "📸"
+  };
+  return map[secao] || "";
+}
 function renderLista(itens = [], labels = {}) {
   if (!Array.isArray(itens) || itens.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
@@ -329,6 +339,7 @@ function renderLista(itens = [], labels = {}) {
     <div class="space-y-3">
       ${itens
         .map((item) => {
+          const emoji = getEmoji(item.secao);
           const titulo = escHtml(item.titulo || "");
           const descricao = escHtml(item.descricao || "");
           const maps = item.link_maps || "";
@@ -338,7 +349,9 @@ function renderLista(itens = [], labels = {}) {
 
           return `
             <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-              <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
+              <h3 class="font-semibold text-base text-gray-800">
+  ${emoji ? emoji + " " : ""}${titulo}
+</h3>
               ${descricao ? `<p class="text-sm text-gray-600 mt-2">${descricao}</p>` : ""}
               <div class="flex flex-wrap gap-2 mt-3">
                 ${
