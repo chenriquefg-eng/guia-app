@@ -332,534 +332,105 @@ secoesResult.rows.forEach(item => {
     ];
 
     const sections = {
+
   importante: {
     title: "Importante",
-    html: `
-      <div class="space-y-3">
-        ${[
-          ["trash-2","Lixo","Descartar no local indicado pelo condomínio."],
-          ["tv","TV Smart","Disponível com acesso a aplicativos de streaming (login do hóspede)."],
-          ["coffee","Máquina de café","Utilize cápsulas compatíveis com Nespresso."],
-          ["spray-can","Produtos de limpeza","Disponíveis na área de serviço."],
-          ["sparkles","Serviço de limpeza","Para estadias longas, pode ser solicitado à parte."]
-        ].map(([ic,t,d])=>`
-          <div class="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-100">
-            <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:#d94f4f15;">
-              <i data-lucide="${ic}" style="width:18px;height:18px;color:#d94f4f;"></i>
-            </div>
-            <div>
-              <p class="text-sm font-semibold text-gray-800">${t}</p>
-              <p class="text-xs text-gray-500 mt-0.5">${d}</p>
-            </div>
-          </div>`).join("")}
-      </div>`
+    html: `...`
   },
 
   amenidades: {
     title: "Amenidades",
-    html: `
-      <div class="grid grid-cols-2 gap-2">
-        ${[
-          "Ar condicionado nos quartos e sala",
-          "Roupas de cama",
-          "Toalhas",
-          "Papel higiênico",
-          "Pó de café",
-          "Açúcar",
-          "Sal e temperos",
-          "Cafeteira elétrica",
-          "Cafeteira Nespresso",
-          "Microondas",
-          "Sanduicheira",
-          "Liquidificador",
-          "Panos de prato",
-          "Esponja e detergente",
-          "Shampoo",
-          "Condicionador",
-          "Sabonete líquido"
-        ].map(a=>`
-          <div class="flex items-center gap-2 p-2.5 rounded-lg" style="background:#c47a2e08;">
-            <span style="color:#c47a2e;">✓</span>
-            <span class="text-xs text-gray-700">${a}</span>
-          </div>`).join("")}
-      </div>`
+    html: `...`
   },
 
   wifi: {
     title: "Wi-Fi",
-    html: `
-      <div class="rounded-2xl p-6 wifi-box" style="background:#1a5c3a;">
-        <div class="text-center">
-          <i data-lucide="wifi" style="width:48px;height:48px;color:#7cc9a0;margin:0 auto 16px;display:block;"></i>
-          <div class="mb-4">
-            <p class="text-white/60 text-xs uppercase tracking-widest mb-1">Rede</p>
-            <p class="text-white text-2xl font-semibold">${escHtml(conteudo.wifi_nome || "")}</p>
-          </div>
-          <div class="mb-5">
-            <p class="text-white/60 text-xs uppercase tracking-widest mb-1">Senha</p>
-            <p class="text-white text-2xl font-semibold">${escHtml(conteudo.wifi_senha || "")}</p>
-          </div>
-          <button onclick="event.stopPropagation();copyText(${JSON.stringify(conteudo.wifi_senha || "")})" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.15);color:white;">
-            <i data-lucide="copy" style="width:14px;height:14px;"></i> Copiar senha
-          </button>
-        </div>
-      </div>`
+    html: `...`
   },
 
   checkin: {
     title: "Check-in / Check-out",
-    html: `
-      <div class="space-y-4">
-        <div class="rounded-xl p-4" style="background:#2a7d5010;">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#2a7d50;">
-              <i data-lucide="log-in" style="width:18px;height:18px;color:white;"></i>
-            </div>
-            <span class="font-semibold text-lg" style="color:#1a5c3a;">Check-in: 15:00</span>
-          </div>
-          <ul class="text-sm text-gray-600 space-y-1 list-disc pl-5">
-            <li>Acesso por fechadura eletrônica</li>
-            <li>O código será enviado no dia da chegada</li>
-            <li>Portaria 24h – informe Ap 1101</li>
-            <li>Check-in rápido e independente</li>
-          </ul>
-        </div>
-        <div class="rounded-xl p-4" style="background:#3b73b810;">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#3b73b8;">
-              <i data-lucide="log-out" style="width:18px;height:18px;color:white;"></i>
-            </div>
-            <span class="font-semibold text-lg" style="color:#3b73b8;">Check-out: 11:00</span>
-          </div>
-          <ul class="text-sm text-gray-600 space-y-1 list-disc pl-5">
-            <li>Desligue ar-condicionado</li>
-            <li>Apague as luzes</li>
-            <li>Feche portas e janelas</li>
-          </ul>
-        </div>
-      </div>`
+    html: `...`
   },
 
   regras: {
     title: "Regras do Apartamento",
-    html: `
-      <div class="space-y-3">
-        ${[
-          ["🤫","Silêncio após 22h"],
-          ["🚭","Não é permitido fumar"],
-          ["🚫","Não são permitidas festas"],
-          ["🪑","Não alterar disposição dos móveis"],
-          ["⏰","Respeitar horários de check-in e check-out"],
-          ["🗑️","Retirar o lixo ao sair"]
-        ].map(([em,tx])=>`
-          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#f5f0eb;">
-            <span class="text-xl">${em}</span>
-            <span class="text-sm text-gray-700 pt-0.5">${tx}</span>
-          </div>`).join("")}
-        <div class="mt-5 p-4 rounded-xl" style="background:#2a7d5010;">
-          <p class="text-sm" style="color:#1a5c3a;">💚 Agradeço antecipadamente por você ser um super hóspede! Espero que você aproveite o máximo da casa!</p>
-        </div>
-      </div>`
+    html: `...`
   },
 
   apartamento: {
     title: "O Apartamento",
-    html: `
-      <p class="text-gray-600 text-sm leading-relaxed mb-5">
-        Estamos muito felizes em receber você. O apartamento foi recém-reformado, com marcenaria planejada, decoração contemporânea e enxoval padrão hotelaria.
-      </p>
-      <div class="grid grid-cols-2 gap-3">
-        ${[
-          ["users","4 pessoas"],
-          ["door-open","2 quartos"],
-          ["bath","1 banheiro"],
-          ["bed-double","4 camas"]
-        ].map(([ic,lb])=>`
-          <div class="rounded-xl p-4 flex items-center gap-3" style="background:#f5f0eb;">
-            <i data-lucide="${ic}" style="width:20px;height:20px;color:#2a7d50;"></i>
-            <span class="text-sm font-medium text-gray-700">${lb}</span>
-          </div>`).join("")}
-      </div>
-      <div class="mt-4 rounded-xl p-4 text-sm text-gray-600 space-y-1" style="background:#f5f0eb;">
-        <p>🛏️ 1 cama de casal (Queen)</p>
-        <p>🛏️ 1 cama de solteiro com cama auxiliar</p>
-        <p>🛋️ 1 sofá-cama</p>
-      </div>`
+    html: `...`
   },
 
   locomover: {
     title: "Como se Locomover",
-    html: `
-      <div class="space-y-3">
-        ${[
-          ["🚗","Uber / 99","Serviços amplamente disponíveis na região, com rápida chegada e excelente cobertura."],
-          ["🚕","Táxi","Há ponto fixo de táxi na torre do Shopping RioSul, a poucos passos do edifício."],
-          ["🚇","Transporte Público","Diversas linhas de ônibus passam em frente ao Shopping RioSul. A estação de metrô Botafogo é a mais próxima."],
-          ["🚲","Bicicleta","Aluguel pelos aplicativos Tembici ou Uber."],
-          ["🚶","A Pé","A região é residencial, tranquila e arborizada, ideal para caminhadas até a Praia Vermelha, Pão de Açúcar e Shopping RioSul."],
-          ["🅿️","Estacionamento","O edifício não dispõe de vaga privativa. Há vagas públicas na rua e estacionamentos próximos."]
-        ].map(([em,t,d])=>`
-          <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#f5f0eb;">
-            <span class="text-xl flex-shrink-0">${em}</span>
-            <div>
-              <p class="text-sm font-semibold text-gray-800">${t}</p>
-              <p class="text-xs text-gray-500">${d}</p>
-            </div>
-          </div>`).join("")}
-      </div>`
+    html: `...`
   },
 
   chegar: {
     title: "Como Chegar",
-    html: `
-      <div class="rounded-xl p-5" style="background:#c47a2e10;">
-        <p class="font-semibold text-gray-800 mb-2">📍 Rua Lauro Müller, 46 - Botafogo</p>
-        <p class="text-gray-600 mb-4 text-sm">Rio de Janeiro - RJ</p>
-        <ul class="text-sm text-gray-600 space-y-2">
-          <li>• Utilize o endereço completo no Google Maps ou Uber</li>
-          <li>• O prédio possui portaria 24h</li>
-          <li>• Informe o número do apartamento: 1101</li>
-          <li>• A entrada é feita por fechadura eletrônica</li>
-        </ul>
-        <a href="https://maps.app.goo.gl/FEPcLwTqpL1vyYfdA" target="_blank" class="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
-          <i data-lucide="map-pinned" style="width:16px;height:16px;"></i> Abrir no Google Maps
-        </a>
-      </div>`
+    html: `...`
   },
 
- bares: {
-  title: "Bares",
-  html: renderLista("bares")
-},
-cafe: {
-  title: "Café da Manhã",
-  html: renderLista("cafe")
-},
-fazer: {
-  title: "O que fazer",
-  html: renderLista("fazer")
-},
-proximos: {
-  title: "Mais próximos",
-  html: renderLista("proximos")
-},
+  restaurantes: {
+    title: "Restaurantes Locais",
+    html: `...`
+  },
 
-doces: {
-  title: "Cafés & Doces",
-  html: `
-    <div class="space-y-3">
-      ${[
-        {
-          nome: "Classico Beach Club Urca",
-          desc: "Av. Pasteur, 520 - Urca · 15 min a pé",
-          maps: "https://maps.app.goo.gl/VUVTfQYV1cRjEwe77",
-          insta: "https://www.instagram.com/classicobeachclub/?hl=pt-br",
-          review: "https://share.google/5aXU0nBUW4il3mwTK"
-        },
-        {
-          nome: "Cirandaia",
-          desc: "R. Voluntários da Pátria, 416 - Botafogo · 19 min de carro",
-          maps: "https://maps.app.goo.gl/4dRMtCkRGyMiErW49",
-          insta: "http://www.instagram.com/",
-          review: "https://share.google/FWbcwup74oNPihmpF"
-        },
-        {
-          nome: "Que Doce",
-          desc: "R. Odílio Bacelar, 30 - Urca · 10 min a pé",
-          maps: "https://www.google.com/maps/place/Casa+Que+Doce/@-22.9541372,-43.174362,17z/data=!4m6!3m5!1s0x997b58dcd90f71:0x4ca184d7bd113064!8m2!3d-22.9532045!4d-43.1682974!16s%2Fg%2F11cmykzrps",
-          insta: "https://www.instagram.com/quedoce/",
-          review: "https://share.google/ZPx65fJw5pWCTAlSh"
-        },
-        {
-          nome: "Padaria Ipanema",
-          desc: "R. Visc. de Pirajá, 325 - Ipanema · 23 min de carro",
-          maps: "https://maps.app.goo.gl/sz9eXmq3dGMR5ujF8",
-          insta: "https://www.instagram.com/padariaipanemaoficial/",
-          review: "https://share.google/YM0kd1DIl4Yml89Rm"
-        }
-      ].map(item => `
-        <div class="p-4 rounded-2xl bg-white border border-gray-100">
-          <p class="text-sm font-semibold text-gray-800">${item.nome}</p>
-          <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
-          <div class="flex flex-wrap gap-2 mt-3">
-            <a href="${item.maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
-            <a href="${item.insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
-            <a href="${item.review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
-          </div>
-        </div>
-      `).join("")}
-    </div>`
-},
+  // 🔥 DINÂMICOS (BANCO)
+  bares: {
+    title: "Bares",
+    html: renderLista("bares")
+  },
 
-restaurantes: {
-  title: "Restaurantes Locais",
-  html: `
-    <div class="space-y-3">
-      ${[
-        {
-          nome: "Terra Brasilis",
-          desc: "Praça General Tibúrcio, s/n · comida brasileira · 15 min a pé",
-          maps: "https://maps.app.goo.gl/UKcfaSs7kywVz4XX6",
-          insta: "https://www.instagram.com/restauranteterrabrasilis/",
-          review: "https://share.google/HypQmZYjXdM1BRLMw"
-        },
-        {
-          nome: "Fogo de Chão",
-          desc: "Praia de Botafogo, 400 · carnes e vista linda · 15 min a pé",
-          maps: "https://maps.app.goo.gl/9rzSjzqu7tuuPrce8",
-          insta: "https://www.instagram.com/fogodechaobr/?hl=en",
-          review: "https://share.google/Qv9X5UeAyXTtJK4Aa"
-        },
-        {
-          nome: "Assador Rio's",
-          desc: "Av. Infante Dom Henrique, s/n · churrascaria · 9 min de carro",
-          maps: "http://www.googlemaps.com/",
-          insta: "https://www.instagram.com/assadorbr/?hl=en",
-          review: "https://share.google/4DTQZiT70rZnZQXjP"
-        },
-        {
-          nome: "Bar Urca / Mureta",
-          desc: "Rua Cândido Gaffrée, 205 · boteco clássico · 10 min de carro",
-          maps: "https://maps.app.goo.gl/2xzVEpzyvjRBKVpY7",
-          insta: "https://www.instagram.com/barurca/",
-          review: "https://share.google/dt4P7Wm3jwq8QbDNz"
-        },
-        {
-          nome: "Pergula",
-          desc: "Copacabana Palace · 15 min de carro",
-          maps: "http://www.googlemaps.com/",
-          insta: "https://www.instagram.com/belmondcopacabanapalace/",
-          review: "https://riotur.rio/onde_comer/pergula/"
-        },
-        {
-          nome: "Irajá Redux",
-          desc: "Shopping RioSul · 3 min a pé",
-          maps: "https://maps.app.goo.gl/QPWX4k7fTXzvj4cY9",
-          insta: "https://www.instagram.com/irajaredux/?hl=en",
-          review: "https://share.google/SqLmhVAICt4EWg438"
-        }
-      ].map(item => `
-        <div class="p-4 rounded-2xl bg-white border border-gray-100">
-          <p class="text-sm font-semibold text-gray-800">${item.nome}</p>
-          <p class="text-xs text-gray-500 mt-1">${item.desc}</p>
-          <div class="flex flex-wrap gap-2 mt-3">
-            <a href="${item.maps}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#1a5c3a;">Maps</a>
-            <a href="${item.insta}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#c47a2e;">Instagram</a>
-            <a href="${item.review}" target="_blank" class="px-3 py-2 rounded-full text-xs font-medium text-white" style="background:#3b73b8;">Reviews</a>
-          </div>
-        </div>
-      `).join("")}
-    </div>`
-},
-emergencia: {
-  title: "Emergência",
-  html: `
-    <div class="space-y-3">
-      <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
-        <div class="flex items-center gap-3">
-          <span class="text-xl">🚔</span>
-          <span class="text-sm font-semibold text-gray-800">Polícia Militar</span>
-        </div>
-        <a href="tel:190" class="text-sm font-bold" style="color:#d94f4f;">190</a>
-      </div>
+  cafe: {
+    title: "Café da Manhã",
+    html: renderLista("cafe")
+  },
 
-      <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
-        <div class="flex items-center gap-3">
-          <span class="text-xl">🚑</span>
-          <span class="text-sm font-semibold text-gray-800">SAMU</span>
-        </div>
-        <a href="tel:192" class="text-sm font-bold" style="color:#d94f4f;">192</a>
-      </div>
+  fazer: {
+    title: "O que fazer",
+    html: renderLista("fazer")
+  },
 
-      <div class="flex items-center justify-between p-4 rounded-xl" style="background:#d94f4f08;">
-        <div class="flex items-center gap-3">
-          <span class="text-xl">🚒</span>
-          <span class="text-sm font-semibold text-gray-800">Corpo de Bombeiros</span>
-        </div>
-        <a href="tel:193" class="text-sm font-bold" style="color:#d94f4f;">193</a>
-      </div>
+  proximos: {
+    title: "Mais próximos",
+    html: renderLista("proximos")
+  },
 
-      <div class="mt-4 p-4 rounded-xl" style="background:#fff7f7;">
-        <p class="text-sm text-gray-700 leading-relaxed">
-          Em caso de emergência médica, policial ou incêndio, utilize os números acima imediatamente.
-          Para situações menos urgentes, fale com o anfitrião pelo card de contato.
-        </p>
-      </div>
-    </div>`
-},
-avaliacao: {
-  title: "Avaliação",
-  html: `
-    <div class="text-center py-6">
-      <div class="text-5xl mb-4">⭐</div>
-      <p class="heading-font text-2xl mb-2" style="color:#1a5c3a;">Sua opinião é muito importante</p>
-      <p class="text-sm text-gray-500 mb-5 leading-relaxed">
-        Esperamos que você tenha gostado da sua estadia em nosso apartamento.
-        Se puder, deixe sua avaliação no Airbnb. Isso nos ajuda muito e faz diferença para os próximos hóspedes.
-      </p>
+  // 🔥 FIXOS (POR ENQUANTO)
+  doces: {
+    title: "Cafés & Doces",
+    html: `...`
+  },
 
-      <a href="https://airbnb.com/" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium text-white shadow-sm" style="background:#1a5c3a;">
-        <i data-lucide="star" style="width:14px;height:14px;"></i> Deixar avaliação no Airbnb
-      </a>
+  emergencia: {
+    title: "Emergência",
+    html: `...`
+  },
 
-      <p class="text-xs text-gray-400 mt-4">
-        Obrigado por dedicar um tempinho para compartilhar sua experiência. 💚
-      </p>
-    </div>`
-},
-      faq: {
-  title: "Perguntas Frequentes",
-  html: `
-    <div class="space-y-3">
-      ${[
-        [
-          "Tem estacionamento disponível no local?",
-          "O edifício não dispõe de vaga privativa. Há vagas públicas na rua e estacionamentos próximos."
-        ],
-        [
-          "Posso levar meu pet?",
-          "Não é permitida a hospedagem de animais."
-        ],
-        [
-          "Tem roupa de cama e banho disponível?",
-          "Sim. Disponibilizamos enxoval completo, incluindo roupas de cama e toalhas de banho e rosto, preparados com padrão de qualidade e conforto."
-        ],
-        [
-          "Como funciona a lavanderia?",
-          "O apartamento não dispõe de máquina de lavar. Para maior comodidade, sugerimos: Lavô Lavanderia – Botafogo; Acqua Lavanderia – Leme; e 5àSec – Botafogo ou Copacabana."
-        ]
-      ].map(([q,a]) => `
-        <div class="p-4 rounded-xl" style="background:#8b5fbf08;">
-          <p class="text-sm font-semibold text-gray-800 mb-1">${q}</p>
-          <p class="text-xs text-gray-600">${a}</p>
-        </div>
-      `).join("")}
-    </div>`
-},
-      
-      partir: {
-  title: "Antes de Partir",
-  html: `
-    <div class="space-y-3">
+  avaliacao: {
+    title: "Avaliação",
+    html: `...`
+  },
 
-      <div class="p-4 rounded-xl" style="background:#3b73b808;">
-        <p class="text-sm font-semibold text-gray-800 mb-2">⏰ Check-out</p>
-        <p class="text-xs text-gray-600">
-          O horário de saída é até <strong>11:00</strong>. Caso precise de um horário diferente, nos avise com antecedência.
-        </p>
-      </div>
+  faq: {
+    title: "Perguntas Frequentes",
+    html: `...`
+  },
 
-      ${[
-        "Verifique se não esqueceu nenhum item pessoal",
-        "Retire o lixo e coloque no local indicado do prédio",
-        "Feche todas as janelas e portas",
-        "Desligue o ar-condicionado",
-        "Apague as luzes",
-        "Informe caso tenha ocorrido algum pequeno dano"
-      ].map(item => `
-        <div class="flex items-center gap-3 p-3 rounded-xl" style="background:#f5f0eb;">
-          <span>✔️</span>
-          <span class="text-sm text-gray-700">${item}</span>
-        </div>
-      `).join("")}
+  partir: {
+    title: "Antes de Partir",
+    html: `...`
+  },
 
-      <div class="mt-4 p-4 rounded-xl text-sm text-gray-700" style="background:#2a7d5010;">
-        💚 Esperamos que você tenha tido uma excelente estadia e momentos especiais aqui no Rio!
-      </div>
+  contato: {
+    title: "Entre em Contato",
+    html: `...`
+  }
 
-    </div>`
-},
-contato: {
-  title: "Entre em Contato",
-  html: `
-    <div class="text-center py-6">
-      <div class="text-5xl mb-4">💬</div>
-      <p class="heading-font text-2xl mb-2" style="color:#1a5c3a;">Estamos por perto</p>
-      <p class="text-sm text-gray-500 mb-5 leading-relaxed">
-        Foi um prazer recebê-lo em nosso apartamento. Caso tenha qualquer dúvida, sugestão ou precise de ajuda, ficaremos muito felizes em falar com você.
-      </p>
-
-      <div class="space-y-2 text-sm mb-5">
-        <p><strong>Instagram:</strong> @milepascoal</p>
-        <p><strong>Telefone:</strong> <a href="tel:+5521971810022" style="color:#1a5c3a;">+55 21 97181-0022</a></p>
-        <p><strong>Endereço:</strong> Rua Lauro Müller, 46 Ap 1101</p>
-      </div>
-
-      <div class="flex flex-col gap-2">
-        <a href="https://wa.me/5521971810022" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-medium text-white" style="background:#25d366;">
-          <i data-lucide="message-circle" style="width:14px;height:14px;"></i> Falar no WhatsApp
-        </a>
-
-        <a href="https://maps.app.goo.gl/5r23kN9fv3gH8JBr8" target="_blank" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full text-sm font-medium text-white" style="background:#1a5c3a;">
-          <i data-lucide="map-pinned" style="width:14px;height:14px;"></i> Abrir localização
-        </a>
-      </div>
-    </div>`
-},
-    };
-
-    const html = `
-<!doctype html>
-<html lang="pt-BR" class="h-full">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escHtml(t.pageTitle)} - ${escHtml(imovel.nome || "")}</title>
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    html, body { height: 100%; margin: 0; }
-    * { box-sizing: border-box; }
-    body { font-family: 'Outfit', sans-serif; }
-    .heading-font { font-family: 'DM Serif Display', serif; }
-    .section-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-    }
-    .section-card:hover { transform: translateY(-2px); }
-    .modal-overlay {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .modal-content {
-      transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .modal-overlay.active .modal-content {
-      transform: translateY(0);
-    }
-    .fade-in {
-      animation: fadeUp 0.5s ease forwards;
-      opacity: 0;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .hero-gradient {
-      background: linear-gradient(165deg, #0c2e1e 0%, #1a5c3a 40%, #2a7d50 70%, #1a5c3a 100%);
-    }
-    .menu-icon-box {
-      width: 56px; height: 56px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s ease;
-    }
-    .wifi-box {
-      background: repeating-linear-gradient(
-        135deg,
-        transparent,
-        transparent 10px,
-        rgba(255,255,255,0.03) 10px,
-        rgba(255,255,255,0.03) 20px
-      );
-    }
+};    }
     .copy-toast {
       position: fixed;
       bottom: 80px;
