@@ -845,23 +845,21 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     return;
   }
 
-  modalTitle.textContent = section.title;
+    modalTitle.textContent = section.title;
   modalBody.innerHTML = section.html;
   modal.classList.add("active");
   modal.dataset.open = id;
 
   lucide.createIcons();
 }
-    }
 
-    function closeModal(e) {
-      const modal = document.getElementById("modal");
-      if (e.target === modal) {
-        modal.classList.remove("active");
-        modal.dataset.open = "";
-      }
-    }
-
+function closeModal(e) {
+  const modal = document.getElementById("modal");
+  if (e.target === modal) {
+    modal.classList.remove("active");
+    modal.dataset.open = "";
+  }
+}
     function closeModalDirect() {
       const modal = document.getElementById("modal");
       modal.classList.remove("active");
