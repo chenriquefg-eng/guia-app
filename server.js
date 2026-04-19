@@ -265,10 +265,33 @@ function agruparListasPorSecao(rows = []) {
     doces: []
   };
 
+  const alias = {
+    cafe: "cafe",
+    cafés: "cafe",
+    cafes: "cafe",
+    bares: "bares",
+    bar: "bares",
+    proximos: "proximos",
+    próximos: "proximos",
+    fazer: "fazer",
+    oquefazer: "fazer",
+    restaurantes: "restaurantes",
+    restaurante: "restaurantes",
+    doces: "doces",
+    cafesdoces: "doces",
+    cafeseDoces: "doces"
+  };
+
   for (const row of rows) {
-    const secao = row.secao;
-    if (!secao) continue;
-    if (!grupos[secao]) grupos[secao] = [];
+    const bruto = String(row.secao || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, "")
+      .toLowerCase();
+
+    const secao = alias[bruto] || bruto;
+    if (!grupos[secao]) continue;
+
     grupos[secao].push(row);
   }
 
@@ -277,6 +300,44 @@ function agruparListasPorSecao(rows = []) {
   }
 
   return grupos;
+}
+
+function renderLista(itens = [], labels = {}) {
+  if (!Array.isArray(itens) || itens.length === 0) {
+    return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
+  }
+
+  const mapLabel = labels.mapLabel || "Maps";
+  const reviewLabel = labels.reviewLabel || "Reviews";
+  const extraLabel = labels.extraLabel || "Mais";
+
+  return `
+    <div class="space-y-3">
+      ${itens
+        .map((item) => {
+          const titulo = escHtml(item.titulo || "");
+          const descricao = escHtml(item.descricao || "");
+          const maps = item.link_maps || "";
+          const instagram = item.link_instagram || "";
+          const review = item.link_reviews || "";
+          const extra = item.link_extra || "";
+
+          return `
+            <div class="rounded-2xl border border-gray-200 p-4 bg-white">
+              <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
+              ${descricao ? `<p class="text-sm text-gray-600 mt-2">${descricao}</p>` : ""}
+              <div class="flex flex-wrap gap-2 mt-3">
+                ${maps ? `<a href="${escHtml(maps)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#1a5c3a;">${escHtml(mapLabel)}</a>` : ""}
+                ${instagram ? `<a href="${escHtml(instagram)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full border" style="border-color:#1a5c3a;color:#1a5c3a;">Instagram</a>` : ""}
+                ${review ? `<a href="${escHtml(review)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#3b73b8;">${escHtml(reviewLabel)}</a>` : ""}
+                ${extra ? `<a href="${escHtml(extra)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#92400e;">${escHtml(extraLabel)}</a>` : ""}
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
 }
 
 function renderLista(itens = [], labels = {}) {
@@ -613,42 +674,31 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     const conteudo = conteudoResult.rows[0] || {};
 
     let listas = {
-      cafe: [],
-      bares: [],
-      proximos: [],
-      fazer: [],
-      restaurantes: [],
-      doces: []
-    };
+  cafe: [],
+  bares: [],
+  proximos: [],
+  fazer: [],
+  restaurantes: [],
+  doces: []
+};
 
-    try {
-      let listasResult = await pool.query(
-        `SELECT *
-         FROM imovel_secao_itens
-         WHERE imovel_id = $1
-           AND ativo_boolean = true
-           AND (idioma = $2 OR idioma IS NULL OR idioma = '')
-         ORDER BY secao, ordem ASC, id ASC`,
-        [imovel.id, idioma]
-      );
+try {
+  const listasResult = await pool.query(
+    `SELECT *
+     FROM imovel_secao_itens
+     WHERE imovel_id = $1
+       AND ativo_boolean = true
+     ORDER BY secao, ordem ASC, id ASC`,
+    [imovel.id]
+  );
 
-      if ((!listasResult.rows || listasResult.rows.length === 0) && idioma !== "pt") {
-        listasResult = await pool.query(
-          `SELECT *
-           FROM imovel_secao_itens
-           WHERE imovel_id = $1
-             AND ativo_boolean = true
-             AND (idioma = 'pt' OR idioma IS NULL OR idioma = '')
-           ORDER BY secao, ordem ASC, id ASC`,
-          [imovel.id]
-        );
-      }
+  console.log("Itens encontrados:", listasResult.rows.length);
+  console.log("Seções encontradas:", listasResult.rows.map(r => r.secao));
 
-      listas = agruparListasPorSecao(listasResult.rows);
-    } catch (e) {
-      console.error("Erro ao buscar listas:", e.message);
-    }
-
+  listas = agruparListasPorSecao(listasResult.rows);
+} catch (e) {
+  console.error("Erro ao buscar listas:", e.message);
+}
     const menuItems = buildMenuItems(t);
     const sections = buildSections(t, conteudo, listas);
 
