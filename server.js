@@ -375,6 +375,7 @@ function renderLista(itens = [], labels = {}) {
     </div>
   </div>
 `;
+        }
 
 function renderTextoBlocos(texto) {
   if (!texto) {
