@@ -343,9 +343,10 @@ function renderLista(itens = [], labels = {}) {
 
           return `
             <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-              <h3 class="font-semibold text-base text-gray-800">
-  ${emoji ? emoji + " " : ""}${titulo}
-</h3>
+              <div class="flex items-center gap-2">
+  <i data-lucide="${icone}" style="width:16px;height:16px;color:#1a5c3a;"></i>
+  <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
+</div>
               ${descricao ? `<p class="text-sm text-gray-600 mt-2">${descricao}</p>` : ""}
               <div class="flex flex-wrap gap-2 mt-3">
                 ${
