@@ -859,7 +859,6 @@ function closeModal(e) {
     modal.classList.remove("active");
     modal.dataset.open = "";
   }
-}
     function closeModalDirect() {
       const modal = document.getElementById("modal");
       modal.classList.remove("active");
