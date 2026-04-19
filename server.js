@@ -687,10 +687,15 @@ try {
     `SELECT *
      FROM imovel_secao_itens
      WHERE imovel_id = $1
-       AND ativo_boolean = true
      ORDER BY secao, ordem ASC, id ASC`,
     [imovel.id]
   );
+
+  listas = agruparListasPorSecao(listasResult.rows);
+
+} catch (e) {
+  console.error("Erro ao buscar listas:", e.message);
+}
 
   console.log("Itens encontrados:", listasResult.rows.length);
   console.log("Seções encontradas:", listasResult.rows.map(r => r.secao));
