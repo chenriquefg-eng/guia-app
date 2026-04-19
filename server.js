@@ -212,7 +212,107 @@ function getLabels(idioma) {
       }
     }
   };
+    const sections = {
 
+  importante: {
+    title: "Importante",
+    html: `...`
+  },
+
+  amenidades: {
+    title: "Amenidades",
+    html: `...`
+  },
+
+  wifi: {
+    title: "Wi-Fi",
+    html: `...`
+  },
+
+  checkin: {
+    title: "Check-in / Check-out",
+    html: `...`
+  },
+
+  regras: {
+    title: "Regras do Apartamento",
+    html: `...`
+  },
+
+  apartamento: {
+    title: "O Apartamento",
+    html: `...`
+  },
+
+  locomover: {
+    title: "Como se Locomover",
+    html: `...`
+  },
+
+  chegar: {
+    title: "Como Chegar",
+    html: `...`
+  },
+
+  restaurantes: {
+    title: "Restaurantes Locais",
+    html: `...`
+  },
+
+  // 🔥 DINÂMICOS (BANCO)
+  bares: {
+    title: "Bares",
+    html: renderLista("bares")
+  },
+
+  cafe: {
+    title: "Café da Manhã",
+    html: renderLista("cafe")
+  },
+
+  fazer: {
+    title: "O que fazer",
+    html: renderLista("fazer")
+  },
+
+  proximos: {
+    title: "Mais próximos",
+    html: renderLista("proximos")
+  },
+
+  // 🔥 FIXOS (POR ENQUANTO)
+  doces: {
+    title: "Cafés & Doces",
+    html: `...`
+  },
+
+  emergencia: {
+    title: "Emergência",
+    html: `...`
+  },
+
+  avaliacao: {
+    title: "Avaliação",
+    html: `...`
+  },
+
+  faq: {
+    title: "Perguntas Frequentes",
+    html: `...`
+  },
+
+  partir: {
+    title: "Antes de Partir",
+    html: `...`
+  },
+
+  contato: {
+    title: "Entre em Contato",
+    html: `...`
+  }
+
+};   
+  
   return dict[idioma] || dict.pt;
 }
 
@@ -331,106 +431,6 @@ secoesResult.rows.forEach(item => {
       { id: "contato", icon: "message-circle", label: t.sections.contato, color: "#2a7d50" }
     ];
 
-    const sections = {
-
-  importante: {
-    title: "Importante",
-    html: `...`
-  },
-
-  amenidades: {
-    title: "Amenidades",
-    html: `...`
-  },
-
-  wifi: {
-    title: "Wi-Fi",
-    html: `...`
-  },
-
-  checkin: {
-    title: "Check-in / Check-out",
-    html: `...`
-  },
-
-  regras: {
-    title: "Regras do Apartamento",
-    html: `...`
-  },
-
-  apartamento: {
-    title: "O Apartamento",
-    html: `...`
-  },
-
-  locomover: {
-    title: "Como se Locomover",
-    html: `...`
-  },
-
-  chegar: {
-    title: "Como Chegar",
-    html: `...`
-  },
-
-  restaurantes: {
-    title: "Restaurantes Locais",
-    html: `...`
-  },
-
-  // 🔥 DINÂMICOS (BANCO)
-  bares: {
-    title: "Bares",
-    html: renderLista("bares")
-  },
-
-  cafe: {
-    title: "Café da Manhã",
-    html: renderLista("cafe")
-  },
-
-  fazer: {
-    title: "O que fazer",
-    html: renderLista("fazer")
-  },
-
-  proximos: {
-    title: "Mais próximos",
-    html: renderLista("proximos")
-  },
-
-  // 🔥 FIXOS (POR ENQUANTO)
-  doces: {
-    title: "Cafés & Doces",
-    html: `...`
-  },
-
-  emergencia: {
-    title: "Emergência",
-    html: `...`
-  },
-
-  avaliacao: {
-    title: "Avaliação",
-    html: `...`
-  },
-
-  faq: {
-    title: "Perguntas Frequentes",
-    html: `...`
-  },
-
-  partir: {
-    title: "Antes de Partir",
-    html: `...`
-  },
-
-  contato: {
-    title: "Entre em Contato",
-    html: `...`
-  }
-
-};    }
     .copy-toast {
       position: fixed;
       bottom: 80px;
