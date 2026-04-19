@@ -53,7 +53,7 @@ function getLabels(idioma) {
         proximos: "Mais Próximos",
         doces: "Cafés & Doces",
         contato: "Contato",
-        emergencyList: [
+        emergencyList: 
     { label: "🚓 190 — Polícia Militar", phone: "190" },
     { label: "🚑 192 — SAMU", phone: "192" },
     { label: "🚒 193 — Corpo de Bombeiros", phone: "193" }
