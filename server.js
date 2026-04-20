@@ -719,13 +719,11 @@ try {
     background-color: #1a5c3a;
   "
 >
-
-    <!-- overlay escuro -->
-    <div style="
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
-"></div>
+  <div style="
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
+  "></div>
 
     <!-- conteúdo -->
     <div class="relative z-10 max-w-md mx-auto">
