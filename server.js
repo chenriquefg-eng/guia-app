@@ -378,15 +378,9 @@ function buildSections(t, conteudo = {}, listas = {}) {
       html: renderTextoBlocos(conteudo.checkin_texto)
     },
 
-    amenidades: {
+   amenidades: {
   title: t.amenitiesTitle,
-  html: `
-    <div class="space-y-2 text-sm leading-relaxed text-gray-700">
-      <p>Ar condicionado nos quartos e sala</p>
-      <p>Roupas de cama</p>
-      ...
-    </div>
-  `
+  html: renderLista(listas.amenidades || [], labelsLista)
 },
 
     wifi: {
