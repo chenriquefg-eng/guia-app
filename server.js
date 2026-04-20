@@ -499,9 +499,9 @@ function buildSections(t, conteudo = {}, listas = {}) {
   title: t.emergencyTitle,
   html: `
     <div class="space-y-3 text-sm text-gray-700">
-      <a href="tel:190" class="block rounded-2xl border p-4">190 — Polícia Militar</a>
-      <a href="tel:192" class="block rounded-2xl border p-4">192 — SAMU</a>
-      <a href="tel:193" class="block rounded-2xl border p-4">193 — Corpo de Bombeiros</a>
+      ${(t.emergencyList || [])
+        .map((e) => `<a href="tel:${e.phone}" class="block rounded-2xl border p-4">${escHtml(e.label)}</a>`)
+        .join("")}
     </div>
   `
 },
