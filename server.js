@@ -613,14 +613,27 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   amenidades: [],
   faq: []
 };
-  try {
-  const listasResult = await pool.query(
+
+try {
+  let listasResult = await pool.query(
     `SELECT *
      FROM imovel_secao_itens
      WHERE imovel_id = $1
+       AND idioma = $2
      ORDER BY secao, ordem ASC, id ASC`,
-    [imovel.id]
+    [imovel.id, idioma]
   );
+
+  if (listasResult.rows.length === 0 && idioma !== "pt") {
+    listasResult = await pool.query(
+      `SELECT *
+       FROM imovel_secao_itens
+       WHERE imovel_id = $1
+         AND idioma = 'pt'
+       ORDER BY secao, ordem ASC, id ASC`,
+      [imovel.id]
+    );
+  }
 
   listas = agruparListasPorSecao(listasResult.rows);
   console.log("FAQ FINAL:", listas.faq);
