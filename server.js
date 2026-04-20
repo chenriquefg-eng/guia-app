@@ -575,8 +575,11 @@ app.get("/health", async (req, res) => {
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   try {
     const codigo = req.params.codigo;
-    const idioma = req.params.idioma || "pt";
-    const t = getLabels(idioma);
+const idioma = req.params.idioma || "pt";
+
+console.log("IDIOMA RECEBIDO:", idioma); // 👈 AQUI
+
+const t = getLabels(idioma);
 
     const imovelResult = await pool.query(
       `SELECT * FROM imoveis WHERE codigo_publico = $1 LIMIT 1`,
