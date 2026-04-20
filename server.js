@@ -495,16 +495,16 @@ function buildSections(t, conteudo = {}, listas = {}) {
       html: renderLista(listas.doces || [], labelsLista)
     },
 
-    emergencia: {
-      title: t.emergencyTitle,
-      html: `
-        <div class="space-y-3 text-sm text-gray-700">
-          <a href="tel:190" class="block rounded-2xl border p-4">190 — Polícia Militar</a>
-          <a href="tel:192" class="block rounded-2xl border p-4">192 — SAMU</a>
-          <a href="tel:193" class="block rounded-2xl border p-4">193 — Corpo de Bombeiros</a>
-        </div>
-      `
-    },
+   emergencia: {
+  title: t.emergencyTitle,
+  html: `
+    <div class="space-y-3 text-sm text-gray-700">
+      <a href="tel:190" class="block rounded-2xl border p-4">190 — Polícia Militar</a>
+      <a href="tel:192" class="block rounded-2xl border p-4">192 — SAMU</a>
+      <a href="tel:193" class="block rounded-2xl border p-4">193 — Corpo de Bombeiros</a>
+    </div>
+  `
+},
 
     avaliacao: {
       title: t.reviewTitle,
