@@ -574,17 +574,48 @@ const t = getLabels(idioma);
 
     const imovel = imovelResult.rows[0];
 
-const fotosResult = await pool.query(
-  `SELECT url, ordem
-   FROM imovel_fotos
-   WHERE imovel_id = $1
-   ORDER BY ordem ASC, id ASC`,
-  [imovel.id]
-);
+<div id="homeScreen">
+  <div
+    class="relative overflow-hidden"
+    style="
+      padding: 60px 24px 48px;
+      background-image: url('${heroImage}');
+      background-size: cover;
+      background-position: center;
+      min-height: 280px; /* Altura mínima para mostrar bem a foto */
+    "
+  >
+    <div style="
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+    "></div>
 
-const fotos = fotosResult.rows || [];
-console.log("FOTOS:", fotos);
-const heroImage = fotos.length > 0 ? fotos[0].url : "";
+    <div class="relative z-10 max-w-md mx-auto">
+      <div class="fade-in" style="animation-delay:0.1s">
+        <p class="text-white/80 text-xs tracking-widest uppercase mb-2 font-medium">
+          Welcome Guide · Guía de Bienvenida
+        </p>
+
+        <h1 id="heroTitle" class="heading-font text-white text-4xl leading-tight mb-3">
+          ${escHtml(conteudo.titulo || t.pageTitle)}
+        </h1>
+
+        <div class="w-12 h-1 rounded-full mb-4" style="background:#7cc9a0;"></div>
+      </div>
+
+      <div class="fade-in" style="animation-delay:0.25s">
+        <p class="text-white text-xl font-medium leading-relaxed">
+          ${escHtml(conteudo.subtitulo || imovel.nome || "")}
+        </p>
+
+        <p class="text-white/70 text-sm mt-1">
+          <i data-lucide="map-pin" class="inline-block w-3 h-3 mr-1"></i>
+          ${escHtml(conteudo.endereco_exibicao || "")}
+        </p>
+      </div>
+    </div>
+  </div>
 
     let conteudoResult = await pool.query(
   `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1`,
