@@ -584,8 +584,9 @@ const fotosResult = await pool.query(
 
 const fotos = fotosResult.rows || [];
 console.log("FOTOS:", fotos);
+const heroImage = fotos.length > 0 ? fotos[0].url : "";
 
-let conteudoResult = await pool.query(
+    let conteudoResult = await pool.query(
   `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1`,
   [imovel.id, idioma]
 );
