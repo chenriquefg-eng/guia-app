@@ -708,15 +708,16 @@ try {
     </div>
 
     <div id="homeScreen">
-  <div 
-    class="relative overflow-hidden"
-    style="
-      padding: 48px 24px 36px;
-      background-image: url('https://images.unsplash.com/photo-1544989164-31dc3c645987');
-      background-size: cover;
-      background-position: center;
-    "
-  >
+  <div
+  class="relative overflow-hidden"
+  style="
+    padding: 48px 24px 36px;
+    background-image: ${heroImage ? `url('${heroImage}')` : "none"};
+    background-size: cover;
+    background-position: center center;
+    background-color: #1a5c3a;
+  "
+>
 
     <!-- overlay escuro -->
     <div style="
