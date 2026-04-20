@@ -696,20 +696,50 @@ try {
     </div>
 
     <div id="homeScreen">
-      <div class="hero-gradient relative overflow-hidden" style="padding: 48px 24px 36px;">
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.2) 0%, transparent 40%);"></div>
-        <div class="relative z-10 max-w-md mx-auto">
-          <div class="fade-in" style="animation-delay:0.1s">
-            <p class="text-white/60 text-xs tracking-widest uppercase mb-2">Welcome Guide · Guía de Bienvenida</p>
-            <h1 id="heroTitle" class="heading-font text-white text-4xl leading-tight mb-3">${escHtml(conteudo.titulo || t.pageTitle)}</h1>
-            <div class="w-10 h-0.5 rounded-full mb-4" style="background:#7cc9a0;"></div>
-          </div>
-          <div class="fade-in" style="animation-delay:0.25s">
-            <p class="text-white/90 font-light text-lg leading-relaxed">${escHtml(conteudo.subtitulo || imovel.nome || "")}</p>
-            <p class="text-white/50 text-sm mt-1">${conteudo.endereco_exibicao || ""}</p>
-          </div>
-        </div>
+  <div 
+    class="relative overflow-hidden"
+    style="
+      padding: 48px 24px 36px;
+      background-image: url('https://images.unsplash.com/photo-1544989164-31dc3c645987');
+      background-size: cover;
+      background-position: center;
+    "
+  >
+
+    <!-- overlay escuro -->
+    <div style="
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.5);
+    "></div>
+
+    <!-- conteúdo -->
+    <div class="relative z-10 max-w-md mx-auto">
+
+      <div class="fade-in" style="animation-delay:0.1s">
+        <p class="text-white/60 text-xs tracking-widest uppercase mb-2">
+          Welcome Guide · Guía de Bienvenida
+        </p>
+
+        <h1 id="heroTitle" class="heading-font text-white text-4xl leading-tight mb-3">
+          ${escHtml(conteudo.titulo || t.pageTitle)}
+        </h1>
+
+        <div class="w-10 h-0.5 rounded-full mb-4" style="background:#7cc9a0;"></div>
       </div>
+
+      <div class="fade-in" style="animation-delay:0.25s">
+        <p class="text-white/90 font-light text-lg leading-relaxed">
+          ${escHtml(conteudo.subtitulo || imovel.nome || "")}
+        </p>
+
+        <p class="text-white/50 text-sm mt-1">
+          ${conteudo.endereco_exibicao || ""}
+        </p>
+      </div>
+
+    </div>
+  </div>
 
       <div class="max-w-md mx-auto px-5 -mt-4 relative z-10">
         <div class="bg-white rounded-2xl p-5 shadow-sm fade-in" style="animation-delay:0.35s">
