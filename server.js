@@ -519,16 +519,16 @@ function buildSections(t, conteudo = {}, listas = {}) {
 },
 
     avaliacao: {
-      title: t.reviewTitle,
-      html: `
-        <div class="space-y-4 text-sm text-gray-700">
-          <p>Esperamos que você tenha gostado da sua estadia em nossa hospedagem.</p>
-          <a href="https://airbnb.com/" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
-            Deixar avaliação
-          </a>
-        </div>
-      `
-    },
+  title: t.reviewTitle,
+  html: `
+    <div class="space-y-4 text-sm text-gray-700">
+      <p>${escHtml(t.reviewText)}</p>
+      <a href="https://airbnb.com/" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
+        ${escHtml(t.reviewButton)}
+      </a>
+    </div>
+  `
+},
 
     faq: {
       title: t.faqTitle,
