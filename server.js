@@ -622,12 +622,22 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
         [imovel.id]
       );
 
-      listas = agruparListasPorSecao(listasResult.rows);
-      console.log("Itens encontrados:", listasResult.rows.length);
-      console.log("Seções encontradas:", listasResult.rows.map((r) => r.secao));
-    } catch (e) {
-      console.error("Erro ao buscar listas:", e.message);
-    }
+      try {
+  const listasResult = await pool.query(
+    `SELECT *
+     FROM imovel_secao_itens
+     WHERE imovel_id = $1
+     ORDER BY secao, ordem ASC, id ASC`,
+    [imovel.id]
+  );
+
+  listas = agruparListasPorSecao(listasResult.rows);
+  console.log("FAQ FINAL:", listas.faq);
+  console.log("Itens encontrados:", listasResult.rows.length);
+  console.log("Seções encontradas:", listasResult.rows.map((r) => r.secao));
+} catch (e) {
+  console.error("Erro ao buscar listas:", e.message);
+}
 
     const menuItems = buildMenuItems(t);
     const sections = buildSections(t, conteudo, listas);
