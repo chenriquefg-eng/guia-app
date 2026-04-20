@@ -54,6 +54,11 @@ function getLabels(idioma) {
         doces: "Cafés & Doces",
         contato: "Contato"    
       },
+      emergencyList: [
+  { label: "🚓 190 — Polícia Militar", phone: "190" },
+  { label: "🚑 192 — SAMU", phone: "192" },
+  { label: "🚒 193 — Corpo de Bombeiros", phone: "193" }
+],
       wifi: {
         title: "Wi-Fi",
         network: "Rede",
