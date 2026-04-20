@@ -536,15 +536,10 @@ function buildSections(t, conteudo = {}, listas = {}) {
   `
 },
 
-   faq: {
+  faq: {
   title: t.faqTitle,
-  html: `
-    <div class="space-y-4 text-sm text-gray-700">
-      ...
-    </div>
-  `
+  html: renderLista(listas.faq || [], labelsLista)
 },
-
     partir: {
       title: t.beforeLeavingTitle,
       html: renderTextoBlocos(conteudo.antes_partir_texto)
