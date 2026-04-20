@@ -278,13 +278,15 @@ function buildMenuItems(t) {
 
 function agruparListasPorSecao(rows = []) {
   const grupos = {
-    cafe: [],
-    bares: [],
-    proximos: [],
-    fazer: [],
-    restaurantes: [],
-    doces: []
-  };
+  cafe: [],
+  bares: [],
+  proximos: [],
+  fazer: [],
+  restaurantes: [],
+  doces: [],
+  amenidades: [],
+  faq: []
+};
 
   for (const row of rows) {
     const secao = (row.secao || "").toLowerCase().trim();
@@ -534,29 +536,14 @@ function buildSections(t, conteudo = {}, listas = {}) {
   `
 },
 
-    faq: {
-      title: t.faqTitle,
-      html: `
-        <div class="space-y-4 text-sm text-gray-700">
-          <div class="rounded-2xl border p-4">
-            <strong>Tem estacionamento disponível no local?</strong>
-            <p class="mt-2">O edifício não dispõe de vaga privativa. Há vagas públicas na rua e estacionamentos próximos.</p>
-          </div>
-          <div class="rounded-2xl border p-4">
-            <strong>Posso levar meu pet?</strong>
-            <p class="mt-2">Não é permitida a hospedagem de animais.</p>
-          </div>
-          <div class="rounded-2xl border p-4">
-            <strong>Tem roupa de cama e banho disponível?</strong>
-            <p class="mt-2">Sim. Disponibilizamos enxoval completo, incluindo roupas de cama e toalhas.</p>
-          </div>
-          <div class="rounded-2xl border p-4">
-            <strong>Como funciona a lavanderia?</strong>
-            <p class="mt-2">O apartamento não dispõe de máquina de lavar. Para maior comodidade, sugerimos lavanderias próximas.</p>
-          </div>
-        </div>
-      `
-    },
+   faq: {
+  title: t.faqTitle,
+  html: `
+    <div class="space-y-4 text-sm text-gray-700">
+      ...
+    </div>
+  `
+},
 
     partir: {
       title: t.beforeLeavingTitle,
