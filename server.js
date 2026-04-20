@@ -379,27 +379,15 @@ function buildSections(t, conteudo = {}, listas = {}) {
     },
 
     amenidades: {
-      title: t.amenitiesTitle,
-      html: `
-        <div class="space-y-2 text-sm leading-relaxed text-gray-700">
-          <p>Ar condicionado nos quartos e sala</p>
-          <p>Roupas de cama</p>
-          <p>Toalhas</p>
-          <p>Papel higiênico</p>
-          <p>Pó de café</p>
-          <p>Açúcar</p>
-          <p>Sal e temperos</p>
-          <p>Cafeteira elétrica</p>
-          <p>Cafeteira Nespresso</p>
-          <p>Microondas</p>
-          <p>Sanduicheira</p>
-          <p>Liquidificador</p>
-          <p>Panos de prato</p>
-          <p>Esponja e detergente</p>
-          <p>Shampoo, condicionador e sabonete líquido</p>
-        </div>
-      `
-    },
+  title: t.amenitiesTitle,
+  html: `
+    <div class="space-y-2 text-sm leading-relaxed text-gray-700">
+      <p>Ar condicionado nos quartos e sala</p>
+      <p>Roupas de cama</p>
+      ...
+    </div>
+  `
+},
 
     wifi: {
       title: t.wifi.title,
