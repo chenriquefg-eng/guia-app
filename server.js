@@ -748,7 +748,65 @@ try {
     background-position: center center;
     background-color: #1a5c3a;
   "
->
+  <div id="homeScreen">
+  <div
+    class="relative overflow-hidden"
+    style="
+      padding: 60px 24px 48px;
+      background-image: url('${heroImage}');
+      background-size: cover;
+      background-position: center;
+      min-height: 280px; /* Altura mínima para mostrar bem a foto */
+    "
+ <div id="homeScreen">
+  <div
+    class="relative overflow-hidden"
+    style="
+      padding: 60px 24px 48px;
+      background-image: url('${heroImage}');
+      background-size: cover;
+      background-position: center;
+      min-height: 280px;
+    "
+  >
+    <div style="
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
+    "></div>
+
+    <div class="relative z-10 max-w-md mx-auto">
+      <div class="fade-in" style="animation-delay:0.1s">
+        <p class="text-white/80 text-xs tracking-widest uppercase mb-2 font-medium">
+          Welcome Guide · Guía de Bienvenida
+        </p>
+
+        <h1 id="heroTitle" class="heading-font text-white text-4xl leading-tight mb-3">
+          ${escHtml(conteudo.titulo || t.pageTitle)}
+        </h1>
+
+        <div class="w-12 h-1 rounded-full mb-4" style="background:#7cc9a0;"></div>
+      </div>
+
+      <div class="fade-in" style="animation-delay:0.25s">
+        <p class="text-white text-xl font-medium leading-relaxed">
+          ${escHtml(conteudo.subtitulo || imovel.nome || "")}
+        </p>
+
+        <p class="text-white/70 text-sm mt-1">
+          <i data-lucide="map-pin" class="inline-block w-3 h-3 mr-1"></i>
+          ${escHtml(conteudo.endereco_exibicao || "")}
+        </p>
+      </div>
+    </div>
+  </div> ```
+
+### O que verificar agora:
+1.  **Tag de fechamento:** Garanta que você removeu o comentário antigo `` que estava sobrando no seu código original para não duplicar elementos.
+2.  **Caminho da Imagem:** Se no seu navegador a imagem não aparecer (ficar tudo escuro), é provável que o Node.js não esteja encontrando a pasta `/images`. Se as fotos estiverem em uma pasta local no seu projeto, adicione esta linha antes das rotas:
+    * `app.use('/images', express.static('public/images'));` (ajuste o nome da pasta conforme sua estrutura).
+
+Como as fotos no seu banco (pela imagem que você mandou) começam com `/images/...`, o navegador vai tentar buscar em `http://seu-site.com/images/capa.png`.
 
     <!-- overlay escuro -->
     <div style="
