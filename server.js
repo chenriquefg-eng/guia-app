@@ -133,6 +133,8 @@ reviewButton: "⭐ Deixar avaliação",
   { label: "🚑 192 — Ambulance (SAMU)", phone: "192" },
   { label: "🚒 193 — Fire Department", phone: "193" }
 ],
+      reviewText: "We hope you enjoyed your stay in our property.",
+reviewButton: "⭐ Leave a review",
       wifi: {
         title: "Wi-Fi",
         network: "Network",
@@ -205,6 +207,8 @@ reviewButton: "⭐ Deixar avaliação",
   { label: "🚑 192 — Ambulancia (SAMU)", phone: "192" },
   { label: "🚒 193 — Bomberos", phone: "193" }
 ],
+      reviewText: "Esperamos que haya disfrutado su estadía en nuestro alojamiento.",
+reviewButton: "⭐ Dejar una reseña",
       wifi: {
         title: "Wi-Fi",
         network: "Red",
