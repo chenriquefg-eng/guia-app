@@ -609,14 +609,15 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
     const conteudo = conteudoResult.rows[0] || {};
 
      let listas = {
-      cafe: [],
-      bares: [],
-      proximos: [],
-      fazer: [],
-      restaurantes: [],
-      doces: []
-    };
-
+  cafe: [],
+  bares: [],
+  proximos: [],
+  fazer: [],
+  restaurantes: [],
+  doces: [],
+  amenidades: [],
+  faq: []
+};
     try {
       const listasResult = await pool.query(
         `SELECT *
