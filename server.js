@@ -574,10 +574,21 @@ const t = getLabels(idioma);
 
     const imovel = imovelResult.rows[0];
 
-    let conteudoResult = await pool.query(
-      `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1`,
-      [imovel.id, idioma]
-    );
+const fotosResult = await pool.query(
+  `SELECT url, ordem
+   FROM imovel_fotos
+   WHERE imovel_id = $1
+   ORDER BY ordem ASC, id ASC`,
+  [imovel.id]
+);
+
+const fotos = fotosResult.rows || [];
+console.log("FOTOS:", fotos);
+
+let conteudoResult = await pool.query(
+  `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1`,
+  [imovel.id, idioma]
+);
 
     if (conteudoResult.rows.length === 0 && idioma !== "pt") {
       conteudoResult = await pool.query(
