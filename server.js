@@ -285,7 +285,7 @@ function agruparListasPorSecao(rows = []) {
   restaurantes: [],
   doces: [],
   amenidades: [],
-  faq: []
+  faq: [] // 👈 ESSENCIAL
 };
 
   for (const row of rows) {
