@@ -630,14 +630,6 @@ app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   console.error("Erro ao buscar listas:", e.message);
 }
 
-  listas = agruparListasPorSecao(listasResult.rows);
-  console.log("FAQ FINAL:", listas.faq);
-  console.log("Itens encontrados:", listasResult.rows.length);
-  console.log("Seções encontradas:", listasResult.rows.map((r) => r.secao));
-} catch (e) {
-  console.error("Erro ao buscar listas:", e.message);
-}
-
     const menuItems = buildMenuItems(t);
     const sections = buildSections(t, conteudo, listas);
     const html = `
