@@ -126,6 +126,11 @@ function getLabels(idioma) {
         doces: "Cafés & Pastries",
         contato: "Contact"
       },
+      emergencyList: [
+  { label: "🚓 190 — Police", phone: "190" },
+  { label: "🚑 192 — Ambulance (SAMU)", phone: "192" },
+  { label: "🚒 193 — Fire Department", phone: "193" }
+],
       wifi: {
         title: "Wi-Fi",
         network: "Network",
@@ -193,6 +198,11 @@ function getLabels(idioma) {
         doces: "Cafés y Dulces",
         contato: "Contacto"
       },
+      emergencyList: [
+  { label: "🚓 190 — Policía", phone: "190" },
+  { label: "🚑 192 — Ambulancia (SAMU)", phone: "192" },
+  { label: "🚒 193 — Bomberos", phone: "193" }
+],
       wifi: {
         title: "Wi-Fi",
         network: "Red",
