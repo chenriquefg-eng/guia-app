@@ -554,6 +554,8 @@ app.get("/health", async (req, res) => {
     res.status(200).json({ ok: true, db: false, error: error.message });
   }
 });
+
+
 function buildPrintCardHtml(cardData = {}) {
   const {
     titulo = "GUIA DE\nBOAS-VINDAS",
@@ -853,7 +855,49 @@ function buildPrintCardHtml(cardData = {}) {
 </html>
   `;
 }
+app.get("/imovel/:codigo/card", async (req, res) => {
+  try {
+    const codigo = req.params.codigo;
 
+    const imovelResult = await pool.query(
+      `SELECT * FROM imoveis WHERE codigo_publico = $1 LIMIT 1`,
+      [codigo]
+    );
+
+    if (imovelResult.rows.length === 0) {
+      return res.status(404).send("Imóvel não encontrado.");
+    }
+
+    const imovel = imovelResult.rows[0];
+
+    const conteudoResult = await pool.query(
+      `SELECT * FROM imovel_conteudos
+       WHERE imovel_id = $1 AND idioma = 'pt'
+       LIMIT 1`,
+      [imovel.id]
+    );
+
+    const conteudo = conteudoResult.rows[0] || {};
+
+    const guiaUrl = `${req.protocol}://${req.get("host")}/imovel/${codigo}/pt`;
+
+    const html = buildPrintCardHtml({
+      titulo: "GUIA DE\nBOAS-VINDAS",
+      subtitulo: conteudo.subtitulo || imovel.nome || "Guia do Hóspede",
+      endereco: conteudo.endereco_exibicao || "",
+      boasVindasTitulo: "SEJA BEM-VINDO!",
+      boasVindasTexto: "Escaneie o QR Code para acessar o guia digital do apartamento.",
+      suporteTexto: "Guia interativo com check-in, Wi-Fi, regras, restaurantes, localização e informações úteis.",
+      guiaUrl,
+      marca: "mundodeoportunidades.com.br"
+    });
+
+    return res.status(200).send(html);
+  } catch (err) {
+    console.error("ERRO AO RENDERIZAR CARD:", err);
+    return res.status(500).send("Erro interno ao carregar o card.");
+  }
+});
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   try {
     const codigo = req.params.codigo;
