@@ -894,6 +894,25 @@ if (heroSlides.length > 1) {
     heroSlides[heroIndex].style.opacity = "1";
   }, 4000);
 }
+</script>
+
+<!-- SUA MARCA AQUI -->
+<div style="
+  text-align:center;
+  font-size:12px;
+  color:#6b7280;
+  margin:40px 0 20px;
+  opacity:0.75;
+  line-height:1.6;
+">
+  <div>✨ Guia Digital Inteligente</div>
+  <div style="font-size:11px; opacity:0.9;">
+    by Automatiza Marketing · chenriquefg
+  </div>
+</div>
+
+</body>
+</html>
   </script>
 
  </body>
