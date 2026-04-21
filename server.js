@@ -861,38 +861,29 @@ function buildPrintCardHtml(cardData = {}) {
           <div class="url-box">${escHtml(guiaUrl)}</div>
 
           <div class="footer">
-            <div class="brand-top">✨ Guia Digital Inteligente</div>
-            <div class="brand-label">desenvolvido por</div>
-           
-            <div style="margin-top:6px;">
-            
-  <div style="
-    font-size:10px;
-    color:#6b7280;
-    letter-spacing:1px;
-    text-transform:uppercase;
-  ">
-  
-<!-- MARCA DISCRETA -->
-<div style="
-  text-align:center;
-  font-size:11px;
-  color:#9ca3af;
-  margin-top:30px;
-  line-height:1.4;
-">
-  <div style="margin-bottom:2px;">
-    desenvolvido por
-  </div>
+  <div class="brand-top">✨ Guia Digital Inteligente</div>
 
   <div style="
-    font-size:12px;
-    color:#374151;
-    font-weight:500;
-    letter-spacing:0.3px;
+    text-align:center;
+    font-size:11px;
+    color:#9ca3af;
+    margin-top:8px;
+    line-height:1.4;
   ">
-    mundodeoportunidades.com.br
+    <div style="margin-bottom:2px;">
+      desenvolvido por
+    </div>
+
+    <div style="
+      font-size:12px;
+      color:#374151;
+      font-weight:500;
+      letter-spacing:0.3px;
+    ">
+      mundodeoportunidades.com.br
+    </div>
   </div>
+</div>
 </div>
 
 </div>
