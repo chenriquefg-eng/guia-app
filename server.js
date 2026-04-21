@@ -846,7 +846,7 @@ function buildPrintCardHtml(cardData = {}) {
     letter-spacing:1px;
     text-transform:uppercase;
   ">
-@media print {
+  @media print {
   html, body {
     width: 210mm;
     height: auto;
@@ -883,6 +883,7 @@ function buildPrintCardHtml(cardData = {}) {
     margin: 10mm;
   }
 }
+
 </style>
   
     desenvolvido por
