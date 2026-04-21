@@ -581,7 +581,40 @@ function buildPrintCardHtml(cardData = {}) {
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+ @media print {
+  html, body {
+    width: 210mm;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
 
+  body.print-card-page {
+    display: block;
+  }
+
+  .print-actions {
+    display: none !important;
+  }
+
+  .page {
+    width: 210mm;
+    padding: 0;
+    margin: 0;
+    background: #fff;
+  }
+
+  .poster {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+}
   <style>
     :root {
       --bg: #f5f0eb;
@@ -789,8 +822,7 @@ function buildPrintCardHtml(cardData = {}) {
       font-weight: 600;
       cursor: pointer;
     }
-
-   
+  
       .poster { box-shadow: none; border: none; border-radius: 0; }
       @page { size: A4; margin: 10mm; }
     }
