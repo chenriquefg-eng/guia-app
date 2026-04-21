@@ -899,11 +899,11 @@ if (heroSlides.length > 1) {
 <!-- SUA MARCA AQUI -->
 <div style="
   text-align:center;
-  font-size:12px;
+  font-size:11px;
   color:#6b7280;
-  margin:40px 0 20px;
-  opacity:0.75;
-  line-height:1.6;
+  margin:60px 0 20px;
+opacity:0.6;
+line-height:1.6;
 ">
   <div>✨ Guia Digital Inteligente</div>
   <div style="font-size:11px; opacity:0.9;">
