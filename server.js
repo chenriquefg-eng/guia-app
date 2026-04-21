@@ -712,12 +712,12 @@ try {
   <div
   class="relative overflow-hidden"
   style="
-    padding: 48px 24px 36px;
+    padding: 36px 20px 24px;
     <div id="homeScreen">
   <div
     class="relative overflow-hidden"
     style="
-      height: 220px;
+      min-height: 280px;
       padding: 28px 24px 20px;
       background-color: #1a5c3a;
       border-bottom-left-radius: 28px;
