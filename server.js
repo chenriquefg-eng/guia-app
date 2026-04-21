@@ -1289,7 +1289,30 @@ line-height:1.6;
 </body>
 </html>
   </script>
+<div style="
+  position: fixed;
+  bottom: 20px;
+  right: 16px;
+  z-index: 999;
+">
 
+  <button onclick="window.print()" style="
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#374151;
+    color:#fff;
+    border:none;
+    padding:8px 12px;
+    font-size:12px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    cursor:pointer;
+  ">
+    🖨️ PDF
+  </button>
+
+</div>
  </body>
 </html>
     `;
