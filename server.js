@@ -793,7 +793,12 @@ function buildPrintCardHtml(cardData = {}) {
     @media print {
       body { padding: 0; background: #fff; }
       .print-actions { display: none; }
-      .page { width: 210mm; min-height: 297mm; padding: 0; }
+      .page {
+  width: 210mm;
+  min-height: auto;
+  background: #ffffff;
+  padding: 10mm;
+}
       .poster { box-shadow: none; border: none; border-radius: 0; }
       @page { size: A4; margin: 10mm; }
     }
@@ -841,6 +846,45 @@ function buildPrintCardHtml(cardData = {}) {
     letter-spacing:1px;
     text-transform:uppercase;
   ">
+@media print {
+  html, body {
+    width: 210mm;
+    height: auto;
+    background: #ffffff;
+  }
+
+  body.print-card-page {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .print-actions {
+    display: none !important;
+  }
+
+  .page {
+    width: 210mm;
+    padding: 0;
+    margin: 0;
+    background: #ffffff;
+  }
+
+  .poster {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+}
+</style>
+  
     desenvolvido por
   </div>
 
@@ -1287,33 +1331,23 @@ line-height:1.6;
 </div>
 
 </body>
-</html>
-  </script>
-<div style="
-  position: fixed;
-  bottom: 20px;
-  right: 16px;
-  z-index: 999;
-">
+<body class="print-card-page">
+</body>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    font-family: "Outfit", sans-serif;
+  }
 
-  <button onclick="window.print()" style="
-    display:flex;
-    align-items:center;
-    gap:6px;
-    background:#374151;
-    color:#fff;
-    border:none;
-    padding:8px 12px;
-    font-size:12px;
-    border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.15);
-    cursor:pointer;
-  ">
-    🖨️ PDF
-  </button>
-
-</div>
- </body>
+  body.print-card-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: #ffffff;
+  }
+</style>
 </html>
     `;
 
