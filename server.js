@@ -873,32 +873,27 @@ function buildPrintCardHtml(cardData = {}) {
     text-transform:uppercase;
   ">
   
-</style>
-  
-    desenvolvido por
-  </div>
-
- <!-- MARCA DISCRETA -->
+<!-- MARCA DISCRETA -->
 <div style="
   text-align:center;
   font-size:11px;
   color:#9ca3af;
-  margin-top:40px;
-  line-height:1.5;
+  margin-top:30px;
+  line-height:1.4;
 ">
-
   <div style="margin-bottom:2px;">
     desenvolvido por
   </div>
 
   <div style="
     font-size:12px;
-    font-weight:500;
     color:#374151;
+    font-weight:500;
     letter-spacing:0.3px;
   ">
     mundodeoportunidades.com.br
   </div>
+</div>
 
 </div>
           </div>
