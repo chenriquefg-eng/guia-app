@@ -713,7 +713,44 @@ try {
   class="relative overflow-hidden"
   style="
     padding: 48px 24px 36px;
-    background-image: ${heroImage ? `url('${heroImage}')` : "none"};
+    <div id="homeScreen">
+  <div
+    class="relative overflow-hidden"
+    style="
+      padding: 48px 24px 36px;
+      background-color: #1a5c3a;
+      min-height: 320px;
+    "
+  >
+    <!-- SLIDER -->
+    <div id="heroSlider" class="absolute inset-0">
+      ${heroImages
+        .map(
+          (img, index) => `
+            <div
+              class="hero-slide absolute inset-0"
+              style="
+                background-image: url('${img}');
+                background-size: cover;
+                background-position: center center;
+                opacity: ${index === 0 ? "1" : "0"};
+                transition: opacity 1s ease-in-out;
+              "
+            ></div>
+          `
+        )
+        .join("")}
+    </div>
+
+    <!-- overlay -->
+    <div style="
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
+    "></div>
+
+    <!-- conteúdo -->
+    <div class="relative z-10 max-w-md mx-auto">
     background-size: cover;
     background-position: center center;
     background-color: #1a5c3a;
