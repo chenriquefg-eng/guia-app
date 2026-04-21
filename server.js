@@ -581,252 +581,241 @@ function buildPrintCardHtml(cardData = {}) {
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
- @media print {
+
+<style>
+  :root {
+    --bg: #f5f0eb;
+    --card: #ffffff;
+    --green: #1a5c3a;
+    --green-dark: #103a25;
+    --green-soft: #7cc9a0;
+    --text: #24323d;
+    --muted: #6b7280;
+    --line: #d9e2dc;
+  }
+
+  * { box-sizing: border-box; }
+
   html, body {
-    width: 210mm;
-    background: #fff;
     margin: 0;
     padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Outfit", sans-serif;
   }
 
   body.print-card-page {
-    display: block;
-  }
-
-  .print-actions {
-    display: none !important;
+    display: flex;
+    justify-content: center;
+    padding: 24px;
   }
 
   .page {
     width: 210mm;
-    padding: 0;
-    margin: 0;
-    background: #fff;
+    min-height: 297mm;
+    background: var(--bg);
+    padding: 14mm;
   }
 
   .poster {
-    box-shadow: none;
-    border: none;
-    border-radius: 0;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(16, 58, 37, 0.08);
   }
 
-  @page {
-    size: A4;
-    margin: 10mm;
+  .hero {
+    background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 65%, #236b46 100%);
+    color: #fff;
+    padding: 28px 28px 34px;
   }
-}
-  <style>
-    :root {
-      --bg: #f5f0eb;
-      --card: #ffffff;
-      --green: #1a5c3a;
-      --green-dark: #103a25;
-      --green-soft: #7cc9a0;
-      --text: #24323d;
-      --muted: #6b7280;
-      --line: #d9e2dc;
-    }
 
-    * { box-sizing: border-box; }
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.72;
+    margin-bottom: 14px;
+  }
 
+  .hero-title {
+    margin: 0;
+    font-family: "DM Serif Display", serif;
+    font-size: 52px;
+    line-height: 0.95;
+  }
+
+  .hero-line {
+    width: 68px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--green-soft);
+    margin: 18px 0 18px;
+  }
+
+  .hero-subtitle {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .hero-address {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.82;
+  }
+
+  .content {
+    padding: 28px 28px 22px;
+    text-align: center;
+  }
+
+  .welcome {
+    font-family: "DM Serif Display", serif;
+    color: var(--green);
+    font-size: 34px;
+    margin: 0 0 8px;
+  }
+
+  .description {
+    max-width: 620px;
+    margin: 0 auto 24px;
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .qr-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 14px 0 22px;
+  }
+
+  .qr-box {
+    background: #fff;
+    border: 2px solid var(--green);
+    border-radius: 24px;
+    padding: 18px;
+    box-shadow: 0 10px 20px rgba(26, 92, 58, 0.10);
+  }
+
+  #qrcode {
+    width: 320px;
+    height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--green);
+    color: #fff;
+    border-radius: 16px;
+    padding: 14px 24px;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    min-width: 420px;
+  }
+
+  .info {
+    max-width: 700px;
+    margin: 0 auto 20px;
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .url-box {
+    display: inline-block;
+    background: #f7f8f7;
+    border: 1px solid var(--line);
+    color: var(--green);
+    border-radius: 14px;
+    padding: 12px 18px;
+    font-size: 14px;
+    margin-top: 6px;
+    word-break: break-all;
+    max-width: 90%;
+  }
+
+  .footer {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .brand-top {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    opacity: 0.8;
+  }
+
+  .print-actions {
+    width: 210mm;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .btn {
+    border: 0;
+    border-radius: 10px;
+    padding: 10px 14px;
+    background: var(--green);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  @media print {
     html, body {
+      width: 210mm;
+      height: auto;
+      background: #fff;
       margin: 0;
       padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Outfit", sans-serif;
     }
 
-    body {
-      display: flex;
-      justify-content: center;
-      padding: 24px;
+    body.print-card-page {
+      display: block;
+      padding: 0;
+    }
+
+    .print-actions {
+      display: none !important;
     }
 
     .page {
       width: 210mm;
-      min-height: 297mm;
-      background: var(--bg);
-      padding: 14mm;
+      min-height: auto;
+      padding: 0;
+      margin: 0;
+      background: #fff;
     }
 
     .poster {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(16, 58, 37, 0.08);
+      box-shadow: none;
+      border: none;
+      border-radius: 0;
     }
 
-    .hero {
-      background: linear-gradient(160deg, var(--green-dark) 0%, var(--green) 65%, #236b46 100%);
-      color: #fff;
-      padding: 28px 28px 34px;
+    @page {
+      size: A4;
+      margin: 10mm;
     }
-
-    .hero-eyebrow {
-      font-size: 12px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      opacity: 0.72;
-      margin-bottom: 14px;
-    }
-
-    .hero-title {
-      margin: 0;
-      font-family: "DM Serif Display", serif;
-      font-size: 52px;
-      line-height: 0.95;
-    }
-
-    .hero-line {
-      width: 68px;
-      height: 3px;
-      border-radius: 999px;
-      background: var(--green-soft);
-      margin: 18px 0 18px;
-    }
-
-    .hero-subtitle {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 500;
-      line-height: 1.3;
-    }
-
-    .hero-address {
-      margin-top: 6px;
-      font-size: 14px;
-      opacity: 0.82;
-    }
-
-    .content {
-      padding: 28px 28px 22px;
-      text-align: center;
-    }
-
-    .welcome {
-      font-family: "DM Serif Display", serif;
-      color: var(--green);
-      font-size: 34px;
-      margin: 0 0 8px;
-    }
-
-    .description {
-      max-width: 620px;
-      margin: 0 auto 24px;
-      font-size: 18px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .qr-wrap {
-      display: flex;
-      justify-content: center;
-      margin: 14px 0 22px;
-    }
-
-    .qr-box {
-      background: #fff;
-      border: 2px solid var(--green);
-      border-radius: 24px;
-      padding: 18px;
-      box-shadow: 0 10px 20px rgba(26, 92, 58, 0.10);
-    }
-
-    #qrcode {
-      width: 320px;
-      height: 320px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-      background: #fff;
-    }
-
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--green);
-      color: #fff;
-      border-radius: 16px;
-      padding: 14px 24px;
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      min-width: 420px;
-    }
-
-    .info {
-      max-width: 700px;
-      margin: 0 auto 20px;
-      font-size: 16px;
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .url-box {
-      display: inline-block;
-      background: #f7f8f7;
-      border: 1px solid var(--line);
-      color: var(--green);
-      border-radius: 14px;
-      padding: 12px 18px;
-      font-size: 14px;
-      margin-top: 6px;
-      word-break: break-all;
-      max-width: 90%;
-    }
-
-    .footer {
-      margin-top: 28px;
-      padding-top: 18px;
-      border-top: 1px solid var(--line);
-      text-align: center;
-    }
-
-    .brand-top {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      opacity: 0.8;
-    }
-
-    .brand-label {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 3px;
-    }
-
-    .brand-name {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--green);
-    }
-
-    .print-actions {
-      width: 210mm;
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .btn {
-      border: 0;
-      border-radius: 10px;
-      padding: 10px 14px;
-      background: var(--green);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-    }
-  
-      .poster { box-shadow: none; border: none; border-radius: 0; }
-      @page { size: A4; margin: 10mm; }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
   <div>
