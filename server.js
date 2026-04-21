@@ -900,7 +900,7 @@ if (heroSlides.length > 1) {
 <div style="
   text-align:center;
   font-size:11px;
-  color:#6b7280;
+  color:#9ca3af;
   margin:60px 0 20px;
 opacity:0.6;
 line-height:1.6;
