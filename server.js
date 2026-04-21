@@ -870,6 +870,17 @@ function closeModalDirect() {
     if (window.lucide && typeof window.lucide.createIcons === "function") {
       window.lucide.createIcons();
     }
+    const heroSlides = document.querySelectorAll(".hero-slide");
+
+if (heroSlides.length > 1) {
+  let heroIndex = 0;
+
+  setInterval(() => {
+    heroSlides[heroIndex].style.opacity = "0";
+    heroIndex = (heroIndex + 1) % heroSlides.length;
+    heroSlides[heroIndex].style.opacity = "1";
+  }, 4000);
+}
   </script>
 
  </body>
