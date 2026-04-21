@@ -851,8 +851,11 @@ function buildPrintCardHtml(cardData = {}) {
 
           <div class="url-box">${escHtml(guiaUrl)}</div>
 
-          <div class="footer">
-  <div class="brand-top">✨ Guia Digital Inteligente</div>
+          <div class="footer" style="text-align:center;">
+
+  <div class="brand-top" style="text-align:center;">
+    ✨ Guia Digital Inteligente
+  </div>
 
   <div style="
     text-align:center;
@@ -873,6 +876,7 @@ function buildPrintCardHtml(cardData = {}) {
     ">
       mundodeoportunidades.com.br
     </div>
+
   </div>
 </div>
 </div>
