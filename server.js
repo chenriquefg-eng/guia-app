@@ -791,13 +791,38 @@ function buildPrintCardHtml(cardData = {}) {
     }
 
     @media print {
-      body { padding: 0; background: #fff; }
-      .print-actions { display: none; }
-      .page {
-  width: 210mm;
-  min-height: auto;
-  background: #ffffff;
-  padding: 10mm;
+  html, body {
+    width: 210mm;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+
+  body.print-card-page {
+    display: block;
+  }
+
+  .print-actions {
+    display: none !important;
+  }
+
+  .page {
+    width: 210mm;
+    padding: 0;
+    margin: 0;
+    background: #fff;
+  }
+
+  .poster {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
 }
       .poster { box-shadow: none; border: none; border-radius: 0; }
       @page { size: A4; margin: 10mm; }
@@ -839,45 +864,9 @@ function buildPrintCardHtml(cardData = {}) {
           <div class="footer">
             <div class="brand-top">✨ Guia Digital Inteligente</div>
             <div class="brand-label">desenvolvido por</div>
+           
             <div style="margin-top:6px;">
-            @media print {
-  html, body {
-    width: 210mm;
-    height: auto;
-    background: #ffffff;
-  }
-
-  body.print-card-page {
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
-
-  .print-actions {
-    display: none !important;
-  }
-
-  .page {
-    width: 210mm;
-    padding: 0;
-    margin: 0;
-    background: #ffffff;
-  }
-
-  .poster {
-    width: 100%;
-    margin: 0;
-    box-shadow: none;
-    border: none;
-    border-radius: 0;
-  }
-
-  @page {
-    size: A4;
-    margin: 10mm;
-  }
-}
-
+            
   <div style="
     font-size:10px;
     color:#6b7280;
