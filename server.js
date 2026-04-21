@@ -1315,7 +1315,16 @@ if (heroSlides.length > 1) {
 ">
   mundodeoportunidades.com.br
 </div>
-
+<div style="margin-top:10px;">
+  <a href="/imovel/${codigo}/card" target="_blank" style="
+    font-size:11px;
+    color:#6b7280;
+    text-decoration:none;
+    border-bottom:1px dashed #9ca3af;
+  ">
+    📄 Imprimir QR Code
+  </a>
+</div>
   </div>
 </div>
 
