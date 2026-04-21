@@ -1288,28 +1288,33 @@ if (heroSlides.length > 1) {
 
 <div class="footer" style="text-align:center;">
 
-  <div class="brand-top" style="text-align:center;">
-    ✨ Guia Digital Inteligente
-  </div>
+  <div class="brand-top" style="
+  text-align:center;
+  font-size:12px;
+  color:#9ca3af;
+  opacity:0.8;
+  margin-bottom:4px;
+">
+  ✨ Guia Digital Inteligente
+</div>
+ <div style="
+  text-align:center;
+  font-size:10px;
+  color:#9ca3af;
+  line-height:1.3;
+">
+  desenvolvido por
+</div>
 
-  <div style="
-    font-size:11px;
-    color:#9ca3af;
-    margin-top:8px;
-    line-height:1.4;
-  ">
-    <div style="margin-bottom:2px;">
-      desenvolvido por
-    </div>
-
-    <div style="
-      font-size:12px;
-      color:#374151;
-      font-weight:500;
-      letter-spacing:0.3px;
-    ">
-      mundodeoportunidades.com.br
-    </div>
+<div style="
+  text-align:center;
+  font-size:11px;
+  color:#6b7280;
+  font-weight:500;
+  letter-spacing:0.2px;
+">
+  mundodeoportunidades.com.br
+</div>
 
   </div>
 </div>
