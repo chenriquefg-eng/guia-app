@@ -840,13 +840,7 @@ function buildPrintCardHtml(cardData = {}) {
             <div class="brand-top">✨ Guia Digital Inteligente</div>
             <div class="brand-label">desenvolvido por</div>
             <div style="margin-top:6px;">
-  <div style="
-    font-size:10px;
-    color:#6b7280;
-    letter-spacing:1px;
-    text-transform:uppercase;
-  ">
-  @media print {
+            @media print {
   html, body {
     width: 210mm;
     height: auto;
@@ -884,6 +878,13 @@ function buildPrintCardHtml(cardData = {}) {
   }
 }
 
+  <div style="
+    font-size:10px;
+    color:#6b7280;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  ">
+  
 </style>
   
     desenvolvido por
