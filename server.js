@@ -812,7 +812,7 @@ function buildPrintCardHtml(cardData = {}) {
           <h1 class="hero-title">${escHtml(titulo).replace(/\\n/g, "<br>")}</h1>
           <div class="hero-line"></div>
           <p class="hero-subtitle">${escHtml(subtitulo)}</p>
-          <div class="hero-address">${escHtml(endereco)}</div>
+          <div class="hero-address">${endereco || ""}</div>
         </div>
 
         <div class="content">
@@ -834,7 +834,32 @@ function buildPrintCardHtml(cardData = {}) {
           <div class="footer">
             <div class="brand-top">✨ Guia Digital Inteligente</div>
             <div class="brand-label">desenvolvido por</div>
-            <div class="brand-name">${escHtml(marca)}</div>
+            <div style="margin-top:6px;">
+  <div style="
+    font-size:10px;
+    color:#6b7280;
+    letter-spacing:1px;
+    text-transform:uppercase;
+  ">
+    desenvolvido por
+  </div>
+
+  <div style="
+    font-size:18px;
+    font-weight:700;
+    color:#1a5c3a;
+    margin-top:2px;
+  ">
+    mundo de oportunidades
+  </div>
+
+  <div style="
+    font-size:11px;
+    color:#6b7280;
+  ">
+    mundodeoportunidades.com.br
+  </div>
+</div>
           </div>
         </div>
       </div>
@@ -1250,7 +1275,7 @@ line-height:1.6;
 ">
   <div>✨ Guia Digital Inteligente</div>
   <div style="font-size:11px; opacity:0.9;">
-    by Automatiza Marketing · chenriquefg
+   mundo de oportunidades
   </div>
 </div>
 
