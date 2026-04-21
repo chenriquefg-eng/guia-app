@@ -605,10 +605,11 @@ function buildPrintCardHtml(cardData = {}) {
   }
 
   body.print-card-page {
-    display: flex;
-    justify-content: center;
-    padding: 24px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
 
   .page {
     width: 210mm;
