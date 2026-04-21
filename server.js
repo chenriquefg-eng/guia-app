@@ -606,16 +606,18 @@ function buildPrintCardHtml(cardData = {}) {
 
   body.print-card-page {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 24px;
 }
 
   .page {
-    width: 210mm;
-    min-height: 297mm;
-    background: var(--bg);
-    padding: 14mm;
-  }
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--bg);
+  padding: 14mm;
+  margin: 0 auto;
+}
 
   .poster {
     background: var(--card);
