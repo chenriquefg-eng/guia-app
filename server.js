@@ -717,12 +717,13 @@ try {
   <div
     class="relative overflow-hidden"
     style="
-      padding: 48px 24px 36px;
+      height: 220px;
+      padding: 28px 24px 20px;
       background-color: #1a5c3a;
-      min-height: 320px;
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
     "
   >
-    <!-- SLIDER -->
     <div id="heroSlider" class="absolute inset-0">
       ${heroImages
         .map(
@@ -742,29 +743,12 @@ try {
         .join("")}
     </div>
 
-    <!-- overlay -->
-    <div style="
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
-    "></div>
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));"
+    ></div>
 
-    <!-- conteúdo -->
     <div class="relative z-10 max-w-md mx-auto">
-    background-size: cover;
-    background-position: center center;
-    background-color: #1a5c3a;
-  "
->
-  <div style="
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));
-  "></div>
-
-    <!-- conteúdo -->
-    <div class="relative z-10 max-w-md mx-auto">
-
       <div class="fade-in" style="animation-delay:0.1s">
         <p class="text-white/60 text-xs tracking-widest uppercase mb-2">
           Welcome Guide · Guía de Bienvenida
@@ -786,10 +770,8 @@ try {
           ${conteudo.endereco_exibicao || ""}
         </p>
       </div>
-
     </div>
   </div>
-
       <div class="max-w-md mx-auto px-5 -mt-4 relative z-10">
         <div class="bg-white rounded-2xl p-5 shadow-sm fade-in" style="animation-delay:0.35s">
           <p class="heading-font text-xl mb-1" style="color:#1a5c3a;">${escHtml(conteudo.boas_vindas_titulo || t.welcomeTitle)}</p>
