@@ -1275,7 +1275,7 @@ line-height:1.6;
 ">
   <div>✨ Guia Digital Inteligente</div>
   <div style="font-size:11px; opacity:0.9;">
-   mundo de oportunidades
+   mundodeoportunidades.com.br
   </div>
 </div>
 
