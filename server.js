@@ -710,15 +710,10 @@ try {
 
     <div id="homeScreen">
   <div
-  class="relative overflow-hidden"
-  style="
-    padding: 36px 20px 24px;
-    <div id="homeScreen">
-  <div
     class="relative overflow-hidden"
     style="
       min-height: 280px;
-      padding: 28px 24px 20px;
+      padding: 36px 20px 24px;
       background-color: #1a5c3a;
       border-bottom-left-radius: 28px;
       border-bottom-right-radius: 28px;
@@ -742,7 +737,6 @@ try {
         )
         .join("")}
     </div>
-
     <div
       class="absolute inset-0"
       style="background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));"
