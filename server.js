@@ -1286,11 +1286,13 @@ if (heroSlides.length > 1) {
 }
 </script>
 
-<div class="footer">
-  <div class="brand-top">✨ Guia Digital Inteligente</div>
+<div class="footer" style="text-align:center;">
+
+  <div class="brand-top" style="text-align:center;">
+    ✨ Guia Digital Inteligente
+  </div>
 
   <div style="
-    text-align:center;
     font-size:11px;
     color:#9ca3af;
     margin-top:8px;
@@ -1308,6 +1310,7 @@ if (heroSlides.length > 1) {
     ">
       mundodeoportunidades.com.br
     </div>
+
   </div>
 </div>
 
