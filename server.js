@@ -1291,18 +1291,28 @@ if (heroSlides.length > 1) {
 }
 </script>
 
-<!-- SUA MARCA AQUI -->
-<div style="
-  text-align:center;
-  font-size:11px;
-  color:#9ca3af;
-  margin:60px 0 20px;
-opacity:0.6;
-line-height:1.6;
-">
-  <div>✨ Guia Digital Inteligente</div>
-  <div style="font-size:11px; opacity:0.9;">
-   mundodeoportunidades.com.br
+<div class="footer">
+  <div class="brand-top">✨ Guia Digital Inteligente</div>
+
+  <div style="
+    text-align:center;
+    font-size:11px;
+    color:#9ca3af;
+    margin-top:8px;
+    line-height:1.4;
+  ">
+    <div style="margin-bottom:2px;">
+      desenvolvido por
+    </div>
+
+    <div style="
+      font-size:12px;
+      color:#374151;
+      font-weight:500;
+      letter-spacing:0.3px;
+    ">
+      mundodeoportunidades.com.br
+    </div>
   </div>
 </div>
 
