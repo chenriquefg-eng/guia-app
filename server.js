@@ -844,21 +844,28 @@ function buildPrintCardHtml(cardData = {}) {
     desenvolvido por
   </div>
 
-  <div style="
-    font-size:18px;
-    font-weight:700;
-    color:#1a5c3a;
-    margin-top:2px;
-  ">
-    mundo de oportunidades
+ <!-- MARCA DISCRETA -->
+<div style="
+  text-align:center;
+  font-size:11px;
+  color:#9ca3af;
+  margin-top:40px;
+  line-height:1.5;
+">
+
+  <div style="margin-bottom:2px;">
+    desenvolvido por
   </div>
 
   <div style="
-    font-size:11px;
-    color:#6b7280;
+    font-size:12px;
+    font-weight:500;
+    color:#374151;
+    letter-spacing:0.3px;
   ">
     mundodeoportunidades.com.br
   </div>
+
 </div>
           </div>
         </div>
