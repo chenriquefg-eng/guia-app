@@ -563,7 +563,7 @@ function buildSections(t, conteudo, listas, top5 = []) {
       html: renderLista(t.faqTitle, listas.faq, "help-circle", labelsLista)
     }
   };
-}
+
     partir: {
       title: t.beforeLeavingTitle,
       html: renderTextoBlocos(conteudo.antes_partir_texto)
