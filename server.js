@@ -326,8 +326,7 @@ function renderLista(itens = [], labels = {}) {
           const extra = item.link_extra || "";
 
           return `
-  return `
-  <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+    <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
 
     ${imagem ? `
       <div class="overflow-hidden">
