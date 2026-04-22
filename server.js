@@ -461,10 +461,12 @@ function buildSections(t, conteudo, listas, top5 = []) {
 
               return `
                 <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
-                  ${imagem ? `
-                    <img src="${escHtml(imagem)}"
-                         style="width:100%; height:140px; object-fit:cover;">
-                  ` : ""}
+                 ${imagem ? `
+  <div class="mb-3 overflow-hidden rounded-xl">
+    <img src="${escHtml(imagem)}"
+         style="width:100%; height:140px; object-fit:cover;">
+  </div>
+` : ""}
 
                   <div class="p-3">
                     <div style="
@@ -519,9 +521,9 @@ function buildSections(t, conteudo, listas, top5 = []) {
     },
 
     importante: {
-      title: t.importantTitle,
-      html: renderTextoBlocos(conteudo.checkin_texto)
-    },
+  title: t.importantTitle,
+  html: renderTextoBlocos(conteudo.importante_texto || conteudo.checkin_texto)
+},
 
     amenidades: {
   title: t.amenitiesTitle,
@@ -1378,17 +1380,6 @@ if (heroSlides.length > 1) {
 </div>
   </div>
 </div>
-
-</body>
-<body class="print-card-page">
-</body>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: #ffffff;
-    font-family: "Outfit", sans-serif;
-  }
 
   body.print-card-page {
     display: flex;
