@@ -561,7 +561,7 @@ doces: {
 faq: {
   title: t.faqTitle,
   html: renderLista(listas.faq, labelsLista)
-}
+},
     partir: {
       title: t.beforeLeavingTitle,
       html: renderTextoBlocos(conteudo.antes_partir_texto)
