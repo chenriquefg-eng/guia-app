@@ -436,7 +436,78 @@ function renderTextoBlocos(texto) {
   `;
 }
 
-function buildSections(t, conteudo = {}, listas = {}) {
+function buildSections(t, conteudo, listas, top5 = []) {
+
+  const top5Section = top5.length
+  ? `
+    <section id="top5" class="mb-8">
+      <div class="rounded-3xl p-5 bg-white border border-gray-200 shadow-sm">
+        <div class="flex items-center gap-2 mb-4">
+          <span style="font-size:20px;">🔥</span>
+          <h2 class="text-xl font-semibold text-gray-800">Top 5 perto do seu apartamento</h2>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          ${top5.map((item) => {
+            const titulo = escHtml(item.titulo || "");
+            const imagem = item.imagem_url || "";
+            const descricao = escHtml(item.descricao || "");
+            const maps = item.link_maps || "";
+            const ordem = Number(item.destaque_ordem || 0);
+
+            return `
+              <div class="rounded-2xl border border-green-200 bg-white overflow-hidden shadow-sm">
+                ${imagem ? `
+                  <div class="overflow-hidden">
+                    <img src="${escHtml(imagem)}"
+                         alt="${titulo}"
+                         class="w-full h-40 object-cover">
+                  </div>
+                ` : ""}
+
+                <div class="p-4">
+                  <div style="
+                    display:inline-flex;
+                    align-items:center;
+                    gap:6px;
+                    font-size:11px;
+                    font-weight:600;
+                    color:#1a5c3a;
+                    background:#ecfdf5;
+                    border:1px solid #bbf7d0;
+                    padding:6px 10px;
+                    border-radius:999px;
+                    margin-bottom:10px;
+                  ">
+                    🔥 Top ${ordem} do anfitrião
+                  </div>
+
+                  <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
+
+                  ${descricao ? `
+                    <p class="text-sm text-gray-600 mt-2 leading-relaxed">
+                      ${descricao}
+                    </p>
+                  ` : ""}
+
+                  ${maps ? `
+                    <div class="mt-4">
+                      <a href="${escHtml(maps)}" target="_blank" rel="noopener noreferrer"
+                         class="text-sm px-3 py-2 rounded-full text-white inline-block"
+                         style="background:#1a5c3a;">
+                        Ver no mapa
+                      </a>
+                    </div>
+                  ` : ""}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    </section>
+  `
+  : "";
   const labelsLista = {
     mapLabel: t.mapLabel,
     reviewLabel: t.reviewLabel,
