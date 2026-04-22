@@ -328,12 +328,17 @@ function renderLista(itens = [], labels = {}) {
           return `
             <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
               ${imagem ? `
-                <div class="mb-3 overflow-hidden">
-                  <img src="${escHtml(imagem)}"
-                       style="width:100%; height:140px; object-fit:cover;">
-                </div>
-              ` : ""}
-
+  <div class="overflow-hidden">
+    <img src="${escHtml(imagem)}"
+         style="
+           width:100%;
+           height:140px;
+           object-fit:cover;
+           border-top-left-radius:16px;
+           border-top-right-radius:16px;
+         ">
+  </div>
+` : ""}
               <div class="p-4">
                 <div class="flex items-center gap-2">
                   <i data-lucide="${icone}" style="width:16px;height:16px;color:#1a5c3a;"></i>
