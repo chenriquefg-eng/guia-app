@@ -701,7 +701,7 @@ function buildSections(t, conteudo, listas, top5 = []) {
     `
   }
 };
-
+}
 app.get("/", (req, res) => {
   res.status(200).send("Guia do Hóspede rodando 🚀");
 });
