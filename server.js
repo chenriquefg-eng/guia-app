@@ -316,15 +316,14 @@ function renderLista(itens = [], labels = {}) {
     <div class="space-y-3">
       ${itens
         .map((item) => {
-          const icone = item.icone || "map-pin";
-          const titulo = escHtml(item.titulo || "");
-          const imagem = item.imagem_url || "";
-          const descricao = escHtml(item.descricao || "");
-          const maps = item.link_maps || "";
-          const instagram = item.link_instagram || "";
-          const review = item.link_reviews || "";
-          const extra = item.link_extra || "";
-
+const icone = item.icone || "map-pin";
+const titulo = escHtml(item.titulo || "");
+const imagem = item.imagem_url || "";
+const descricao = escHtml(item.descricao || "");
+const maps = item.link_maps || "";
+const instagram = item.link_instagram || "";
+const review = item.link_reviews || "";
+const extra = item.link_extra || "";
           return `
     <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
 
