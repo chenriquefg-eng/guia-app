@@ -524,7 +524,6 @@ function buildSections(t, conteudo, listas, top5 = []) {
 
   ${renderLista(t.faq, listas.faq, "help-circle", labelsLista)}
 `;
-}
 
   return {
     importante: {
