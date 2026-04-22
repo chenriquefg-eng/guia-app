@@ -1144,7 +1144,6 @@ const top5 = [
   .filter((item) => item.destaque_ordem && Number(item.destaque_ordem) > 0)
   .sort((a, b) => Number(a.destaque_ordem) - Number(b.destaque_ordem))
   .slice(0, 5);
-
 const menuItems = buildMenuItems(t);
 const sections = buildSections(t, conteudo, listas, top5);
     const html = `
