@@ -324,8 +324,15 @@ const maps = item.link_maps || "";
 const instagram = item.link_instagram || "";
 const review = item.link_reviews || "";
 const extra = item.link_extra || "";
-          return `
-    <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+const destaqueTop = [
+  "Cristo Redentor",
+  "Bondinho do Pão de Açúcar",
+  "Praia de Copacabana",
+  "Rio Scenarium",
+  "Empório Jardim Casa Firjan"
+].includes(item.titulo);          
+         return `
+  <div class="rounded-2xl border ${destaqueTop ? 'border-green-300' : 'border-gray-200'} bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
 
     ${imagem ? `
       <div class="overflow-hidden">
@@ -336,6 +343,25 @@ const extra = item.link_extra || "";
     ` : ""}
 
     <div class="p-4">
+
+      ${destaqueTop ? `
+        <div style="
+          display:inline-flex;
+          align-items:center;
+          gap:6px;
+          font-size:11px;
+          font-weight:600;
+          color:#1a5c3a;
+          background:#ecfdf5;
+          border:1px solid #bbf7d0;
+          padding:6px 10px;
+          border-radius:999px;
+          margin-bottom:10px;
+        ">
+          🔥 Recomendado pelo anfitrião
+        </div>
+      ` : ""}
+
       <div class="flex items-center gap-2">
         <i data-lucide="${icone}" style="width:16px;height:16px;color:#1a5c3a;"></i>
         <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
