@@ -437,244 +437,133 @@ function renderTextoBlocos(texto) {
 }
 
 function buildSections(t, conteudo, listas, top5 = []) {
+  const labelsLista = {
+    mapLabel: t.mapLabel,
+    reviewLabel: t.reviewLabel,
+    extraLabel: t.extraLabel
+  };
 
   const top5Section = top5.length
-  ? `
-    <section id="top5" class="mb-8">
-      <div class="rounded-3xl p-5 bg-white border border-gray-200 shadow-sm">
-        <div class="flex items-center gap-2 mb-4">
-          <span style="font-size:18px;">⭐</span>
-          <h2 class="text-lg font-semibold text-gray-800">Imperdíveis próximos ao apartamento</h2>
-        </div>
+    ? `
+      <section id="top5" class="mb-8">
+        <div class="rounded-3xl p-5 bg-white border border-gray-200 shadow-sm">
+          <div class="flex items-center gap-2 mb-4">
+            <span style="font-size:18px;">⭐</span>
+            <h2 class="text-lg font-semibold text-gray-800">Imperdíveis próximos ao apartamento</h2>
+          </div>
 
-        <div class="grid gap-4 sm:grid-cols-2">
-          ${top5.map((item) => {
-            const titulo = escHtml(item.titulo || "");
-            const imagem = item.imagem_url || "";
-            const descricao = escHtml(item.descricao || "");
-            const maps = item.link_maps || "";
+          <div class="grid gap-4 sm:grid-cols-2">
+            ${top5.map((item) => {
+              const titulo = escHtml(item.titulo || "");
+              const imagem = item.imagem_url || "";
+              const descricao = escHtml(item.descricao || "");
+              const maps = item.link_maps || "";
 
-            return `
-              <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
-                ${imagem ? `
-                  <img src="${escHtml(imagem)}"
-                       style="width:100%; height:140px; object-fit:cover;">
-                ` : ""}
+              return `
+                <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+                  ${imagem ? `
+                    <img src="${escHtml(imagem)}"
+                         style="width:100%; height:140px; object-fit:cover;">
+                  ` : ""}
 
-                <div class="p-3">
-                  <div style="
-                    font-size:11px;
-                    color:#6b7280;
-                    margin-bottom:6px;
-                    font-weight:500;
-                  ">
-                    ⭐ Recomendado
+                  <div class="p-3">
+                    <div style="
+                      font-size:11px;
+                      color:#6b7280;
+                      margin-bottom:6px;
+                      font-weight:500;
+                    ">
+                      ⭐ Recomendado
+                    </div>
+
+                    <h3 class="font-semibold text-base text-gray-800">
+                      ${titulo}
+                    </h3>
+
+                    ${descricao ? `
+                      <p class="text-sm text-gray-600 mt-1">
+                        ${descricao}
+                      </p>
+                    ` : ""}
+
+                    ${maps ? `
+                      <a href="${escHtml(maps)}"
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         style="
+                           display:inline-block;
+                           margin-top:8px;
+                           font-size:12px;
+                           color:#fff;
+                           background:#1a5c3a;
+                           padding:6px 10px;
+                           border-radius:8px;
+                         ">
+                        Ver no mapa
+                      </a>
+                    ` : ""}
                   </div>
-
-                  <h3 class="font-semibold text-base text-gray-800">
-                    ${titulo}
-                  </h3>
-
-                  ${descricao ? `
-                    <p class="text-sm text-gray-600 mt-1">
-                      ${descricao}
-                    </p>
-                  ` : ""}
-
-                  ${maps ? `
-                    <a href="${escHtml(maps)}"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       style="
-                         display:inline-block;
-                         margin-top:8px;
-                         font-size:12px;
-                         color:#fff;
-                         background:#1a5c3a;
-                         padding:6px 10px;
-                         border-radius:8px;
-                       ">
-                      Ver no mapa
-                    </a>
-                  ` : ""}
                 </div>
-              </div>
-            `;
-          }).join("")}
+              `;
+            }).join("")}
+          </div>
         </div>
-      </div>
-    </section>
-  `
-  : "";
-  
-  return `
-  ${top5Section}
-
-  ${renderTextoBlocos(conteudo.importante_texto)}
-  ${renderLista(t.importante, listas.amenidades, "sparkles", labelsLista)}
-
-  ${renderLista(t.cafe, listas.cafe, "coffee", labelsLista)}
-  ${renderLista(t.bares, listas.bares, "wine", labelsLista)}
-  ${renderLista(t.restaurantes, listas.restaurantes, "utensils", labelsLista)}
-
-  ${renderLista(t.fazer, listas.fazer, "map", labelsLista)}
-  ${renderLista(t.proximos, listas.proximos, "map-pin", labelsLista)}
-
-  ${renderLista(t.doces, listas.doces, "cake", labelsLista)}
-
-  ${renderLista(t.faq, listas.faq, "help-circle", labelsLista)}
-`;
+      </section>
+    `
+    : "";
 
   return {
+    top5: {
+      title: "Imperdíveis",
+      html: top5Section
+    },
+
     importante: {
       title: t.importantTitle,
       html: renderTextoBlocos(conteudo.checkin_texto)
     },
 
-   amenidades: {
-  title: t.amenitiesTitle,
-  html: renderLista(listas.amenidades || [], labelsLista)
-},
-
-    wifi: {
-      title: t.wifi.title,
-      html: `
-        <div class="wifi-box rounded-2xl p-4 border border-gray-200">
-          <div class="mb-4">
-            <p class="text-xs uppercase tracking-widest text-gray-500">${escHtml(t.wifi.network)}</p>
-            <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(conteudo.wifi_nome || "")}</p>
-          </div>
-          <div class="mb-4">
-            <p class="text-xs uppercase tracking-widest text-gray-500">${escHtml(t.wifi.password)}</p>
-            <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(conteudo.wifi_senha || "")}</p>
-          </div>
-          <button onclick="copyText(${JSON.stringify(conteudo.wifi_senha || "")})" class="text-sm px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
-            ${escHtml(t.wifi.copyPassword)}
-          </button>
-        </div>
-      `
-    },
-
-    checkin: {
-      title: t.checkin.title,
-      html: `
-        <div class="space-y-4 text-sm text-gray-700">
-          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="font-semibold mb-2">${escHtml(t.checkin.checkin)}</p>
-            ${renderTextoBlocos(conteudo.checkin_texto)}
-          </div>
-          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="font-semibold mb-2">${escHtml(t.checkin.checkout)}</p>
-            ${renderTextoBlocos(conteudo.checkout_texto)}
-          </div>
-        </div>
-      `
-    },
-
-    regras: {
-      title: t.rulesTitle,
-      html: renderTextoBlocos(conteudo.regras_texto)
-    },
-
-    apartamento: {
-      title: t.apartmentTitle,
-      html: `
-        <div class="space-y-4 text-sm text-gray-700">
-          ${renderTextoBlocos(conteudo.apartamento_texto)}
-          <div class="grid grid-cols-2 gap-3">
-            <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-              <p class="text-xs text-gray-500 uppercase">Capacidade</p>
-              <p class="font-semibold text-lg">4 pessoas</p>
-            </div>
-            <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-              <p class="text-xs text-gray-500 uppercase">Quartos</p>
-              <p class="font-semibold text-lg">2 quartos</p>
-            </div>
-            <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-              <p class="text-xs text-gray-500 uppercase">Banheiro</p>
-              <p class="font-semibold text-lg">1 banheiro</p>
-            </div>
-            <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-              <p class="text-xs text-gray-500 uppercase">Camas</p>
-              <p class="font-semibold text-lg">4 camas</p>
-            </div>
-          </div>
-        </div>
-      `
-    },
-
-    locomover: {
-      title: t.gettingAroundTitle,
-      html: renderTextoBlocos(conteudo.transporte_texto)
-    },
-
-    chegar: {
-      title: t.gettingThereTitle,
-      html: `
-        <div class="space-y-3 text-sm text-gray-700">
-          ${conteudo.endereco_exibicao ? `<p><strong>${conteudo.endereco_exibicao}</strong></p>` : ""}
-          ${renderTextoBlocos(conteudo.como_chegar_texto)}
-        </div>
-      `
-    },
-
-    restaurantes: {
-      title: t.restaurantsTitle,
-      html: renderLista(listas.restaurantes || [], labelsLista)
-    },
-
-    bares: {
-      title: t.barsTitle,
-      html: renderLista(listas.bares || [], labelsLista)
+    amenidades: {
+      title: t.amenitiesTitle,
+      html: renderLista(t.amenitiesTitle, listas.amenidades, "sparkles", labelsLista)
     },
 
     cafe: {
       title: t.breakfastTitle,
-      html: renderLista(listas.cafe || [], labelsLista)
+      html: renderLista(t.breakfastTitle, listas.cafe, "coffee", labelsLista)
+    },
+
+    bares: {
+      title: t.barsTitle,
+      html: renderLista(t.barsTitle, listas.bares, "wine", labelsLista)
+    },
+
+    restaurantes: {
+      title: t.restaurantsTitle,
+      html: renderLista(t.restaurantsTitle, listas.restaurantes, "utensils", labelsLista)
     },
 
     fazer: {
       title: t.whatToDoTitle,
-      html: renderLista(listas.fazer || [], labelsLista)
+      html: renderLista(t.whatToDoTitle, listas.fazer, "map", labelsLista)
     },
 
     proximos: {
       title: t.nearbyTitle,
-      html: renderLista(listas.proximos || [], labelsLista)
+      html: renderLista(t.nearbyTitle, listas.proximos, "map-pin", labelsLista)
     },
 
     doces: {
-      title: t.sweetsTitle,
-      html: renderLista(listas.doces || [], labelsLista)
+      title: t.cafesDessertsTitle,
+      html: renderLista(t.cafesDessertsTitle, listas.doces, "cake", labelsLista)
     },
 
-   emergencia: {
-  title: t.emergencyTitle,
-  html: `
-    <div class="space-y-3 text-sm text-gray-700">
-      ${(t.emergencyList || [])
-        .map((e) => `<a href="tel:${e.phone}" class="block rounded-2xl border p-4">${escHtml(e.label)}</a>`)
-        .join("")}
-    </div>
-  `
-},
-
-    avaliacao: {
-  title: t.reviewTitle,
-  html: `
-    <div class="space-y-4 text-sm text-gray-700">
-      <p>${escHtml(t.reviewText)}</p>
-      <a href="https://airbnb.com/" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
-        ${escHtml(t.reviewButton)}
-      </a>
-    </div>
-  `
-},
-
-  faq: {
-  title: t.faqTitle,
-  html: renderLista(listas.faq || [], labelsLista)
-},
+    faq: {
+      title: t.faqTitle,
+      html: renderLista(t.faqTitle, listas.faq, "help-circle", labelsLista)
+    }
+  };
+}
     partir: {
       title: t.beforeLeavingTitle,
       html: renderTextoBlocos(conteudo.antes_partir_texto)
