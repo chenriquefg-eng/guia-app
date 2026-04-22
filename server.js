@@ -443,8 +443,8 @@ function buildSections(t, conteudo, listas, top5 = []) {
     <section id="top5" class="mb-8">
       <div class="rounded-3xl p-5 bg-white border border-gray-200 shadow-sm">
         <div class="flex items-center gap-2 mb-4">
-          <span style="font-size:20px;">🔥</span>
-          <h2 class="text-xl font-semibold text-gray-800">Top 5 perto do seu apartamento</h2>
+          <span style="font-size:18px;">⭐</span>
+          <h2 class="text-lg font-semibold text-gray-800">Imperdíveis próximos ao apartamento</h2>
         </div>
 
         <div class="grid gap-4 sm:grid-cols-2">
@@ -453,21 +453,63 @@ function buildSections(t, conteudo, listas, top5 = []) {
             const imagem = item.imagem_url || "";
             const descricao = escHtml(item.descricao || "");
             const maps = item.link_maps || "";
-            const ordem = Number(item.destaque_ordem || 0);
 
             return `
+              <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+                ${imagem ? `
+                  <img src="${escHtml(imagem)}"
+                       style="width:100%; height:140px; object-fit:cover;">
+                ` : ""}
+
+                <div class="p-3">
+                  <div style="
+                    font-size:11px;
+                    color:#6b7280;
+                    margin-bottom:6px;
+                    font-weight:500;
+                  ">
+                    ⭐ Recomendado
+                  </div>
+
+                  <h3 class="font-semibold text-base text-gray-800">
+                    ${titulo}
+                  </h3>
+
+                  ${descricao ? `
+                    <p class="text-sm text-gray-600 mt-1">
+                      ${descricao}
+                    </p>
+                  ` : ""}
+
+                  ${maps ? `
+                    <a href="${escHtml(maps)}"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       style="
+                         display:inline-block;
+                         margin-top:8px;
+                         font-size:12px;
+                         color:#fff;
+                         background:#1a5c3a;
+                         padding:6px 10px;
+                         border-radius:8px;
+                       ">
+                      Ver no mapa
+                    </a>
+                  ` : ""}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    </section>
+  `
+  : "";
+  return `
   ${top5Section}
   ${outrasSections}
 `;
-              <div class="rounded-2xl border border-green-200 bg-white overflow-hidden shadow-sm">
-                ${imagem ? `
-                  <div class="overflow-hidden">
-                    <img src="${escHtml(imagem)}"
-                         alt="${titulo}"
-                         class="w-full h-40 object-cover">
-                  </div>
-                ` : ""}
-
                 <div class="p-4">
                   <div style="
                     display:inline-flex;
