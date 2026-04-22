@@ -288,7 +288,7 @@ function agruparListasPorSecao(rows = []) {
   amenidades: [],
   faq: [] // 👈 ESSENCIAL
 };
-
+}
   for (const row of rows) {
     const secao = (row.secao || "").toLowerCase().trim();
 
