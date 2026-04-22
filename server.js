@@ -525,54 +525,6 @@ function buildSections(t, conteudo, listas, top5 = []) {
   ${renderLista(t.faq, listas.faq, "help-circle", labelsLista)}
 `;
 }
-                <div class="p-4">
-                  <div style="
-                    display:inline-flex;
-                    align-items:center;
-                    gap:6px;
-                    font-size:11px;
-                    font-weight:600;
-                    color:#1a5c3a;
-                    background:#ecfdf5;
-                    border:1px solid #bbf7d0;
-                    padding:6px 10px;
-                    border-radius:999px;
-                    margin-bottom:10px;
-                  ">
-                    🔥 Top ${ordem} do anfitrião
-                  </div>
-
-                  <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
-
-                  ${descricao ? `
-                    <p class="text-sm text-gray-600 mt-2 leading-relaxed">
-                      ${descricao}
-                    </p>
-                  ` : ""}
-
-                  ${maps ? `
-                    <div class="mt-4">
-                      <a href="${escHtml(maps)}" target="_blank" rel="noopener noreferrer"
-                         class="text-sm px-3 py-2 rounded-full text-white inline-block"
-                         style="background:#1a5c3a;">
-                        Ver no mapa
-                      </a>
-                    </div>
-                  ` : ""}
-                </div>
-              </div>
-            `;
-          }).join("")}
-        </div>
-      </div>
-    </section>
-  `
-  : "";
-  const labelsLista = {
-    mapLabel: t.mapLabel,
-    reviewLabel: t.reviewLabel,
-    extraLabel: t.extraLabel
-  };
 
   return {
     importante: {
