@@ -524,46 +524,44 @@ function buildSections(t, conteudo, listas, top5 = []) {
     },
 
     amenidades: {
-      title: t.amenitiesTitle,
-      html: renderLista(t.amenitiesTitle, listas.amenidades, "sparkles", labelsLista)
-    },
+  title: t.amenitiesTitle,
+  html: renderLista(listas.amenidades, labelsLista)
+},
 
-    cafe: {
-      title: t.breakfastTitle,
-      html: renderLista(t.breakfastTitle, listas.cafe, "coffee", labelsLista)
-    },
+cafe: {
+  title: t.breakfastTitle,
+  html: renderLista(listas.cafe, labelsLista)
+},
 
-    bares: {
-      title: t.barsTitle,
-      html: renderLista(t.barsTitle, listas.bares, "wine", labelsLista)
-    },
+bares: {
+  title: t.barsTitle,
+  html: renderLista(listas.bares, labelsLista)
+},
 
-    restaurantes: {
-      title: t.restaurantsTitle,
-      html: renderLista(t.restaurantsTitle, listas.restaurantes, "utensils", labelsLista)
-    },
+restaurantes: {
+  title: t.restaurantsTitle,
+  html: renderLista(listas.restaurantes, labelsLista)
+},
 
-    fazer: {
-      title: t.whatToDoTitle,
-      html: renderLista(t.whatToDoTitle, listas.fazer, "map", labelsLista)
-    },
+fazer: {
+  title: t.whatToDoTitle,
+  html: renderLista(listas.fazer, labelsLista)
+},
 
-    proximos: {
-      title: t.nearbyTitle,
-      html: renderLista(t.nearbyTitle, listas.proximos, "map-pin", labelsLista)
-    },
+proximos: {
+  title: t.nearbyTitle,
+  html: renderLista(listas.proximos, labelsLista)
+},
 
-    doces: {
-      title: t.cafesDessertsTitle,
-      html: renderLista(t.cafesDessertsTitle, listas.doces, "cake", labelsLista)
-    },
+doces: {
+  title: t.cafesDessertsTitle,
+  html: renderLista(listas.doces, labelsLista)
+},
 
-    faq: {
-      title: t.faqTitle,
-      html: renderLista(t.faqTitle, listas.faq, "help-circle", labelsLista)
-    }
-  };
-
+faq: {
+  title: t.faqTitle,
+  html: renderLista(listas.faq, labelsLista)
+}
     partir: {
       title: t.beforeLeavingTitle,
       html: renderTextoBlocos(conteudo.antes_partir_texto)
