@@ -345,7 +345,16 @@ function renderLista(itens = [], labels = {}) {
                   <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
                 </div>
 
-                ${descricao ? `<p class="text-sm text-gray-600 mt-2">${descricao}</p>` : ""}
+                ${descricao ? `
+  <p class="text-sm text-gray-600 mt-2" style="
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  ">
+    ${descricao}
+  </p>
+` : ""}
 
                 <div class="flex flex-wrap gap-2 mt-3">
                   ${maps ? `<a href="${escHtml(maps)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#1a5c3a;">${escHtml(mapLabel)}</a>` : ""}
