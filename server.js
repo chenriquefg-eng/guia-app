@@ -529,73 +529,178 @@ function buildSections(t, conteudo, listas, top5 = []) {
     : "";
 
   return {
-    top5: {
-      title: "Imperdíveis",
-      html: top5Section
-    },
+  top5: {
+    title: "Imperdíveis",
+    html: top5Section
+  },
 
-    importante: {
-  title: t.importantTitle,
-  html: renderTextoBlocos(conteudo.importante_texto || conteudo.checkin_texto)
-},
+  importante: {
+    title: t.importantTitle,
+    html: renderTextoBlocos(conteudo.importante_texto || conteudo.checkin_texto)
+  },
 
-    amenidades: {
-  title: t.amenitiesTitle,
-  html: renderLista(listas.amenidades, labelsLista)
-},
+  amenidades: {
+    title: t.amenitiesTitle,
+    html: renderLista(listas.amenidades || [], labelsLista)
+  },
 
-cafe: {
-  title: t.breakfastTitle,
-  html: renderLista(listas.cafe, labelsLista)
-},
-
-bares: {
-  title: t.barsTitle,
-  html: renderLista(listas.bares, labelsLista)
-},
-
-restaurantes: {
-  title: t.restaurantsTitle,
-  html: renderLista(listas.restaurantes, labelsLista)
-},
-
-fazer: {
-  title: t.whatToDoTitle,
-  html: renderLista(listas.fazer, labelsLista)
-},
-
-proximos: {
-  title: t.nearbyTitle,
-  html: renderLista(listas.proximos, labelsLista)
-},
-
-doces: {
-  title: t.cafesDessertsTitle,
-  html: renderLista(listas.doces, labelsLista)
-},
-
-faq: {
-  title: t.faqTitle,
-  html: renderLista(listas.faq, labelsLista)
-},
-    partir: {
-      title: t.beforeLeavingTitle,
-      html: renderTextoBlocos(conteudo.antes_partir_texto)
-    },
-
-    contato: {
-      title: t.contactTitle,
-      html: `
-        <div class="space-y-4 text-sm text-gray-700">
-          ${renderTextoBlocos(conteudo.contato_texto)}
-          <a href="https://wa.me/5521971810022" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#25d366;">
-            💬 Falar com anfitrião
-          </a>
+  wifi: {
+    title: t.wifi.title,
+    html: `
+      <div class="wifi-box rounded-2xl p-4 border border-gray-200">
+        <div class="mb-4">
+          <p class="text-xs uppercase tracking-widest text-gray-500">${escHtml(t.wifi.network)}</p>
+          <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(conteudo.wifi_nome || "")}</p>
         </div>
-      `
-    }
-  };
-}
+        <div class="mb-4">
+          <p class="text-xs uppercase tracking-widest text-gray-500">${escHtml(t.wifi.password)}</p>
+          <p class="text-lg font-semibold text-gray-800 break-all">${escHtml(conteudo.wifi_senha || "")}</p>
+        </div>
+        <button onclick="copyText(${JSON.stringify(conteudo.wifi_senha || "")})" class="text-sm px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
+          ${escHtml(t.wifi.copyPassword)}
+        </button>
+      </div>
+    `
+  },
+
+  checkin: {
+    title: t.checkin.title,
+    html: `
+      <div class="space-y-4 text-sm text-gray-700">
+        <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+          <p class="font-semibold mb-2">${escHtml(t.checkin.checkin)}</p>
+          ${renderTextoBlocos(conteudo.checkin_texto)}
+        </div>
+        <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+          <p class="font-semibold mb-2">${escHtml(t.checkin.checkout)}</p>
+          ${renderTextoBlocos(conteudo.checkout_texto)}
+        </div>
+      </div>
+    `
+  },
+
+  regras: {
+    title: t.rulesTitle,
+    html: renderTextoBlocos(conteudo.regras_texto)
+  },
+
+  apartamento: {
+    title: t.apartmentTitle,
+    html: `
+      <div class="space-y-4 text-sm text-gray-700">
+        ${renderTextoBlocos(conteudo.apartamento_texto)}
+        <div class="grid grid-cols-2 gap-3">
+          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+            <p class="text-xs text-gray-500 uppercase">Capacidade</p>
+            <p class="font-semibold text-lg">4 pessoas</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+            <p class="text-xs text-gray-500 uppercase">Quartos</p>
+            <p class="font-semibold text-lg">2 quartos</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+            <p class="text-xs text-gray-500 uppercase">Banheiro</p>
+            <p class="font-semibold text-lg">1 banheiro</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+            <p class="text-xs text-gray-500 uppercase">Camas</p>
+            <p class="font-semibold text-lg">4 camas</p>
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  locomover: {
+    title: t.gettingAroundTitle,
+    html: renderTextoBlocos(conteudo.transporte_texto)
+  },
+
+  chegar: {
+    title: t.gettingThereTitle,
+    html: `
+      <div class="space-y-3 text-sm text-gray-700">
+        ${conteudo.endereco_exibicao ? `<p><strong>${conteudo.endereco_exibicao}</strong></p>` : ""}
+        ${renderTextoBlocos(conteudo.como_chegar_texto)}
+      </div>
+    `
+  },
+
+  restaurantes: {
+    title: t.restaurantsTitle,
+    html: renderLista(listas.restaurantes || [], labelsLista)
+  },
+
+  bares: {
+    title: t.barsTitle,
+    html: renderLista(listas.bares || [], labelsLista)
+  },
+
+  cafe: {
+    title: t.breakfastTitle,
+    html: renderLista(listas.cafe || [], labelsLista)
+  },
+
+  fazer: {
+    title: t.whatToDoTitle,
+    html: renderLista(listas.fazer || [], labelsLista)
+  },
+
+  proximos: {
+    title: t.nearbyTitle,
+    html: renderLista(listas.proximos || [], labelsLista)
+  },
+
+  doces: {
+    title: t.sweetsTitle,
+    html: renderLista(listas.doces || [], labelsLista)
+  },
+
+  emergencia: {
+    title: t.emergencyTitle,
+    html: `
+      <div class="space-y-3 text-sm text-gray-700">
+        ${(t.emergencyList || [])
+          .map((e) => `<a href="tel:${e.phone}" class="block rounded-2xl border p-4">${escHtml(e.label)}</a>`)
+          .join("")}
+      </div>
+    `
+  },
+
+  avaliacao: {
+    title: t.reviewTitle,
+    html: `
+      <div class="space-y-4 text-sm text-gray-700">
+        <p>${escHtml(t.reviewText)}</p>
+        <a href="https://airbnb.com/" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
+          ${escHtml(t.reviewButton)}
+        </a>
+      </div>
+    `
+  },
+
+  faq: {
+    title: t.faqTitle,
+    html: renderLista(listas.faq || [], labelsLista)
+  },
+
+  partir: {
+    title: t.beforeLeavingTitle,
+    html: renderTextoBlocos(conteudo.antes_partir_texto)
+  },
+
+  contato: {
+    title: t.contactTitle,
+    html: `
+      <div class="space-y-4 text-sm text-gray-700">
+        ${renderTextoBlocos(conteudo.contato_texto)}
+        <a href="https://wa.me/5521971810022" target="_blank" rel="noopener noreferrer" class="inline-flex px-4 py-2 rounded-full text-white" style="background:#25d366;">
+          💬 Falar com anfitrião
+        </a>
+      </div>
+    `
+  }
+};
 
 app.get("/", (req, res) => {
   res.status(200).send("Guia do Hóspede rodando 🚀");
