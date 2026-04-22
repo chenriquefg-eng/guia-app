@@ -506,9 +506,23 @@ function buildSections(t, conteudo, listas, top5 = []) {
     </section>
   `
   : "";
+  
   return `
   ${top5Section}
-  ${outrasSections}
+
+  ${renderTextoBlocos(conteudo.importante_texto)}
+  ${renderLista(t.importante, listas.amenidades, "sparkles", labelsLista)}
+
+  ${renderLista(t.cafe, listas.cafe, "coffee", labelsLista)}
+  ${renderLista(t.bares, listas.bares, "wine", labelsLista)}
+  ${renderLista(t.restaurantes, listas.restaurantes, "utensils", labelsLista)}
+
+  ${renderLista(t.fazer, listas.fazer, "map", labelsLista)}
+  ${renderLista(t.proximos, listas.proximos, "map-pin", labelsLista)}
+
+  ${renderLista(t.doces, listas.doces, "cake", labelsLista)}
+
+  ${renderLista(t.faq, listas.faq, "help-circle", labelsLista)}
 `;
                 <div class="p-4">
                   <div style="
