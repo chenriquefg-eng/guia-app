@@ -1441,12 +1441,6 @@ if (heroSlides.length > 1) {
   </div>
 </div>
 
-  body.print-card-page {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background: #ffffff;
-  }
 </style>
 </html>
     `;
