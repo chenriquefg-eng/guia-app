@@ -456,6 +456,9 @@ function buildSections(t, conteudo, listas, top5 = []) {
             const ordem = Number(item.destaque_ordem || 0);
 
             return `
+  ${top5Section}
+  ${outrasSections}
+`;
               <div class="rounded-2xl border border-green-200 bg-white overflow-hidden shadow-sm">
                 ${imagem ? `
                   <div class="overflow-hidden">
