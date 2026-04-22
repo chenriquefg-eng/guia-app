@@ -1101,8 +1101,20 @@ try {
   console.error("Erro ao buscar listas:", e.message);
 }
 
-    const menuItems = buildMenuItems(t);
-    const sections = buildSections(t, conteudo, listas);
+const top5 = [
+  ...listas.fazer,
+  ...listas.bares,
+  ...listas.cafe,
+  ...listas.restaurantes,
+  ...listas.doces,
+  ...listas.proximos
+]
+  .filter((item) => item.destaque_ordem && Number(item.destaque_ordem) > 0)
+  .sort((a, b) => Number(a.destaque_ordem) - Number(b.destaque_ordem))
+  .slice(0, 5);
+
+const menuItems = buildMenuItems(t);
+const sections = buildSections(t, conteudo, listas, top5);
     const html = `
 <!doctype html>
 <html lang="pt-BR" class="h-full">
