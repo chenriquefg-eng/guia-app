@@ -524,6 +524,7 @@ function buildSections(t, conteudo, listas, top5 = []) {
 
   ${renderLista(t.faq, listas.faq, "help-circle", labelsLista)}
 `;
+}
                 <div class="p-4">
                   <div style="
                     display:inline-flex;
