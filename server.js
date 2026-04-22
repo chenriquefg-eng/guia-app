@@ -316,32 +316,46 @@ function renderLista(itens = [], labels = {}) {
     <div class="space-y-3">
       ${itens
         .map((item) => {
-const icone = item.icone || "map-pin";
-const titulo = escHtml(item.titulo || "");
-const imagem = item.imagem_url || "";
-const descricao = escHtml(item.descricao || "");
-const maps = item.link_maps || "";
-const instagram = item.link_instagram || "";
-const review = item.link_reviews || "";
-const extra = item.link_extra || "";
-const destaqueTop = [
-  "Cristo Redentor",
-  "Bondinho do Pão de Açúcar",
-  "Praia de Copacabana",
-  "Rio Scenarium",
-  "Empório Jardim Casa Firjan"
-].includes(item.titulo);          
-         return `
-  <div class="rounded-2xl border ${destaqueTop ? 'border-green-300' : 'border-gray-200'} bg-white overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+          const icone = item.icone || "map-pin";
+          const titulo = escHtml(item.titulo || "");
+          const imagem = item.imagem_url || "";
+          const descricao = escHtml(item.descricao || "");
+          const maps = item.link_maps || "";
+          const instagram = item.link_instagram || "";
+          const review = item.link_reviews || "";
+          const extra = item.link_extra || "";
 
-    ${imagem ? `
-      <div class="overflow-hidden">
-        <img src="${escHtml(imagem)}"
-             alt="${titulo}"
-             class="w-full h-40 object-cover transition-transform duration-300 hover:scale-105">
-      </div>
-    ` : ""}
+          return `
+            <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+              ${imagem ? `
+                <div class="mb-3 overflow-hidden">
+                  <img src="${escHtml(imagem)}"
+                       style="width:100%; height:140px; object-fit:cover;">
+                </div>
+              ` : ""}
 
+              <div class="p-4">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="${icone}" style="width:16px;height:16px;color:#1a5c3a;"></i>
+                  <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
+                </div>
+
+                ${descricao ? `<p class="text-sm text-gray-600 mt-2">${descricao}</p>` : ""}
+
+                <div class="flex flex-wrap gap-2 mt-3">
+                  ${maps ? `<a href="${escHtml(maps)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#1a5c3a;">${escHtml(mapLabel)}</a>` : ""}
+                  ${instagram ? `<a href="${escHtml(instagram)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full border" style="border-color:#1a5c3a;color:#1a5c3a;">Instagram</a>` : ""}
+                  ${review ? `<a href="${escHtml(review)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#3b73b8;">${escHtml(reviewLabel)}</a>` : ""}
+                  ${extra ? `<a href="${escHtml(extra)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#92400e;">${escHtml(extraLabel)}</a>` : ""}
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
     <div class="p-4">
 
       ${destaqueTop ? `
