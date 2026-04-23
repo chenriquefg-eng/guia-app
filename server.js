@@ -316,6 +316,7 @@ function buildMenuItems(t) {
     { id: "regras", label: t.sections.regras, icon: "shield-check", color: "#dc2626" },
     { id: "apartamento", label: t.sections.apartamento, icon: "bed-double", color: "#0f766e" },
     { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
+    { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
     { id: "locomover", label: t.sections.locomover, icon: "car-front", color: "#ea580c" },
     { id: "chegar", label: t.sections.chegar, icon: "map-pinned", color: "#2563eb" },
     { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
