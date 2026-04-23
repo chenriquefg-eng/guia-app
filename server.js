@@ -27,6 +27,7 @@ function nl2brEsc(texto) {
 function getLabels(idioma) {
   const dict = {
     pt: {
+      lang: "pt",
       pageTitle: "Guia de Boas-Vindas",
       welcomeTitle: "Seja bem-vindo! 🌿",
       welcomeText:
@@ -111,6 +112,7 @@ reviewButton: "⭐ Deixar avaliação",
       }
     },
     en: {
+      lang: "en",
       pageTitle: "Welcome Guide",
       welcomeTitle: "Welcome! 🌿",
       welcomeText:
@@ -195,6 +197,7 @@ reviewButton: "⭐ Leave a review",
       }
     },
     es: {
+      lang: "es",
       pageTitle: "Guía de Bienvenida",
       welcomeTitle: "¡Bienvenido! 🌿",
       welcomeText:
@@ -333,7 +336,7 @@ function agruparListasPorSecao(rows = []) {
 
   return grupos;
 }
-function renderLista(itens = [], labels = {}) {
+function renderLista(itens = [], labels = {}, secao = "") {
   if (!Array.isArray(itens) || itens.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
   }
@@ -354,6 +357,10 @@ function renderLista(itens = [], labels = {}) {
           const instagram = item.link_instagram || "";
           const review = item.link_reviews || "";
           const extra = item.link_extra || "";
+          const nearbyType =
+  secao === "proximos"
+    ? getNearbyTypeLabel(labels, item.titulo || "")
+    : "";
 
           return `
             <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm hover:shadow-md transition">
@@ -375,13 +382,14 @@ function renderLista(itens = [], labels = {}) {
                   <h3 class="font-semibold text-base text-gray-800">${titulo}</h3>
                 </div>
 
-                ${descricao ? `
+                ${descricao || nearbyType ? `
   <p class="text-sm text-gray-600 mt-2" style="
     display:-webkit-box;
     -webkit-line-clamp:3;
     -webkit-box-orient:vertical;
     overflow:hidden;
   ">
+    ${nearbyType ? `<span style="font-weight:600;">${escHtml(nearbyType)}</span>${descricao ? " · " : ""}` : ""}
     ${descricao}
   </p>
 ` : ""}
@@ -421,7 +429,35 @@ function renderTextoBlocos(texto) {
     </div>
   `;
 }
+function getNearbyTypeLabel(t, titulo = "") {
+  const nome = String(titulo || "").toLowerCase();
 
+  if (nome.includes("pão") || nome.includes("padaria") || nome.includes("bakery")) {
+    return { pt: "Padaria", en: "Bakery", es: "Panadería" }[t.lang];
+  }
+
+  if (nome.includes("zona sul") || nome.includes("mercado") || nome.includes("market")) {
+    return { pt: "Mercado", en: "Supermarket", es: "Supermercado" }[t.lang];
+  }
+
+  if (nome.includes("hospital") || nome.includes("samaritano")) {
+    return { pt: "Hospital", en: "Hospital", es: "Hospital" }[t.lang];
+  }
+
+  if (nome.includes("drogaria") || nome.includes("farm")) {
+    return { pt: "Farmácia", en: "Pharmacy", es: "Farmacia" }[t.lang];
+  }
+
+  if (nome.includes("delivery")) {
+    return { pt: "App de bebidas", en: "Drinks app", es: "App de bebidas" }[t.lang];
+  }
+
+  if (nome.includes("posto") || nome.includes("petrobras")) {
+    return { pt: "Posto", en: "Gas station", es: "Gasolinera" }[t.lang];
+  }
+
+  return { pt: "Local próximo", en: "Nearby place", es: "Lugar cercano" }[t.lang];
+}
 function buildSections(t, conteudo, listas, top5 = []) {
   const labelsLista = {
     mapLabel: t.mapLabel,
@@ -619,9 +655,9 @@ function buildSections(t, conteudo, listas, top5 = []) {
   },
 
   proximos: {
-    title: t.nearbyTitle,
-    html: renderLista(listas.proximos || [], labelsLista)
-  },
+  title: t.nearbyTitle,
+  html: renderLista(listas.proximos || [], labelsLista, "proximos")
+},
 
   doces: {
     title: t.sweetsTitle,
