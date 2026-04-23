@@ -55,6 +55,16 @@ function getLabels(idioma) {
         doces: "Cafés & Doces",
         contato: "Contato"    
       },
+      apartmentLabels: {
+  capacity: "Capacidade",
+  bedrooms: "Quartos",
+  bathroom: "Banheiro",
+  beds: "Camas",
+  capacityValue: "4 pessoas",
+  bedroomsValue: "2 quartos",
+  bathroomValue: "1 banheiro",
+  bedsValue: "4 camas"
+},
       emergencyList: [
   { label: "🚓 190 — Polícia Militar", phone: "190" },
   { label: "🚑 192 — SAMU", phone: "192" },
@@ -129,6 +139,16 @@ reviewButton: "⭐ Deixar avaliação",
         doces: "Cafés & Pastries",
         contato: "Contact"
       },
+      apartmentLabels: {
+  capacity: "Capacity",
+  bedrooms: "Bedrooms",
+  bathroom: "Bathroom",
+  beds: "Beds",
+  capacityValue: "4 guests",
+  bedroomsValue: "2 bedrooms",
+  bathroomValue: "1 bathroom",
+  bedsValue: "4 beds"
+},
       emergencyList: [
   { label: "🚓 190 — Police", phone: "190" },
   { label: "🚑 192 — Ambulance (SAMU)", phone: "192" },
@@ -203,6 +223,16 @@ reviewButton: "⭐ Leave a review",
         doces: "Cafés y Dulces",
         contato: "Contacto"
       },
+      apartmentLabels: {
+  capacity: "Capacidad",
+  bedrooms: "Habitaciones",
+  bathroom: "Baño",
+  beds: "Camas",
+  capacityValue: "4 personas",
+  bedroomsValue: "2 habitaciones",
+  bathroomValue: "1 baño",
+  bedsValue: "4 camas"
+},
       emergencyList: [
   { label: "🚓 190 — Policía", phone: "190" },
   { label: "🚑 192 — Ambulancia (SAMU)", phone: "192" },
