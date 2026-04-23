@@ -597,6 +597,26 @@ function buildSections(t, conteudo, listas, top5 = []) {
   html: `
       <div class="space-y-4 text-sm text-gray-700">
         ${renderTextoBlocos(conteudo.apartamento_texto)}
+
+${heroImages.length ? `
+  <div style="
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:4px 0 8px;
+    margin-top:12px;
+  ">
+    ${heroImages.map(img => `
+      <img src="${escHtml(img)}"
+        style="
+          height:120px;
+          min-width:160px;
+          object-fit:cover;
+          border-radius:12px;
+        ">
+    `).join("")}
+  </div>
+` : ""}
         <div class="grid grid-cols-2 gap-3">
           <div class="rounded-2xl p-4" style="background:#f5f0eb;">
             <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.capacity)}</p>
