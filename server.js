@@ -557,31 +557,31 @@ function buildSections(t, conteudo, listas, top5 = []) {
   },
 
   apartamento: {
-    title: t.apartmentTitle,
-    html: `
+  title: t.apartmentTitle,
+  html: `
       <div class="space-y-4 text-sm text-gray-700">
         ${renderTextoBlocos(conteudo.apartamento_texto)}
         <div class="grid grid-cols-2 gap-3">
           <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">Capacidade</p>
-            <p class="font-semibold text-lg">4 pessoas</p>
+            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.capacity)}</p>
+            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.capacityValue)}</p>
           </div>
           <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">Quartos</p>
-            <p class="font-semibold text-lg">2 quartos</p>
+            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.bedrooms)}</p>
+            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bedroomsValue)}</p>
           </div>
           <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">Banheiro</p>
-            <p class="font-semibold text-lg">1 banheiro</p>
+            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.bathroom)}</p>
+            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bathroomValue)}</p>
           </div>
           <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">Camas</p>
-            <p class="font-semibold text-lg">4 camas</p>
+            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.beds)}</p>
+            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bedsValue)}</p>
           </div>
         </div>
       </div>
     `
-  },
+},
 
   locomover: {
     title: t.gettingAroundTitle,
