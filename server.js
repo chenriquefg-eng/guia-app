@@ -56,6 +56,13 @@ function getLabels(idioma) {
         doces: "Cafés & Doces",
         contato: "Contato"    
       },
+      quickAccessTitle: "Acesso Rápido",
+quickAccess: {
+  wifi: "Wi-Fi",
+  checkin: "Check-in",
+  chegar: "Localização",
+  contato: "Falar"
+},
       apartmentLabels: {
   capacity: "Capacidade",
   bedrooms: "Quartos",
@@ -141,6 +148,13 @@ reviewButton: "⭐ Deixar avaliação",
         doces: "Cafés & Pastries",
         contato: "Contact"
       },
+      quickAccessTitle: "Quick Access",
+quickAccess: {
+  wifi: "Wi-Fi",
+  checkin: "Check-in",
+  chegar: "Location",
+  contato: "Contact"
+},
       apartmentLabels: {
   capacity: "Capacity",
   bedrooms: "Bedrooms",
@@ -226,6 +240,13 @@ reviewButton: "⭐ Leave a review",
         doces: "Cafés y Dulces",
         contato: "Contacto"
       },
+      quickAccessTitle: "Acceso Rápido",
+quickAccess: {
+  wifi: "Wi-Fi",
+  checkin: "Check-in",
+  chegar: "Ubicación",
+  contato: "Contacto"
+},
       apartmentLabels: {
   capacity: "Capacidad",
   bedrooms: "Habitaciones",
@@ -294,6 +315,7 @@ function buildMenuItems(t) {
     { id: "checkin", label: t.sections.checkin, icon: "log-in", color: "#7c3aed" },
     { id: "regras", label: t.sections.regras, icon: "shield-check", color: "#dc2626" },
     { id: "apartamento", label: t.sections.apartamento, icon: "bed-double", color: "#0f766e" },
+    { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
     { id: "locomover", label: t.sections.locomover, icon: "car-front", color: "#ea580c" },
     { id: "chegar", label: t.sections.chegar, icon: "map-pinned", color: "#2563eb" },
     { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
@@ -642,6 +664,60 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
         </div>
       </div>
     `
+},
+    acesso: {
+  title: t.quickAccessTitle,
+  html: `
+    <div style="
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    ">
+
+      <button onclick="openSection('wifi')" style="
+        background:#f5f0eb;
+        padding:14px;
+        border-radius:16px;
+        font-size:14px;
+        font-weight:600;
+      ">
+        📶 ${t.quickAccess.wifi}
+      </button>
+
+      <button onclick="openSection('checkin')" style="
+        background:#f5f0eb;
+        padding:14px;
+        border-radius:16px;
+        font-size:14px;
+        font-weight:600;
+      ">
+        🔑 ${t.quickAccess.checkin}
+      </button>
+
+      <button onclick="openSection('chegar')" style="
+        background:#f5f0eb;
+        padding:14px;
+        border-radius:16px;
+        font-size:14px;
+        font-weight:600;
+      ">
+        📍 ${t.quickAccess.chegar}
+      </button>
+
+      <a href="https://wa.me/5521971810022" target="_blank" style="
+        background:#25d366;
+        color:white;
+        padding:14px;
+        border-radius:16px;
+        font-size:14px;
+        font-weight:600;
+        text-align:center;
+      ">
+        💬 ${t.quickAccess.contato}
+      </a>
+
+    </div>
+  `
 },
   locomover: {
     title: t.gettingAroundTitle,
