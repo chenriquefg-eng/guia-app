@@ -348,7 +348,7 @@ function renderLista(itens = [], labels = {}) {
                 ${descricao ? `
   <p class="text-sm text-gray-600 mt-2" style="
     display:-webkit-box;
-    -webkit-line-clamp:2;
+    -webkit-line-clamp:3;
     -webkit-box-orient:vertical;
     overflow:hidden;
   ">
@@ -1163,10 +1163,55 @@ const sections = buildSections(t, conteudo, listas, top5);
     .heading-font { font-family: 'DM Serif Display', serif; }
     .section-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
     .section-card:hover { transform: translateY(-2px); }
-    .modal-overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
-    .modal-content { transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .modal-overlay { 
+  opacity: 0; 
+  pointer-events: none; 
+  transition: opacity 0.3s ease; 
+}
+
+.modal-overlay.active { 
+  opacity: 1; 
+  pointer-events: all; 
+}
+
+.modal-content { 
+  transform: translateY(100%); 
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.modal-overlay.active .modal-content { 
+  transform: translateY(0); 
+}
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #ffffff;
+  padding-top: max(16px, env(safe-area-inset-top));
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  padding-top: 28px;
+  scroll-padding-top: 96px;
+}
+
+@supports (height: 100dvh) {
+  .modal-sheet {
+    max-height: 90dvh !important;
+  }
+}
+
+@supports not (height: 100dvh) {
+  .modal-sheet {
+    max-height: 90vh !important;
+  }
+}
     .fade-in { animation: fadeUp 0.5s ease forwards; opacity: 0; }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -1299,17 +1344,16 @@ const sections = buildSections(t, conteudo, listas, top5);
     </div>
 
     <div id="modal" class="modal-overlay fixed inset-0 z-50" style="background:rgba(0,0,0,0.4);" onclick="closeModal(event)">
-      <div class="modal-content absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl" style="max-height:90vh; display:flex; flex-direction:column;">
-        <div class="sticky top-0 bg-white z-10 px-5 pt-4 pb-3 border-b border-gray-100 flex items-center justify-between">
-          <h2 id="modalTitle" class="heading-font text-xl" style="color:#1a5c3a;"></h2>
-          <button onclick="closeModalDirect()" class="w-8 h-8 rounded-full flex items-center justify-center" style="background:#f0f0f0;">
-            <i data-lucide="x" style="width:16px;height:16px;color:#666;"></i>
-          </button>
-        </div>
-        <div id="modalBody" style="flex:1; overflow-y:auto; padding:20px;"></div>
-      </div>
+  <div class="modal-content modal-sheet absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl" style="display:flex; flex-direction:column;">
+    <div class="modal-header px-5 pb-3 border-b border-gray-100 flex items-center justify-between">
+      <h2 id="modalTitle" class="heading-font text-xl pr-3" style="color:#1a5c3a;"></h2>
+      <button onclick="closeModalDirect()" class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background:#f0f0f0;">
+        <i data-lucide="x" style="width:16px;height:16px;color:#666;"></i>
+      </button>
     </div>
+    <div id="modalBody" class="modal-body"></div>
   </div>
+</div>  </div>
 
   <script>
     const menuItems = ${JSON.stringify(menuItems)};
@@ -1338,7 +1382,7 @@ const sections = buildSections(t, conteudo, listas, top5);
       }
     }
 
-    function openSection(id) {
+  function openSection(id) {
   const modal = document.getElementById("modal");
   const modalBody = document.getElementById("modalBody");
   const modalTitle = document.getElementById("modalTitle");
@@ -1351,12 +1395,20 @@ const sections = buildSections(t, conteudo, listas, top5);
     return;
   }
 
-    modalTitle.textContent = section.title;
+  modalTitle.textContent = section.title;
   modalBody.innerHTML = section.html;
   modal.classList.add("active");
   modal.dataset.open = id;
 
-  lucide.createIcons();
+  modalBody.scrollTop = 0;
+
+  requestAnimationFrame(() => {
+    modalBody.scrollTop = 0;
+
+    if (window.lucide && typeof window.lucide.createIcons === "function") {
+      window.lucide.createIcons();
+    }
+  });
 }
 
 function closeModal(e) {
@@ -1372,16 +1424,18 @@ function closeModalDirect() {
   modal.classList.remove("active");
   modal.dataset.open = "";
 }
-    function copyText(text) {
-      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById("copyToast");
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 1800);
-      }).catch(() => {});
-    }
 
-    buildMenu();
+function copyText(text) {
+  if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.getElementById("copyToast");
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 1800);
+  }).catch(() => {});
+}
+
+buildMenu();
 
     if (window.lucide && typeof window.lucide.createIcons === "function") {
       window.lucide.createIcons();
