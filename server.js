@@ -346,7 +346,10 @@ function renderLista(itens = [], labels = {}, secao = "") {
   const extraLabel = labels.extraLabel || "Mais";
 
   return `
-    <div class="space-y-3">
+    <div class="space-y-3" style="
+  max-width:560px;
+  margin:0 auto;
+">
       ${itens
         .map((item) => {
           const icone = item.icone || "map-pin";
