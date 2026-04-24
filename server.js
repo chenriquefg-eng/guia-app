@@ -309,14 +309,17 @@ reviewButton: "⭐ Dejar una reseña",
 
 function buildMenuItems(t) {
   return [
+
     { id: "importante", label: t.sections.importante, icon: "badge-alert", color: "#b7791f" },
     { id: "amenidades", label: t.sections.amenidades, icon: "sparkles", color: "#2a7d50" },
     { id: "wifi", label: t.sections.wifi, icon: "wifi", color: "#2563eb" },
     { id: "checkin", label: t.sections.checkin, icon: "log-in", color: "#7c3aed" },
     { id: "regras", label: t.sections.regras, icon: "shield-check", color: "#dc2626" },
     { id: "apartamento", label: t.sections.apartamento, icon: "bed-double", color: "#0f766e" },
+
+    // 👉 AQUI É O CERTO
     { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
-    { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
+
     { id: "locomover", label: t.sections.locomover, icon: "car-front", color: "#ea580c" },
     { id: "chegar", label: t.sections.chegar, icon: "map-pinned", color: "#2563eb" },
     { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
@@ -330,6 +333,7 @@ function buildMenuItems(t) {
     { id: "proximos", label: t.sections.proximos, icon: "map", color: "#15803d" },
     { id: "doces", label: t.sections.doces, icon: "cake-slice", color: "#db2777" },
     { id: "contato", label: t.sections.contato, icon: "message-circle", color: "#16a34a" }
+
   ];
 }
 
