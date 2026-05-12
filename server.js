@@ -1363,6 +1363,19 @@ app.get("/admin/imovel/:id/fotos", async (req, res) => {
           <p><strong>Ordem:</strong> ${foto.ordem}</p>
           <p><strong>Ativo:</strong> ${foto.ativo ? "Sim" : "Não"}</p>
           <p style="font-size:12px;word-break:break-all;">${foto.url}</p>
+          <form method="POST" action="/admin/foto/${foto.id}/excluir"
+      onsubmit="return confirm('Excluir esta foto?')">
+
+  <button
+    type="submit"
+    style="
+      background:#dc2626;
+      margin-top:10px;
+    ">
+    🗑 Excluir Foto
+  </button>
+
+</form>
         </div>
       `).join("")}
     </body>
@@ -1381,6 +1394,30 @@ app.post("/admin/imovel/:id/fotos", async (req, res) => {
 
   res.redirect(`/admin/imovel/${id}/fotos`);
 });
+app.post("/admin/foto/:id/excluir", async (req, res) => {
+
+  const { id } = req.params;
+
+  const fotoResult = await pool.query(
+    `SELECT imovel_id FROM imovel_fotos WHERE id = $1 LIMIT 1`,
+    [id]
+  );
+
+  if (fotoResult.rows.length === 0) {
+    return res.send("Foto não encontrada.");
+  }
+
+  const imovelId = fotoResult.rows[0].imovel_id;
+
+  await pool.query(
+    `DELETE FROM imovel_fotos WHERE id = $1`,
+    [id]
+  );
+
+  res.redirect(`/admin/imovel/${imovelId}/fotos`);
+
+});
+
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   try {
     const codigo = req.params.codigo;
