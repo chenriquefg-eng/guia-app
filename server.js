@@ -388,8 +388,6 @@ function renderLista(itens = [], labels = {}, secao = "") {
           const maps = item.link_maps || "";
           const instagram = item.link_instagram || "";
           const reviews = item.link_reviews || "";
-          const instagram = item.link_instagram || "";
-          const review = item.link_reviews || "";
           const extra = item.link_extra || "";
           const nearbyType =
   secao === "proximos"
