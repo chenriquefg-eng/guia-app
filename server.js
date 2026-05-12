@@ -550,11 +550,9 @@ function renderAcoesLugar(maps, instagram, reviews) {
           style="
             width:36px;
             height:36px;
-            border-radius:999px;
-            background:#f9fafb;
-color:#374151;
-border:1px solid #d1d5db;
-            color:#fff;
+           background:#fffbeb;
+color:#eab308;
+border:1px solid #fde68a;
             display:flex;
             align-items:center;
             justify-content:center;
