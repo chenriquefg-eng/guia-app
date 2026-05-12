@@ -1251,7 +1251,8 @@ console.log("FOTOS:", fotos);
 
 const heroImages = fotos.map(f => f.url).filter(Boolean);
 const heroImage = heroImages[0] || "";
-    let conteudoResult = await pool.query(
+
+let conteudoResult = await pool.query(
   `SELECT * FROM imovel_conteudos 
    WHERE imovel_id = $1 
    AND idioma = $2 
@@ -1270,7 +1271,6 @@ if (conteudoResult.rows.length === 0 && idioma !== "pt") {
 }
 
 const conteudo = conteudoResult.rows[0] || {};
-
        let listas = {
   cafe: [],
   bares: [],
