@@ -1608,6 +1608,95 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
   `);
 
 });
+app.get("/admin/top5/novo/:imovelId", async (req, res) => {
+
+  const { imovelId } = req.params;
+
+  res.send(`
+    <!doctype html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Novo Top5</title>
+    </head>
+
+    <body style="
+      font-family:Arial;
+      background:#f3f4f6;
+      padding:30px;
+      max-width:700px;
+      margin:auto;
+    ">
+
+      <h1 style="margin-bottom:24px;">
+        ✨ Novo Item Top5
+      </h1>
+
+      <form method="POST" action="/admin/top5/novo">
+
+        <input type="hidden" name="imovel_id" value="${imovelId}">
+
+        <div style="margin-bottom:16px;">
+          <label>Título</label><br>
+          <input name="titulo"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Descrição</label><br>
+          <textarea name="descricao"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;height:120px;"></textarea>
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Imagem URL</label><br>
+          <input name="imagem_url"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Google Maps</label><br>
+          <input name="link_maps"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Instagram</label><br>
+          <input name="link_instagram"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Reviews</label><br>
+          <input name="link_reviews"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Ordem destaque</label><br>
+          <input name="destaque_ordem" type="number"
+            style="width:120px;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <button style="
+          background:#15803d;
+          color:#fff;
+          border:none;
+          padding:14px 18px;
+          border-radius:12px;
+          cursor:pointer;
+          font-weight:bold;
+        ">
+          Salvar
+        </button>
+
+      </form>
+
+    </body>
+    </html>
+  `);
+
+});
 app.get("/admin/top5/excluir/:id", async (req, res) => {
 
   const { id } = req.params;
