@@ -521,8 +521,8 @@ function renderAcoesLugar(maps, instagram, reviews) {
         </a>
       ` : ""}
 
-     ${instagramLink ? `
-        ${escHtml(instagramLink)}
+    ${instagram ? `
+        href="${escHtml(instagram)}"
           target="_blank"
           rel="noopener noreferrer"
           title="Instagram"
@@ -543,7 +543,7 @@ function renderAcoesLugar(maps, instagram, reviews) {
         </a>
       ` : ""}
 
-     ${reviewsLink ? `
+     ${reviews ? `
         ${escHtml(reviews)}
           target="_blank"
           rel="noopener noreferrer"
