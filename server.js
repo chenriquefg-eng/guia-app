@@ -569,6 +569,7 @@ ${descricao ? `
 </div>
 
 </div>
+  `;
 
   return {
   top5: {
