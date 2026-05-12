@@ -536,13 +536,13 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
                       ${titulo}
                     </h3>
 
-                    ${descricao ? `
-                      <p class="text-sm text-gray-600 mt-1">
-                        ${descricao}
-                      </p>
-                    ` : ""}
+                   ${descricao ? `
+  <p class="text-sm text-gray-600 mt-1">
+    ${descricao}
+  </p>
+` : ""}
 
-                    <div style="
+<div style="
   display:flex;
   gap:10px;
   margin-top:12px;
@@ -568,6 +568,7 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
     </a>
   ` : ""}
 
+</div>
 </div>
 
 </div>
