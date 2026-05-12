@@ -1587,6 +1587,19 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
       <h1 style="margin-bottom:24px;">
         ⭐ Painel Top5
       </h1>
+      <a href="/admin/top5/novo/${imovelId}"
+  style="
+    display:inline-block;
+    margin-bottom:24px;
+    background:#15803d;
+    color:#fff;
+    padding:12px 16px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+  ">
+  + Adicionar Top5
+</a>
 
       ${htmlItens}
 
