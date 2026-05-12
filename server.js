@@ -490,6 +490,36 @@ function getNearbyTypeLabel(t, titulo = "") {
 
   return { pt: "Local próximo", en: "Nearby place", es: "Lugar cercano" }[t.lang];
 }
+function renderAcoesLugar(maps) {
+  if (!maps) return "";
+
+  return `
+    <div style="
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    ">
+      <a href="${escHtml(maps)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        title="Ver no mapa"
+        style="
+          width:36px;
+          height:36px;
+          border-radius:999px;
+          background:#1a5c3a;
+          color:#fff;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          text-decoration:none;
+          font-size:16px;
+        ">
+        📍
+      </a>
+    </div>
+  `;
+}
 function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
   const labelsLista = {
     mapLabel: t.mapLabel,
@@ -544,23 +574,7 @@ const top5Section = top5.length
           </p>
         ` : ""}
 
-        ${maps ? `
-          <a href="${escHtml(maps)}"
-             target="_blank"
-             rel="noopener noreferrer"
-             style="
-               display:inline-block;
-               margin-top:8px;
-               font-size:12px;
-               color:#fff;
-               background:#1a5c3a;
-               padding:6px 10px;
-               border-radius:8px;
-               text-decoration:none;
-             ">
-             Ver no mapa
-          </a>
-        ` : ""}
+        ${renderAcoesLugar(maps)}
 
       </div>
     </div>
