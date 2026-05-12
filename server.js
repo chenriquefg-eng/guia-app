@@ -427,9 +427,7 @@ function renderLista(itens = [], labels = {}, secao = "") {
 ` : ""}
 
                 <div class="flex flex-wrap gap-2 mt-3">
-                  ${maps ? `<a href="${escHtml(maps)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#1a5c3a;">${escHtml(mapLabel)}</a>` : ""}
-                  ${instagramLink ? `<a href="${escHtml(instagramLink)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full border" style="border-color:#1a5c3a;color:#1a5c3a;">Instagram</a>` : ""}
-                  ${reviewsLink ? `<a href="${escHtml(reviewsLink)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#3b73b8;">${escHtml(reviewLabel)}</a>` : ""}
+                  ${renderAcoesLugar(maps, instagramLink, reviewsLink)}
                   ${extra ? `<a href="${escHtml(extra)}" target="_blank" rel="noopener noreferrer" class="text-sm px-3 py-2 rounded-full text-white" style="background:#92400e;">${escHtml(extraLabel)}</a>` : ""}
                 </div>
               </div>
