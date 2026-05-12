@@ -1252,20 +1252,26 @@ console.log("FOTOS:", fotos);
 const heroImages = fotos.map(f => f.url).filter(Boolean);
 const heroImage = heroImages[0] || "";
     let conteudoResult = await pool.query(
-  `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1`,
+  `SELECT * FROM imovel_conteudos 
+   WHERE imovel_id = $1 
+   AND idioma = $2 
+   LIMIT 1`,
   [imovel.id, idioma]
 );
 
-    if (conteudoResult.rows.length === 0 && idioma !== "pt") {
-      conteudoResult = await pool.query(
-        `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = 'pt' LIMIT 1`,
-        [imovel.id]
-      );
-    }
+if (conteudoResult.rows.length === 0 && idioma !== "pt") {
+  conteudoResult = await pool.query(
+    `SELECT * FROM imovel_conteudos 
+     WHERE imovel_id = $1 
+     AND idioma = 'pt' 
+     LIMIT 1`,
+    [imovel.id]
+  );
+}
 
-    const conteudo = conteudoResult.rows[0] || {};
+const conteudo = conteudoResult.rows[0] || {};
 
-     let listas = {
+       let listas = {
   cafe: [],
   bares: [],
   proximos: [],
