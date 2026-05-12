@@ -1697,6 +1697,48 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
   `);
 
 });
+app.post("/admin/top5/novo", async (req, res) => {
+
+  const {
+    imovel_id,
+    titulo,
+    descricao,
+    imagem_url,
+    link_maps,
+    link_instagram,
+    link_reviews,
+    destaque_ordem
+  } = req.body;
+
+  await pool.query(`
+    INSERT INTO imovel_secao_itens (
+      imovel_id,
+      titulo,
+      descricao,
+      imagem_url,
+      link_maps,
+      link_instagram,
+      link_reviews,
+      destaque_ordem,
+      ativo
+    )
+    VALUES (
+      $1,$2,$3,$4,$5,$6,$7,$8,true
+    )
+  `, [
+    imovel_id,
+    titulo,
+    descricao,
+    imagem_url,
+    link_maps,
+    link_instagram,
+    link_reviews,
+    destaque_ordem
+  ]);
+
+  res.redirect("/admin/top5/" + imovel_id);
+
+});
 app.get("/admin/top5/excluir/:id", async (req, res) => {
 
   const { id } = req.params;
