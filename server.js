@@ -1275,10 +1275,16 @@ app.get("/admin", async (req, res) => {
           </p>
 
           <p>
-            <a href="/imovel/${imovel.codigo_publico}" target="_blank">
-              Abrir Guia
-            </a>
-          </p>
+  <a href="/imovel/${imovel.codigo_publico}" target="_blank">
+    Abrir Guia
+  </a>
+</p>
+
+<p style="margin-top:10px;">
+  <a href="/admin/imovel/${imovel.id}/fotos">
+    📸 Gerenciar Fotos
+  </a>
+</p>
 
         </div>
       `).join("")}
