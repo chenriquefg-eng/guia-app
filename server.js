@@ -490,8 +490,8 @@ function getNearbyTypeLabel(t, titulo = "") {
 
   return { pt: "Local próximo", en: "Nearby place", es: "Lugar cercano" }[t.lang];
 }
-function renderAcoesLugar(maps) {
-  if (!maps) return "";
+function renderAcoesLugar(maps, instagram, reviews) {
+  if (!maps && !instagram && !reviews) return "";
 
   return `
     <div style="
@@ -499,24 +499,71 @@ function renderAcoesLugar(maps) {
       gap:10px;
       margin-top:12px;
     ">
-      <a href="${escHtml(maps)}"
-        target="_blank"
-        rel="noopener noreferrer"
-        title="Ver no mapa"
-        style="
-          width:36px;
-          height:36px;
-          border-radius:999px;
-          background:#1a5c3a;
-          color:#fff;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          text-decoration:none;
-          font-size:16px;
-        ">
-        📍
-      </a>
+
+      ${maps ? `
+        <a href="${escHtml(maps)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Ver no mapa"
+          style="
+            width:36px;
+            height:36px;
+            border-radius:999px;
+            background:#1a5c3a;
+            color:#fff;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:16px;
+          ">
+          📍
+        </a>
+      ` : ""}
+
+      ${instagram ? `
+        <a href="${escHtml(instagram)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Instagram"
+          style="
+            width:36px;
+            height:36px;
+            border-radius:999px;
+            border:1px solid #d1d5db;
+            background:#fff;
+            color:#374151;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:16px;
+          ">
+          📸
+        </a>
+      ` : ""}
+
+      ${reviews ? `
+        <a href="${escHtml(reviews)}"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Avaliações"
+          style="
+            width:36px;
+            height:36px;
+            border-radius:999px;
+            background:#2563eb;
+            color:#fff;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:16px;
+          ">
+          ⭐
+        </a>
+      ` : ""}
+
     </div>
   `;
 }
