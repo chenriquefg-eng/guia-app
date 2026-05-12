@@ -573,7 +573,6 @@ const top5Section = top5.length
       </section>
     `
   : "";
-
  
 return {
   top5: {
