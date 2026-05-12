@@ -548,25 +548,22 @@ ${descricao ? `
   margin-top:12px;
 ">
 
-  ${maps ? `
-    <a href="${escHtml(maps)}"
-      target="_blank"
-      rel="noopener noreferrer"
-      style="
-        width:36px;
-        height:36px;
-        border-radius:999px;
-        background:#1a5c3a;
-        color:#fff;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        text-decoration:none;
-        font-size:16px;
-      ">
-      📍
-    </a>
-  ` : ""}
+ ${maps ? `
+  <a href="${escHtml(maps)}"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="
+      display:inline-block;
+      margin-top:8px;
+      font-size:12px;
+      color:#fff;
+      background:#1a5c3a;
+      padding:6px 10px;
+      border-radius:8px;
+    ">
+    Ver no mapa
+  </a>
+` : ""}
 
 </div>
 </div>
