@@ -1562,17 +1562,7 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
   ">
   Excluir
 </a>
-          <button style="
-          background:#dc2626;
-          color:#fff;
-          border:none;
-          padding:10px 14px;
-          border-radius:10px;
-          cursor:pointer;
-        ">
-          Excluir
-        </button>
-
+        
       </div>
 
     </div>
