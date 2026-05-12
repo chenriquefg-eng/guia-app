@@ -532,44 +532,45 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
                       ⭐ Recomendado
                     </div>
 
-                    <h3 class="font-semibold text-base text-gray-800">
-  ${titulo}
-</h3>
+                    const top5Section = `
+  <h3 class="font-semibold text-base text-gray-800">
+    ${titulo}
+  </h3>
 
-${descricao ? `
-  <p class="text-sm text-gray-600 mt-1">
-    ${descricao}
-  </p>
-` : ""}
+  ${descricao ? `
+    <p class="text-sm text-gray-600 mt-1">
+      ${descricao}
+    </p>
+  ` : ""}
 
-<div style="
-  display:flex;
-  gap:10px;
-  margin-top:12px;
-">
+  <div style="
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+  ">
 
- ${maps ? `
-  <a href="${escHtml(maps)}"
-    target="_blank"
-    rel="noopener noreferrer"
-    style="
-      display:inline-block;
-      margin-top:8px;
-      font-size:12px;
-      color:#fff;
-      background:#1a5c3a;
-      padding:6px 10px;
-      border-radius:8px;
-    ">
-    Ver no mapa
-  </a>
-` : ""}
+    ${maps ? `
+      <a href="${escHtml(maps)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="
+          display:inline-block;
+          margin-top:8px;
+          font-size:12px;
+          color:#fff;
+          background:#1a5c3a;
+          padding:6px 10px;
+          border-radius:8px;
+        ">
+        Ver no mapa
+      </a>
+    ` : ""}
+
+  </div>
+</div>
 
 </div>
-</div>
-
-</div>
-  `;
+`;
 
   return {
   top5: {
