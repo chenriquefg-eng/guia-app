@@ -1450,6 +1450,158 @@ app.get("/admin/imovel/:id/fotos", async (req, res) => {
     </html>
   `);
 });
+
+app.get("/admin/top5/:imovelId", async (req, res) => {
+
+  const { imovelId } = req.params;
+
+  const itens = await pool.query(`
+    SELECT *
+    FROM imovel_secao_itens
+    WHERE imovel_id = $1
+      AND destaque_ordem IS NOT NULL
+    ORDER BY destaque_ordem ASC
+  `, [imovelId]);
+
+  const htmlItens = itens.rows.map(item => `
+    <div style="
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:16px;
+    ">
+
+      ${item.imagem_url ? `
+        <img src="${item.imagem_url}"
+          style="
+            width:100%;
+            height:160px;
+            object-fit:cover;
+            border-radius:12px;
+            margin-bottom:12px;
+          ">
+      ` : ""}
+
+      <div style="font-size:18px;font-weight:600;margin-bottom:6px;">
+        ${item.titulo || ""}
+      </div>
+
+      <div style="
+        color:#6b7280;
+        font-size:14px;
+        margin-bottom:12px;
+      ">
+        ${item.descricao || ""}
+      </div>
+
+      <div style="
+        display:flex;
+        gap:8px;
+        flex-wrap:wrap;
+      ">
+
+        <a href="${item.link_maps || "#"}"
+          target="_blank"
+          style="
+            padding:8px 12px;
+            border-radius:999px;
+            background:#dcfce7;
+            color:#15803d;
+            text-decoration:none;
+            font-size:13px;
+          ">
+          Maps
+        </a>
+
+        <a href="${item.link_instagram || "#"}"
+          target="_blank"
+          style="
+            padding:8px 12px;
+            border-radius:999px;
+            background:#f3f4f6;
+            color:#374151;
+            text-decoration:none;
+            font-size:13px;
+          ">
+          Instagram
+        </a>
+
+        <a href="${item.link_reviews || "#"}"
+          target="_blank"
+          style="
+            padding:8px 12px;
+            border-radius:999px;
+            background:#fef3c7;
+            color:#ca8a04;
+            text-decoration:none;
+            font-size:13px;
+          ">
+          Reviews
+        </a>
+
+      </div>
+
+      <div style="
+        margin-top:16px;
+        display:flex;
+        gap:10px;
+      ">
+
+        <button style="
+          background:#2563eb;
+          color:#fff;
+          border:none;
+          padding:10px 14px;
+          border-radius:10px;
+          cursor:pointer;
+        ">
+          Editar
+        </button>
+
+        <button style="
+          background:#dc2626;
+          color:#fff;
+          border:none;
+          padding:10px 14px;
+          border-radius:10px;
+          cursor:pointer;
+        ">
+          Excluir
+        </button>
+
+      </div>
+
+    </div>
+  `).join("");
+
+  res.send(`
+    <!doctype html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Painel Top5</title>
+    </head>
+
+    <body style="
+      font-family:Arial;
+      background:#f3f4f6;
+      padding:30px;
+      max-width:900px;
+      margin:auto;
+    ">
+
+      <h1 style="margin-bottom:24px;">
+        ⭐ Painel Top5
+      </h1>
+
+      ${htmlItens}
+
+    </body>
+    </html>
+  `);
+
+});
 app.post("/admin/imovel/:id/fotos", async (req, res) => {
   const { id } = req.params;
   const { url, categoria, ordem } = req.body;
