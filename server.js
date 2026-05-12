@@ -515,7 +515,7 @@ function renderAcoesLugar(maps, instagram, reviews) {
             text-decoration:none;
             font-size:16px;
           ">
-          📍
+          <i data-lucide="map-pin" style="width:16px;height:16px;"></i>
         </a>
       ` : ""}
 
@@ -537,7 +537,7 @@ function renderAcoesLugar(maps, instagram, reviews) {
             text-decoration:none;
             font-size:16px;
           ">
-          📸
+          <i data-lucide="instagram" style="width:16px;height:16px;"></i>
         </a>
       ` : ""}
 
@@ -559,7 +559,7 @@ function renderAcoesLugar(maps, instagram, reviews) {
             text-decoration:none;
             font-size:16px;
           ">
-          ⭐
+          <i data-lucide="star" style="width:16px;height:16px;"></i>
         </a>
       ` : ""}
 
