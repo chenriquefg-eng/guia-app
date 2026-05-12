@@ -561,10 +561,12 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
       ` : ""}
 
     </div>
-  </div>
+</div>
 `;
 
-  return {
+}).join("");
+
+return {
   top5: {
     title: "Imperdíveis",
     html: top5Section
