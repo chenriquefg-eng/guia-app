@@ -496,7 +496,16 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
     reviewLabel: t.reviewLabel,
     extraLabel: t.extraLabel
   };
+const top5Section = top5.length
+  ? `
+      <section id="top5" class="mb-8">
+        <div class="rounded-2xl p-5 bg-white border border-gray-200 shadow-sm">
+          <div class="flex items-center gap-2 mb-4">
+            <span style="font-size:18px;">⭐</span>
+            <h2 class="text-lg font-semibold text-gray-800">Imperdíveis próximos ao apartamento</h2>
+          </div>
 
+          <div class="grid gap-4 sm:grid-cols-2">
   ${top5.map((item) => {
 
   const titulo = escHtml(item.titulo || "");
