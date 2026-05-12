@@ -1218,6 +1218,77 @@ app.get("/imovel/:codigo/card", async (req, res) => {
     return res.status(500).send("Erro interno ao carregar o card.");
   }
 });
+app.get("/admin", async (req, res) => {
+
+  const result = await pool.query(`
+    SELECT id, nome, codigo_publico
+    FROM imoveis
+    ORDER BY id DESC
+  `);
+
+  const imoveis = result.rows;
+
+  res.send(`
+    <html>
+    <head>
+      <title>Painel Admin</title>
+
+      <style>
+        body{
+          font-family:Arial;
+          padding:40px;
+          background:#f5f5f5;
+        }
+
+        .card{
+          background:#fff;
+          padding:20px;
+          margin-bottom:16px;
+          border-radius:12px;
+          box-shadow:0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        a{
+          text-decoration:none;
+          color:#2563eb;
+          font-weight:bold;
+        }
+
+        h1{
+          margin-bottom:30px;
+        }
+      </style>
+    </head>
+
+    <body>
+
+      <h1>🏠 Painel Guia do Hóspede</h1>
+
+      ${imoveis.map(imovel => `
+        <div class="card">
+
+          <h2>${imovel.nome}</h2>
+
+          <p>
+            Código:
+            <strong>${imovel.codigo_publico}</strong>
+          </p>
+
+          <p>
+            <a href="/imovel/${imovel.codigo_publico}" target="_blank">
+              Abrir Guia
+            </a>
+          </p>
+
+        </div>
+      `).join("")}
+
+    </body>
+    </html>
+  `);
+
+});
+
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   try {
     const codigo = req.params.codigo;
