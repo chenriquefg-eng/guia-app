@@ -1367,6 +1367,18 @@ app.get("/admin/imovel/:id/fotos", async (req, res) => {
     </html>
   `);
 });
+app.post("/admin/imovel/:id/fotos", async (req, res) => {
+  const { id } = req.params;
+  const { url, categoria, ordem } = req.body;
+
+  await pool.query(
+    `INSERT INTO imovel_fotos (imovel_id, url, categoria, ordem, ativo)
+     VALUES ($1, $2, $3, $4, true)`,
+    [id, url, categoria || "apartamento", ordem || 0]
+  );
+
+  res.redirect(`/admin/imovel/${id}/fotos`);
+});
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   try {
     const codigo = req.params.codigo;
