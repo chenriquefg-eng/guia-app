@@ -586,9 +586,11 @@ const top5Section = top5.length
   ${top5.map((item) => {
 
   const titulo = escHtml(item.titulo || "");
-  const imagem = item.imagem_url || "";
-  const descricao = escHtml(item.descricao || "");
-  const maps = item.link_maps || "";
+const imagem = item.imagem_url || "";
+const descricao = escHtml(item.descricao || "");
+const maps = item.link_maps || "";
+const instagramLink = item.link_instagram || "";
+const reviewsLink = item.link_reviews || "";
 
   return `
     <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
