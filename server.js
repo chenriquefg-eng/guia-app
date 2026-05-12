@@ -386,8 +386,8 @@ function renderLista(itens = [], labels = {}, secao = "") {
           const imagem = item.imagem_url || "";
           const descricao = escHtml(item.descricao || "");
           const maps = item.link_maps || "";
-          const instagram = item.link_instagram || "";
-          const reviews = item.link_reviews || "";
+          const instagramLink = item.link_instagram || "";
+          const reviewsLink = item.link_reviews || "";
           const extra = item.link_extra || "";
           const nearbyType =
   secao === "proximos"
@@ -521,8 +521,8 @@ function renderAcoesLugar(maps, instagram, reviews) {
         </a>
       ` : ""}
 
-      ${instagram ? `
-        <a href="${escHtml(instagram)}"
+     ${instagramLink ? `
+        ${escHtml(instagramLink)}
           target="_blank"
           rel="noopener noreferrer"
           title="Instagram"
@@ -543,8 +543,8 @@ function renderAcoesLugar(maps, instagram, reviews) {
         </a>
       ` : ""}
 
-      ${reviews ? `
-        <a href="${escHtml(reviews)}"
+     ${reviewsLink ? `
+        ${escHtml(reviews)}
           target="_blank"
           rel="noopener noreferrer"
           title="Avaliações"
@@ -621,7 +621,7 @@ const top5Section = top5.length
           </p>
         ` : ""}
 
-       ${renderAcoesLugar(maps, instagram, reviews)}
+      ${renderAcoesLugar(maps, instagramLink, reviewsLink)}
 
       </div>
     </div>
