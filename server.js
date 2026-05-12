@@ -568,6 +568,12 @@ const top5Section = top5.length
 
 }).join("")}
 
+          </div>
+        </div>
+      </section>
+    `
+  : "";
+
               return `
   <div class="rounded-2xl border border-gray-200 bg-white overflow-hidden shadow-sm">
 
