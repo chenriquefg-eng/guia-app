@@ -1238,18 +1238,19 @@ const t = getLabels(idioma);
 
     const imovel = imovelResult.rows[0];
 
-const fotosResult = await pool.query(
-  `SELECT url, ordem
-   FROM imovel_fotos
-   WHERE imovel_id = $1
-   ORDER BY ordem ASC, id ASC`,
-  [imovel.id]
-);
+const fotosResult = await pool.query(`
+  SELECT url, categoria, ordem, destaque
+  FROM imovel_fotos
+  WHERE imovel_id = $1
+    AND ativo = true
+  ORDER BY destaque DESC, ordem ASC, id ASC
+`, [imovel.id]);
 
 const fotos = fotosResult.rows || [];
 console.log("FOTOS:", fotos);
-const heroImage = fotos.length > 0 ? fotos[0].url : "";
-const heroImages = fotos.map((f) => f.url).filter(Boolean);
+
+const heroImages = fotos.map(f => f.url).filter(Boolean);
+const heroImage = heroImages[0] || "";
     let conteudoResult = await pool.query(
   `SELECT * FROM imovel_conteudos WHERE imovel_id = $1 AND idioma = $2 LIMIT 1`,
   [imovel.id, idioma]
