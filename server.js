@@ -533,10 +533,10 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
                     </div>
 
                     <h3 class="font-semibold text-base text-gray-800">
-                      ${titulo}
-                    </h3>
+  ${titulo}
+</h3>
 
-                  ${descricao ? `
+${descricao ? `
   <p class="text-sm text-gray-600 mt-1">
     ${descricao}
   </p>
@@ -568,6 +568,7 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
     </a>
   ` : ""}
 
+</div>
 </div>
 
 </div>
