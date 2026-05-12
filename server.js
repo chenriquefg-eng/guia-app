@@ -536,7 +536,7 @@ function buildSections(t, conteudo, listas, top5 = [], heroImages = []) {
                       ${titulo}
                     </h3>
 
-                   ${descricao ? `
+                   ${descricao ?
   <p class="text-sm text-gray-600 mt-1">
     ${descricao}
   </p>
