@@ -544,7 +544,8 @@ function renderAcoesLugar(maps, instagram, reviews) {
       ` : ""}
 
      ${reviews ? `
-        ${escHtml(reviews)}
+  <a
+    href="${escHtml(reviews)}"
           target="_blank"
           rel="noopener noreferrer"
           title="Avaliações"
