@@ -1294,7 +1294,79 @@ app.get("/admin", async (req, res) => {
   `);
 
 });
+app.get("/admin/imovel/:id/fotos", async (req, res) => {
+  const { id } = req.params;
 
+  const imovelResult = await pool.query(
+    `SELECT id, nome, codigo_publico FROM imoveis WHERE id = $1 LIMIT 1`,
+    [id]
+  );
+
+  if (imovelResult.rows.length === 0) {
+    return res.send("Imóvel não encontrado.");
+  }
+
+  const imovel = imovelResult.rows[0];
+
+  const fotosResult = await pool.query(
+    `SELECT id, url, categoria, ordem, destaque, ativo
+     FROM imovel_fotos
+     WHERE imovel_id = $1
+     ORDER BY ordem ASC, id ASC`,
+    [id]
+  );
+
+  const fotos = fotosResult.rows;
+
+  res.send(`
+    <html>
+    <head>
+      <title>Fotos do Imóvel</title>
+      <style>
+        body{font-family:Arial;padding:40px;background:#f5f5f5;}
+        .card{background:#fff;padding:20px;margin-bottom:16px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.08);}
+        img{width:180px;height:120px;object-fit:cover;border-radius:10px;display:block;margin-bottom:10px;}
+        input{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #ddd;border-radius:8px;}
+        button{padding:10px 16px;border:0;border-radius:8px;background:#2563eb;color:white;font-weight:bold;cursor:pointer;}
+        a{text-decoration:none;color:#2563eb;font-weight:bold;}
+      </style>
+    </head>
+    <body>
+      <h1>📸 Fotos - ${imovel.nome}</h1>
+
+      <p><a href="/admin">← Voltar ao painel</a></p>
+      <p><a href="/imovel/${imovel.codigo_publico}" target="_blank">Abrir guia</a></p>
+
+      <div class="card">
+        <h2>Adicionar foto por URL</h2>
+
+        <form method="POST" action="/admin/imovel/${imovel.id}/fotos">
+          <label>URL da foto</label>
+          <input name="url" required placeholder="https://...">
+
+          <label>Categoria</label>
+          <input name="categoria" value="apartamento">
+
+          <label>Ordem</label>
+          <input name="ordem" type="number" value="${fotos.length + 1}">
+
+          <button type="submit">Adicionar Foto</button>
+        </form>
+      </div>
+
+      ${fotos.map(foto => `
+        <div class="card">
+          <img src="${foto.url}">
+          <p><strong>Categoria:</strong> ${foto.categoria || ""}</p>
+          <p><strong>Ordem:</strong> ${foto.ordem}</p>
+          <p><strong>Ativo:</strong> ${foto.ativo ? "Sim" : "Não"}</p>
+          <p style="font-size:12px;word-break:break-all;">${foto.url}</p>
+        </div>
+      `).join("")}
+    </body>
+    </html>
+  `);
+});
 app.get("/imovel/:codigo/:idioma?", async (req, res) => {
   try {
     const codigo = req.params.codigo;
