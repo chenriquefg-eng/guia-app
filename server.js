@@ -520,7 +520,7 @@ function renderAcoesLugar(maps, instagram, reviews) {
       ` : ""}
 
     ${instagram ? `
-        href="${escHtml(instagram)}"
+        <a href="${escHtml(instagram)}"
           target="_blank"
           rel="noopener noreferrer"
           title="Instagram"
