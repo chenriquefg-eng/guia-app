@@ -1602,6 +1602,18 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
   `);
 
 });
+app.get("/admin/top5/excluir/:id", async (req, res) => {
+
+  const { id } = req.params;
+
+  await pool.query(`
+    DELETE FROM imovel_secao_itens
+    WHERE id = $1
+  `, [id]);
+
+  res.redirect("back");
+
+});
 app.post("/admin/imovel/:id/fotos", async (req, res) => {
   const { id } = req.params;
   const { url, categoria, ordem } = req.body;
