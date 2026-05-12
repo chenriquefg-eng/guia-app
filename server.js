@@ -1631,7 +1631,25 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
       <h1 style="margin-bottom:24px;">
         ✨ Novo Item Top5
       </h1>
-
+        <div style="
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:24px;
+  color:#374151;
+  font-size:14px;
+  line-height:1.6;
+">
+  <strong>Como preencher:</strong><br>
+  <b>Título:</b> nome do local. Ex: Terra Brasilis.<br>
+  <b>Descrição:</b> endereço curto + tipo + tempo. Ex: Comida brasileira · 15 min a pé.<br>
+  <b>Link da imagem:</b> cole o link direto da imagem hospedada no Postimg.<br>
+  <b>Link do Google Maps:</b> abra o local no Google Maps, clique em Compartilhar e copie o link.<br>
+  <b>Instagram:</b> cole o link do perfil oficial do local.<br>
+  <b>Link das avaliações:</b> cole o link de avaliações do Google ou busca do local.<br>
+  <b>Posição no Top5:</b> número da posição. Ex: 1, 2, 3, 4 ou 5.
+</div>
       <form method="POST" action="/admin/top5/novo">
 
         <input type="hidden" name="imovel_id" value="${imovelId}">
