@@ -1797,6 +1797,21 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
         </div>
 
         <div style="margin-bottom:16px;">
+          <div style="
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#7c2d12;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:16px;
+  font-size:14px;
+  line-height:1.5;
+">
+  <strong>📸 Orientação para imagem do card:</strong><br>
+  Use imagem horizontal no formato 16:9.<br>
+  Tamanho recomendado: <strong>1200 x 675 px</strong> ou <strong>1600 x 900 px</strong>.<br>
+  Mantenha o ponto principal da foto no centro, pois o sistema pode cortar as bordas para manter o visual bonito no celular.
+</div>
           <label>Link da imagem</label><br>
           <input
             id="imagem_url"
@@ -1936,6 +1951,21 @@ app.get("/admin/top5/editar/:id", async (req, res) => {
         </div>
 
         <div style="margin-bottom:16px;">
+          <div style="
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  color:#7c2d12;
+  padding:14px;
+  border-radius:14px;
+  margin-bottom:16px;
+  font-size:14px;
+  line-height:1.5;
+">
+  <strong>📸 Orientação para imagem do card:</strong><br>
+  Use imagem horizontal no formato 16:9.<br>
+  Tamanho recomendado: <strong>1200 x 675 px</strong> ou <strong>1600 x 900 px</strong>.<br>
+  Mantenha o ponto principal da foto no centro, pois o sistema pode cortar as bordas para manter o visual bonito no celular.
+</div>
           <label>Link da imagem</label><br>
           <input
             name="imagem_url"
