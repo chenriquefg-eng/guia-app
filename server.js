@@ -1807,7 +1807,26 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
         </button>
 
       </form>
+      <script>
 
+const imagemInput = document.getElementById("imagem_url");
+const preview = document.getElementById("preview_imagem");
+
+imagemInput.addEventListener("input", () => {
+
+  const url = imagemInput.value.trim();
+
+  if (!url) {
+    preview.style.display = "none";
+    return;
+  }
+
+  preview.src = url;
+  preview.style.display = "block";
+
+});
+
+</script>
     </body>
     </html>
   `);
