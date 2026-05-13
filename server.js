@@ -1845,6 +1845,51 @@ app.get("/admin/top5/editar/:id", async (req, res) => {
   `);
 
 });
+
+app.post("/admin/top5/editar", async (req, res) => {
+  try {
+    const {
+      id,
+      imovel_id,
+      titulo,
+      descricao,
+      imagem_url,
+      link_maps,
+      link_instagram,
+      link_reviews,
+      destaque_ordem
+    } = req.body;
+
+    await pool.query(`
+      UPDATE imovel_secao_itens
+      SET
+        titulo = $1,
+        descricao = $2,
+        imagem_url = $3,
+        link_maps = $4,
+        link_instagram = $5,
+        link_reviews = $6,
+        destaque_ordem = $7,
+        ordem = $7
+      WHERE id = $8
+    `, [
+      titulo || "",
+      descricao || "",
+      imagem_url || null,
+      link_maps || null,
+      link_instagram || null,
+      link_reviews || null,
+      Number(destaque_ordem || 1),
+      id
+    ]);
+
+    res.redirect("/admin/top5/" + imovel_id);
+
+  } catch (err) {
+    console.error("ERRO AO EDITAR TOP5:", err);
+    res.status(500).send("Erro ao editar Top5. Veja o log do servidor.");
+  }
+});
 app.post("/admin/top5/novo", async (req, res) => {
   try {
     const {
