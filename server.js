@@ -1548,7 +1548,19 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
         display:flex;
         gap:10px;
       ">
-
+        <a href="/admin/top5/editar/${item.id}"
+  style="
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+  ">
+  Editar
+</a>
         <a href="/admin/top5/excluir/${item.id}"
   onclick="return confirm('Deseja excluir este item?')"
   style="
