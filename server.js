@@ -1345,15 +1345,36 @@ app.get("/admin", async (req, res) => {
           </p>
 
           <p>
+
   <a href="/imovel/${imovel.codigo_publico}" target="_blank">
     Abrir Guia
   </a>
-</p>
 
-<p style="margin-top:10px;">
-  <a href="/admin/imovel/${imovel.id}/fotos">
-    📸 Gerenciar Fotos
+  <br><br>
+
+  <a href="/admin/imovel/${imovel.id}/fotos"
+    style="
+      display:inline-block;
+      margin-top:8px;
+      margin-right:10px;
+      color:#2563eb;
+      text-decoration:none;
+      font-weight:bold;
+    ">
+    Fotos
   </a>
+
+  <a href="/admin/top5/${imovel.id}"
+    style="
+      display:inline-block;
+      margin-top:8px;
+      color:#15803d;
+      text-decoration:none;
+      font-weight:bold;
+    ">
+    Top5
+  </a>
+
 </p>
 
         </div>
