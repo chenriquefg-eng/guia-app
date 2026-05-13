@@ -1346,34 +1346,52 @@ app.get("/admin", async (req, res) => {
 
           <p>
 
-  <a href="/imovel/${imovel.codigo_publico}" target="_blank">
-    Abrir Guia
-  </a>
+  <a href="/imovel/${imovel.codigo_publico}" target="_blank"
+  style="
+    display:inline-block;
+    margin-top:12px;
+    margin-right:8px;
+    padding:10px 14px;
+    border-radius:999px;
+    background:#111827;
+    color:#fff;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+  ">
+  Abrir Guia
+</a>
 
-  <br><br>
+<a href="/admin/imovel/${imovel.id}/fotos"
+  style="
+    display:inline-block;
+    margin-top:12px;
+    margin-right:8px;
+    padding:10px 14px;
+    border-radius:999px;
+    background:#eff6ff;
+    color:#2563eb;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+  ">
+  Fotos
+</a>
 
-  <a href="/admin/imovel/${imovel.id}/fotos"
-    style="
-      display:inline-block;
-      margin-top:8px;
-      margin-right:10px;
-      color:#2563eb;
-      text-decoration:none;
-      font-weight:bold;
-    ">
-    Fotos
-  </a>
-
-  <a href="/admin/top5/${imovel.id}"
-    style="
-      display:inline-block;
-      margin-top:8px;
-      color:#15803d;
-      text-decoration:none;
-      font-weight:bold;
-    ">
-    Top5
-  </a>
+<a href="/admin/top5/${imovel.id}"
+  style="
+    display:inline-block;
+    margin-top:12px;
+    padding:10px 14px;
+    border-radius:999px;
+    background:#ecfdf5;
+    color:#15803d;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+  ">
+  Top5
+</a>
 
 </p>
 
