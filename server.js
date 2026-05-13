@@ -1757,7 +1757,30 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
       max-width:700px;
       margin:auto;
     ">
+      <div style="
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+">
 
+  <a href="/admin"
+    style="...">
+    ← Painel
+  </a>
+
+  <a href="/admin/imovel/1/fotos"
+    style="...">
+    📸 Fotos
+  </a>
+
+  <a href="/imovel/codigo"
+    target="_blank"
+    style="...">
+    🌐 Abrir Guia
+  </a>
+
+</div>
       <h1 style="margin-bottom:24px;">
         ✨ Novo Item Top5
       </h1>
