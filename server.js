@@ -1298,9 +1298,23 @@ app.get("/imovel/:codigo/card", async (req, res) => {
 app.get("/admin", async (req, res) => {
 
   const result = await pool.query(`
-    SELECT id, nome, codigo_publico
-    FROM imoveis
-    ORDER BY id DESC
+    SELECT
+  i.id,
+  i.nome,
+  i.codigo_publico,
+
+  (
+    SELECT f.url
+    FROM imovel_fotos f
+    WHERE f.imovel_id = i.id
+      AND f.ativo = true
+    ORDER BY f.destaque DESC, f.ordem ASC, f.id ASC
+    LIMIT 1
+  ) AS foto_capa
+
+FROM imoveis i
+
+ORDER BY i.id DESC
   `);
 
   const imoveis = result.rows;
