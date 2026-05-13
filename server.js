@@ -1487,7 +1487,47 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
       <div style="font-size:18px;font-weight:600;margin-bottom:6px;">
         ${item.titulo || ""}
       </div>
+      <div style="
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+">
 
+  <span style="
+    background:#eef2ff;
+    color:#4338ca;
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+  ">
+    Posição: ${item.destaque_ordem || "-"}
+  </span>
+
+  <span style="
+    background:#f3f4f6;
+    color:#374151;
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+  ">
+    Categoria: ${item.secao || "-"}
+  </span>
+
+  <span style="
+    background:#ecfeff;
+    color:#0f766e;
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+  ">
+    Idioma: ${item.idioma || "pt"}
+  </span>
+
+</div>
       <div style="
         color:#6b7280;
         font-size:14px;
