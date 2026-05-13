@@ -403,7 +403,6 @@ function renderLista(itens = [], labels = {}, secao = "") {
        width:100%;
        height:140px;
        object-fit:cover;
-       background:#f3f4f6;
        border-top-left-radius:16px;
        border-top-right-radius:16px;
 ">
@@ -603,7 +602,6 @@ const reviewsLink = item.link_reviews || "";
        width:100%;
        height:140px;
        object-fit:cover;
-       background:#f3f4f6;
        border-top-left-radius:16px;
        border-top-right-radius:16px;
 ">
