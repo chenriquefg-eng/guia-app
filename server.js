@@ -1667,13 +1667,13 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
         </div>
 
         <div style="margin-bottom:16px;">
-          <label>Imagem URL</label><br>
+          <label>Link da imagem</label><br>
           <input name="imagem_url"
             style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
         </div>
 
         <div style="margin-bottom:16px;">
-          <label>Google Maps</label><br>
+          <label>Link do Google Maps</label><br>
           <input name="link_maps"
             style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
         </div>
@@ -1685,13 +1685,13 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
         </div>
 
         <div style="margin-bottom:16px;">
-          <label>Reviews</label><br>
+          <label>Link das avaliações</label><br>
           <input name="link_reviews"
             style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
         </div>
 
         <div style="margin-bottom:16px;">
-          <label>Ordem destaque</label><br>
+          <label>Posição no Top5</label><br>
           <input name="destaque_ordem" type="number"
             style="width:120px;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
         </div>
