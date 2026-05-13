@@ -322,7 +322,7 @@ function buildMenuItems(t) {
     // 👉 AQUI É O CERTO
     { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
 
-    { id: "locomover", label: t.sections.locomover, icon: "car-front", color: "#ea580c" },
+    { id: "locomover", label: t.sections.locomover, icon: "car", color: "#ea580c" },
     { id: "chegar", label: t.sections.chegar, icon: "map-pinned", color: "#2563eb" },
     { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
     { id: "bares", label: t.sections.bares, icon: "martini", color: "#7c2d12" },
@@ -330,7 +330,7 @@ function buildMenuItems(t) {
     { id: "partir", label: t.sections.partir, icon: "briefcase", color: "#475569" },
     { id: "emergencia", label: t.sections.emergencia, icon: "siren", color: "#dc2626" },
     { id: "avaliacao", label: t.sections.avaliacao, icon: "star", color: "#eab308" },
-    { id: "faq", label: t.sections.faq, icon: "circle-help", color: "#6366f1" },
+    { id: "faq", label: t.sections.faq, icon: "help-circle", color: "#6366f1" },
     { id: "cafe", label: t.sections.cafe, icon: "coffee", color: "#92400e" },
     { id: "proximos", label: t.sections.proximos, icon: "map", color: "#15803d" },
     { id: "doces", label: t.sections.doces, icon: "cake-slice", color: "#db2777" },
