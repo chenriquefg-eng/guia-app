@@ -1298,7 +1298,7 @@ app.get("/imovel/:codigo/card", async (req, res) => {
 app.get("/admin", async (req, res) => {
 
   const result = await pool.query(`
-    SELECT
+  SELECT
   i.id,
   i.nome,
   i.codigo_publico,
@@ -1310,7 +1310,28 @@ app.get("/admin", async (req, res) => {
       AND f.ativo = true
     ORDER BY f.destaque DESC, f.ordem ASC, f.id ASC
     LIMIT 1
-  ) AS foto_capa
+  ) AS foto_capa,
+
+  (
+    SELECT COUNT(*)
+    FROM imovel_fotos f
+    WHERE f.imovel_id = i.id
+      AND f.ativo = true
+  ) AS total_fotos,
+
+  (
+    SELECT COUNT(*)
+    FROM imovel_secao_itens s
+    WHERE s.imovel_id = i.id
+      AND s.destaque_ordem IS NOT NULL
+      AND s.idioma = 'pt'
+  ) AS total_top5,
+
+  (
+    SELECT COUNT(DISTINCT s.idioma)
+    FROM imovel_secao_itens s
+    WHERE s.imovel_id = i.id
+  ) AS total_idiomas
 
 FROM imoveis i
 
@@ -1369,6 +1390,47 @@ ORDER BY i.id DESC
     ">
 ` : ""}
           <h2>${imovel.nome}</h2>
+          <div style="
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:12px 0 16px;
+">
+
+  <span style="
+    background:#eff6ff;
+    color:#2563eb;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+  ">
+    📸 ${imovel.total_fotos || 0} fotos
+  </span>
+
+  <span style="
+    background:#ecfdf5;
+    color:#15803d;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+  ">
+    ⭐ ${imovel.total_top5 || 0} Top5
+  </span>
+
+  <span style="
+    background:#f5f3ff;
+    color:#7c3aed;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:700;
+  ">
+    🌎 ${imovel.total_idiomas || 1} idiomas
+  </span>
+
+</div>
 
           <p>
             Código:
