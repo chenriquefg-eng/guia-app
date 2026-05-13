@@ -334,9 +334,9 @@ function buildMenuItems(t) {
     { id: "cafe", label: t.sections.cafe, icon: "coffee", color: "#92400e" },
     { id: "proximos", label: t.sections.proximos, icon: "map", color: "#15803d" },
     { id: "doces", label: t.sections.doces, icon: "cake-slice", color: "#db2777" },
-    { id: "contato", label: t.sections.contato, icon: "message-circle", color: "#16a34a" }
+    { id: "contato", label: t.sections.contato, icon: "message-circle", color: "#16a34a" },
 
-  ];
+];
 }
 
 function agruparListasPorSecao(rows = []) {
