@@ -1459,7 +1459,8 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
     SELECT *
     FROM imovel_secao_itens
     WHERE imovel_id = $1
-      AND destaque_ordem IS NOT NULL
+  AND destaque_ordem IS NOT NULL
+  AND idioma = 'pt'
     ORDER BY destaque_ordem ASC
   `, [imovelId]);
 
