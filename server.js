@@ -1357,7 +1357,17 @@ ORDER BY i.id DESC
 
       ${imoveis.map(imovel => `
         <div class="card">
-
+                    
+          ${imovel.foto_capa ? `
+  <img src="${imovel.foto_capa}"
+    style="
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:16px;
+      margin-bottom:16px;
+    ">
+` : ""}
           <h2>${imovel.nome}</h2>
 
           <p>
