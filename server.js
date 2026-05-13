@@ -1980,8 +1980,8 @@ app.get("/admin/top5/editar/:id", async (req, res) => {
       font-family:Arial;
       background:#f3f4f6;
       padding:30px;
-      max-width:700px;
-      margin:auto;
+      max-width:900px;
+      margin:0 auto;
     ">
 
       <h1 style="margin-bottom:24px;">
