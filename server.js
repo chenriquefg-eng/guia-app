@@ -1763,22 +1763,57 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
   flex-wrap:wrap;
   margin-bottom:24px;
 ">
+<div style="
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:24px;
+">
 
   <a href="/admin"
-    style="...">
+    style="
+      display:inline-block;
+      background:#e5e7eb;
+      color:#111827;
+      padding:10px 14px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+    ">
     ← Painel
   </a>
 
-  <a href="/admin/imovel/1/fotos"
-    style="...">
+  <a href="/admin/imovel/${imovelId}/fotos"
+    style="
+      display:inline-block;
+      background:#eff6ff;
+      color:#2563eb;
+      padding:10px 14px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+    ">
     📸 Fotos
   </a>
 
-  <a href="/imovel/codigo"
+  <a href="/imovel/${imovelId}"
     target="_blank"
-    style="...">
+    style="
+      display:inline-block;
+      background:#ecfdf5;
+      color:#15803d;
+      padding:10px 14px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+    ">
     🌐 Abrir Guia
   </a>
+
+</div>
 
 </div>
       <h1 style="margin-bottom:24px;">
