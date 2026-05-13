@@ -323,7 +323,7 @@ function buildMenuItems(t) {
     { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
 
     { id: "locomover", label: t.sections.locomover, icon: "car", color: "#ea580c" },
-    { id: "chegar", label: t.sections.chegar, icon: "map-pinned", color: "#2563eb" },
+    { id: "chegar", label: t.sections.chegar, icon: "map-pin", color: "#2563eb" },
     { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
     { id: "bares", label: t.sections.bares, icon: "martini", color: "#7c2d12" },
     { id: "fazer", label: t.sections.fazer, icon: "camera", color: "#0891b2" },
