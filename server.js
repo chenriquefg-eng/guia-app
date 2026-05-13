@@ -1752,10 +1752,24 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
 
         <div style="margin-bottom:16px;">
           <label>Link da imagem</label><br>
-          <input name="imagem_url"
+          <input
+            id="imagem_url"
+            name="imagem_url"
             style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
         </div>
-
+        <div style="margin-top:12px;">
+  <img
+    id="preview_imagem"
+    src=""
+    style="
+      width:100%;
+      max-height:220px;
+      object-fit:cover;
+      border-radius:14px;
+      display:none;
+      border:1px solid #e5e7eb;
+    ">
+</div>
         <div style="margin-bottom:16px;">
           <label>Link do Google Maps</label><br>
           <input name="link_maps"
