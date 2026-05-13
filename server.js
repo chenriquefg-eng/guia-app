@@ -1728,6 +1728,123 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
   `);
 
 });
+app.get("/admin/top5/editar/:id", async (req, res) => {
+
+  const { id } = req.params;
+
+  const result = await pool.query(`
+    SELECT *
+    FROM imovel_secao_itens
+    WHERE id = $1
+    LIMIT 1
+  `, [id]);
+
+  if (result.rows.length === 0) {
+    return res.send("Item não encontrado.");
+  }
+
+  const item = result.rows[0];
+
+  res.send(`
+    <!doctype html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Editar Top5</title>
+    </head>
+
+    <body style="
+      font-family:Arial;
+      background:#f3f4f6;
+      padding:30px;
+      max-width:700px;
+      margin:auto;
+    ">
+
+      <h1 style="margin-bottom:24px;">
+        ✏️ Editar Item Top5
+      </h1>
+
+      <form method="POST" action="/admin/top5/editar">
+
+        <input type="hidden" name="id" value="${item.id}">
+        <input type="hidden" name="imovel_id" value="${item.imovel_id}">
+
+        <div style="margin-bottom:16px;">
+          <label>Título</label><br>
+          <input
+            name="titulo"
+            value="${escHtml(item.titulo || "")}"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Descrição</label><br>
+          <textarea
+            name="descricao"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;height:120px;">${escHtml(item.descricao || "")}</textarea>
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Link da imagem</label><br>
+          <input
+            name="imagem_url"
+            value="${escHtml(item.imagem_url || "")}"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Link do Google Maps</label><br>
+          <input
+            name="link_maps"
+            value="${escHtml(item.link_maps || "")}"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Instagram</label><br>
+          <input
+            name="link_instagram"
+            value="${escHtml(item.link_instagram || "")}"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Link das avaliações</label><br>
+          <input
+            name="link_reviews"
+            value="${escHtml(item.link_reviews || "")}"
+            style="width:100%;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <label>Posição no Top5</label><br>
+          <input
+            type="number"
+            name="destaque_ordem"
+            value="${item.destaque_ordem || 1}"
+            style="width:120px;padding:12px;border-radius:10px;border:1px solid #d1d5db;">
+        </div>
+
+        <button style="
+          background:#2563eb;
+          color:#fff;
+          border:none;
+          padding:14px 18px;
+          border-radius:12px;
+          cursor:pointer;
+          font-weight:bold;
+        ">
+          Salvar Alterações
+        </button>
+
+      </form>
+
+    </body>
+    </html>
+  `);
+
+});
 app.post("/admin/top5/novo", async (req, res) => {
   try {
     const {
