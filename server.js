@@ -1588,6 +1588,37 @@ app.get("/admin/top5/:imovelId", async (req, res) => {
         display:flex;
         gap:10px;
       ">
+      <div style="
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
+">
+
+  <a href="/admin/top5/subir/${item.id}"
+    style="
+      background:#e5e7eb;
+      color:#111827;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:bold;
+    ">
+    ↑ Subir
+  </a>
+
+  <a href="/admin/top5/descer/${item.id}"
+    style="
+      background:#e5e7eb;
+      color:#111827;
+      padding:8px 12px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:bold;
+    ">
+    ↓ Descer
+  </a>
+
+</div>
         <a href="/admin/top5/editar/${item.id}"
   style="
     background:#2563eb;
@@ -1988,6 +2019,108 @@ app.get("/admin/top5/excluir/:id", async (req, res) => {
     DELETE FROM imovel_secao_itens
     WHERE id = $1
   `, [id]);
+
+  res.redirect("back");
+
+});
+app.get("/admin/top5/subir/:id", async (req, res) => {
+
+  const { id } = req.params;
+
+  const atual = await pool.query(`
+    SELECT *
+    FROM imovel_secao_itens
+    WHERE id = $1
+    LIMIT 1
+  `, [id]);
+
+  if (!atual.rows.length) {
+    return res.redirect("back");
+  }
+
+  const item = atual.rows[0];
+
+  const acima = await pool.query(`
+    SELECT *
+    FROM imovel_secao_itens
+    WHERE imovel_id = $1
+      AND idioma = $2
+      AND destaque_ordem < $3
+    ORDER BY destaque_ordem DESC
+    LIMIT 1
+  `, [
+    item.imovel_id,
+    item.idioma,
+    item.destaque_ordem
+  ]);
+
+  if (acima.rows.length) {
+
+    const outro = acima.rows[0];
+
+    await pool.query(`
+      UPDATE imovel_secao_itens
+      SET destaque_ordem = $1
+      WHERE id = $2
+    `, [outro.destaque_ordem, item.id]);
+
+    await pool.query(`
+      UPDATE imovel_secao_itens
+      SET destaque_ordem = $1
+      WHERE id = $2
+    `, [item.destaque_ordem, outro.id]);
+  }
+
+  res.redirect("back");
+
+});
+app.get("/admin/top5/descer/:id", async (req, res) => {
+
+  const { id } = req.params;
+
+  const atual = await pool.query(`
+    SELECT *
+    FROM imovel_secao_itens
+    WHERE id = $1
+    LIMIT 1
+  `, [id]);
+
+  if (!atual.rows.length) {
+    return res.redirect("back");
+  }
+
+  const item = atual.rows[0];
+
+  const abaixo = await pool.query(`
+    SELECT *
+    FROM imovel_secao_itens
+    WHERE imovel_id = $1
+      AND idioma = $2
+      AND destaque_ordem > $3
+    ORDER BY destaque_ordem ASC
+    LIMIT 1
+  `, [
+    item.imovel_id,
+    item.idioma,
+    item.destaque_ordem
+  ]);
+
+  if (abaixo.rows.length) {
+
+    const outro = abaixo.rows[0];
+
+    await pool.query(`
+      UPDATE imovel_secao_itens
+      SET destaque_ordem = $1
+      WHERE id = $2
+    `, [outro.destaque_ordem, item.id]);
+
+    await pool.query(`
+      UPDATE imovel_secao_itens
+      SET destaque_ordem = $1
+      WHERE id = $2
+    `, [item.destaque_ordem, outro.id]);
+  }
 
   res.redirect("back");
 
