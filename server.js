@@ -1716,20 +1716,8 @@ app.get("/admin/top5/novo/:imovelId", async (req, res) => {
 
 });
 app.post("/admin/top5/novo", async (req, res) => {
-
-  const {
-    imovel_id,
-    titulo,
-    descricao,
-    imagem_url,
-    link_maps,
-    link_instagram,
-    link_reviews,
-    destaque_ordem
-  } = req.body;
-
-  await pool.query(`
-    INSERT INTO imovel_secao_itens (
+  try {
+    const {
       imovel_id,
       titulo,
       descricao,
@@ -1737,25 +1725,45 @@ app.post("/admin/top5/novo", async (req, res) => {
       link_maps,
       link_instagram,
       link_reviews,
-      destaque_ordem,
-      ativo
-    )
-    VALUES (
-      $1,$2,$3,$4,$5,$6,$7,$8,true
-    )
-  `, [
-    imovel_id,
-    titulo,
-    descricao,
-    imagem_url,
-    link_maps,
-    link_instagram,
-    link_reviews,
-    destaque_ordem
-  ]);
+      destaque_ordem
+    } = req.body;
 
-  res.redirect("/admin/top5/" + imovel_id);
+    await pool.query(`
+      INSERT INTO imovel_secao_itens (
+        imovel_id,
+        idioma,
+        secao,
+        titulo,
+        descricao,
+        imagem_url,
+        link_maps,
+        link_instagram,
+        link_reviews,
+        icone,
+        ordem,
+        destaque_ordem,
+        ativo
+      )
+      VALUES (
+        $1, 'pt', 'fazer', $2, $3, $4, $5, $6, $7, 'map-pin', $8, $8, true
+      )
+    `, [
+      imovel_id,
+      titulo || "",
+      descricao || "",
+      imagem_url || null,
+      link_maps || null,
+      link_instagram || null,
+      link_reviews || null,
+      Number(destaque_ordem || 1)
+    ]);
 
+    res.redirect("/admin/top5/" + imovel_id);
+
+  } catch (err) {
+    console.error("ERRO AO SALVAR TOP5:", err);
+    res.status(500).send("Erro ao salvar Top5. Veja o log do servidor.");
+  }
 });
 app.get("/admin/top5/excluir/:id", async (req, res) => {
 
