@@ -399,13 +399,14 @@ function renderLista(itens = [], labels = {}, secao = "") {
               ${imagem ? `
   <div class="overflow-hidden">
     <img src="${escHtml(imagem)}"
-         style="
-           width:100%;
-           height:140px;
-           object-fit:cover;
-           border-top-left-radius:16px;
-           border-top-right-radius:16px;
-         ">
+     style="
+       width:100%;
+       height:140px;
+       object-fit:contain;
+       background:#f3f4f6;
+       border-top-left-radius:16px;
+       border-top-right-radius:16px;
+">
   </div>
 ` : ""}
               <div class="p-4">
@@ -597,7 +598,15 @@ const reviewsLink = item.link_reviews || "";
       ${imagem ? `
         <div class="mb-3 overflow-hidden rounded-xl">
           <img src="${escHtml(imagem)}"
-               style="width:100%; height:140px; object-fit:cover;">
+               style="width:100%; <img src="${escHtml(imagem)}"
+     style="
+       width:100%;
+       height:140px;
+       object-fit:contain;
+       background:#f3f4f6;
+       border-top-left-radius:16px;
+       border-top-right-radius:16px;
+">
         </div>
       ` : ""}
 
