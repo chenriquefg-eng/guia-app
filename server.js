@@ -2938,7 +2938,19 @@ if (heroSlides.length > 1) {
     ">
     📲 Compartilhar
   </button>
-
+<button
+  onclick="copiarMensagemGuia()"
+  style="
+    border:none;
+    background:#fff7ed;
+    color:#c2410c;
+    padding:10px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    font-weight:600;
+  ">
+  💬 Mensagem pronta
+</button>
 </div>
 </div>
   </div>
@@ -2965,7 +2977,27 @@ async function compartilharGuia() {
 }
 
 </script>
+<script>
+function copiarMensagemGuia() {
+  const mensagem = `Olá! 😊
 
+Segue o guia digital da sua hospedagem:
+
+🔗 ${window.location.href}
+
+Nele você encontra:
+📍 localização
+📶 Wi-Fi
+🍽 restaurantes e dicas locais
+🚕 formas de locomoção
+📋 regras e orientações do imóvel
+
+Boa estadia!`;
+
+  navigator.clipboard.writeText(mensagem);
+  alert("Mensagem pronta copiada!");
+}
+</script>
 </body>
 </html>
 
