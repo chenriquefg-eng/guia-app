@@ -2962,21 +2962,40 @@ function copiarLinkGuia() {
   alert("Link do guia copiado!");
 }
 
+<script>
+
+function copiarLinkGuia() {
+
+  navigator.clipboard.writeText(window.location.href);
+
+  alert("Link do guia copiado!");
+
+}
+
 async function compartilharGuia() {
+
   if (navigator.share) {
+
     try {
+
       await navigator.share({
         title: document.title,
         text: "Guia Digital do Hóspede",
         url: window.location.href
       });
+
     } catch(err) {}
+
   } else {
+
     copiarLinkGuia();
+
   }
+
 }
-<script>
+
 function copiarMensagemGuia() {
+
   const mensagem = `Olá! 😊
 
 Segue o guia digital da sua hospedagem:
@@ -2993,9 +3012,11 @@ Nele você encontra:
 Boa estadia!`;
 
   navigator.clipboard.writeText(mensagem);
+
   alert("Mensagem pronta copiada!");
+
 }
-</script>
+
 </script>
 
 </body>
