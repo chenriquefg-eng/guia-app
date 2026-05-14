@@ -2991,20 +2991,22 @@ async function compartilharGuia() {
 
 function copiarMensagemGuia() {
 
-  const mensagem = `Olá! 😊
-
-Segue o guia digital da sua hospedagem:
-
-🔗 ${window.location.href}
-
-Nele você encontra:
-📍 localização
-📶 Wi-Fi
-🍽 restaurantes e dicas locais
-🚕 formas de locomoção
-📋 regras e orientações do imóvel
-
-Boa estadia!`;
+  const mensagem = [
+    "Olá! 😊",
+    "",
+    "Segue o guia digital da sua hospedagem:",
+    "",
+    "🔗 " + window.location.href,
+    "",
+    "Nele você encontra:",
+    "📍 localização",
+    "📶 Wi-Fi",
+    "🍽 restaurantes e dicas locais",
+    "🚕 formas de locomoção",
+    "📋 regras e orientações do imóvel",
+    "",
+    "Boa estadia!"
+  ].join("\n");
 
   navigator.clipboard.writeText(mensagem);
 
