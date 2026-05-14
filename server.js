@@ -2957,11 +2957,6 @@ if (heroSlides.length > 1) {
 </div>
 <script>
 
-function copiarLinkGuia() {
-  navigator.clipboard.writeText(window.location.href);
-  alert("Link do guia copiado!");
-}
-
 <script>
 
 function copiarLinkGuia() {
