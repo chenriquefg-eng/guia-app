@@ -1172,7 +1172,9 @@ function buildPrintCardHtml(cardData = {}) {
 <body>
   <div>
     <div class="print-actions">
-      <button class="btn" onclick="window.open('/imovel/${codigo}/card', '_blank')">Imprimir / Salvar PDF</button>
+     <button class="btn" onclick="window.print()">
+  Imprimir / Salvar PDF
+</button>
     </div>
 
     <div class="page">
@@ -2896,7 +2898,7 @@ if (heroSlides.length > 1) {
 ">
 
   <button
-    onclick="window.print()"
+    onclick="window.open('/imovel/${codigo}/card', '_blank')"
     style="
       border:none;
       background:#eef2ff;
