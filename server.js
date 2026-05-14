@@ -1389,6 +1389,38 @@ ORDER BY i.id DESC
       margin-bottom:16px;
     ">
 ` : ""}
+${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
+  ? `
+    <div style="
+      display:inline-block;
+      margin-bottom:12px;
+      background:#dcfce7;
+      color:#166534;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    ">
+      🟢 Publicado
+    </div>
+  `
+  : `
+    <div style="
+      display:inline-block;
+      margin-bottom:12px;
+      background:#fef9c3;
+      color:#854d0e;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    ">
+      🟡 Em configuração
+    </div>
+  `
+}
+
+<h2>${imovel.nome}</h2>
           <h2>${imovel.nome}</h2>
           <div style="
   display:flex;
