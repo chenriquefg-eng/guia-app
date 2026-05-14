@@ -1420,7 +1420,6 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
   `
 }
 
-<h2>${imovel.nome}</h2>
           <h2>${imovel.nome}</h2>
           <div style="
   display:flex;
