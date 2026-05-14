@@ -2975,8 +2975,6 @@ async function compartilharGuia() {
     copiarLinkGuia();
   }
 }
-
-</script>
 <script>
 function copiarMensagemGuia() {
   const mensagem = `Olá! 😊
@@ -2998,6 +2996,8 @@ Boa estadia!`;
   alert("Mensagem pronta copiada!");
 }
 </script>
+</script>
+
 </body>
 </html>
 
