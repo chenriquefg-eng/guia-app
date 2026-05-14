@@ -1172,7 +1172,7 @@ function buildPrintCardHtml(cardData = {}) {
 <body>
   <div>
     <div class="print-actions">
-      <button class="btn" onclick="window.print()">Imprimir / Salvar PDF</button>
+      <button class="btn" onclick="window.open('/imovel/${codigo}/card', '_blank')">Imprimir / Salvar PDF</button>
     </div>
 
     <div class="page">
