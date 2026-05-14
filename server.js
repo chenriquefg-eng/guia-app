@@ -2887,21 +2887,86 @@ if (heroSlides.length > 1) {
 ">
   mundodeoportunidades.com.br
 </div>
-<div style="margin-top:10px;">
-  <a href="/imovel/${codigo}/card" target="_blank" style="
-    font-size:11px;
-    color:#6b7280;
-    text-decoration:none;
-    border-bottom:1px dashed #9ca3af;
-  ">
-    📄 Imprimir QR Code
-  </a>
+<div style="
+  margin-top:16px;
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+">
+
+  <button
+    onclick="window.print()"
+    style="
+      border:none;
+      background:#eef2ff;
+      color:#4338ca;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+    ">
+    📄 Imprimir QR
+  </button>
+
+  <button
+    onclick="copiarLinkGuia()"
+    style="
+      border:none;
+      background:#ecfdf5;
+      color:#15803d;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+    ">
+    🔗 Copiar Link
+  </button>
+
+  <button
+    onclick="compartilharGuia()"
+    style="
+      border:none;
+      background:#eff6ff;
+      color:#2563eb;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+    ">
+    📲 Compartilhar
+  </button>
+
+</div>
 </div>
   </div>
 </div>
+<script>
 
-</style>
+function copiarLinkGuia() {
+  navigator.clipboard.writeText(window.location.href);
+  alert("Link do guia copiado!");
+}
+
+async function compartilharGuia() {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: document.title,
+        text: "Guia Digital do Hóspede",
+        url: window.location.href
+      });
+    } catch(err) {}
+  } else {
+    copiarLinkGuia();
+  }
+}
+
+</script>
+
+</body>
 </html>
+
     `;
 
     return res.status(200).send(html);
