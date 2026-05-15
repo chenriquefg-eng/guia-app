@@ -1522,7 +1522,7 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
   📄 QR
 </button>
 
-<button type="button" onclick="alert('clicou')">
+<button type="button" onclick="window.copiarMensagemGuia('${imovel.codigo_publico}')">
   💬 Mensagem
 </button>
 </p>
@@ -1530,10 +1530,6 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
         </div>
       `).join("")}
 <script>
-
-function urlGuia(codigo) {
-  return window.location.origin + '/imovel/' + codigo;
-}
 
 <script>
 function urlGuia(codigo) {
@@ -1551,16 +1547,10 @@ window.copiarMensagemGuia = async function(codigo) {
     "Boa estadia!"
   ].join("\n");
 
-  try {
-    await navigator.clipboard.writeText(mensagem);
-    alert("Mensagem copiada!");
-  } catch (err) {
-    alert("Não foi possível copiar a mensagem.");
-    console.log(err);
-  }
+  await navigator.clipboard.writeText(mensagem);
+  alert("Mensagem copiada!");
 }
 </script>
-    </script>
 
     </body>
     </html>
