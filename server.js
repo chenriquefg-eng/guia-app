@@ -2819,98 +2819,59 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
     const menuItems = ${JSON.stringify(menuItems)};
     const sections = ${JSON.stringify(sections)};
 
-    function buildMenu() {
-      const grid = document.getElementById("menuGrid");
-      grid.innerHTML = "";
+function buildMenu() {
+  const grid = document.getElementById("menuGrid");
+  const conteudoCompleto = document.getElementById("conteudoCompleto");
 
-     menuItems.forEach((item, i) => {
-  const card = document.createElement("div");
-  card.className = "section-card bg-white rounded-2xl p-3 flex flex-col items-center gap-2 shadow-sm fade-in";
-  card.style.animationDelay = (0.4 + i * 0.04) + "s";
+  grid.innerHTML = "";
 
-  card.onclick = () => {
-    const sec = document.getElementById("sec-" + item.id);
+  menuItems.forEach((item, i) => {
+    const card = document.createElement("div");
 
-    if (sec) {
-      sec.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-  };
+    card.className =
+      "section-card bg-white rounded-2xl p-3 flex flex-col items-center gap-2 shadow-sm fade-in";
 
-  card.innerHTML = `
-  <div class="menu-icon-box" style="background:${item.color}15;">
-    <i data-lucide="${item.icon}" style="width:24px;height:24px;color:${item.color};"></i>
-  </div>
+    card.style.animationDelay = (0.4 + i * 0.04) + "s";
 
-  <span class="text-xs font-medium text-center leading-tight" style="color:#444;">
-    ${item.label}
-  </span>
-`;
+    card.onclick = () => {
+      const sec = document.getElementById("sec-" + item.id);
 
-  grid.appendChild(card);
-});
-
-const conteudoCompleto = document.getElementById("conteudoCompleto");
-
-conteudoCompleto.innerHTML = Object.entries(sections)
-  .map(([key, sec]) => `
-    <section id="sec-${key}"
-      class="bg-white rounded-2xl p-5 shadow-sm fade-in">
-
-      <h2 style="
-        font-size:20px;
-        font-weight:800;
-        margin-bottom:16px;
-        color:#111827;
-      ">
-        ${sec.title}
-      </h2>
-
-      ${sec.html}
-
-    </section>
-  `)
-  .join("");
-        card.innerHTML = \`
-          <div class="menu-icon-box" style="background:\${item.color}15;">
-            <i data-lucide="\${item.icon}" style="width:24px;height:24px;color:\${item.color};"></i>
-          </div>
-          <span class="text-xs font-medium text-center leading-tight" style="color:#444;">\${item.label}</span>
-        \`;
-        grid.appendChild(card);
-      });
-      const conteudoCompleto = document.getElementById("conteudoCompleto");
-
-conteudoCompleto.innerHTML = Object.entries(sections)
-  .map(([key, sec]) => `
-    <section id="sec-${key}"
-      class="bg-white rounded-2xl p-5 shadow-sm fade-in">
-
-      <h2 style="
-        font-size:20px;
-        font-weight:800;
-        margin-bottom:16px;
-        color:#111827;
-      ">
-        ${sec.title}
-      </h2>
-
-      ${sec.html}
-
-    </section>
-  `)
-  .join("");
-
-if (window.lucide && typeof window.lucide.createIcons === "function") {
-  window.lucide.createIcons();
-}
-      if (window.lucide && typeof window.lucide.createIcons === "function") {
-        window.lucide.createIcons();
+      if (sec) {
+        sec.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
       }
-    }
+    };
 
+    card.innerHTML =
+      '<div class="menu-icon-box" style="background:' + item.color + '15;">' +
+        '<i data-lucide="' + item.icon + '" style="width:24px;height:24px;color:' + item.color + ';"></i>' +
+      '</div>' +
+      '<span class="text-xs font-medium text-center leading-tight" style="color:#444;">' +
+        item.label +
+      '</span>';
+
+    grid.appendChild(card);
+  });
+
+  conteudoCompleto.innerHTML = Object.entries(sections)
+    .map(([key, sec]) => {
+      return (
+        '<section id="sec-' + key + '" class="bg-white rounded-2xl p-5 shadow-sm fade-in">' +
+          '<h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:#111827;">' +
+            sec.title +
+          '</h2>' +
+          sec.html +
+        '</section>'
+      );
+    })
+    .join("");
+
+  if (window.lucide && typeof window.lucide.createIcons === "function") {
+    window.lucide.createIcons();
+  }
+}
   function openSection(id) {
   const modal = document.getElementById("modal");
   const modalBody = document.getElementById("modalBody");
