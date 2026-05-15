@@ -1529,7 +1529,6 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
 
         </div>
       `).join("")}
-<script>
 
 <script>
 function urlGuia(codigo) {
