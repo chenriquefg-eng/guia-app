@@ -1555,29 +1555,19 @@ async function copiarMensagemGuia(codigo) {
   ].join("\n");
 
   if (navigator.share) {
-
     try {
-
       await navigator.share({
         title: "Guia Digital do Hóspede",
         text: mensagem
       });
-
-    } catch(err) {}
-
+    } catch (err) {}
   } else {
-
     navigator.clipboard.writeText(mensagem);
-
     alert("Mensagem copiada!");
-
   }
-
 }
+    </script>
 
-</script>
-
-</body>
     </body>
     </html>
   `);
