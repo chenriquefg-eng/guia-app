@@ -1518,7 +1518,21 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
   ">
   Top5
 </a>
+<button onclick="window.open('/imovel/${imovel.codigo_publico}/card','_blank')">
+  📄 QR
+</button>
 
+<button onclick="copiarLinkGuia('${imovel.codigo_publico}')">
+  🔗 Link
+</button>
+
+<button onclick="compartilharGuia('${imovel.codigo_publico}')">
+  📲 Compartilhar
+</button>
+
+<button onclick="copiarMensagemGuia('${imovel.codigo_publico}')">
+  💬 Mensagem
+</button>
 </p>
 
         </div>
