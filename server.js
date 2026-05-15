@@ -1575,7 +1575,35 @@ window.copiarMensagemGuia = async function(codigo) {
 }
 
 </script>
+<button id="btnTopo"
+  onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+  style="
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:46px;
+    height:46px;
+    border-radius:999px;
+    border:none;
+    background:#111827;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    display:none;
+    z-index:9999;
+  ">
+  ↑
+</button>
 
+<script>
+const btnTopo = document.getElementById("btnTopo");
+
+window.addEventListener("scroll", () => {
+  btnTopo.style.display =
+    window.scrollY > 500 ? "block" : "none";
+});
+</script>
     </body>
     </html>
   `);
