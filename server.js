@@ -1522,7 +1522,7 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
   📄 QR
 </button>
 
-<button type="button" onclick="window.copiarMensagemGuia('${imovel.codigo_publico}')">
+<button type="button" onclick="alert('clicou')">
   💬 Mensagem
 </button>
 </p>
@@ -1560,10 +1560,6 @@ window.copiarMensagemGuia = async function(codigo) {
   }
 }
 </script>
-
-  alert("clicou");
-
-}
     </script>
 
     </body>
