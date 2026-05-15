@@ -1532,24 +1532,48 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
       `).join("")}
 
 <script>
+
 function urlGuia(codigo) {
   return window.location.origin + "/imovel/" + codigo;
 }
 
 window.copiarMensagemGuia = async function(codigo) {
+
   const mensagem = [
     "Olá! 😊",
     "",
     "Segue o guia digital da sua hospedagem:",
     "",
-    "Link: " + urlGuia(codigo),
+    "🔗 " + urlGuia(codigo),
     "",
     "Boa estadia!"
   ].join(String.fromCharCode(10));
 
-  await navigator.clipboard.writeText(mensagem);
-  alert("Mensagem copiada!");
+  try {
+
+    if (navigator.share) {
+
+      await navigator.share({
+        title: "Guia Digital do Hóspede",
+        text: mensagem
+      });
+
+    } else {
+
+      await navigator.clipboard.writeText(mensagem);
+
+      alert("Mensagem copiada!");
+
+    }
+
+  } catch(err) {
+
+    console.log(err);
+
+  }
+
 }
+
 </script>
 
     </body>
