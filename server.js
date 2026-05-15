@@ -1542,10 +1542,10 @@ window.copiarMensagemGuia = async function(codigo) {
     "",
     "Segue o guia digital da sua hospedagem:",
     "",
-    "🔗 " + urlGuia(codigo),
+    "Link: " + urlGuia(codigo),
     "",
     "Boa estadia!"
-  ].join("\n");
+  ].join(String.fromCharCode(10));
 
   await navigator.clipboard.writeText(mensagem);
   alert("Mensagem copiada!");
