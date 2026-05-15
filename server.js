@@ -1537,7 +1537,64 @@ ${Number(imovel.total_fotos) > 0 && Number(imovel.total_top5) > 0
 
         </div>
       `).join("")}
+<script>
 
+function urlGuia(codigo) {
+  return window.location.origin + '/imovel/' + codigo;
+}
+
+function copiarLinkGuia(codigo) {
+
+  navigator.clipboard.writeText(urlGuia(codigo));
+
+  alert("Link copiado!");
+
+}
+
+async function compartilharGuia(codigo) {
+
+  const url = urlGuia(codigo);
+
+  if (navigator.share) {
+
+    try {
+
+      await navigator.share({
+        title: "Guia Digital do Hóspede",
+        url
+      });
+
+    } catch(err) {}
+
+  } else {
+
+    copiarLinkGuia(codigo);
+
+  }
+
+}
+
+function copiarMensagemGuia(codigo) {
+
+  const mensagem = [
+    "Olá! 😊",
+    "",
+    "Segue o guia digital da sua hospedagem:",
+    "",
+    "🔗 " + urlGuia(codigo),
+    "",
+    "Boa estadia!"
+  ].join("\\n");
+
+  navigator.clipboard.writeText(mensagem);
+
+  alert("Mensagem copiada!");
+
+}
+
+</script>
+
+</body>
     </body>
     </html>
   `);
