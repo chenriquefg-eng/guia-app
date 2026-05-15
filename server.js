@@ -2824,19 +2824,31 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
       grid.innerHTML = "";
 
       menuItems.forEach((item, i) => {
-        const card = document.createElement("div");
-        card.className = "section-card bg-white rounded-2xl p-3 flex flex-col items-center gap-2 shadow-sm fade-in";
-        card.style.animationDelay = \`\${0.4 + i * 0.04}s\`;
-        card.onclick = () => {
-  const sec = document.getElementById("sec-" + item.id);
+  const card = document.createElement("div");
+  card.className = "section-card bg-white rounded-2xl p-3 flex flex-col items-center gap-2 shadow-sm fade-in";
+  card.style.animationDelay = `${0.4 + i * 0.04}s`;
 
-  if (sec) {
-    sec.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }
-};
+  card.onclick = () => {
+    const sec = document.getElementById("sec-" + item.id);
+
+    if (sec) {
+      sec.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
+  card.innerHTML = `
+    <div class="menu-icon-box" style="background:${item.color}15;">
+      <i data-lucide="${item.icon}" style="width:24px;height:24px;color:${item.color};"></i>
+    </div>
+    <span class="text-xs font-medium text-center leading-tight" style="color:#444;">${item.label}</span>
+  `;
+
+  grid.appendChild(card);
+});
+
 const conteudoCompleto = document.getElementById("conteudoCompleto");
 
 conteudoCompleto.innerHTML = Object.entries(sections)
