@@ -2826,7 +2826,7 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
      menuItems.forEach((item, i) => {
   const card = document.createElement("div");
   card.className = "section-card bg-white rounded-2xl p-3 flex flex-col items-center gap-2 shadow-sm fade-in";
-  card.style.animationDelay = `${0.4 + i * 0.04}s`;
+  card.style.animationDelay = (0.4 + i * 0.04) + "s";
 
   card.onclick = () => {
     const sec = document.getElementById("sec-" + item.id);
