@@ -1535,36 +1535,10 @@ function urlGuia(codigo) {
   return window.location.origin + '/imovel/' + codigo;
 }
 
-async function copiarMensagemGuia(codigo) {
+function copiarMensagemGuia(codigo) {
 
-  const mensagem = [
-    "Olá! 😊",
-    "",
-    "Segue o guia digital da sua hospedagem:",
-    "",
-    "🔗 " + urlGuia(codigo),
-    "",
-    "Nele você encontra:",
-    "📍 localização",
-    "📶 Wi-Fi",
-    "🍽 restaurantes e dicas locais",
-    "🚕 formas de locomoção",
-    "📋 regras e orientações do imóvel",
-    "",
-    "Boa estadia!"
-  ].join("\n");
+  alert("clicou");
 
-  if (navigator.share) {
-    try {
-      await navigator.share({
-        title: "Guia Digital do Hóspede",
-        text: mensagem
-      });
-    } catch (err) {}
-  } else {
-    navigator.clipboard.writeText(mensagem);
-    alert("Mensagem copiada!");
-  }
 }
     </script>
 
