@@ -2799,6 +2799,7 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
 
       <div class="max-w-md mx-auto px-5 py-6">
         <div class="grid grid-cols-3 gap-3" id="menuGrid"></div>
+        <div id="conteudoCompleto" class="mt-8 space-y-5"></div>
       </div>
     </div>
 
