@@ -1543,38 +1543,7 @@ function urlGuia(codigo) {
   return window.location.origin + '/imovel/' + codigo;
 }
 
-function copiarLinkGuia(codigo) {
-
-  navigator.clipboard.writeText(urlGuia(codigo));
-
-  alert("Link copiado!");
-
-}
-
-async function compartilharGuia(codigo) {
-
-  const url = urlGuia(codigo);
-
-  if (navigator.share) {
-
-    try {
-
-      await navigator.share({
-        title: "Guia Digital do Hóspede",
-        url
-      });
-
-    } catch(err) {}
-
-  } else {
-
-    copiarLinkGuia(codigo);
-
-  }
-
-}
-
-function copiarMensagemGuia(codigo) {
+async function copiarMensagemGuia(codigo) {
 
   const mensagem = [
     "Olá! 😊",
@@ -1583,12 +1552,34 @@ function copiarMensagemGuia(codigo) {
     "",
     "🔗 " + urlGuia(codigo),
     "",
+    "Nele você encontra:",
+    "📍 localização",
+    "📶 Wi-Fi",
+    "🍽 restaurantes e dicas locais",
+    "🚕 formas de locomoção",
+    "📋 regras e orientações do imóvel",
+    "",
     "Boa estadia!"
-  ].join("\\n");
+  ].join("\n");
 
-  navigator.clipboard.writeText(mensagem);
+  if (navigator.share) {
 
-  alert("Mensagem copiada!");
+    try {
+
+      await navigator.share({
+        title: "Guia Digital do Hóspede",
+        text: mensagem
+      });
+
+    } catch(err) {}
+
+  } else {
+
+    navigator.clipboard.writeText(mensagem);
+
+    alert("Mensagem copiada!");
+
+  }
 
 }
 
