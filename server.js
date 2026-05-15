@@ -2840,11 +2840,14 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
   };
 
   card.innerHTML = `
-    <div class="menu-icon-box" style="background:${item.color}15;">
-      <i data-lucide="${item.icon}" style="width:24px;height:24px;color:${item.color};"></i>
-    </div>
-    <span class="text-xs font-medium text-center leading-tight" style="color:#444;">${item.label}</span>
-  `;
+  <div class="menu-icon-box" style="background:${item.color}15;">
+    <i data-lucide="${item.icon}" style="width:24px;height:24px;color:${item.color};"></i>
+  </div>
+
+  <span class="text-xs font-medium text-center leading-tight" style="color:#444;">
+    ${item.label}
+  </span>
+`;
 
   grid.appendChild(card);
 });
