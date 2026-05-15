@@ -2823,7 +2823,7 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
       const grid = document.getElementById("menuGrid");
       grid.innerHTML = "";
 
-      menuItems.forEach((item, i) => {
+     menuItems.forEach((item, i) => {
   const card = document.createElement("div");
   card.className = "section-card bg-white rounded-2xl p-3 flex flex-col items-center gap-2 shadow-sm fade-in";
   card.style.animationDelay = `${0.4 + i * 0.04}s`;
@@ -2878,7 +2878,31 @@ conteudoCompleto.innerHTML = Object.entries(sections)
         \`;
         grid.appendChild(card);
       });
+      const conteudoCompleto = document.getElementById("conteudoCompleto");
 
+conteudoCompleto.innerHTML = Object.entries(sections)
+  .map(([key, sec]) => `
+    <section id="sec-${key}"
+      class="bg-white rounded-2xl p-5 shadow-sm fade-in">
+
+      <h2 style="
+        font-size:20px;
+        font-weight:800;
+        margin-bottom:16px;
+        color:#111827;
+      ">
+        ${sec.title}
+      </h2>
+
+      ${sec.html}
+
+    </section>
+  `)
+  .join("");
+
+if (window.lucide && typeof window.lucide.createIcons === "function") {
+  window.lucide.createIcons();
+}
       if (window.lucide && typeof window.lucide.createIcons === "function") {
         window.lucide.createIcons();
       }
