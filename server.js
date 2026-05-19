@@ -438,7 +438,27 @@ function renderLista(itens = [], labels = {}, secao = "") {
     </div>
   `;
 }
-   
+function getIconeLinha(texto) {
+
+  const t = texto.toLowerCase();
+
+  if (t.includes("wifi")) return "wifi";
+  if (t.includes("wi-fi")) return "wifi";
+  if (t.includes("tv")) return "tv";
+  if (t.includes("micro")) return "microwave";
+  if (t.includes("caf")) return "coffee";
+  if (t.includes("toalha")) return "bath";
+  if (t.includes("cama")) return "bed";
+  if (t.includes("ar")) return "snowflake";
+  if (t.includes("banho")) return "bath";
+  if (t.includes("cozinha")) return "utensils";
+  if (t.includes("garagem")) return "car";
+  if (t.includes("elevador")) return "building";
+  if (t.includes("portaria")) return "shield-check";
+
+  return "sparkles";
+}
+
 function renderTextoBlocos(texto) {
   if (!texto) {
     return `<p class="text-sm text-gray-500">Sem conteúdo cadastrado.</p>`;
@@ -480,7 +500,7 @@ function renderTextoBlocos(texto) {
           flex-shrink:0;
         ">
 
-          <i data-lucide="sparkles"
+          <i data-lucide="${getIconeLinha(linha)}"
              style="
                width:18px;
                height:18px;
