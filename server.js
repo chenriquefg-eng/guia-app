@@ -454,10 +454,57 @@ function renderTextoBlocos(texto) {
   }
 
   return `
-    <div class="space-y-2 text-sm leading-relaxed text-gray-700">
-      ${linhas.map((linha) => `<p>${escHtml(linha)}</p>`).join("")}
-    </div>
-  `;
+  <div class="space-y-3">
+
+    ${linhas.map(linha => `
+
+      <div style="
+        display:flex;
+        align-items:center;
+        gap:14px;
+        background:#ffffff;
+        border:1px solid #e5e7eb;
+        border-radius:18px;
+        padding:16px;
+        box-shadow:0 1px 3px rgba(0,0,0,0.04);
+      ">
+
+        <div style="
+          width:38px;
+          height:38px;
+          border-radius:12px;
+          background:#f0fdf4;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          flex-shrink:0;
+        ">
+
+          <i data-lucide="sparkles"
+             style="
+               width:18px;
+               height:18px;
+               color:#1a5c3a;
+             ">
+          </i>
+
+        </div>
+
+        <div style="
+          font-size:15px;
+          line-height:1.5;
+          color:#374151;
+          font-weight:500;
+        ">
+          ${escHtml(linha)}
+        </div>
+
+      </div>
+
+    `).join("")}
+
+  </div>
+`;
 }
 function getNearbyTypeLabel(t, titulo = "") {
   const nome = String(titulo || "").toLowerCase();
