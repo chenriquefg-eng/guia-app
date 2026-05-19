@@ -2899,7 +2899,6 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
 
 function buildMenu() {
   const grid = document.getElementById("menuGrid");
-  const conteudoCompleto = document.getElementById("conteudoCompleto");
 
   grid.innerHTML = "";
 
@@ -2911,16 +2910,7 @@ function buildMenu() {
 
     card.style.animationDelay = (0.4 + i * 0.04) + "s";
 
-    card.onclick = () => {
-      const sec = document.getElementById("sec-" + item.id);
-
-      if (sec) {
-        sec.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-    };
+    card.onclick = () => openSection(item.id);
 
     card.innerHTML =
       '<div class="menu-icon-box" style="background:' + item.color + '15;">' +
@@ -2933,40 +2923,9 @@ function buildMenu() {
     grid.appendChild(card);
   });
 
-  conteudoCompleto.innerHTML = Object.entries(sections)
-    .map(([key, sec]) => {
-      const itemMenu = menuItems.find((m) => m.id === key) || {
-  icon: "sparkles",
-  color: "#1a5c3a"
-};
-
-return (
-  '<section id="sec-' + key + '" class="bg-white rounded-2xl p-5 shadow-sm fade-in">' +
-
-    '<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">' +
-
-      '<div style="width:62px;height:62px;border-radius:18px;background:' + itemMenu.color + '15;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
-        '<i data-lucide="' + itemMenu.icon + '" style="width:30px;height:30px;color:' + itemMenu.color + ';"></i>' +
-      '</div>' +
-
-      '<div>' +
-        '<h2 style="font-size:34px;line-height:1;font-weight:900;color:#111827;margin:0;letter-spacing:-1px;">' +
-          sec.title +
-        '</h2>' +
-
-        '<div style="width:90px;height:4px;border-radius:999px;background:' + itemMenu.color + ';margin-top:10px;opacity:0.75;"></div>' +
-      '</div>' +
-
-    '</div>' +
-
-    sec.html +
-
-  '</section>'
-);
-    })
-    .join("");
   if (window.lucide && typeof window.lucide.createIcons === "function") {
-  window.lucide.createIcons();
+    window.lucide.createIcons();
+  }
 }
   function openSection(id) {
   const modal = document.getElementById("modal");
