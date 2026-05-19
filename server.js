@@ -2887,31 +2887,52 @@ function buildMenu() {
     .map(([key, sec]) => {
       return (
         '<section id="sec-' + key + '" class="bg-white rounded-2xl p-5 shadow-sm fade-in">' +
-          '<div style="
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-">
+          '<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">' +
 
-  <div style="
-    width:4px;
-    height:28px;
-    border-radius:999px;
-    background:#1a5c3a;
-  "></div>
+  '<div style="' +
+    'width:62px;' +
+    'height:62px;' +
+    'border-radius:18px;' +
+    'background:#1a5c315;' +
+    'display:flex;' +
+    'align-items:center;' +
+    'justify-content:center;' +
+    'flex-shrink:0;' +
+  '">' +
 
-  <h2 style="
-    font-size:24px;
-    font-weight:800;
-    color:#111827;
-    margin:0;
-    letter-spacing:-0.3px;
-  ">
-    ${sec.title}
-  </h2>
+    '<i data-lucide="sparkles" style="' +
+      'width:30px;' +
+      'height:30px;' +
+      'color:#1a5c3a;' +
+    '"></i>' +
 
-</div>' +
+  '</div>' +
+
+  '<div>' +
+
+    '<h2 style="' +
+      'font-size:34px;' +
+      'line-height:1;' +
+      'font-weight:900;' +
+      'color:#111827;' +
+      'margin:0;' +
+      'letter-spacing:-1px;' +
+    '">' +
+      sec.title +
+    '</h2>' +
+
+    '<div style="' +
+      'width:90px;' +
+      'height:4px;' +
+      'border-radius:999px;' +
+      'background:#1a5c3a;' +
+      'margin-top:10px;' +
+      'opacity:0.75;' +
+    '"></div>' +
+
+  '</div>' +
+
+'</div>' +
           sec.html +
         '</section>'
       );
