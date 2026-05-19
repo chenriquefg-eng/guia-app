@@ -2885,57 +2885,34 @@ function buildMenu() {
 
   conteudoCompleto.innerHTML = Object.entries(sections)
     .map(([key, sec]) => {
-      return (
-        '<section id="sec-' + key + '" class="bg-white rounded-2xl p-5 shadow-sm fade-in">' +
-          '<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">' +
+      const itemMenu = menuItems.find((m) => m.id === key) || {
+  icon: "sparkles",
+  color: "#1a5c3a"
+};
 
-  '<div style="' +
-    'width:62px;' +
-    'height:62px;' +
-    'border-radius:18px;' +
-    'background:#1a5c315;' +
-    'display:flex;' +
-    'align-items:center;' +
-    'justify-content:center;' +
-    'flex-shrink:0;' +
-  '">' +
+return (
+  '<section id="sec-' + key + '" class="bg-white rounded-2xl p-5 shadow-sm fade-in">' +
 
-    '<i data-lucide="sparkles" style="' +
-      'width:30px;' +
-      'height:30px;' +
-      'color:#1a5c3a;' +
-    '"></i>' +
+    '<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;">' +
 
-  '</div>' +
+      '<div style="width:62px;height:62px;border-radius:18px;background:' + itemMenu.color + '15;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+        '<i data-lucide="' + itemMenu.icon + '" style="width:30px;height:30px;color:' + itemMenu.color + ';"></i>' +
+      '</div>' +
 
-  '<div>' +
+      '<div>' +
+        '<h2 style="font-size:34px;line-height:1;font-weight:900;color:#111827;margin:0;letter-spacing:-1px;">' +
+          sec.title +
+        '</h2>' +
 
-    '<h2 style="' +
-      'font-size:34px;' +
-      'line-height:1;' +
-      'font-weight:900;' +
-      'color:#111827;' +
-      'margin:0;' +
-      'letter-spacing:-1px;' +
-    '">' +
-      sec.title +
-    '</h2>' +
+        '<div style="width:90px;height:4px;border-radius:999px;background:' + itemMenu.color + ';margin-top:10px;opacity:0.75;"></div>' +
+      '</div>' +
 
-    '<div style="' +
-      'width:90px;' +
-      'height:4px;' +
-      'border-radius:999px;' +
-      'background:#1a5c3a;' +
-      'margin-top:10px;' +
-      'opacity:0.75;' +
-    '"></div>' +
+    '</div>' +
 
-  '</div>' +
+    sec.html +
 
-'</div>' +
-          sec.html +
-        '</section>'
-      );
+  '</section>'
+);
     })
     .join("");
 
@@ -3043,40 +3020,6 @@ if (heroSlides.length > 1) {
 ">
   mundodeoportunidades.com.br
 </div>
-<div style="
-  margin-top:16px;
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  flex-wrap:wrap;
-">
-
-  <button
-    onclick="window.open('/imovel/${codigo}/card', '_blank')"
-    style="
-      border:none;
-      background:#eef2ff;
-      color:#4338ca;
-      padding:10px 14px;
-      border-radius:999px;
-      cursor:pointer;
-      font-weight:600;
-    ">
-    📄 Imprimir QR
-  </button>
-
-  <button
-    onclick="copiarLinkGuia()"
-    style="
-      border:none;
-      background:#ecfdf5;
-      color:#15803d;
-      padding:10px 14px;
-      border-radius:999px;
-      cursor:pointer;
-      font-weight:600;
-    ">
-
 
 </script>
 
