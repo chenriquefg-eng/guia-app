@@ -2887,9 +2887,31 @@ function buildMenu() {
     .map(([key, sec]) => {
       return (
         '<section id="sec-' + key + '" class="bg-white rounded-2xl p-5 shadow-sm fade-in">' +
-          '<h2 style="font-size:20px;font-weight:800;margin-bottom:16px;color:#111827;">' +
-            sec.title +
-          '</h2>' +
+          '<div style="
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+">
+
+  <div style="
+    width:4px;
+    height:28px;
+    border-radius:999px;
+    background:#1a5c3a;
+  "></div>
+
+  <h2 style="
+    font-size:24px;
+    font-weight:800;
+    color:#111827;
+    margin:0;
+    letter-spacing:-0.3px;
+  ">
+    ${sec.title}
+  </h2>
+
+</div>' +
           sec.html +
         '</section>'
       );
