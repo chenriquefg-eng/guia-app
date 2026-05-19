@@ -444,16 +444,27 @@ function getIconeLinha(texto) {
 
   if (t.includes("wifi")) return "wifi";
   if (t.includes("wi-fi")) return "wifi";
+
   if (t.includes("tv")) return "tv";
-  if (t.includes("micro")) return "microwave";
+
+  if (t.includes("micro")) return "chef-hat";
+
   if (t.includes("caf")) return "coffee";
-  if (t.includes("toalha")) return "bath";
+
+  if (t.includes("toalha")) return "shirt";
+
   if (t.includes("cama")) return "bed";
-  if (t.includes("ar")) return "snowflake";
-  if (t.includes("banho")) return "bath";
-  if (t.includes("cozinha")) return "utensils";
+
+  if (t.includes("ar condicionado")) return "snowflake";
+
+  if (t.includes("banho")) return "droplets";
+
+  if (t.includes("cozinha")) return "utensils-crossed";
+
   if (t.includes("garagem")) return "car";
+
   if (t.includes("elevador")) return "building";
+
   if (t.includes("portaria")) return "shield-check";
 
   return "sparkles";
@@ -2982,10 +2993,8 @@ return (
 );
     })
     .join("");
-
   if (window.lucide && typeof window.lucide.createIcons === "function") {
-    window.lucide.createIcons();
-  }
+  window.lucide.createIcons();
 }
   function openSection(id) {
   const modal = document.getElementById("modal");
