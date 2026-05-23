@@ -2910,7 +2910,16 @@ function buildMenu() {
 
     card.style.animationDelay = (0.4 + i * 0.04) + "s";
 
-    card.onclick = () => openSection(item.id);
+    card.onclick = () => {
+  const sec = document.getElementById("sec-" + item.id);
+
+  if (sec) {
+    sec.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+};
 
     card.innerHTML =
       '<div class="menu-icon-box" style="background:' + item.color + '15;">' +
