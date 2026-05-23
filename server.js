@@ -3077,7 +3077,7 @@ if (heroSlides.length > 1) {
     font-size:22px;
     cursor:pointer;
     box-shadow:0 8px 20px rgba(0,0,0,0.25);
-    display:none;
+    display:block;
     z-index:9999;
   ">
   ↑
