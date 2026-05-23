@@ -3053,7 +3053,26 @@ if (heroSlides.length > 1) {
 </div>
 
 </script>
-
+<button id="btnTopo"
+  onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+  style="
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:46px;
+    height:46px;
+    border-radius:999px;
+    border:none;
+    background:#111827;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,0.25);
+    display:none;
+    z-index:9999;
+  ">
+  ↑
+</button>
 </body>
 </html>
 
