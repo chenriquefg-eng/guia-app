@@ -2827,7 +2827,7 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
       style="background: linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.65));"
     ></div>
 
-    <div class="relative z-10 max-w-md mx-auto">
+    <div id="topoGuia" class="relative z-10 max-w-md mx-auto">
       <div class="fade-in" style="animation-delay:0.1s">
         <p class="text-white/60 text-xs tracking-widest uppercase mb-2">
           Welcome Guide · Guía de Bienvenida
