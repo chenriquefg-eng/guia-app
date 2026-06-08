@@ -2881,19 +2881,7 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
       </div>
     </div>
 
-    <div id="modal" class="modal-overlay fixed inset-0 z-50" style="background:rgba(0,0,0,0.4);" onclick="closeModal(event)">
-  <div class="modal-content modal-sheet absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl" style="display:flex; flex-direction:column;">
-    <div class="modal-header px-5 pb-3 border-b border-gray-100 flex items-center justify-between">
-      <h2 id="modalTitle" class="heading-font text-xl pr-3" style="color:#1a5c3a;"></h2>
-      <button onclick="closeModalDirect()" class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background:#f0f0f0;">
-        <i data-lucide="x" style="width:16px;height:16px;color:#666;"></i>
-      </button>
-    </div>
-    <div id="modalBody" class="modal-body"></div>
-  </div>
-</div>  </div>
-
-  <script>
+     <script>
     const menuItems = ${JSON.stringify(menuItems)};
     const sections = ${JSON.stringify(sections)};
 
