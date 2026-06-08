@@ -3051,7 +3051,7 @@ if (heroSlides.length > 1) {
 
 </script>
   <button id="btnTopo"
-  onclick="document.getElementById('menuGrid').scrollIntoView({ behavior: 'smooth', block: 'start' })"
+  onclick="document.getElementById('topoGuia').scrollIntoView({ behavior: 'smooth', block: 'start' })"
   style="
     position:fixed;
     right:18px;
