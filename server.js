@@ -666,7 +666,7 @@ const reviewsLink = item.link_reviews || "";
           margin-bottom:6px;
           font-weight:500;
         ">
-          ⭐ Recomendado
+          ⭐ ${t.recommended || "Recomendado"}
         </div>
 
         <h3 class="font-semibold text-base text-gray-800">
@@ -695,7 +695,7 @@ const reviewsLink = item.link_reviews || "";
  
 return {
   top5: {
-    title: "Imperdíveis",
+    title: t.mustSeeTitle || "Imperdíveis",
     html: top5Section
   },
 
