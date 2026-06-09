@@ -805,60 +805,7 @@ return {
       </div>
     `
 },
-    acesso: {
-  title: t.quickAccessTitle,
-  html: `
-    <div style="
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    ">
-
-      <button onclick="openSection('wifi')" style="
-        background:#f5f0eb;
-        padding:14px;
-        border-radius:16px;
-        font-size:14px;
-        font-weight:600;
-      ">
-        📶 ${t.quickAccess.wifi}
-      </button>
-
-      <button onclick="openSection('checkin')" style="
-        background:#f5f0eb;
-        padding:14px;
-        border-radius:16px;
-        font-size:14px;
-        font-weight:600;
-      ">
-        🔑 ${t.quickAccess.checkin}
-      </button>
-
-      <button onclick="openSection('chegar')" style="
-        background:#f5f0eb;
-        padding:14px;
-        border-radius:16px;
-        font-size:14px;
-        font-weight:600;
-      ">
-        📍 ${t.quickAccess.chegar}
-      </button>
-
-      <a href="https://wa.me/5521971810022" target="_blank" style="
-        background:#25d366;
-        color:white;
-        padding:14px;
-        border-radius:16px;
-        font-size:14px;
-        font-weight:600;
-        text-align:center;
-      ">
-        💬 ${t.quickAccess.contato}
-      </a>
-
-    </div>
-  `
-},
+    
   locomover: {
     title: t.gettingAroundTitle,
     html: renderTextoBlocos(conteudo.transporte_texto)
