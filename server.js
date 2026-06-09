@@ -329,8 +329,7 @@ function buildMenuItems(t) {
     { id: "apartamento", label: t.sections.apartamento, icon: "bed-double", color: "#0f766e" },
 
     // 👉 AQUI É O CERTO
-    { id: "acesso", label: t.quickAccessTitle, icon: "zap", color: "#1a5c3a" },
-
+    
     { id: "locomover", label: t.sections.locomover, icon: "car", color: "#ea580c" },
     { id: "chegar", label: t.sections.chegar, icon: "map-pin", color: "#2563eb" },
     { id: "restaurantes", label: t.sections.restaurantes, icon: "utensils-crossed", color: "#be123c" },
@@ -343,7 +342,7 @@ function buildMenuItems(t) {
     { id: "cafe", label: t.sections.cafe, icon: "coffee", color: "#92400e" },
     { id: "proximos", label: t.sections.proximos, icon: "map", color: "#15803d" },
     { id: "doces", label: t.sections.doces, icon: "cake-slice", color: "#db2777" },
-    { id: "contato", label: t.sections.contato, icon: "message-circle", color: "#16a34a" },
+    
 
 ];
 }
