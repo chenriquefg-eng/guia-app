@@ -2667,12 +2667,16 @@ const todosItens = [
 ];
 const top5 = [1, 2, 3, 4, 5]
   .map(ordem => {
-    return todosItens.find(
-      item => Number(item.destaque_ordem) === ordem
+    return (
+      todosItens.find(
+        item => Number(item.destaque_ordem) === ordem && item.idioma === idioma
+      ) ||
+      todosItens.find(
+        item => Number(item.destaque_ordem) === ordem && item.idioma === "pt"
+      )
     );
   })
-  .filter(Boolean);
-  
+  .filter(Boolean);  
 const menuItems = buildMenuItems(t);
 const sections = buildSections(t, conteudo, listas, top5, heroImages);
     const html = `
