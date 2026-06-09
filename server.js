@@ -2665,6 +2665,15 @@ const todosItens = [
   ...listas.doces,
   ...listas.proximos
 ];
+console.log(
+  "TOP5 TESTE:",
+  todosItens.map(i => ({
+    titulo: i.titulo,
+    idioma: i.idioma,
+    destaque: i.destaque_ordem
+  }))
+);
+    
 const top5 = [1, 2, 3, 4, 5]
   .map(ordem => {
     return (
