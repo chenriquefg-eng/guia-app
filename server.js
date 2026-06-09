@@ -3065,24 +3065,25 @@ pointer-events:auto;
   ">
   ↑
 </button>
-</button>
 
 <script>
 const btnTopo = document.getElementById("btnTopo");
+const topoGuia = document.getElementById("topoGuia");
 
-window.addEventListener("scroll", () => {
-  if (!btnTopo) return;
+setInterval(() => {
+  if (!btnTopo || !topoGuia) return;
 
-  if (window.scrollY > 500) {
+  const posicao = topoGuia.getBoundingClientRect().top;
+
+  if (posicao < -300) {
     btnTopo.style.opacity = "1";
     btnTopo.style.pointerEvents = "auto";
   } else {
     btnTopo.style.opacity = "0";
     btnTopo.style.pointerEvents = "none";
   }
-});
+}, 300);
 </script>
-
 </body>
 </html>
 </body>
