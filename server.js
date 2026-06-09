@@ -2678,15 +2678,21 @@ try {
 } catch (e) {
   console.error("Erro ao buscar listas:", e.message);
 }
-
-const top5 = [
+const todosItens = [
   ...listas.fazer,
   ...listas.bares,
   ...listas.cafe,
   ...listas.restaurantes,
   ...listas.doces,
   ...listas.proximos
-]
+];
+const top5 = [1, 2, 3, 4, 5]
+  .map(ordem => {
+    return todosItens.find(
+      item => Number(item.destaque_ordem) === ordem
+    );
+  })
+  .filter(Boolean);
   .filter((item) => item.destaque_ordem && Number(item.destaque_ordem) > 0)
   .sort((a, b) => Number(a.destaque_ordem) - Number(b.destaque_ordem))
   .slice(0, 5);
