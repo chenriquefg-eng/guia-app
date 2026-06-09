@@ -2847,9 +2847,12 @@ const sections = buildSections(t, conteudo, listas, top5, heroImages);
         <div class="bg-white rounded-2xl p-5 shadow-sm fade-in" style="animation-delay:0.35s">
           <p class="heading-font text-xl mb-1" style="color:#1a5c3a;">${escHtml(conteudo.boas_vindas_titulo || t.welcomeTitle)}</p>
           <p class="text-sm text-gray-500 leading-relaxed">${escHtml(conteudo.boas_vindas_subtitulo || t.welcomeText)}</p>
-          <button onclick="openSection('contato')" class="mt-3 flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full text-white" style="background:#1a5c3a;">
+          <a href="https://wa.me/5521971810022"
+   target="_blank"
+   class="mt-3 flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full text-white"
+   style="background:#1a5c3a; display:inline-flex; text-decoration:none;">
             <i data-lucide="message-circle" style="width:15px;height:15px;"></i> ${escHtml(t.contactButton)}
-          </button>
+          </a>
         </div>
       </div>
 
