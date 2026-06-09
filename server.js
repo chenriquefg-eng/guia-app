@@ -2660,16 +2660,35 @@ try {
     [imovel.id, idioma]
   );
 
-  if (listasResult.rows.length === 0 && idioma !== "pt") {
-    listasResult = await pool.query(
-      `SELECT *
-       FROM imovel_secao_itens
-       WHERE imovel_id = $1
-         AND idioma = 'pt'
-       ORDER BY secao, ordem ASC, id ASC`,
-      [imovel.id]
+  if (idioma !== "pt") {
+  const listasPtResult = await pool.query(
+    `SELECT *
+     FROM imovel_secao_itens
+     WHERE imovel_id = $1
+       AND idioma = 'pt'
+     ORDER BY secao, ordem ASC, id ASC`,
+    [imovel.id]
+  );
+
+  const destaquesExistentes = new Set(
+    listasResult.rows
+      .filter(item => item.destaque_ordem)
+      .map(item => Number(item.destaque_ordem))
+  );
+
+  const fallbackPt = listasPtResult.rows.filter(item => {
+    if (!item.destaque_ordem) return false;
+
+    return !destaquesExistentes.has(
+      Number(item.destaque_ordem)
     );
-  }
+  });
+
+  listasResult.rows = [
+    ...listasResult.rows,
+    ...fallbackPt
+  ];
+}
 
   listas = agruparListasPorSecao(listasResult.rows);
   console.log("FAQ FINAL:", listas.faq);
