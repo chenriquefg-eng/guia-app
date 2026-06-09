@@ -3107,8 +3107,8 @@ if (heroSlides.length > 1) {
     cursor:pointer;
     box-shadow:0 8px 20px rgba(0,0,0,0.25);
     display:block;
-    opacity:0;
-    pointer-events:none;
+    opacity:1;
+pointer-events:auto;
     transition:all .3s ease;
     z-index:9999;
   ">
