@@ -3107,10 +3107,33 @@ if (heroSlides.length > 1) {
     cursor:pointer;
     box-shadow:0 8px 20px rgba(0,0,0,0.25);
     display:block;
+    opacity:0;
+    pointer-events:none;
+    transition:all .3s ease;
     z-index:9999;
   ">
   ↑
 </button>
+</button>
+
+<script>
+const btnTopo = document.getElementById("btnTopo");
+
+window.addEventListener("scroll", () => {
+  if (!btnTopo) return;
+
+  if (window.scrollY > 500) {
+    btnTopo.style.opacity = "1";
+    btnTopo.style.pointerEvents = "auto";
+  } else {
+    btnTopo.style.opacity = "0";
+    btnTopo.style.pointerEvents = "none";
+  }
+});
+</script>
+
+</body>
+</html>
 </body>
 </html>
 
