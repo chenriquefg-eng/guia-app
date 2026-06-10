@@ -817,20 +817,29 @@ return {
   },
 
   checkin: {
-    title: t.checkin.title,
-    html: `
-      <div class="space-y-4 text-sm text-gray-700">
-        <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-          <p class="font-semibold mb-2">${escHtml(t.checkin.checkin)}</p>
-          ${renderTextoBlocos(conteudo.checkin_texto)}
-        </div>
-        <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-          <p class="font-semibold mb-2">${escHtml(t.checkin.checkout)}</p>
-          ${renderTextoBlocos(conteudo.checkout_texto)}
+  title: t.checkin.title,
+  html: `
+    <div class="space-y-4 text-sm text-gray-700">
+
+      <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+        <p class="font-semibold mb-3">${escHtml(t.checkin.checkin)}</p>
+
+        <div class="space-y-3">
+          ${renderTextoBlocos("🕑 Check-in a partir das 14h\n" + (conteudo.checkin_texto || ""))}
         </div>
       </div>
-    `
-  },
+
+      <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+        <p class="font-semibold mb-3">${escHtml(t.checkin.checkout)}</p>
+
+        <div class="space-y-3">
+          ${renderTextoBlocos("🕛 Check-out até às 12h\n" + (conteudo.checkout_texto || ""))}
+        </div>
+      </div>
+
+    </div>
+  `
+},
 
   regras: {
     title: t.rulesTitle,
