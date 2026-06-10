@@ -554,7 +554,12 @@ function getIconeLinha(texto) {
   if (t.includes("garagem")) return "car";
   if (t.includes("elevador")) return "building";
   if (t.includes("portaria")) return "shield-check";
-
+  if (t.includes("fumar") || t.includes("smoking")) return "cigarette-off";
+  if (t.includes("festa") || t.includes("party")) return "party-popper";
+  if (t.includes("silêncio") || t.includes("silencio") || t.includes("quiet")) return "volume-x";
+  if (t.includes("hóspede") || t.includes("guest") || t.includes("huésped")) return "users";
+  if (t.includes("animal") || t.includes("pet") || t.includes("mascota")) return "paw-print";
+  if (t.includes("emergência") || t.includes("emergency") || t.includes("emergencia")) return "phone";
   return "sparkles";
 }
 
