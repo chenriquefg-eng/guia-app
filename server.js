@@ -373,6 +373,86 @@ function agruparListasPorSecao(rows = []) {
 
   return grupos;
 }
+function renderAmenidades(items = []) {
+  if (!Array.isArray(items) || items.length === 0) {
+    return '<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>';
+  }
+
+  const grupos = [
+    {
+      titulo: "🛏️ Conforto",
+      termos: ["ar condicionado", "roupa", "toalha"],
+      icone: "bed"
+    },
+    {
+      titulo: "🍳 Cozinha",
+      termos: ["café", "cafe", "açúcar", "acucar", "sal", "tempero", "cafeteira", "nespresso", "microondas", "sanduicheira", "liquidificador"],
+      icone: "utensils"
+    },
+    {
+      titulo: "🚿 Banheiro",
+      termos: ["papel higiênico", "shampoo", "condicionador", "sabonete"],
+      icone: "bath"
+    },
+    {
+      titulo: "🧼 Limpeza",
+      termos: ["pano", "esponja", "detergente"],
+      icone: "sparkles"
+    }
+  ];
+
+  const renderItem = (item) => {
+    const titulo = escHtml(item.titulo || "");
+
+    return `
+      <div style="
+        background:#fff;
+        border:1px solid #e5e7eb;
+        border-radius:16px;
+        padding:14px;
+        font-size:13px;
+        font-weight:700;
+        color:#1f2937;
+        box-shadow:0 1px 3px rgba(0,0,0,.04);
+      ">
+        ${titulo}
+      </div>
+    `;
+  };
+
+  return grupos.map(grupo => {
+    const itensGrupo = items.filter(item => {
+      const nome = String(item.titulo || "").toLowerCase();
+      return grupo.termos.some(t => nome.includes(t));
+    });
+
+    if (itensGrupo.length === 0) return "";
+
+    return `
+      <div style="margin-bottom:22px;">
+        <div style="
+          display:flex;
+          align-items:center;
+          gap:10px;
+          margin-bottom:12px;
+          font-weight:900;
+          color:#111827;
+          font-size:17px;
+        ">
+          <span>${grupo.titulo}</span>
+        </div>
+
+        <div style="
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:10px;
+        ">
+          ${itensGrupo.map(renderItem).join("")}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
 function renderLista(itens = [], labels = {}, secao = "") {
   if (!Array.isArray(itens) || itens.length === 0) {
     return `<p class="text-sm text-gray-500">Sem itens cadastrados nesta seção.</p>`;
@@ -714,7 +794,7 @@ return {
 
   amenidades: {
     title: t.amenitiesTitle,
-    html: renderLista(listas.amenidades || [], labelsLista)
+    html: renderAmenidades(listas.amenidades || [])
   },
 
   wifi: {
