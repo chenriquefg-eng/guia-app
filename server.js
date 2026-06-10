@@ -527,6 +527,34 @@ function renderLista(itens = [], labels = {}, secao = "") {
   `;
 }
 function getIconeLinha(texto) {
+  const t = String(texto || "").toLowerCase();
+
+  if (t.includes("check-in") && t.includes("14")) return "clock";
+  if (t.includes("check-out") && t.includes("12")) return "clock";
+
+  if (t.includes("fechadura") || t.includes("cerradura") || t.includes("lock")) return "lock-keyhole";
+  if (t.includes("código") || t.includes("codigo") || t.includes("code")) return "smartphone";
+  if (t.includes("portaria") || t.includes("portería") || t.includes("concierge")) return "building-2";
+  if (t.includes("independente") || t.includes("self")) return "door-open";
+
+  if (t.includes("lixo") || t.includes("basura") || t.includes("trash")) return "trash-2";
+  if (t.includes("janela") || t.includes("ventana") || t.includes("window")) return "panel-top";
+  if (t.includes("luzes") || t.includes("luces") || t.includes("lights")) return "lightbulb";
+  if (t.includes("horário") || t.includes("horario") || t.includes("time")) return "alarm-clock";
+
+  if (t.includes("wifi") || t.includes("wi-fi")) return "wifi";
+  if (t.includes("tv")) return "tv";
+  if (t.includes("micro")) return "chef-hat";
+  if (t.includes("caf")) return "coffee";
+  if (t.includes("toalha") || t.includes("toalla")) return "shirt";
+  if (t.includes("cama") || t.includes("ropa de cama")) return "bed";
+  if (t.includes("ar condicionado") || t.includes("aire acondicionado")) return "snowflake";
+  if (t.includes("banho") || t.includes("baño")) return "droplets";
+  if (t.includes("cozinha") || t.includes("cocina")) return "utensils-crossed";
+  if (t.includes("garagem")) return "car";
+  if (t.includes("elevador")) return "building";
+  if (t.includes("portaria")) return "shield-check";
+
   return "sparkles";
 }
 
