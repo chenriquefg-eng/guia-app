@@ -885,6 +885,21 @@ return {
       <div class="space-y-4 text-sm text-gray-700">
         ${renderTextoBlocos(conteudo.apartamento_texto)}
 
+<div style="
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+  margin-top:12px;
+">
+  ${renderTextoBlocos(`
+✨ Recém-reformado
+🛏️ Enxoval padrão hotelaria
+📍 Localização privilegiada na Urca
+🔐 Fechadura eletrônica
+📶 Wi-Fi de alta velocidade
+  `)}
+</div>
+
         ${heroImages.length ? `
           <div style="
             display:flex;
@@ -907,23 +922,28 @@ return {
         ` : ""}
 
         <div class="grid grid-cols-2 gap-3">
-          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.capacity)}</p>
-            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.capacityValue)}</p>
-          </div>
-          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.bedrooms)}</p>
-            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bedroomsValue)}</p>
-          </div>
-          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.bathroom)}</p>
-            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bathroomValue)}</p>
-          </div>
-          <div class="rounded-2xl p-4" style="background:#f5f0eb;">
-            <p class="text-xs text-gray-500 uppercase">${escHtml(t.apartmentLabels.beds)}</p>
-            <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bedsValue)}</p>
-          </div>
-        </div>
+
+  <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+    <p class="text-xs text-gray-500 uppercase">👥 ${escHtml(t.apartmentLabels.capacity)}</p>
+    <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.capacityValue)}</p>
+  </div>
+
+  <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+    <p class="text-xs text-gray-500 uppercase">🛏️ ${escHtml(t.apartmentLabels.bedrooms)}</p>
+    <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bedroomsValue)}</p>
+  </div>
+
+  <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+    <p class="text-xs text-gray-500 uppercase">🚿 ${escHtml(t.apartmentLabels.bathroom)}</p>
+    <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bathroomValue)}</p>
+  </div>
+
+  <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+    <p class="text-xs text-gray-500 uppercase">🛌 ${escHtml(t.apartmentLabels.beds)}</p>
+    <p class="font-semibold text-lg">${escHtml(t.apartmentLabels.bedsValue)}</p>
+  </div>
+
+</div>
       </div>
     `
 },
