@@ -532,7 +532,7 @@ function getIconeLinha(texto) {
   if (t.includes("check-in") && t.includes("14")) return "clock";
   if (t.includes("check-out") && t.includes("12")) return "clock";
 
-  if (t.includes("fechadura") || t.includes("cerradura") || t.includes("lock")) return "key-round";
+  if (t.includes("fechadura") || t.includes("cerradura") || t.includes("lock")) return "lock";
   if (t.includes("código") || t.includes("codigo") || t.includes("code")) return "smartphone";
   if (t.includes("portaria") || t.includes("portería") || t.includes("concierge")) return "building-2";
   if (t.includes("independente") || t.includes("self")) return "door-open";
