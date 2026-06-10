@@ -75,6 +75,13 @@ quickAccess: {
   bathroomValue: "1 banheiro",
   bedsValue: "4 camas"
 },
+      apartmentHighlights: {
+  renovated: "✨ Recém-reformado",
+  linens: "🛏️ Enxoval hotelaria",
+  location: "📍 Localização Urca",
+  lock: "🔐 Fechadura eletrônica",
+  wifi: "📶 Wi-Fi de alta velocidade"
+},
       emergencyList: [
   { label: "🚓 190 — Polícia Militar", phone: "190" },
   { label: "🚑 192 — SAMU", phone: "192" },
@@ -170,6 +177,13 @@ quickAccess: {
   bathroomValue: "1 bathroom",
   bedsValue: "4 beds"
 },
+      apartmentHighlights: {
+  renovated: "✨ Recently renovated",
+  linens: "🛏️ Hotel-quality linens",
+  location: "📍 Prime Urca location",
+  lock: "🔐 Electronic door lock",
+  wifi: "📶 High-speed Wi-Fi"
+},
       emergencyList: [
   { label: "🚓 190 — Police", phone: "190" },
   { label: "🚑 192 — Ambulance (SAMU)", phone: "192" },
@@ -264,6 +278,13 @@ quickAccess: {
   bedroomsValue: "2 habitaciones",
   bathroomValue: "1 baño",
   bedsValue: "4 camas"
+},
+      apartmentHighlights: {
+  renovated: "✨ Recientemente reformado",
+  linens: "🛏️ Ropa de cama de hotel",
+  location: "📍 Excelente ubicación en Urca",
+  lock: "🔐 Cerradura electrónica",
+  wifi: "📶 Wi-Fi de alta velocidad"
 },
       emergencyList: [
   { label: "🚓 190 — Policía", phone: "190" },
@@ -899,24 +920,24 @@ return {
 ">
 
   <div class="rounded-xl p-3 border border-gray-200 bg-white">
-    ✨ Recém-reformado
-  </div>
+  ${escHtml(t.apartmentHighlights.renovated)}
+</div>
 
-  <div class="rounded-xl p-3 border border-gray-200 bg-white">
-    🛏️ Enxoval hotelaria
-  </div>
+<div class="rounded-xl p-3 border border-gray-200 bg-white">
+  ${escHtml(t.apartmentHighlights.linens)}
+</div>
 
-  <div class="rounded-xl p-3 border border-gray-200 bg-white">
-    📍 Localização Urca
-  </div>
+<div class="rounded-xl p-3 border border-gray-200 bg-white">
+  ${escHtml(t.apartmentHighlights.location)}
+</div>
 
-  <div class="rounded-xl p-3 border border-gray-200 bg-white">
-    🔐 Fechadura eletrônica
-  </div>
+<div class="rounded-xl p-3 border border-gray-200 bg-white">
+  ${escHtml(t.apartmentHighlights.lock)}
+</div>
 
-  <div class="rounded-xl p-3 border border-gray-200 bg-white" style="grid-column:span 2;">
-    📶 Wi-Fi de alta velocidade
-  </div>
+<div class="rounded-xl p-3 border border-gray-200 bg-white" style="grid-column:span 2;">
+  ${escHtml(t.apartmentHighlights.wifi)}
+</div>
 
 </div>
 </div>
