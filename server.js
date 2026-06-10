@@ -891,13 +891,34 @@ return {
   gap:8px;
   margin-top:12px;
 ">
-  ${renderTextoBlocos(`
-✨ Recém-reformado
-🛏️ Enxoval padrão hotelaria
-📍 Localização privilegiada na Urca
-🔐 Fechadura eletrônica
-📶 Wi-Fi de alta velocidade
-  `)}
+ <div style="
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+">
+
+  <div class="rounded-xl p-3 border border-gray-200 bg-white">
+    ✨ Recém-reformado
+  </div>
+
+  <div class="rounded-xl p-3 border border-gray-200 bg-white">
+    🛏️ Enxoval hotelaria
+  </div>
+
+  <div class="rounded-xl p-3 border border-gray-200 bg-white">
+    📍 Localização Urca
+  </div>
+
+  <div class="rounded-xl p-3 border border-gray-200 bg-white">
+    🔐 Fechadura eletrônica
+  </div>
+
+  <div class="rounded-xl p-3 border border-gray-200 bg-white" style="grid-column:span 2;">
+    📶 Wi-Fi de alta velocidade
+  </div>
+
+</div>
 </div>
 
         ${heroImages.length ? `
