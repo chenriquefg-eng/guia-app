@@ -3168,6 +3168,8 @@ function buildMenu() {
 
     card.style.animationDelay = (0.4 + i * 0.04) + "s";
     card.onclick = () => {
+  alert(item.id);
+
   const sec = document.getElementById("sec-" + item.id);
 
   if (sec) {
