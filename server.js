@@ -3173,10 +3173,21 @@ function buildMenu() {
   const sec = document.getElementById("sec-" + item.id);
 
   if (sec) {
-    sec.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
+    const app = document.getElementById("app");
+
+const y = sec.offsetTop - 12;
+
+if (app) {
+  app.scrollTo({
+    top: y,
+    behavior: "smooth"
+  });
+} else {
+  window.scrollTo({
+    top: y,
+    behavior: "smooth"
+  });
+}
   }
 };
 
