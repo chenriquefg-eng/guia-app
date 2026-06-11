@@ -82,6 +82,15 @@ quickAccess: {
   lock: "🔐 Fechadura eletrônica",
   wifi: "📶 Wi-Fi de alta velocidade"
 },
+      arrival: {
+  address: "Endereço",
+  uber: "Uber / Táxi",
+  concierge: "Portaria",
+  lock: "Acesso ao apartamento",
+  uberText: "Uber e 99 funcionam muito bem na região.",
+  conciergeText: "Portaria 24h. Informe que está hospedado no Apto 1101.",
+  lockText: "O acesso é feito por fechadura eletrônica. Não é necessário retirar chaves."
+},
       emergencyList: [
   { label: "🚓 190 — Polícia Militar", phone: "190" },
   { label: "🚑 192 — SAMU", phone: "192" },
@@ -184,6 +193,15 @@ quickAccess: {
   lock: "🔐 Electronic door lock",
   wifi: "📶 High-speed Wi-Fi"
 },
+      arrival: {
+  address: "Address",
+  uber: "Uber / Taxi",
+  concierge: "Building Concierge",
+  lock: "Apartment Access",
+  uberText: "Uber and taxis work very well in this area.",
+  conciergeText: "24-hour concierge. Inform them you are staying in Apartment 1101.",
+  lockText: "Access is through an electronic door lock. No key pickup is required."
+},
       emergencyList: [
   { label: "🚓 190 — Police", phone: "190" },
   { label: "🚑 192 — Ambulance (SAMU)", phone: "192" },
@@ -285,6 +303,15 @@ quickAccess: {
   location: "📍 Excelente ubicación en Urca",
   lock: "🔐 Cerradura electrónica",
   wifi: "📶 Wi-Fi de alta velocidad"
+},
+      arrival: {
+  address: "Dirección",
+  uber: "Uber / Taxi",
+  concierge: "Portería",
+  lock: "Acceso al apartamento",
+  uberText: "Uber y taxis funcionan muy bien en esta zona.",
+  conciergeText: "Portería 24 horas. Informe que se hospeda en el Apartamento 1101.",
+  lockText: "El acceso se realiza mediante cerradura electrónica. No es necesario retirar llaves."
 },
       emergencyList: [
   { label: "🚓 190 — Policía", phone: "190" },
@@ -995,15 +1022,37 @@ return {
     html: renderTextoBlocos(conteudo.transporte_texto)
   },
 
-  chegar: {
-    title: t.gettingThereTitle,
-    html: `
-      <div class="space-y-3 text-sm text-gray-700">
-        ${conteudo.endereco_exibicao ? `<p><strong>${conteudo.endereco_exibicao}</strong></p>` : ""}
+  comoChegar: {
+  title: t.gettingThereTitle,
+  html: `
+
+  <div class="space-y-4 text-sm text-gray-700">
+
+    <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+      <p class="font-semibold mb-2">📍 ${escHtml(t.arrival.address)}</p>
+      <div class="space-y-3">
         ${renderTextoBlocos(conteudo.como_chegar_texto)}
       </div>
-    `
-  },
+    </div>
+
+    <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+      <p class="font-semibold mb-2">🚖 ${escHtml(t.arrival.uber)}</p>
+      <p>${escHtml(t.arrival.uberText)}</p>
+    </div>
+
+    <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+      <p class="font-semibold mb-2">🏢 ${escHtml(t.arrival.concierge)}</p>
+      <p>${escHtml(t.arrival.conciergeText)}</p>
+    </div>
+
+    <div class="rounded-2xl p-4" style="background:#f5f0eb;">
+      <p class="font-semibold mb-2">🔐 ${escHtml(t.arrival.lock)}</p>
+      <p>${escHtml(t.arrival.lockText)}</p>
+    </div>
+
+  </div>
+  `
+},
 
   restaurantes: {
     title: t.restaurantsTitle,
