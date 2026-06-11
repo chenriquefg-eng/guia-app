@@ -1030,9 +1030,17 @@ return {
 
     <div class="rounded-2xl p-4" style="background:#f5f0eb;">
       <p class="font-semibold mb-2">📍 ${escHtml(t.arrival.address)}</p>
-      <div class="space-y-3">
-        ${renderTextoBlocos(conteudo.como_chegar_texto)}
-      </div>
+      <p class="font-medium">
+Rua Lauro Müller, 46 – Apto 1101
+</p>
+
+<p>
+Urca – Rio de Janeiro – RJ
+</p>
+
+<p class="mt-2 text-sm text-gray-600">
+Utilize este endereço no Google Maps, Uber ou Táxi.
+</p>
     </div>
 
     <div class="rounded-2xl p-4" style="background:#f5f0eb;">
