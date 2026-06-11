@@ -3168,24 +3168,7 @@ function buildMenu() {
 
     card.style.animationDelay = (0.4 + i * 0.04) + "s";
 
-    const abrirSecao = (e) => {
-  if (e) {
-    e.preventDefault();
-    e.stopPropagation();
-  }
-
-  const sec = document.getElementById("sec-" + item.id);
-
-  if (sec) {
-    const y = sec.getBoundingClientRect().top + window.pageYOffset - 12;
-
-    window.scrollTo({
-      top: y,
-      behavior: "smooth"
-    });
-  }
-};
-
+    
 card.onclick = () => {
   const sec = document.getElementById("sec-" + item.id);
 
