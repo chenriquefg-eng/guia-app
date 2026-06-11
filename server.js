@@ -3168,16 +3168,26 @@ function buildMenu() {
 
     card.style.animationDelay = (0.4 + i * 0.04) + "s";
 
-    card.onclick = () => {
+    const abrirSecao = (e) => {
+  if (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
   const sec = document.getElementById("sec-" + item.id);
 
   if (sec) {
-    sec.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+    const y = sec.getBoundingClientRect().top + window.pageYOffset - 12;
+
+    window.scrollTo({
+      top: y,
+      behavior: "smooth"
     });
   }
 };
+
+card.onclick = abrirSecao;
+card.ontouchend = abrirSecao;
 
     card.innerHTML =
       '<div class="menu-icon-box" style="background:' + item.color + '15;">' +
