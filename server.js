@@ -3186,8 +3186,16 @@ function buildMenu() {
   }
 };
 
-card.onclick = abrirSecao;
-card.ontouchend = abrirSecao;
+card.onclick = () => {
+  const sec = document.getElementById("sec-" + item.id);
+
+  if (sec) {
+    sec.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+};
 
     card.innerHTML =
       '<div class="menu-icon-box" style="background:' + item.color + '15;">' +
