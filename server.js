@@ -1022,12 +1022,10 @@ return {
     html: renderTextoBlocos(conteudo.transporte_texto)
   },
 
-  chegar: {
+ chegar: {
   title: t.gettingThereTitle,
   html: `
-},
-
-  <div class="space-y-4 text-sm text-gray-700">
+    <div class="space-y-4 text-sm text-gray-700">
 
     <div class="rounded-2xl p-4" style="background:#f5f0eb;">
       <p class="font-semibold mb-2">📍 ${escHtml(t.arrival.address)}</p>
