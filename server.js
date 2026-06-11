@@ -3167,7 +3167,28 @@ function buildMenu() {
       "section-card bg-white rounded-2xl p-3 flex flex-col items-center gap-2 shadow-sm fade-in";
 
     card.style.animationDelay = (0.4 + i * 0.04) + "s";
-  
+  card.style.animationDelay = (0.4 + i * 0.04) + "s";
+
+card.onclick = () => {
+  const sec = document.getElementById("sec-" + item.id);
+
+  if (sec) {
+    const app = document.getElementById("app");
+    const y = sec.offsetTop - 12;
+
+    if (app) {
+      app.scrollTo({
+        top: y,
+        behavior: "smooth"
+      });
+    } else {
+      window.scrollTo({
+        top: y,
+        behavior: "smooth"
+      });
+    }
+  }
+};
   const sec = document.getElementById("sec-" + item.id);
 
   if (sec) {
