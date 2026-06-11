@@ -2961,6 +2961,12 @@ menuItems.forEach(item => {
     .heading-font { font-family: 'DM Serif Display', serif; }
     .section-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
     .section-card:hover { transform: translateY(-2px); }
+    .section-card *,
+.section-card i,
+.section-card svg,
+.section-card span {
+  pointer-events: none;
+}
     .modal-overlay { 
   opacity: 0; 
   pointer-events: none; 
