@@ -3363,8 +3363,6 @@ setInterval(() => {
 </script>
 </body>
 </html>
-</body>
-</html>
 
     `;
 
