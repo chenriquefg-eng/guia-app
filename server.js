@@ -3191,26 +3191,7 @@ card.onclick = () => {
 };
   const sec = document.getElementById("sec-" + item.id);
 
-  if (sec) {
-    const app = document.getElementById("app");
-
-const y = sec.offsetTop - 12;
-
-if (app) {
-  app.scrollTo({
-    top: y,
-    behavior: "smooth"
-  });
-} else {
-  window.scrollTo({
-    top: y,
-    behavior: "smooth"
-  });
-}
-  }
-};
-
-    card.innerHTML =
+     card.innerHTML =
       '<div class="menu-icon-box" style="background:' + item.color + '15;">' +
         '<i data-lucide="' + item.icon + '" style="width:24px;height:24px;color:' + item.color + ';"></i>' +
       '</div>' +
