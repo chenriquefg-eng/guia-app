@@ -2936,6 +2936,14 @@ const top5 = [1, 2, 3, 4, 5]
   .filter(Boolean);  
 const menuItems = buildMenuItems(t);
 const sections = buildSections(t, conteudo, listas, top5, heroImages);
+    console.log("MENU IDS:", menuItems.map(i => i.id));
+console.log("SECTION IDS:", Object.keys(sections));
+
+menuItems.forEach(item => {
+  if (!sections[item.id]) {
+    console.warn("SEÇÃO NÃO ENCONTRADA:", item.id, item.label);
+  }
+});
     const html = `
 <!doctype html>
 <html lang="pt-BR" class="h-full">
