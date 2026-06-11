@@ -1025,8 +1025,6 @@ return {
   chegar: {
   title: t.gettingThereTitle,
   html: `
-    ...
-  `
 },
 
   <div class="space-y-4 text-sm text-gray-700">
