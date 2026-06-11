@@ -1029,7 +1029,7 @@ return {
 
     <div class="rounded-2xl p-4" style="background:#f5f0eb;">
       <p class="font-semibold mb-2">📍 ${escHtml(t.arrival.address)}</p>
-      <p class="font-medium">
+      <p class="font-semibold text-base">
 Rua Lauro Müller, 46 – Apto 1101
 </p>
 
@@ -1040,6 +1040,14 @@ Urca – Rio de Janeiro – RJ
 <p class="mt-2 text-sm text-gray-600">
 Utilize este endereço no Google Maps, Uber ou Táxi.
 </p>
+<a
+  href="https://maps.google.com/?q=Rua+Lauro+Muller+46+Rio+de+Janeiro"
+  target="_blank"
+  class="inline-flex items-center gap-2 mt-3 px-3 py-2 rounded-full text-sm"
+  style="background:#dff5e8;color:#166534;"
+>
+  📍 Abrir no Google Maps
+</a>
     </div>
 
     <div class="rounded-2xl p-4" style="background:#f5f0eb;">
