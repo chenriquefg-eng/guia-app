@@ -1022,7 +1022,7 @@ return {
     html: renderTextoBlocos(conteudo.transporte_texto)
   },
 
-  comoChegar: {
+  Chegar: {
   title: t.gettingThereTitle,
   html: `
 
